@@ -44,7 +44,7 @@
                         </li>
                     </ul>
                     <hr>
-                    <div class="mt-4">
+                    <div class="mt-4 cursor-pointer">
                         <x-dropdown align="top" width="48">
                             <x-slot name="trigger">
                                 <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
