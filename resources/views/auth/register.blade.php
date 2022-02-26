@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
 
             <!-- Name -->
@@ -17,6 +17,21 @@
                 <x-label for="name" :value="__('Name')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="noTelp" value="No. Telp" />
+
+                <x-input id="noTelp" class="block mt-1 w-full" type="tel" name="noTelp" :value="old('noTelp')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="alamat" value="Alamat" />
+                <textarea 
+                    id="alamat" 
+                    name="alamat" 
+                    class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >{{old('alamat')}}</textarea>
             </div>
 
             <!-- Email Address -->
@@ -43,6 +58,35 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />
+            </div>
+
+            <div class="mt-4">
+                <div x-data="{
+                    photo: '/images/default-user-photo.jpg',
+                    handleFileChange(e) {
+                        if (!event.target.files.length) {
+                            this.photo = '/images/default-user-photo.jpg';
+                            return
+                        };
+
+                        let file = event.target.files[0],
+                            reader = new FileReader()
+
+                        reader.readAsDataURL(file)
+                        reader.onload = e => this.photo = e.target.result;
+                    }
+                }">
+                    <x-label for="photo">
+                        <span>Photo</span>
+                        <img x-bind:src="photo" class="block w-32 h-32 object-cover mt-1" />
+                        <input 
+                            type="file" 
+                            class="hidden" 
+                            id="photo" 
+                            name="photo" 
+                            x-on:change="handleFileChange" />
+                    </x-label>
+                </div>
             </div>
 
             <div class="flex items-center justify-end mt-4">
