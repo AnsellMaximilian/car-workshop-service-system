@@ -1,10 +1,10 @@
 @props(['active'])
 
 @php
-$baseClasses = 'w-full inline-flex items-center p-1 text-white rounded-md';
+$baseClasses = 'w-full inline-flex items-center py-1 px-2 rounded-md focus:outline-none';
 $classes = ($active ?? false)
-            ? 'focus:outline-none transition duration-150 ease-in-out bg-primary'
-            : 'hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out';
+            ? 'transition duration-150 ease-in-out bg-primary text-white'
+            : 'text-gray-400 hover:text-white transition duration-150 ease-in-out';
 @endphp
 
 <a {{ $attributes->merge(['class' => ( $baseClasses . ' ' . $classes ) ]) }}>

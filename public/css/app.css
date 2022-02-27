@@ -669,6 +669,9 @@ select {
 .ml-48 {
   margin-left: 12rem;
 }
+.ml-64 {
+  margin-left: 16rem;
+}
 .block {
   display: block;
 }
@@ -737,6 +740,9 @@ select {
 }
 .w-6 {
   width: 1.5rem;
+}
+.w-64 {
+  width: 16rem;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -898,9 +904,6 @@ select {
 }
 .p-2 {
   padding: 0.5rem;
-}
-.p-1 {
-  padding: 0.25rem;
 }
 .px-4 {
   padding-left: 1rem;
@@ -1174,6 +1177,10 @@ select {
 .hover\:text-gray-800:hover {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
   z-index: 10;

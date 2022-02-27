@@ -27,8 +27,8 @@
                         <li>
                             <x-sidebar-nav-link 
                                 :href="route('dashboard')" 
-                                :active="request()->routeIs('work-order')"
-                            >Work Order</x-sidebar-nav-link>
+                                :active="request()->routeIs('users')"
+                            >Users</x-sidebar-nav-link>
                         </li>
                         <li>
                             <x-sidebar-nav-link 
@@ -82,7 +82,7 @@
     
             <!-- Page Content -->
             <main class="ml-48 w-full">
-                @include('layouts.navigation')
+                {{-- @include('layouts.navigation') --}}
     
                 <!-- Page Heading -->
                 <header class="bg-white shadow">
