@@ -64,4 +64,11 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    public function index()
+    {
+        
+
+        return view('users.index');
+    }
 }

@@ -15,7 +15,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="flex">
-            <aside class="bg-gray-800 fixed top-0 left-0 w-48 min-h-screen p-2">
+            <aside class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2">
                 <nav>
                     <ul class="flex flex-col">
                         <li>
@@ -81,7 +81,7 @@
             </aside>
     
             <!-- Page Content -->
-            <main class="ml-48 w-full">
+            <main class="ml-52 w-full">
                 {{-- @include('layouts.navigation') --}}
     
                 <!-- Page Heading -->

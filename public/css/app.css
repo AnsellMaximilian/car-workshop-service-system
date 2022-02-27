@@ -672,6 +672,9 @@ select {
 .ml-64 {
   margin-left: 16rem;
 }
+.ml-52 {
+  margin-left: 13rem;
+}
 .block {
   display: block;
 }
@@ -743,6 +746,9 @@ select {
 }
 .w-64 {
   width: 16rem;
+}
+.w-52 {
+  width: 13rem;
 }
 .max-w-7xl {
   max-width: 80rem;
