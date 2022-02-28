@@ -608,6 +608,12 @@ select {
 .left-0 {
   left: 0px;
 }
+.top-full {
+  top: 100%;
+}
+.top-\[-100\%\] {
+  top: -100%;
+}
 .z-0 {
   z-index: 0;
 }
@@ -672,6 +678,9 @@ select {
 }
 .ml-52 {
   margin-left: 13rem;
+}
+.mt-auto {
+  margin-top: auto;
 }
 .block {
   display: block;
@@ -783,6 +792,10 @@ select {
 }
 .origin-top-right {
   transform-origin: top right;
+}
+.translate-y-\[-100\%\] {
+  --tw-translate-y: -100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-95 {
   --tw-scale-x: .95;

@@ -4,11 +4,11 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading>ID</x-table.heading>
-            <x-table.heading>Name</x-table.heading>
-            <x-table.heading>Email</x-table.heading>
-            <x-table.heading>No. Telp</x-table.heading>
-            <x-table.heading>Alamat</x-table.heading>
+            <x-table.heading wire:click="setSort(id)">ID</x-table.heading>
+            <x-table.heading wire:click="setSort(name)">Name</x-table.heading>
+            <x-table.heading wire:click="setSort(email)">Email</x-table.heading>
+            <x-table.heading wire:click="setSort(noTelp)">No. Telp</x-table.heading>
+            <x-table.heading wire:click="setSort(alamat)">Alamat</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
         </x-slot>
