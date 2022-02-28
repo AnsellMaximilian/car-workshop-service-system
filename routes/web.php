@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\PeranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/users', [RegisteredUserController::class, 'index'])->middleware(['auth'])->name('users');
+
+Route::middleware('auth')->group(function () {
+    Route::get('perans', [PeranController::class, 'index'])->name('perans');
+});
+
 
 require __DIR__.'/auth.php';
