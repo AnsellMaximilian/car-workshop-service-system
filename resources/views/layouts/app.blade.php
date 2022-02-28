@@ -15,7 +15,7 @@
 
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased min-h-screen">
         <div class="flex">
             <aside class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2">
                 <nav>
@@ -28,7 +28,7 @@
                         </li>
                         <li>
                             <x-sidebar-nav-link 
-                                :href="route('dashboard')" 
+                                :href="route('users')" 
                                 :active="request()->routeIs('users')"
                             >Users</x-sidebar-nav-link>
                         </li>
@@ -83,16 +83,18 @@
             </aside>
     
             <!-- Page Content -->
-            <main class="ml-52 w-full">
+            <main class="ml-52 w-full overflow-x-hidden">
                 {{-- @include('layouts.navigation') --}}
     
                 <!-- Page Heading -->
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
-                {{ $slot }}
+                <div class="py-6 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
         @livewireScripts

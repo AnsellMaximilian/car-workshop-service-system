@@ -1,1 +1,1 @@
-<th>{{ $slot }}</th>
+<th class="uppercase font-medium text-left text-xs px-6 py-4">{{ $slot }}</th>
