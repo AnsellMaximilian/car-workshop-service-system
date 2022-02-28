@@ -20,7 +20,10 @@
                 <x-table.cell>{{ $user->email }}</x-table.cell>
                 <x-table.cell>{{ $user->noTelp }}</x-table.cell>
                 <x-table.cell>{{ $user->alamat }}</x-table.cell>
-                <x-table.cell>Delete</x-table.cell>
+                <x-table.cell class="space-x-2">
+                    <span class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer">Edit</span>
+                    <span class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer">Delete</span>
+                </x-table.cell>
             </x-table.row>
             @endforeach
         </x-slot>
