@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Peran;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+
+        $perans = Peran::all();
+        return view('auth.register', ['perans' => $perans]);
     }
 
     /**
@@ -36,6 +39,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'kode_peran' => 'required|exists:perans,kode_peran',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -45,6 +49,7 @@ class RegisteredUserController extends Controller
         $user = new User;
 
         $user->name = $request->name;
+        $user->kode_peran = $request->kode_peran;
         $user->email = $request->email;
         $user->alamat = $request->alamat;
         $user->noTelp = $request->noTelp;

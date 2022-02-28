@@ -12,6 +12,7 @@
         <x-slot name="head">
             <x-table.heading wire:click="setSort('id')">ID</x-table.heading>
             <x-table.heading wire:click="setSort('name')">Name</x-table.heading>
+            <x-table.heading wire:click="setSort('name')">Peran</x-table.heading>
             <x-table.heading wire:click="setSort('email')">Email</x-table.heading>
             <x-table.heading wire:click="setSort('noTelp')">No. Telp</x-table.heading>
             <x-table.heading wire:click="setSort('alamat')">Alamat</x-table.heading>
@@ -23,6 +24,7 @@
             <x-table.row>
                 <x-table.cell>{{ $user->id }}</x-table.cell>
                 <x-table.cell>{{ $user->name }}</x-table.cell>
+                <x-table.cell>{{ $user->peran->nama_peran }}</x-table.cell>
                 <x-table.cell>{{ $user->email }}</x-table.cell>
                 <x-table.cell>{{ $user->noTelp }}</x-table.cell>
                 <x-table.cell>{{ $user->alamat }}</x-table.cell>

@@ -20,6 +20,17 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="kode_peran" value="Peran" />
+                <select name="kode_peran" id="kode_peran" class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    @foreach ($perans as $peran)
+                        <option value="{{ $peran->kode_peran }}">{{ $peran->nama_peran }}</option>
+                    @endforeach
+                </select>
+
+                {{-- <x-input id="peran" class="block mt-1 w-full" type="tel" name="peran" :value="old('peran')" required /> --}}
+            </div>
+
+            <div class="mt-4">
                 <x-label for="noTelp" value="No. Telp" />
 
                 <x-input id="noTelp" class="block mt-1 w-full" type="tel" name="noTelp" :value="old('noTelp')" required />
