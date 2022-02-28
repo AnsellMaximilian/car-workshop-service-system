@@ -1,6 +1,12 @@
 <div class="space-y-2">
-    <div class="">
+    <div class="flex justify-between gap-2">
         <x-input wire:model="query" class="block w-full md:w-1/3" type="text" placeholder="Search"/>
+        <a 
+            href="{{ route('register') }}" 
+            class="bg-primary shadow-lg text-white rounded-md flex items-center px-2 font-semibold text-sm"
+        >
+            <span>Tambah User</span>
+        </a>
     </div>
     <x-table.wrapper>
         <x-slot name="head">
