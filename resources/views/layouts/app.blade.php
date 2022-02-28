@@ -17,9 +17,9 @@
     </head>
     <body class="font-sans antialiased min-h-screen bg-gray-100">
         <div class="flex">
-            <aside class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2">
-                <nav>
-                    <ul class="flex flex-col">
+            <aside class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2 flex flex-col">
+                <nav class="flex flex-col grow">
+                    <ul class="flex flex-col grow">
                         <li>
                             <x-sidebar-nav-link 
                                 :href="route('dashboard')" 
