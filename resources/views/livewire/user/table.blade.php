@@ -1,9 +1,9 @@
 <div class="space-y-2">
     <div class="flex justify-between gap-2">
-        <x-input wire:model="query" class="block w-full md:w-1/3" type="text" placeholder="Search"/>
+        <x-input wire:model="query" class="block md:w-1/3 w-16 grow md:grow-0" type="text" placeholder="Search"/>
         <a 
             href="{{ route('register') }}" 
-            class="bg-primary shadow-lg text-white rounded-md flex items-center px-2 font-semibold text-sm"
+            class="bg-primary shadow-lg text-white rounded-md flex items-center px-2 md:px-6 font-semibold text-sm"
         >
             <span>Tambah User</span>
         </a>
