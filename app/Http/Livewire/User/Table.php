@@ -13,6 +13,12 @@ class Table extends Component
 
     public function setSort($field)
     {
+        if($this->sortField === $field) {
+            $this->sortDir = $this->sortDir === 'asc' ? 'desc' : 'asc';
+        }else {
+            $this->sortDir = 'asc';
+        }
+
         $this->sortField = $field;
     }
 
