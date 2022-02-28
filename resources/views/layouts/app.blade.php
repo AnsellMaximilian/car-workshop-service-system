@@ -15,7 +15,7 @@
 
         @livewireStyles
     </head>
-    <body class="font-sans antialiased min-h-screen">
+    <body class="font-sans antialiased min-h-screen bg-gray-100">
         <div class="flex">
             <aside class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2">
                 <nav>

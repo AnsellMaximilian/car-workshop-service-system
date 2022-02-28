@@ -11,7 +11,8 @@ class Table extends Component
 
     public function render()
     {
-        $users = $this->query ? User::where('name', 'like', '%'.$this->query.'%')->get() : User::all();
+        $users = User::search('name', $this->query)->get();
+
         return view('livewire.user.table', [
             'users' => $users,
         ]);
