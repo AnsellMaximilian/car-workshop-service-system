@@ -26,4 +26,7 @@
         </x-slot>
 
     </x-table.wrapper>
+    <div>
+        {{ $users->links() }}
+    </div>
 <div>
