@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PeranController;
+use App\Http\Livewire\UserPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/users', [RegisteredUserController::class, 'index'])->middleware(['auth'])->name('users');
+Route::get('/users', UserPage::class)->middleware(['auth'])->name('users');
 
 Route::middleware('auth')->group(function () {
     Route::get('perans', [PeranController::class, 'index'])->name('perans');

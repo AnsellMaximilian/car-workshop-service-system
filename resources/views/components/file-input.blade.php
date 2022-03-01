@@ -19,7 +19,8 @@
     <x-label for="{{ $name }}">
         <span>{{ $label }}</span>
         <img x-bind:src="photo" class="block w-32 h-32 object-cover mt-1" />
-        <input 
+        <input
+            {{ $attributes->whereStartsWith('wire:model') }}
             type="file" 
             class="hidden" 
             id="{{ $name }}" 
