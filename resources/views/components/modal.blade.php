@@ -1,7 +1,9 @@
-<div class="mt-6" x-data="{ open: false }">
+<div x-data="{ open: false }">
     
     {{-- Trigger Button --}}
-    <button class="px-4 py-2 text-white bg-blue-500 rounded select-none no-outline focus:shadow-outline" @click="open = true">Open Modal</button>
+    <div @click="open = true" class="h-full">
+        {{ $trigger }}
+    </div>
     
     {{-- Modal Background --}}
     <div class="fixed top-0 left-0 flex items-center justify-center w-screen h-screen p-4" style="display: none; background-color: rgba(0,0,0,.5);" x-show="open"  >
