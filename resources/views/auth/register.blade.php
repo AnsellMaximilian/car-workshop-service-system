@@ -72,32 +72,7 @@
             </div>
 
             <div class="mt-4">
-                <div x-data="{
-                    photo: '/images/default-user-photo.jpg',
-                    handleFileChange(e) {
-                        if (!event.target.files.length) {
-                            this.photo = '/images/default-user-photo.jpg';
-                            return
-                        };
-
-                        let file = event.target.files[0],
-                            reader = new FileReader()
-
-                        reader.readAsDataURL(file)
-                        reader.onload = e => this.photo = e.target.result;
-                    }
-                }">
-                    <x-label for="photo">
-                        <span>Photo</span>
-                        <img x-bind:src="photo" class="block w-32 h-32 object-cover mt-1" />
-                        <input 
-                            type="file" 
-                            class="hidden" 
-                            id="photo" 
-                            name="photo" 
-                            x-on:change="handleFileChange" />
-                    </x-label>
-                </div>
+                <x-file-input name="photo" label="Photo" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
