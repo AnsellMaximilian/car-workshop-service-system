@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Peran;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,9 +11,12 @@ class Table extends Component
 {
     use WithPagination;
 
+    // Search and sort
     public $query = "";
     public $sortField;
     public $sortDir = "asc";
+
+    // New entry
 
     public function setSort($field)
     {
@@ -33,6 +37,7 @@ class Table extends Component
 
         return view('livewire.user.table', [
             'users' => $users,
+            'perans' => Peran::all(),
         ]);
     }
 }
