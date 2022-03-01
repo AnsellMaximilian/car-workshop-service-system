@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\User;
+namespace App\Http\Livewire;
 
 use App\Models\Peran;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Table extends Component
+class UserPage extends Component
 {
     use WithPagination;
 
@@ -35,7 +35,7 @@ class Table extends Component
             ->optionalSort($this->sortField, $this->sortDir)
             ->paginate(10);
 
-        return view('livewire.user.table', [
+        return view('livewire.user-page', [
             'users' => $users,
             'perans' => Peran::all(),
         ]);

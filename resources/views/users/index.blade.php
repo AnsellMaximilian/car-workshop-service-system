@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <livewire:user.table/>
+    <livewire:user-page/>
 
 </x-app-layout>
 
