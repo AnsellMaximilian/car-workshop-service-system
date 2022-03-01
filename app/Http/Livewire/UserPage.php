@@ -9,7 +9,6 @@ use Livewire\WithPagination;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 
 class UserPage extends Component
