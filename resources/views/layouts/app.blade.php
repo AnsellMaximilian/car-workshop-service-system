@@ -57,7 +57,7 @@
                             <x-slot name="trigger">
                                 <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
                                     <div class="flex items-center">
-                                        <img src="{{ asset('storage/'.Auth::user()->photo) }}"
+                                        <img src="{{ asset(Auth::user()->getPhotoPath()) }}"
                                             class="w-8 h-8 object-cover rounded-full mr-2"
                                         />
                                         <span>{{ Auth::user()->name }}</span>
