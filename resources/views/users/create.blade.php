@@ -1,5 +1,10 @@
-<x-guest-layout>
-    <x-auth-card>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Daftar User') }}
+        </h2>
+    </x-slot>
+    <x-card>
         <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -76,14 +81,10 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('Daftar') }}
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </x-card>
+</x-app-layout>

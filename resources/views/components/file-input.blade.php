@@ -4,7 +4,6 @@
 <div x-data="{
     photo: '{{ $defaultFile }}',
     handleFileChange(e) {
-        console.log('File changed', this.photo);
         if (!e.target.files.length) {
             this.photo = '{{ $defaultFile }}';
             return
@@ -15,14 +14,10 @@
 
         reader.readAsDataURL(file)
         reader.onload = e => {
-            console.log('reader ready', this.photo)
             this.photo = e.target.result
             console.log('reader set finished', this.photo)
         };
     },
-    consoleLog(){
-        console.log(this, this.photo)
-    }
 }"
 >
     <x-label for="{{ $name }}">
@@ -35,6 +30,5 @@
             id="{{ $name }}" 
             name="{{ $name }}" 
             x-on:change="handleFileChange" />
-        <button x-on:click="consoleLog">Button</button>
     </x-label>
 </div>

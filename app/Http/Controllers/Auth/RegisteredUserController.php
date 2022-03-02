@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
     {
 
         $perans = Peran::all();
-        return view('auth.register', ['perans' => $perans]);
+        return view('users.create', ['perans' => $perans]);
     }
 
     /**
@@ -69,8 +69,6 @@ class RegisteredUserController extends Controller
 
     public function index()
     {
-        
-
         return view('users.index');
     }
 }

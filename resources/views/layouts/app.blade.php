@@ -28,8 +28,8 @@
                         </li>
                         <li>
                             <x-sidebar-nav-link 
-                                :href="route('users')" 
-                                :active="request()->routeIs('users')"
+                                :href="route('users.index')" 
+                                :active="request()->routeIs('users.*')"
                             >Users</x-sidebar-nav-link>
                         </li>
                         <li>

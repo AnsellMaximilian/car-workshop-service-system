@@ -8,7 +8,7 @@
     <div class="space-y-2">
         <div class="flex">
             <a 
-                href="{{ route('register') }}" 
+                href="{{ route('users.register') }}" 
                 class="ml-auto bg-primary shadow-lg text-white rounded-md flex items-center px-2 py-2 md:px-6 font-semibold text-sm"
             >
                 <span>Tambah Peran</span>
