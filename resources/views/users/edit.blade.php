@@ -4,6 +4,13 @@
             {{ 'Edit User '.$user->id }}
         </h2>
     </x-slot>
+    <div class="mb-4">
+        <x-icon-link href="{{ route('users.index') }}" label="Kembali">
+            <x-slot name="icon">
+                <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
+            </x-slot>
+        </x-icon-link>
+    </div>
     <x-card class="max-w-xl">
         <x-slot name="logo">
             <a href="/">

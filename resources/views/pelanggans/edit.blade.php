@@ -4,6 +4,13 @@
             {{ __('Daftar Pelanggan') }}
         </h2>
     </x-slot>
+    <div class="mb-4">
+        <x-icon-link href="{{ route('pelanggan.index') }}" label="Kembali">
+            <x-slot name="icon">
+                <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
+            </x-slot>
+        </x-icon-link>
+    </div>
     <x-card class="">
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
