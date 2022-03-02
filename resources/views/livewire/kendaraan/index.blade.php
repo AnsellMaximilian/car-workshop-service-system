@@ -22,8 +22,18 @@
             <x-table.row>
                 <x-table.cell>{{ $kendaraan->id }}</x-table.cell>
                 <x-table.cell>{{ $kendaraan->no_plat }}</x-table.cell>
-                <x-table.cell>{{ $kendaraan->pelanggan_id }}</x-table.cell>
-                <x-table.cell>{{ $kendaraan->tipe_id }}</x-table.cell>
+                <x-table.cell class="relative group cursor-pointer">
+                    {{ $kendaraan->pelanggan_id }}
+                    <x-tooltip class="bg-primary text-white whitespace-nowrap" align="left">
+                        {{ $kendaraan->pelanggan->nama }}
+                    </x-tooltip>
+                </x-table.cell>
+                <x-table.cell class="relative group cursor-pointer">
+                    {{ $kendaraan->tipe_id }}
+                    <x-tooltip class="bg-primary text-white whitespace-nowrap" align="left">
+                        {{ $kendaraan->tipe->tipe }}
+                    </x-tooltip>
+                </x-table.cell>
                 <x-table.cell>{{ $kendaraan->warna }}</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
