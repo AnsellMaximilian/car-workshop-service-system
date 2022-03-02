@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'kode_peran' => 'required|exists:perans,kode_peran',
+            'photo' => 'mimes:jpg,jpeg,png',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -82,6 +83,7 @@ class RegisteredUserController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'kode_peran' => 'required|exists:perans,kode_peran',
+            'photo' => 'mimes:jpg,jpeg,png',
         ]);
 
         $user->update($data);

@@ -1,4 +1,4 @@
-@props(['defaultFile' => '/images/default-user-photo.jpg', 'name', 'label'])
+@props(['defaultFile' => '/images/default-user-photo.jpg', 'name', 'label', 'accept' => ''])
 
 
 <div x-data="{
@@ -28,7 +28,8 @@
             type="file" 
             class="hidden" 
             id="{{ $name }}" 
-            name="{{ $name }}" 
+            name="{{ $name }}"
+            accept="{{ $accept }}"
             x-on:change="handleFileChange" />
     </x-label>
 </div>

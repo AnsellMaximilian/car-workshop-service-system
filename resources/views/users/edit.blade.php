@@ -58,7 +58,12 @@
             </div>
 
             <div class="mt-4">
-                <x-file-input name="photo" label="Photo" defaultFile="{{ asset($user->getPhotoPath()) }}"/>
+                <x-file-input 
+                    name="photo" 
+                    label="Photo" 
+                    defaultFile="{{ asset($user->getPhotoPath()) }}"
+                    accept=".jpg,.png,.jpeg"
+                 />
             </div>
 
             <div class="flex items-center justify-end mt-4">
