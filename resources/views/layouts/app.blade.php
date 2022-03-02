@@ -46,9 +46,9 @@
                         </li>
                         <li>
                             <x-sidebar-nav-link 
-                                :href="route('dashboard')" 
-                                :active="request()->routeIs('fg')"
-                            >Merk dan Tipe</x-sidebar-nav-link>
+                                :href="route('kendaraans.index')" 
+                                :active="request()->routeIs('kendaraans.*')"
+                            >Kendaraan</x-sidebar-nav-link>
                         </li>
                     </ul>
                     <hr>

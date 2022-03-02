@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
 use App\Http\Livewire\UserPage;
@@ -35,6 +36,14 @@ Route::middleware('auth')->group(function () {
         Route::post('pelanggans', [PelangganController::class, 'store'])->name('store');
         Route::get('pelanggans/{pelanggan}/edit', [PelangganController::class, 'edit'])->name('edit');
         Route::patch('pelanggans/{pelanggan}', [PelangganController::class, 'update'])->name('update');
+    });
+
+    Route::name('kendaraans.')->group(function(){
+        Route::get('kendaraans', [KendaraanController::class, 'index'])->name('index');
+        Route::get('kendaraans/create', [KendaraanController::class, 'create'])->name('create');
+        Route::post('kendaraans', [KendaraanController::class, 'store'])->name('store');
+        Route::get('kendaraans/{kendaraan}/edit', [KendaraanController::class, 'edit'])->name('edit');
+        Route::patch('kendaraans/{kendaraan}', [KendaraanController::class, 'update'])->name('update');
     });
 });
 
