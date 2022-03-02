@@ -34,7 +34,7 @@ class Index extends Component
 
     public function render()
     {
-        $kendaraans = Kendaraan::search('nama', $this->query)
+        $kendaraans = Kendaraan::search('no_plat', $this->query)
             ->optionalSort($this->sortField, $this->sortDir)
             ->paginate(10);
 
