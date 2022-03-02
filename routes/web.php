@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
 use App\Http\Livewire\UserPage;
 use Illuminate\Support\Facades\Route;
@@ -24,11 +25,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/users', [RegisteredUserController::class, 'index'])->middleware(['auth'])->name('users.index');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
     Route::get('perans', [PeranController::class, 'index'])->name('perans');
+
+    Route::name('pelanggans.')->group(function(){
+        Route::get('pelanggans', [PelangganController::class, 'index'])->name('index');
+        Route::get('pelanggans/create', [PelangganController::class, 'create'])->name('create');
+        Route::post('pelanggans', [PelangganController::class, 'store'])->name('store');
+        Route::get('pelanggans/{pelanggan}/edit', [PelangganController::class, 'edit'])->name('edit');
+        Route::patch('pelanggans/{pelanggan}', [PelangganController::class, 'update'])->name('update');
+    });
 });
+
 
 
 require __DIR__.'/auth.php';

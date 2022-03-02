@@ -40,9 +40,9 @@
                         </li>
                         <li>
                             <x-sidebar-nav-link 
-                                :href="route('dashboard')" 
-                                :active="request()->routeIs('fg')"
-                            >Servis</x-sidebar-nav-link>
+                                :href="route('pelanggans.index')" 
+                                :active="request()->routeIs('pelanggans.*')"
+                            >Pelanggan</x-sidebar-nav-link>
                         </li>
                         <li>
                             <x-sidebar-nav-link 
