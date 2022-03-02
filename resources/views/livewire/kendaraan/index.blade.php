@@ -24,13 +24,13 @@
                 <x-table.cell>{{ $kendaraan->no_plat }}</x-table.cell>
                 <x-table.cell class="relative group cursor-pointer">
                     {{ $kendaraan->pelanggan_id }}
-                    <x-tooltip class="bg-primary text-white whitespace-nowrap" align="left">
+                    <x-tooltip class="bg-primary text-white w-max" align="left">
                         {{ $kendaraan->pelanggan->nama }}
                     </x-tooltip>
                 </x-table.cell>
                 <x-table.cell class="relative group cursor-pointer">
                     {{ $kendaraan->tipe_id }}
-                    <x-tooltip class="bg-primary text-white whitespace-nowrap" align="left">
+                    <x-tooltip class="bg-primary text-white w-max" align="left">
                         {{ $kendaraan->tipe->tipe }}
                     </x-tooltip>
                 </x-table.cell>
