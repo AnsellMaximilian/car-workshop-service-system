@@ -6,14 +6,6 @@
     </x-slot>
 
     <div class="space-y-2">
-        <div class="flex">
-            <a 
-                href="{{ route('users.register') }}" 
-                class="ml-auto bg-primary shadow-lg text-white rounded-md flex items-center px-2 py-2 md:px-6 font-semibold text-sm"
-            >
-                <span>Tambah Peran</span>
-            </a>
-        </div>
         <x-table.wrapper>
             <x-slot name="head">
                 <x-table.heading>Kode Peran</x-table.heading>
