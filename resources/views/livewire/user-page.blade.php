@@ -30,7 +30,7 @@
                 >
                     <div>
                         <x-label for="name" :value="__('Name')" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" required autofocus />
+                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model.defer="name" required autofocus />
                     </div>
     
                     <div class="mt-4">
@@ -38,7 +38,7 @@
                         <select 
                             id="kode_peran" 
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
-                            wire:model="kode_peran"
+                            wire:model.defer="kode_peran"
                         >
                             @foreach ($perans as $peran)
                                 <option value="{{ $peran->kode_peran }}">{{ $peran->nama_peran }}</option>
@@ -49,14 +49,14 @@
                     <div class="mt-4">
                         <x-label for="noTelp" value="No. Telp" />
     
-                        <x-input id="noTelp" class="block mt-1 w-full" type="tel" wire:model="noTelp" required />
+                        <x-input id="noTelp" class="block mt-1 w-full" type="tel" wire:model.defer="noTelp" required />
                     </div>
     
                     <div class="mt-4">
                         <x-label for="alamat" value="Alamat" />
                         <textarea 
                             id="alamat"
-                            wire:model="alamat" 
+                            wire:model.defer="alamat" 
                             class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         ></textarea>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="mt-4">
                         <x-label for="email" :value="__('Email')" />
     
-                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model="email" required />
+                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model.defer="email" required />
                     </div>
     
 
@@ -74,7 +74,7 @@
     
                         <x-input id="password" class="block mt-1 w-full"
                                         type="password"
-                                        wire:model="password"
+                                        wire:model.defer="password"
                                         required autocomplete="new-password" />
                     </div>
     
@@ -83,12 +83,16 @@
     
                         <x-input id="password_confirmation" class="block mt-1 w-full"
                                         type="password"
-                                        wire:model="password_confirmation" required />
+                                        wire:model.defer="password_confirmation" required />
                     </div>
                     @endif
-    
+
                     <div class="mt-4">
-                        <x-file-input name="photo" label="Photo" wire:model="photo"/>
+                        <x-file-input 
+                            name="photo" 
+                            label="Photo" 
+                            wire:model="photo"
+                        />
                     </div>
     
                     <div class="flex items-center justify-end mt-4">

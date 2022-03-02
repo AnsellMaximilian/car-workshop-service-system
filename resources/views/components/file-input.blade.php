@@ -4,20 +4,29 @@
 <div x-data="{
     photo: '{{ $defaultFile }}',
     handleFileChange(e) {
-        if (!event.target.files.length) {
+        console.log('File changed', this.photo);
+        if (!e.target.files.length) {
             this.photo = '{{ $defaultFile }}';
             return
         };
 
-        let file = event.target.files[0],
+        let file = e.target.files[0],
             reader = new FileReader()
 
         reader.readAsDataURL(file)
-        reader.onload = e => this.photo = e.target.result;
+        reader.onload = e => {
+            console.log('reader ready', this.photo)
+            this.photo = e.target.result
+            console.log('reader set finished', this.photo)
+        };
+    },
+    consoleLog(){
+        console.log(this, this.photo)
     }
-}">
+}"
+>
     <x-label for="{{ $name }}">
-        <span>{{ $label }}</span>
+        <span @click="photo = 'fag'">{{ $label }}</span>
         <img x-bind:src="photo" class="block w-32 h-32 object-cover mt-1" />
         <input
             {{ $attributes->whereStartsWith('wire:model') }}
@@ -26,5 +35,6 @@
             id="{{ $name }}" 
             name="{{ $name }}" 
             x-on:change="handleFileChange" />
+        <button x-on:click="consoleLog">Button</button>
     </x-label>
 </div>

@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
 class UserPage extends Component
@@ -114,6 +115,12 @@ class UserPage extends Component
             $this->userToUpdate->alamat = $this->alamat;
             $this->userToUpdate->noTelp = $this->noTelp;
 
+            if($this->photo){
+                $photoFile = $this->photo;
+                $photoPath = $photoFile->store('avatars', 'public');
+                $this->userToUpdate->photo = $photoPath;
+            }
+
             $this->userToUpdate->save();
         }
         $this->reset(['name', 'kode_peran', 'email', 'alamat', 'photo', 'noTelp', 'password', 'password_confirmation']);
@@ -123,6 +130,7 @@ class UserPage extends Component
 
     public function destroy(User $user)
     {
+        Storage::disk('public')->delete('');
         $user->delete();
     }
 
