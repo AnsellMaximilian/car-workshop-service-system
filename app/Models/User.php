@@ -25,6 +25,7 @@ class User extends Authenticatable
         'alamat',
         'noTelp',
         'photo',
+        'kode_peran'
     ];
 
     /**

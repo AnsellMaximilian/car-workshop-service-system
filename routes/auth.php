@@ -53,5 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store'])->name('users.store');
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('users.register');
+    Route::get('users/edit/{user}', [RegisteredUserController::class, 'edit'])->name('users.edit');
+    Route::patch('users/{user}', [RegisteredUserController::class, 'update'])->name('users.update');
+    
 
 });

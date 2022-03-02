@@ -27,13 +27,13 @@
                 <x-table.cell>{{ $user->email }}</x-table.cell>
                 <x-table.cell>{{ $user->noTelp }}</x-table.cell>
                 <x-table.cell>{{ $user->alamat }}</x-table.cell>
-                <x-table.cell class="space-x-2">
-                    {{-- <span class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
-                        wire:click="edit({{ $user->id}})"    
-                    >Edit</span> --}}
-                    <span class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
+                <x-table.cell class="space-x-2 flex">
+                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                        href="{{ route('users.edit', $user->id) }}"    
+                    >Edit</a>
+                    <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
                         wire:click="destroy({{ $user->id }})"
-                    >Delete</span>
+                    >Delete</button>
                 </x-table.cell>
             </x-table.row>
             @endforeach

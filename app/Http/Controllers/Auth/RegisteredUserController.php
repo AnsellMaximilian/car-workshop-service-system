@@ -71,4 +71,28 @@ class RegisteredUserController extends Controller
     {
         return view('users.index');
     }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', ['user' => $user, 'perans' => Peran::all()]);
+    }
+
+    public function update(User $user, Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'kode_peran' => 'required|exists:perans,kode_peran',
+        ]);
+
+        $user->update($data);
+
+        if($request->hasFile('photo')){
+            $photoFile = $request->file('photo');
+            $photoPath = $photoFile->store('avatars', 'public');
+            $user->photo = $photoPath;
+            $user->save();
+        }
+
+        return redirect(route('users.index'));
+    }
 }
