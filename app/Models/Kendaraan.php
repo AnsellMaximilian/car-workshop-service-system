@@ -13,4 +13,9 @@ class Kendaraan extends Model
     {
         return $this->belongsTo(Tipe::class);
     }
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class);
+    }
 }
