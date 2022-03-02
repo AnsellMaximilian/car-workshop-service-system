@@ -4,6 +4,12 @@
             {{ __('Daftar User') }}
         </h2>
     </x-slot>
+    <div class="mb-4">
+        <a href="{{ route('users.index') }}" class="group text-primary hover:text-red-800 font-semibold flex items-baseline">
+            <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
+            <span>Kembali</span>
+        </a>
+    </div>
     <x-card class="max-w-xl">
         <x-slot name="logo">
             <a href="/">
