@@ -50,6 +50,12 @@
                                 :active="request()->routeIs('kendaraans.*')"
                             >Kendaraan</x-sidebar-nav-link>
                         </li>
+                        <li>
+                            <x-sidebar-nav-link 
+                                :href="route('merks-dan-tipes')" 
+                                :active="request()->routeIs('merks-dan-tipes')"
+                            >Merk dan Tipe</x-sidebar-nav-link>
+                        </li>
                     </ul>
                     <hr>
                     <div class="mt-4 cursor-pointer">
