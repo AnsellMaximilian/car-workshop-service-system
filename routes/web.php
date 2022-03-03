@@ -6,8 +6,10 @@ use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\SukuCadangController;
+use App\Http\Controllers\WorkOrderController;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
 use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
+use App\Http\Livewire\WorkOrder\Show as WorkOrderShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +68,15 @@ Route::middleware('auth')->group(function () {
         Route::post('jenis-services', [JenisServiceController::class, 'store'])->name('store');
         Route::get('jenis-services/{jenis_service}/edit', [JenisServiceController::class, 'edit'])->name('edit');
         Route::patch('jenis-services/{jenis_service}', [JenisServiceController::class, 'update'])->name('update');
+    });
+
+    Route::name('work-orders.')->group(function(){
+        Route::get('work-orders', [WorkOrderController::class, 'index'])->name('index');
+        Route::get('work-orders/create', [WorkOrderController::class, 'create'])->name('create');
+        Route::post('work-orders', [WorkOrderController::class, 'store'])->name('store');
+        Route::get('work-orders/{id}', WorkOrderShow::class)->name('show');
+        Route::get('work-orders/{work_order}/edit', [WorkOrderController::class, 'edit'])->name('edit');
+        Route::patch('work-orders/{work_order}', [WorkOrderController::class, 'update'])->name('update');
     });
 });
 
