@@ -4,6 +4,13 @@
             {{ 'Suku Cadang '.$sukuCadang->id }}
         </h2>
     </x-slot>
+    <div class="mb-4">
+        <x-icon-link href="{{ route('suku-cadangs.index') }}" label="Kembali">
+            <x-slot name="icon">
+                <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
+            </x-slot>
+        </x-icon-link>
+    </div>
     <x-card>
         {{-- <h1 class="font-semibold mb-4 text-2xl">Detail Suku Cadang</h1> --}}
         <div class="grid grid-cols-12 gap-4">
@@ -29,19 +36,19 @@
                     Stok
                 </div>
                 <div class="text-4xl font-bold">
-                    {{ $sukuCadang->getCurrentStock() }}
+                    {{ $sukuCadang->current_stock }}
                 </div>
             </div>
         </div>
         <hr class="my-4">
         <div class="grid grid-cols-12 gap-4">
             <h3 class="uppercase font-bold col-span-12">Kontrol Stok</h3>
-            <div class="col-span-12 lg:col-span-6 flex gap-4">
-                <x-input placeholder="Penerimaan" type="number"/>
-                <x-button class="bg-green-500 hover:bg-green-600">Terima</x-button>
+            <div class="col-span-12 lg:col-span-4 flex gap-4">
+                <x-input placeholder="Pemasukkan" type="number" class="block min-w-0" wire:model="jumlah_pemasukkan"/>
+                <x-button class="bg-green-500 hover:bg-green-600" wire:click="addToStock">Terima</x-button>
             </div>
-            <div class="col-span-12 lg:col-span-6 flex gap-4">
-                <x-input placeholder="Pengeluaran" type="number"/>
+            <div class="col-span-12 lg:col-span-4 flex gap-4">
+                <x-input placeholder="Pengeluaran" type="number" class="block min-w-0" />
                 <x-button class="bg-red-500">Keluar</x-button>
             </div>
         </div>
