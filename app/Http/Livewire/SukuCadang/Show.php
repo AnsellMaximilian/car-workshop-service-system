@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\SukuCadang;
 
 use App\Models\PemasukkanSukuCadang;
+use App\Models\PengeluaranSukuCadang;
 use App\Models\SukuCadang;
 
 use Livewire\Component;
@@ -30,6 +31,20 @@ class Show extends Component
         $this->sukuCadang->refresh();
 
         $this->reset(['jumlah_pemasukkan']);
+    }
+
+    public function removeFromStock()
+    {
+        $this->validate([
+            'jumlah_pengeluaran' => 'required|numeric|min:0'
+        ]);
+        $pengeluaran = new PengeluaranSukuCadang;
+        $pengeluaran->jumlah = $this->jumlah_pengeluaran;
+
+        $this->sukuCadang->pengeluaran_suku_cadangs()->save($pengeluaran);
+        $this->sukuCadang->refresh();
+
+        $this->reset(['jumlah_pengeluaran']);
     }
 
     public function render()

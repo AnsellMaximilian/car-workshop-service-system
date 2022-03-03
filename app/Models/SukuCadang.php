@@ -16,14 +16,26 @@ class SukuCadang extends Model
         }, 0);
     }
 
+    public function getTotalPengeluaran()
+    {
+        return $this->pengeluaran_suku_cadangs->reduce(function($total, $pengeluaran){
+            return $total + $pengeluaran->jumlah;
+        }, 0);
+    }
+
     public function getCurrentStock()
     {
-        return $this->stok_awal + $this->getTotalPemasukkan();
+        return $this->stok_awal + $this->getTotalPemasukkan() - $this->getTotalPengeluaran();
     }
 
     public function pemasukkan_suku_cadangs()
     {
         return $this->hasMany(PemasukkanSukuCadang::class);
+    }
+
+    public function pengeluaran_suku_cadangs()
+    {
+        return $this->hasMany(PengeluaranSukuCadang::class);
     }
 
     public function getCurrentStockAttribute()

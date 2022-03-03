@@ -48,8 +48,8 @@
                 <x-button class="bg-green-500 hover:bg-green-600" wire:click="addToStock">Terima</x-button>
             </div>
             <div class="col-span-12 lg:col-span-4 flex gap-4">
-                <x-input placeholder="Pengeluaran" type="number" class="block min-w-0" />
-                <x-button class="bg-red-500">Keluar</x-button>
+                <x-input placeholder="Pengeluaran" type="number" class="block min-w-0" wire:model="jumlah_pengeluaran"/>
+                <x-button class="bg-red-500" wire:click="removeFromStock">Keluar</x-button>
             </div>
         </div>
     </x-card>
