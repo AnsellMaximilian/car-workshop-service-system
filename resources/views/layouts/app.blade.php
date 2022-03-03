@@ -56,6 +56,12 @@
                                 :active="request()->routeIs('merks-dan-tipes')"
                             >Merk dan Tipe</x-sidebar-nav-link>
                         </li>
+                        <li>
+                            <x-sidebar-nav-link 
+                                :href="route('suku-cadangs.index')" 
+                                :active="request()->routeIs('suku-cadangs.*')"
+                            >Suku Cadang</x-sidebar-nav-link>
+                        </li>
                     </ul>
                     <hr>
                     <div class="mt-4 cursor-pointer">

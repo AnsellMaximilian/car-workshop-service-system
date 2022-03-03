@@ -4,8 +4,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
+use App\Http\Controllers\SukuCadangController;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
-use App\Http\Livewire\UserPage;
+use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,15 @@ Route::middleware('auth')->group(function () {
         Route::post('kendaraans', [KendaraanController::class, 'store'])->name('store');
         Route::get('kendaraans/{kendaraan}/edit', [KendaraanController::class, 'edit'])->name('edit');
         Route::patch('kendaraans/{kendaraan}', [KendaraanController::class, 'update'])->name('update');
+    });
+
+    Route::name('suku-cadangs.')->group(function(){
+        Route::get('suku-cadangs', [SukuCadangController::class, 'index'])->name('index');
+        Route::get('suku-cadangs/create', [SukuCadangController::class, 'create'])->name('create');
+        Route::post('suku-cadangs', [SukuCadangController::class, 'store'])->name('store');
+        Route::get('suku-cadangs/{id}', SukuCadangShow::class)->name('show');
+        Route::get('suku-cadangs/{suku_cadang}/edit', [SukuCadangController::class, 'edit'])->name('edit');
+        Route::patch('suku-cadangs/{suku_cadang}', [SukuCadangController::class, 'update'])->name('update');
     });
 });
 
