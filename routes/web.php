@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
@@ -57,6 +58,14 @@ Route::middleware('auth')->group(function () {
         Route::get('suku-cadangs/{id}', SukuCadangShow::class)->name('show');
         Route::get('suku-cadangs/{suku_cadang}/edit', [SukuCadangController::class, 'edit'])->name('edit');
         Route::patch('suku-cadangs/{suku_cadang}', [SukuCadangController::class, 'update'])->name('update');
+    });
+
+    Route::name('jenis-services.')->group(function(){
+        Route::get('jenis-services', [JenisServiceController::class, 'index'])->name('index');
+        Route::get('jenis-services/create', [JenisServiceController::class, 'create'])->name('create');
+        Route::post('jenis-services', [JenisServiceController::class, 'store'])->name('store');
+        Route::get('jenis-services/{jenis_service}/edit', [JenisServiceController::class, 'edit'])->name('edit');
+        Route::patch('jenis-services/{jenis_service}', [JenisServiceController::class, 'update'])->name('update');
     });
 });
 

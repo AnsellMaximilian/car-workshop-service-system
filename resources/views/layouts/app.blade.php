@@ -62,6 +62,12 @@
                                 :active="request()->routeIs('suku-cadangs.*')"
                             >Suku Cadang</x-sidebar-nav-link>
                         </li>
+                        <li>
+                            <x-sidebar-nav-link 
+                                :href="route('jenis-services.index')" 
+                                :active="request()->routeIs('jenis-services.*')"
+                            >Jenis Service</x-sidebar-nav-link>
+                        </li>
                     </ul>
                     <hr>
                     <div class="mt-4 cursor-pointer">
