@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
+use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
 use App\Http\Livewire\UserPage;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
         Route::get('pelanggans/{pelanggan}/edit', [PelangganController::class, 'edit'])->name('edit');
         Route::patch('pelanggans/{pelanggan}', [PelangganController::class, 'update'])->name('update');
     });
+
+    Route::get('merk-dan-tipe-kendaraan', MerkDanTipeIndex::class)->name('merks-dan-tipes');
 
     Route::name('kendaraans.')->group(function(){
         Route::get('kendaraans', [KendaraanController::class, 'index'])->name('index');

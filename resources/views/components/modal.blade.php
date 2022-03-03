@@ -1,7 +1,7 @@
-@props(['entangled' => false])
+@props(['entangled' => false, 'entangleKey' => 'isModalOpen'])
 
 @if ($entangled)
-<div x-data="{ open: @entangle('isModalOpen').defer }">
+<div x-data="{ open: @entangle($entangleKey).defer }">
     
 @else
 <div x-data="{ open: false }">

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <livewire:kendaraan.index/>
+    <livewire:kendaraan.index />
 
 </x-app-layout>
 

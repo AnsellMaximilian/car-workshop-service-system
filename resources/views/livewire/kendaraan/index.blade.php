@@ -1,7 +1,9 @@
-
 <div class="space-y-2">
     <div class="flex justify-between gap-2">
         <x-input wire:model="query" class="block md:w-1/3 w-16 grow md:grow-0" type="text" placeholder="Search"/>
+        <a href="{{ route('merks-dan-tipes') }} ">
+            <x-button type="button">Merk dan Tipe</x-button>
+        </a>
         <a href="{{ route('kendaraans.create') }} ">
             <x-button type="button">Tambah Kendaraan</x-button>
         </a>
@@ -53,6 +55,3 @@
     </div>
     
 <div>
-
-
-
