@@ -21,7 +21,7 @@
                 <x-table.cell>{{ $sukuCadang->id }}</x-table.cell>
                 <x-table.cell>{{ $sukuCadang->nama }}</x-table.cell>
                 <x-table.cell>{{ $sukuCadang->harga }}</x-table.cell>
-                <x-table.cell>333</x-table.cell>
+                <x-table.cell>{{ $sukuCadang->current_stock }}</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('suku-cadangs.show', $sukuCadang->id) }}"    
