@@ -31,4 +31,23 @@ class WorkOrder extends Model
     {
         return $this->hasMany(PenggantianSukuCadang::class);
     }
+
+    public function getTotalPenjualanServices()
+    {
+        return $this->penjualan_services->reduce(function($total, $penjualan){
+            return $total + $penjualan->getTotal();
+        }, 0);
+    }
+
+    public function getTotalPenggantianSukuCadangs()
+    {
+        return $this->penggantian_suku_cadangs->reduce(function($total, $penggantian){
+            return $total + $penggantian->getTotal();
+        }, 0);
+    }
+
+    public function getGrandTotal()
+    {
+        return $this->getTotalPenjualanServices() + $this->getTotalPenggantianSukuCadangs();
+    }
 }

@@ -87,7 +87,7 @@
 
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            <form class="grid grid-cols-12 gap-4" wire:submit.prevent="addJenisService">
+            <form class="grid grid-cols-12 gap-4 mb-4" wire:submit.prevent="addJenisService">
                 <div class="col-span-3">
                     <select
                         wire:model="selectedJenisServiceId"
@@ -125,6 +125,11 @@
                     </x-button>
                 </div>
             </form>
+            <div class="grid grid-cols-12 py-2 gap-4">
+                <div class="col-span-9 col-start-4 border-t-4 border-primary"></div>
+                <div class="col-span-4 col-start-4 uppercase font-bold text-xl">TOTAL SERVICE</div>
+                <div class="col-span-5 col-start-8 text-xl">{{ $workOrder->getTotalPenjualanServices()}}</div>
+            </div>
         </div>
         <hr class="my-4">
         {{-- SUKU CADANG --}}
@@ -193,6 +198,18 @@
                     </x-button>
                 </div>
             </form>
+            <div class="grid grid-cols-12 py-2 gap-4">
+                <div class="col-span-9 col-start-4 border-t-4 border-primary"></div>
+                <div class="col-span-4 col-start-4 uppercase font-bold text-xl">TOTAL SUKU CADANG</div>
+                <div class="col-span-5 col-start-8 text-xl">{{ $workOrder->getTotalPenggantianSukuCadangs()}}</div>
+            </div>
+        </div>
+        <hr class="my-4">
+
+        <div class="grid grid-cols-12 py-2 gap-4">
+            <div class="col-span-9 col-start-4 border-t-4 border-primary"></div>
+            <div class="col-span-4 col-start-4 uppercase font-bold text-xl">Grandtotal</div>
+            <div class="col-span-5 col-start-8 text-xl">{{ $workOrder->getGrandTotal()}}</div>
         </div>
         @endif
 
