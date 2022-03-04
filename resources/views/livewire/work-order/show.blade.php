@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="mb-4">
-        <x-icon-link href="{{ route('suku-cadangs.index') }}" label="Kembali">
+        <x-icon-link href="{{ route('work-orders.index') }}" label="Kembali">
             <x-slot name="icon">
                 <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
             </x-slot>
