@@ -56,7 +56,8 @@
             Dicek dulu mas... Baru bisa
         </div>
         @else
-        <div>
+        {{-- PENJUALAN SERVIS --}}
+        <div class="">
             <h3 class="font-semibold text-lg uppercase mb-4">Penjualan Servis</h3>
             
             <div class="mb-4">
@@ -117,6 +118,74 @@
                         class="block min-w-0 w-full" 
                         type="number" 
                         placeholder="Subtotal" disabled :value="$selectedJenisService->harga * $jenisServiceAmount" required />
+                </div>
+                <div class="col-span-2 flex items-center justify-end">
+                    <x-button class="">
+                        {{ __('Tambah') }}
+                    </x-button>
+                </div>
+            </form>
+        </div>
+        <hr class="my-4">
+        {{-- SUKU CADANG --}}
+        <div>
+            <h3 class="font-semibold text-lg uppercase mb-4">Penggantian Suku Cadang</h3>
+            <div class="mb-4">
+                <div class="border-b-2 border-primary grid grid-cols-12 py-2 font-semibold gap-4">
+                    <div class="col-span-3">Suku Cadang</div>
+                    <div class="col-span-2">Harga</div>
+                    <div class="col-span-2">Jumlah</div>
+                    <div class="col-span-3">Subtotal</div>
+                    <div class="col-span-2">Aksi</div>
+                </div>
+                @foreach ($workOrder->penggantian_suku_cadangs as $penggantianSukuCadang)
+                    <div class="border-b border-primary grid grid-cols-12 py-2 gap-4">
+                        <div class="col-span-3">{{$penggantianSukuCadang->suku_cadang->nama}}</div>
+                        <div class="col-span-2">{{$penggantianSukuCadang->harga}}</div>
+                        <div class="col-span-2">{{$penggantianSukuCadang->jumlah}}</div>
+                        <div class="col-span-3">{{$penggantianSukuCadang->getTotal()}}</div>
+                        <div class="col-span-2">
+                            <button
+                                wire:click="deletePenggantianSukuCadang({{$penggantianSukuCadang->id}})" 
+                                class="uppercase text-red-600 hover:text-red-800 font-semibold text-sm">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <form class="grid grid-cols-12 gap-4" wire:submit.prevent="addSukuCadang">
+                <div class="col-span-3">
+                    <select
+                        wire:model="selectedSukuCadangId"
+                        class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    >
+                        @foreach ($sukuCadangs as $sukuCadang)
+                            <option 
+                                value="{{ $sukuCadang->id }}" 
+                            >{{ $sukuCadang->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <x-input 
+                        class="block min-w-0 w-full" 
+                        type="number" 
+                        placeholder="Harga" disabled :value="$selectedSukuCadang->harga" required />
+                </div>
+                <div class="col-span-2">
+                    <x-input
+                        wire:model="sukuCadangAmount"
+                        class="block min-w-0 w-full" 
+                        type="number" 
+                        placeholder="Jumlah" required />
+                </div>
+                <div class="col-span-3">
+                    <x-input 
+                        class="block min-w-0 w-full" 
+                        type="number" 
+                        placeholder="Subtotal" disabled :value="$selectedSukuCadang->harga * $sukuCadangAmount" required />
                 </div>
                 <div class="col-span-2 flex items-center justify-end">
                     <x-button class="">

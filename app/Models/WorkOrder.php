@@ -26,4 +26,9 @@ class WorkOrder extends Model
     {
         return $this->hasMany(PenjualanService::class);
     }
+
+    public function penggantian_suku_cadangs()
+    {
+        return $this->hasMany(PenggantianSukuCadang::class);
+    }
 }

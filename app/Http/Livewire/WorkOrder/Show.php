@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\WorkOrder;
 
 use App\Models\JenisService;
+use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
+use App\Models\SukuCadang;
 use App\Models\WorkOrder;
 use Livewire\Component;
 
@@ -15,17 +17,30 @@ class Show extends Component
     public $selectedJenisServiceId;
     public $jenisServiceAmount = 0;
 
+    // Adding spare part change
+    public $selectedSukuCadangId;
+    public $sukuCadangAmount = 0;
+
     public function mount($id)
     {
         $this->workOrder = WorkOrder::find($id);
 
         $firstJenisService = JenisService::first();
+        $firstSukuCadang = SukuCadang::first();
         
         if(old('selectedJenisServiceId')){
             $this->selectedJenisServiceId = old('selectedJenisServiceId');
         }else {
             if($firstJenisService) {
                 $this->selectedJenisServiceId = $firstJenisService->id;
+            }
+        }
+
+        if(old('selectedSukuCadangId')){
+            $this->selectedSukuCadangId = old('selectedSukuCadangId');
+        }else {
+            if($firstSukuCadang) {
+                $this->selectedSukuCadangId = $firstSukuCadang->id;
             }
         }
     }
@@ -63,6 +78,33 @@ class Show extends Component
         $this->workOrder->refresh();
     }
 
+    public function addSukuCadang()
+    {
+        $this->validate([
+            'sukuCadangAmount' => 'required|numeric',
+            'selectedSukuCadangId' => 'required|exists:suku_cadangs,id',
+        ]);
+        
+        $selectedSukuCadang = SukuCadang::find($this->selectedSukuCadangId);
+        
+        $newPenggantianSukuCadang = new PenggantianSukuCadang;
+
+        $newPenggantianSukuCadang->jumlah = $this->sukuCadangAmount;
+        $newPenggantianSukuCadang->suku_cadang_id = $this->selectedSukuCadangId;
+        $newPenggantianSukuCadang->harga = $selectedSukuCadang->harga;
+        
+        $this->workOrder->penggantian_suku_cadangs()->save($newPenggantianSukuCadang);
+        $this->workOrder->refresh();
+
+        $this->reset(['sukuCadangAmount']);
+    }
+
+    public function deletePenggantianSukuCadang($id)
+    {
+        $penggantianSukuCadang = PenggantianSukuCadang::find($id);
+        $penggantianSukuCadang->delete();
+        $this->workOrder->refresh();
+    }
 
     public function render()
     {
@@ -73,10 +115,18 @@ class Show extends Component
             $selectedJenisService = new JenisService();
         }
 
+        if($this->selectedSukuCadangId){
+            $selectedSukuCadang = SukuCadang::find($this->selectedSukuCadangId);
+        }else {
+            $selectedSukuCadang = new SukuCadang();
+        }
+
         return view('livewire.work-order.show', [
             'sukuCadang' => $this->workOrder,
             'jenisServices' => JenisService::all(),
-            'selectedJenisService' => $selectedJenisService
+            'sukuCadangs' => SukuCadang::all(),
+            'selectedJenisService' => $selectedJenisService,
+            'selectedSukuCadang' => $selectedSukuCadang
         ]);
     }
 }
