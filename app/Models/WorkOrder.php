@@ -21,4 +21,9 @@ class WorkOrder extends Model
     {
         return $this->belongsTo(Kendaraan::class);
     }
+
+    public function penjualan_services()
+    {
+        return $this->hasMany(PenjualanService::class);
+    }
 }
