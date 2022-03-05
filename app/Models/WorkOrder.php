@@ -17,6 +17,22 @@ class WorkOrder extends Model
         }
     }
 
+    public function markAsApproved()
+    {
+        if($this->dicek){
+            $this->mau_diservice = true;
+            $this->save();
+        }
+    }
+
+    public function markAsCancelled()
+    {
+        if($this->dicek){
+            $this->mau_diservice = false;
+            $this->save();
+        }
+    }
+
     public function kendaraan()
     {
         return $this->belongsTo(Kendaraan::class);
@@ -49,5 +65,20 @@ class WorkOrder extends Model
     public function getGrandTotal()
     {
         return $this->getTotalPenjualanServices() + $this->getTotalPenggantianSukuCadangs();
+    }
+
+    public function isServiceApproved()
+    {
+        return $this->mau_diservice === 1;
+    }
+
+    public function isServiceCancelled()
+    {
+        return $this->mau_diservice === 0;
+    }
+
+    public function isApprovalPending()
+    {
+        return !$this->isServiceApproved() && !$this->isServiceCancelled();
     }
 }

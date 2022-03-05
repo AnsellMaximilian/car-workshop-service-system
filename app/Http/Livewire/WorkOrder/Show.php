@@ -106,6 +106,18 @@ class Show extends Component
         $this->workOrder->refresh();
     }
 
+    public function markApproveStatus($isApproved)
+    {
+        if($isApproved){
+            $this->workOrder->markAsApproved();
+        }else{
+            $this->workOrder->markAsCancelled();
+        }
+
+        $this->workOrder->refresh();
+
+    }
+
     public function render()
     {
         // dd($this->sukuCadang->getTotalPemasukkan());

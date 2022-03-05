@@ -13,8 +13,20 @@
     </div>
     <x-card class="mb-4">
         {{-- <h1 class="font-semibold mb-4 text-2xl">Detail Suku Cadang</h1> --}}
+        @if ($workOrder->dicek && $workOrder->isApprovalPending())
+        <div class="flex justify-end items-center gap-4">
+            <div class="font-semibold uppercase">
+                Mau Diservice?
+            </div>
+            <div>
+                <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Mau</x-button>
+                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal</x-button>
+            </div>
+        </div>
+        <hr class="my-4">
+        @endif
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-6 flex items-center">
+            <div class="col-span-6 flex items-start">
                 <div class="font-bold uppercase mr-4 text-sm">
                     Tanggal
                 </div>
@@ -22,7 +34,7 @@
                     {{ $workOrder->tanggal }}
                 </div>
             </div>
-            <div class="col-span-6 flex items-center">
+            <div class="col-span-6 flex items-start">
                 <div class="font-bold uppercase mr-4 text-sm">
                     Kendaraan
                 </div>
@@ -30,7 +42,7 @@
                     {{ $workOrder->kendaraan->no_plat }}
                 </div>
             </div>
-            <div class="col-span-6 flex items-center">
+            <div class="col-span-6 flex items-start">
                 <div class="font-bold uppercase mr-4 text-sm">
                     Pelanggan
                 </div>
@@ -38,14 +50,28 @@
                     {{ $workOrder->kendaraan->pelanggan->nama }}
                 </div>
             </div>
-            <div class="col-span-6 flex items-center">
+            <div class="col-span-6 flex items-start">
                 <div class="font-bold uppercase mr-4 text-sm">
-                    Dicek
+                    Status
                 </div>
-                <div
-                    @if(!$workOrder->dicek) wire:click="markAsChecked"  @endif
-                    class="cursor-pointer px-2 rounded text-white font-semibold {{ $workOrder->dicek ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600' }}">
-                    {{ $workOrder->dicek ? 'Sudah' : 'Belum' }}
+                <div class="flex gap-4">
+                    <x-boolean-button
+                        class="px-2 rounded text-white font-semibold" trueLabel="Dicek" falseLabel="Dicek"
+                        trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
+                        :state="$workOrder->dicek" wire:click="markAsChecked"
+                    />
+                    {{-- <x-boolean-button
+                        class="px-2 rounded text-white font-semibold" trueLabel="Disetujui" 
+                        falseLabel="{{$workOrder->isServiceCancelled() ? 'Dibatalkan' : 'Disetujui'  }}"
+                        trueClass="bg-green-500 hover:bg-green-600" 
+                        falseClass="{{$workOrder->isServiceCancelled() ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-300 hover:bg-gray-400'  }}" 
+                        :state="$workOrder->mau_diservice" 
+                    /> --}}
+                    <x-boolean-button
+                        class="px-2 rounded text-white font-semibold" trueLabel="Selesai" falseLabel="Selesai"
+                        trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
+                        :state="$workOrder->service_selesai" 
+                    />
                 </div>
             </div>
 
@@ -207,7 +233,7 @@
         <hr class="my-4">
 
         <div class="grid grid-cols-12 py-2 gap-4">
-            <div class="col-span-9 col-start-4 border-t-4 border-primary"></div>
+            <div class="col-span-12 border-t-8 border-primary"></div>
             <div class="col-span-4 col-start-4 uppercase font-bold text-xl">Grandtotal</div>
             <div class="col-span-5 col-start-8 text-xl">{{ $workOrder->getGrandTotal()}}</div>
         </div>
