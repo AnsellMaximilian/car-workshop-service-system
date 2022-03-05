@@ -33,6 +33,14 @@ class WorkOrder extends Model
         }
     }
 
+    public function markAsFinished()
+    {
+        if($this->mau_diservice){
+            $this->service_selesai = true;
+            $this->save();
+        }
+    }
+
     public function kendaraan()
     {
         return $this->belongsTo(Kendaraan::class);

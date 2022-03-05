@@ -118,6 +118,11 @@ class Show extends Component
 
     }
 
+    public function markAsFinished()
+    {
+        $this->workOrder->markAsFinished();
+    }
+
     public function render()
     {
         // dd($this->sukuCadang->getTotalPemasukkan());

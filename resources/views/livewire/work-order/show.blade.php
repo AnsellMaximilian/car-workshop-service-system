@@ -60,17 +60,10 @@
                         trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
                         :state="$workOrder->dicek" wire:click="markAsChecked"
                     />
-                    {{-- <x-boolean-button
-                        class="px-2 rounded text-white font-semibold" trueLabel="Disetujui" 
-                        falseLabel="{{$workOrder->isServiceCancelled() ? 'Dibatalkan' : 'Disetujui'  }}"
-                        trueClass="bg-green-500 hover:bg-green-600" 
-                        falseClass="{{$workOrder->isServiceCancelled() ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-300 hover:bg-gray-400'  }}" 
-                        :state="$workOrder->mau_diservice" 
-                    /> --}}
                     <x-boolean-button
                         class="px-2 rounded text-white font-semibold" trueLabel="Selesai" falseLabel="Selesai"
                         trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
-                        :state="$workOrder->service_selesai" 
+                        :state="$workOrder->service_selesai" wire:click="markAsFinished"
                     />
                 </div>
             </div>
