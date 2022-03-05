@@ -11,8 +11,15 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <x-card class="mb-4">
-        {{-- <h1 class="font-semibold mb-4 text-2xl">Detail Suku Cadang</h1> --}}
+    <x-card class="mb-4 relative">
+        @if ($workOrder->isServiceCancelled())
+        <div class="absolute left-0 top-0 w-full h-full flex items-center justify-center">
+            <div class="text-8xl text-red-700 font-bold z-20 border-8 border-red-700 rounded-md py-1 px-4">
+                BATAL
+            </div>
+            <div class="absolute left-0 top-0 w-full h-full bg-gray-300 opacity-50 "></div>
+        </div>
+        @endif
         @if ($workOrder->dicek && $workOrder->isApprovalPending())
         <div class="flex justify-end items-center gap-4">
             <div class="font-semibold uppercase">
