@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\FakturServiceController;
 use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
@@ -77,6 +78,15 @@ Route::middleware('auth')->group(function () {
         Route::get('work-orders/{id}', WorkOrderShow::class)->name('show');
         Route::get('work-orders/{work_order}/edit', [WorkOrderController::class, 'edit'])->name('edit');
         Route::patch('work-orders/{work_order}', [WorkOrderController::class, 'update'])->name('update');
+    });
+
+    Route::name('faktur-services.')->group(function(){
+        Route::get('faktur-services', [FakturServiceController::class, 'index'])->name('index');
+        Route::get('faktur-services/create', [FakturServiceController::class, 'create'])->name('create');
+        Route::post('faktur-services', [FakturServiceController::class, 'store'])->name('store');
+        // Route::get('faktur-services/{id}', WorkOrderShow::class)->name('show');
+        // Route::get('faktur-services/{work_order}/edit', [FakturServiceController::class, 'edit'])->name('edit');
+        // Route::patch('faktur-services/{work_order}', [FakturServiceController::class, 'update'])->name('update');
     });
 });
 
