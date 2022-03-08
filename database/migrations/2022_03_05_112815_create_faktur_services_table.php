@@ -17,7 +17,7 @@ class CreateFakturServicesTable extends Migration
             $table->id();
             $table->date('tanggal');
             $table->foreignId('work_order_id')->constrained();
-            $table->boolean('dibayar');
+            $table->boolean('dibayar')->default(false);
             $table->timestamps();
         });
     }
