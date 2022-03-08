@@ -14,57 +14,56 @@
     </div>
     
     <x-card class="mb-4 relative">
-        <div class="">
-            <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="ml-auto">
-        </div>
-        <hr class="my-4">
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-6 grid grid-cols-12">
-                <div class="font-bold uppercase mr-4 text-sm col-span-4">
-                    Work Order
+        <div class="flex justify-between mb-4">
+            <div class="">
+                <div class="grid grid-cols-12 mb-4">
+                    <div class="font-bold uppercase mr-4 text-sm col-span-6">
+                        Work Order
+                    </div>
+                    <div class="col-span-6">
+                        <select 
+                            wire:model="selectedWorkOrderId"
+                            name="selectedWorkOrderId" 
+                            id="selectedWorkOrderId" 
+                            class="w-32 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            @foreach ($workOrders as $workOrder)
+                                <option 
+                                    value="{{ $workOrder->id }}" 
+                                    {{ old('selectedWorkOrderId') === $workOrder->id  ? 'selected' : '' }}
+                                >{{ $workOrder->id }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-                <div class="col-span-8">
-                    <select 
-                        wire:model="selectedWorkOrderId"
-                        name="selectedWorkOrderId" 
-                        id="selectedWorkOrderId" 
-                        class="w-32 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    >
-                        @foreach ($workOrders as $workOrder)
-                            <option 
-                                value="{{ $workOrder->id }}" 
-                                {{ old('selectedWorkOrderId') === $workOrder->id  ? 'selected' : '' }}
-                            >{{ $workOrder->id }}</option>
-                        @endforeach
-                    </select>
+                <div class="grid grid-cols-12 mb-4">
+                    <div class="font-bold uppercase mr-4 text-sm col-span-6">
+                        Tanggal
+                    </div>
+                    <div class="col-span-6">
+                        {{ now()->format('d/m/Y') }}
+                    </div>
                 </div>
-            </div>
-            <div class="col-span-6"></div>
-            <div class="col-span-6 grid grid-cols-12">
-                <div class="font-bold uppercase mr-4 text-sm col-span-4">
-                    Tanggal
+                <div class="grid grid-cols-12 mb-4">
+                    <div class="font-bold uppercase mr-4 text-sm col-span-6">
+                        Kendaraan
+                    </div>
+                    <div class="col-span-6">
+                        {{ $selectedWorkOrder->kendaraan->no_plat }}
+                    </div>
                 </div>
-                <div class="col-span-8">
-                    {{ now()->format('d/m/Y') }}
-                </div>
-            </div>
-            <div class="col-span-6 grid grid-cols-12">
-                <div class="font-bold uppercase mr-4 text-sm col-span-4">
-                    Kendaraan
-                </div>
-                <div class="col-span-8">
-                    {{ $selectedWorkOrder->kendaraan->no_plat }}
-                </div>
-            </div>
-            <div class="col-span-6 grid grid-cols-12">
-                <div class="font-bold uppercase mr-4 text-sm col-span-4">
-                    Pelanggan
-                </div>
-                <div class="col-span-8">
-                    {{ $selectedWorkOrder->kendaraan->pelanggan->nama }}
+                <div class="grid grid-cols-12 mb-4">
+                    <div class="font-bold uppercase mr-4 text-sm col-span-6">
+                        Pelanggan
+                    </div>
+                    <div class="col-span-6">
+                        {{ $selectedWorkOrder->kendaraan->pelanggan->nama }}
+                    </div>
                 </div>
             </div>
-
+            <div class="">
+                <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="ml-auto">
+            </div>
         </div>
         <hr class="my-4">
         {{-- PENJUALAN SERVIS --}}
