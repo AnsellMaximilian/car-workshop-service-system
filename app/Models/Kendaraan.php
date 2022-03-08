@@ -18,4 +18,9 @@ class Kendaraan extends Model
     {
         return $this->belongsTo(Pelanggan::class);
     }
+
+    public function getFullName()
+    {
+        return $this->tipe->merk->merk . ' ' . $this->tipe->tipe;
+    }
 }

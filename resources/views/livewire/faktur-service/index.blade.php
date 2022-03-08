@@ -41,9 +41,9 @@
                     Paid
                 </x-table.cell>
                 <x-table.cell class="space-x-2 flex">
-                    {{-- <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('faktur-services.show', $fakturService->id) }}"    
-                    >VIEW</a> --}}
+                    >VIEW</a>
                     <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
                         wire:click="destroy({{ $fakturService->id }})"
                     >Delete</button>

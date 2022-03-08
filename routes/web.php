@@ -8,6 +8,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\SukuCadangController;
 use App\Http\Controllers\WorkOrderController;
+use App\Http\Livewire\FakturService\Show as FakturServiceShow;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
 use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
 use App\Http\Livewire\WorkOrder\Show as WorkOrderShow;
@@ -84,7 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::get('faktur-services', [FakturServiceController::class, 'index'])->name('index');
         Route::get('faktur-services/create', [FakturServiceController::class, 'create'])->name('create');
         Route::post('faktur-services', [FakturServiceController::class, 'store'])->name('store');
-        // Route::get('faktur-services/{id}', WorkOrderShow::class)->name('show');
+        Route::get('faktur-services/{id}', FakturServiceShow::class)->name('show');
         // Route::get('faktur-services/{work_order}/edit', [FakturServiceController::class, 'edit'])->name('edit');
         // Route::patch('faktur-services/{work_order}', [FakturServiceController::class, 'update'])->name('update');
     });
