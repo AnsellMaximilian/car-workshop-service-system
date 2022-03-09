@@ -1154,6 +1154,9 @@ select {
 .fill-primary {
   fill: #b51919;
 }
+.fill-white {
+  fill: #fff;
+}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1487,6 +1490,15 @@ select {
 .hover\:bg-red-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+.hover\:fill-gray-100:hover {
+  fill: #f3f4f6;
+}
+.hover\:fill-gray-800:hover {
+  fill: #1f2937;
+}
+.hover\:fill-gray-300:hover {
+  fill: #d1d5db;
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
