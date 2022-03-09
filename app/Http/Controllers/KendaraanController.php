@@ -50,12 +50,12 @@ class KendaraanController extends Controller
     public function update(Kendaraan $kendaraan, Request $request)
     {
         $request->validate([
-            'no_plat' => 'required|max:20|unique:kendaraans',
+            // 'no_plat' => 'required|max:20|unique:kendaraans',
             'tipe_id' => 'required|exists:tipes,id',
             'pelanggan_id' => 'required|exists:pelanggans,id',
         ]);
 
-        $kendaraan->no_plat = $request->no_plat;
+        // $kendaraan->no_plat = $request->no_plat;
         $kendaraan->tipe_id = $request->tipe_id;
         $kendaraan->pelanggan_id = $request->pelanggan_id;
         $kendaraan->warna = $request->warna;

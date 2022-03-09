@@ -15,7 +15,7 @@
             <div class="col-span-6">
                 <x-label for="no_plat" :value="__('No. Plat')" />
 
-                <x-input id="no_plat" class="block mt-1 w-full" type="text" name="no_plat" :value="old('no_plat')"  autofocus />
+                <x-input id="no_plat" class="block mt-1 w-full" type="text" name="no_plat" :value="$kendaraan->no_plat" disabled />
             </div>
 
             <div class="col-span-6">
