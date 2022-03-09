@@ -12,6 +12,8 @@
         </x-icon-link>
     </div>
     <x-card>
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
         {{-- <h1 class="font-semibold mb-4 text-2xl">Detail Suku Cadang</h1> --}}
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6 flex">

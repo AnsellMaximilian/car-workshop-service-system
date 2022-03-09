@@ -131,14 +131,15 @@
                     <x-input
                         wire:model="jenisServiceAmount"
                         class="block min-w-0 w-full" 
-                        type="number" 
+                        type="number"
+                        min="0"
                         placeholder="Jumlah" required />
                 </div>
                 <div class="col-span-3">
                     <x-input 
                         class="block min-w-0 w-full" 
                         type="number" 
-                        placeholder="Subtotal" disabled :value="$selectedJenisService->harga * $jenisServiceAmount" required />
+                        placeholder="Subtotal" disabled :value="$selectedJenisService->harga * (is_numeric($jenisServiceAmount) ? $jenisServiceAmount : 0)" required />
                 </div>
                 <div class="col-span-2 flex items-center justify-end">
                     <x-button class="">
@@ -205,13 +206,14 @@
                         wire:model="sukuCadangAmount"
                         class="block min-w-0 w-full" 
                         type="number" 
+                        min="0"
                         placeholder="Jumlah" required />
                 </div>
                 <div class="col-span-3">
                     <x-input 
                         class="block min-w-0 w-full" 
                         type="number" 
-                        placeholder="Subtotal" disabled :value="$selectedSukuCadang->harga * $sukuCadangAmount" required />
+                        placeholder="Subtotal" disabled :value="$selectedSukuCadang->harga * (is_numeric($sukuCadangAmount) ? $sukuCadangAmount : 0)" required />
                 </div>
                 <div class="col-span-2 flex items-center justify-end">
                     <x-button class="">

@@ -53,7 +53,7 @@ class Show extends Component
     public function addJenisService()
     {
         $this->validate([
-            'jenisServiceAmount' => 'required|numeric',
+            'jenisServiceAmount' => 'required|numeric|min:0',
             'selectedJenisServiceId' => 'required|exists:jenis_services,id',
         ]);
         
@@ -81,7 +81,7 @@ class Show extends Component
     public function addSukuCadang()
     {
         $this->validate([
-            'sukuCadangAmount' => 'required|numeric',
+            'sukuCadangAmount' => 'required|numeric|min:0',
             'selectedSukuCadangId' => 'required|exists:suku_cadangs,id',
         ]);
         
