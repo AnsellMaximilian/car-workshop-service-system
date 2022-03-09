@@ -11,14 +11,19 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <div class="mb-4">
+    <div class="mb-4 flex items-end">
         <x-label class="">
             <x-input type="checkbox" wire:model="isEditMode" class="hidden" />
             <span class="block mb-1">Mode Edit</span>
             <x-toggle :state="$isEditMode"/>
         </x-label>
+        @if (!$isEditMode && $workOrder->dicek)
+        <div class="ml-auto">
+            <x-button onclick="window.print()">Print</x-button>
+        </div>
+        @endif
     </div>
-    <x-card class="mb-4 relative">
+    <x-card class="mb-4 relative print-out">
         @if ($workOrder->isServiceCancelled())
         <x-stamp label="BATAL" />
         @endif

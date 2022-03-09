@@ -1,3 +1,23 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .print-out,
+    .print-out * {
+        visibility: visible;
+    }
+
+    .print-out {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 100%;
+        min-height: 100vh;
+    }
+}
