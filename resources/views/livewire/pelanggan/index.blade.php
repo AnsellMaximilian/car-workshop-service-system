@@ -11,7 +11,7 @@
         <x-slot name="head">
             <x-table.heading wire:click="setSort('id')">ID</x-table.heading>
             <x-table.heading wire:click="setSort('nama')">Nama</x-table.heading>
-            <x-table.heading wire:click="setSort('name')">No. Telp</x-table.heading>
+            <x-table.heading wire:click="setSort('noTelp')">No. Telp</x-table.heading>
             <x-table.heading wire:click="setSort('email')">Email</x-table.heading>
             <x-table.heading wire:click="setSort('alamat')">Alamat</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
