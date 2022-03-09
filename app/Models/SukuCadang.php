@@ -23,9 +23,16 @@ class SukuCadang extends Model
         }, 0);
     }
 
+    public function getTotalPenggantian()
+    {
+        return $this->penggantian_suku_cadangs->reduce(function($total, $penggantian){
+            return $total + $penggantian->work_order->mau_diservice ? $penggantian->jumlah : 0;
+        }, 0);
+    }
+
     public function getCurrentStock()
     {
-        return $this->stok_awal + $this->getTotalPemasukkan() - $this->getTotalPengeluaran();
+        return $this->stok_awal + $this->getTotalPemasukkan() - $this->getTotalPengeluaran() - $this->getTotalPenggantian();
     }
 
     public function pemasukkan_suku_cadangs()
@@ -36,6 +43,11 @@ class SukuCadang extends Model
     public function pengeluaran_suku_cadangs()
     {
         return $this->hasMany(PengeluaranSukuCadang::class);
+    }
+
+    public function penggantian_suku_cadangs()
+    {
+        return $this->hasMany(PenggantianSukuCadang::class);
     }
 
     public function getCurrentStockAttribute()
