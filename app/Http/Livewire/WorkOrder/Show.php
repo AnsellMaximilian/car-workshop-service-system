@@ -58,26 +58,36 @@ class Show extends Component
             'jenisServiceAmount' => 'required|numeric|min:0',
             'selectedJenisServiceId' => 'required|exists:jenis_services,id',
         ]);
-        
-        $selectedJenisService = JenisService::find($this->selectedJenisServiceId);
-        
-        $newPenjualanService = new PenjualanService;
 
-        $newPenjualanService->jumlah = $this->jenisServiceAmount;
-        $newPenjualanService->jenis_service_id = $this->selectedJenisServiceId;
-        $newPenjualanService->harga = $selectedJenisService->harga;
+        if(!$this->workOrder->isApprovalPending()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+            ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
+        }else {
+            $selectedJenisService = JenisService::find($this->selectedJenisServiceId);
         
-        $this->workOrder->penjualan_services()->save($newPenjualanService);
-        $this->workOrder->refresh();
-
+            $newPenjualanService = new PenjualanService;
+    
+            $newPenjualanService->jumlah = $this->jenisServiceAmount;
+            $newPenjualanService->jenis_service_id = $this->selectedJenisServiceId;
+            $newPenjualanService->harga = $selectedJenisService->harga;
+            
+            $this->workOrder->penjualan_services()->save($newPenjualanService);
+            $this->workOrder->refresh();
+        }
+        
         $this->reset(['jenisServiceAmount']);
     }
     
     public function deletePenjualanService($id)
     {
-        $penjualanService = PenjualanService::find($id);
-        $penjualanService->delete();
-        $this->workOrder->refresh();
+        if(!$this->workOrder->isApprovalPending()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
+        }else {
+            $penjualanService = PenjualanService::find($id);
+            $penjualanService->delete();
+            $this->workOrder->refresh();
+        }
     }
 
     public function addSukuCadang()
@@ -86,12 +96,14 @@ class Show extends Component
             'sukuCadangAmount' => 'required|numeric|min:0',
             'selectedSukuCadangId' => 'required|exists:suku_cadangs,id',
         ]);
-        
         $selectedSukuCadang = SukuCadang::find($this->selectedSukuCadangId);
         
         if($selectedSukuCadang->current_stock < $this->sukuCadangAmount){
             return redirect(route('work-orders.show', $this->workOrder->id))
                 ->with('error', 'Stok '.$selectedSukuCadang->nama.' tidak cukup. Stok: '.$selectedSukuCadang->current_stock);
+        }elseif(!$this->workOrder->isApprovalPending()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+            ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
         }else {
             $newPenggantianSukuCadang = new PenggantianSukuCadang;
 
@@ -108,9 +120,14 @@ class Show extends Component
 
     public function deletePenggantianSukuCadang($id)
     {
-        $penggantianSukuCadang = PenggantianSukuCadang::find($id);
-        $penggantianSukuCadang->delete();
-        $this->workOrder->refresh();
+        if(!$this->workOrder->isApprovalPending()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
+        }else {
+            $penggantianSukuCadang = PenggantianSukuCadang::find($id);
+            $penggantianSukuCadang->delete();
+            $this->workOrder->refresh();
+        }
     }
 
     public function markApproveStatus($isApproved)
@@ -122,7 +139,6 @@ class Show extends Component
         }
 
         $this->workOrder->refresh();
-
     }
 
     public function markAsFinished()
