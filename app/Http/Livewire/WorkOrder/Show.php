@@ -21,6 +21,8 @@ class Show extends Component
     public $selectedSukuCadangId;
     public $sukuCadangAmount = 0;
 
+    public $isEditMode = false;
+
     public function mount($id)
     {
         $this->workOrder = WorkOrder::find($id);
