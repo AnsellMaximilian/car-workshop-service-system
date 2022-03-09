@@ -39,6 +39,14 @@
                     {{ $sukuCadang->current_stock }}
                 </div>
             </div>
+            <div class="col-span-6">
+                <div>
+                    <div>Stok awal: {{ $sukuCadang->stok_awal }}</div>
+                    <div>Pemasukkan: {{ $sukuCadang->getTotalPemasukkan() }}</div>
+                    <div>Pengeluaran: {{ $sukuCadang->getTotalPengeluaran() }}</div>
+                    <div>Penggantian: {{ $sukuCadang->getTotalPenggantian() }}</div>
+                </div>
+            </div>
         </div>
         <hr class="my-4">
         <div class="grid grid-cols-12 gap-4">

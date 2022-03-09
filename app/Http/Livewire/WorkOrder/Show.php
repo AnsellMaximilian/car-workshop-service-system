@@ -87,14 +87,19 @@ class Show extends Component
         
         $selectedSukuCadang = SukuCadang::find($this->selectedSukuCadangId);
         
-        $newPenggantianSukuCadang = new PenggantianSukuCadang;
+        if($selectedSukuCadang->current_stock < $this->sukuCadangAmount){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Stok '.$selectedSukuCadang->nama.' tidak cukup. Stok: '.$selectedSukuCadang->current_stock);
+        }else {
+            $newPenggantianSukuCadang = new PenggantianSukuCadang;
 
-        $newPenggantianSukuCadang->jumlah = $this->sukuCadangAmount;
-        $newPenggantianSukuCadang->suku_cadang_id = $this->selectedSukuCadangId;
-        $newPenggantianSukuCadang->harga = $selectedSukuCadang->harga;
-        
-        $this->workOrder->penggantian_suku_cadangs()->save($newPenggantianSukuCadang);
-        $this->workOrder->refresh();
+            $newPenggantianSukuCadang->jumlah = $this->sukuCadangAmount;
+            $newPenggantianSukuCadang->suku_cadang_id = $this->selectedSukuCadangId;
+            $newPenggantianSukuCadang->harga = $selectedSukuCadang->harga;
+            
+            $this->workOrder->penggantian_suku_cadangs()->save($newPenggantianSukuCadang);
+            $this->workOrder->refresh();
+        }
 
         $this->reset(['sukuCadangAmount']);
     }

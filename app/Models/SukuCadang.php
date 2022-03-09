@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class SukuCadang extends Model
 {
@@ -25,8 +26,9 @@ class SukuCadang extends Model
 
     public function getTotalPenggantian()
     {
+
         return $this->penggantian_suku_cadangs->reduce(function($total, $penggantian){
-            return $total + $penggantian->work_order->mau_diservice ? $penggantian->jumlah : 0;
+            return $total + (!$penggantian->work_order->isServiceCancelled() ? $penggantian->jumlah : 0);
         }, 0);
     }
 
