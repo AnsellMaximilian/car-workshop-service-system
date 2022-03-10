@@ -132,13 +132,17 @@ class Show extends Component
 
     public function markApproveStatus($isApproved)
     {
-        if($isApproved){
-            $this->workOrder->markAsApproved();
-        }else{
-            $this->workOrder->markAsCancelled();
+        if(count($this->workOrder->penjualan_services) === 0 && count($this->workOrder->penggantian_suku_cadangs) === 0){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Work order kosong. Hapus saja.');
+        }else {
+            if($isApproved){
+                $this->workOrder->markAsApproved();
+            }else{
+                $this->workOrder->markAsCancelled();
+            }
+            $this->workOrder->refresh();
         }
-
-        $this->workOrder->refresh();
     }
 
     public function markAsFinished()

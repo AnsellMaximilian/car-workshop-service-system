@@ -11,33 +11,42 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <div class="mb-4 flex items-end">
-        <x-label class="">
-            <x-input type="checkbox" wire:model="isEditMode" class="hidden" />
-            <span class="block mb-1">Mode Edit</span>
-            <x-toggle :state="$isEditMode"/>
-        </x-label>
-        @if (!$isEditMode && $workOrder->dicek)
-        <div class="ml-auto">
-            <x-button onclick="window.print()">Print</x-button>
+    <x-card class="mb-4 relative">
+        @if($workOrder->isServiceCancelled())<x-obscurer/>@endif
+        <div class="flex items-end">
+            <x-label class="">
+                <x-input type="checkbox" wire:model="isEditMode" class="hidden" />
+                <span class="block mb-1">Mode Edit</span>
+                <x-toggle :state="$isEditMode"/>
+            </x-label>
+            <div class="ml-auto flex items-end gap-4">
+                @if (!$isEditMode && $workOrder->dicek)
+                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600 active:bg-gray-900">
+                    <x-icons.trash class="fill-white inline-block h-5"/>
+                </x-button>
+                <x-button onclick="window.print()">
+                    <x-icons.print class="h-5 fill-white inline-block"/>
+                </x-button>
+                @endif
+            </div>
         </div>
+        @if ($workOrder->dicek && $workOrder->isApprovalPending())
+        <hr class="my-4">
+        <div class="flex justify-end items-center gap-4">
+            {{-- <div class="font-semibold uppercase">
+                Mau Diservice?
+            </div> --}}
+            <div>
+                <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju Service</x-button>
+                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal Service</x-button>
+            </div>
+        </div>
+        {{-- <hr class="my-4"> --}}
         @endif
-    </div>
+    </x-card>
     <x-card class="mb-4 relative print-out">
         @if ($workOrder->isServiceCancelled())
         <x-stamp label="BATAL" />
-        @endif
-        @if ($workOrder->dicek && $workOrder->isApprovalPending())
-        <div class="flex justify-end items-center gap-4">
-            <div class="font-semibold uppercase">
-                Mau Diservice?
-            </div>
-            <div>
-                <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Mau</x-button>
-                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal</x-button>
-            </div>
-        </div>
-        <hr class="my-4">
         @endif
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6 flex items-start">

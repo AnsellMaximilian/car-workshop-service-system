@@ -11,9 +11,8 @@ switch($color) {
 }
 @endphp
 
-<div class="absolute left-0 top-0 w-full h-full flex items-center justify-center">
+<x-obscurer>
     <div class="text-6xl md:text-8xl font-bold z-20 border-8 rounded-md py-1 px-4 rotate-45 {{ $colorClasses }}">
         {{ $label }}
     </div>
-    <div class="absolute left-0 top-0 w-full h-full bg-gray-300 opacity-50 "></div>
-</div>
+</x-obscurer>
