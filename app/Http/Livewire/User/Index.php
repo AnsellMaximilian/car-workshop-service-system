@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
@@ -16,6 +17,7 @@ class Index extends Component
 {
     use WithPagination;
     // use WithFileUploads;
+    use AuthorizesRequests;
 
     // Search and sort
     public $query = "";
@@ -131,6 +133,8 @@ class Index extends Component
     public function destroy(User $user)
     {
         // Storage::disk('public')->delete('');
+        $this->authorize('delete', $user);
+
         $user->delete();
     }
 

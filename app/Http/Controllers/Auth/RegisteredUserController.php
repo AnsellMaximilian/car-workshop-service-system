@@ -21,6 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
 
         $perans = Peran::all();
         return view('users.create', ['perans' => $perans]);
@@ -36,6 +37,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', User::class);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -75,11 +78,16 @@ class RegisteredUserController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
+
+
         return view('users.edit', ['user' => $user, 'perans' => Peran::all()]);
     }
 
     public function update(User $user, Request $request)
     {
+        $this->authorize('update', $user);
+
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'kode_peran' => 'required|exists:perans,kode_peran',
