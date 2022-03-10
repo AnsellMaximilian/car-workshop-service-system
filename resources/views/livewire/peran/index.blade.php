@@ -30,8 +30,8 @@
     </x-modal>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('kode_peran')">Kode Peran</x-table.heading>
-            <x-table.heading wire:click="setSort('nama_peran')">Nama Peran</x-table.heading>
+            <x-table.heading wire:click="setSort('kode_peran')" sortable :sortDir="$sortField === 'kode_peran' ? $sortDir : null">Kode Peran</x-table.heading>
+            <x-table.heading wire:click="setSort('nama_peran')" sortable :sortDir="$sortField === 'nama_peran' ? $sortDir : null">Nama Peran</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
         </x-slot>
         <x-slot name="body">

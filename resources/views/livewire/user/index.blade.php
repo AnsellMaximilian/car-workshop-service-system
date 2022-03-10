@@ -9,12 +9,12 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('id')">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('name')">Name</x-table.heading>
-            <x-table.heading wire:click="setSort('name')">Peran</x-table.heading>
-            <x-table.heading wire:click="setSort('email')">Email</x-table.heading>
-            <x-table.heading wire:click="setSort('noTelp')">No. Telp</x-table.heading>
-            <x-table.heading wire:click="setSort('alamat')">Alamat</x-table.heading>
+            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
+            <x-table.heading wire:click="setSort('name')" sortable :sortDir="$sortField === 'name' ? $sortDir : null">Name</x-table.heading>
+            <x-table.heading>Peran</x-table.heading>
+            <x-table.heading wire:click="setSort('email')" sortable :sortDir="$sortField === 'email' ? $sortDir : null">Email</x-table.heading>
+            <x-table.heading wire:click="setSort('noTelp')" sortable :sortDir="$sortField === 'noTelp' ? $sortDir : null">No. Telp</x-table.heading>
+            <x-table.heading wire:click="setSort('alamat')" sortable :sortDir="$sortField === 'alamat' ? $sortDir : null">Alamat</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
         </x-slot>

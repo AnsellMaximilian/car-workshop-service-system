@@ -13,11 +13,11 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('id')">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('no_plat')">No. Plat</x-table.heading>
-            <x-table.heading wire:click="setSort('pelanggan_id')">ID Pemilik</x-table.heading>
-            <x-table.heading wire:click="setSort('tipe_id')">ID Tipe</x-table.heading>
-            <x-table.heading wire:click="setSort('warna')">Warna</x-table.heading>
+            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
+            <x-table.heading wire:click="setSort('no_plat')" sortable :sortDir="$sortField === 'no_plat' ? $sortDir : null">No. Plat</x-table.heading>
+            <x-table.heading wire:click="setSort('pelanggan_id')" sortable :sortDir="$sortField === 'pelanggan_id' ? $sortDir : null">ID Pemilik</x-table.heading>
+            <x-table.heading wire:click="setSort('tipe_id')" sortable :sortDir="$sortField === 'tipe_id' ? $sortDir : null">ID Tipe</x-table.heading>
+            <x-table.heading wire:click="setSort('warna')" sortable :sortDir="$sortField === 'warna' ? $sortDir : null">Warna</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
         </x-slot>

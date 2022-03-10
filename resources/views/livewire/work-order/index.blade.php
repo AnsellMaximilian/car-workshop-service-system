@@ -8,10 +8,10 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('id')">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('tanggal')">Tanggal</x-table.heading>
-            <x-table.heading wire:click="setSort('kendaraan_id')">ID Kendaraan</x-table.heading>
-            <x-table.heading wire:click="setSort('keluhan')">Keluhan</x-table.heading>
+            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
+            <x-table.heading wire:click="setSort('tanggal')" sortable :sortDir="$sortField === 'tanggal' ? $sortDir : null">Tanggal</x-table.heading>
+            <x-table.heading wire:click="setSort('kendaraan_id')" sortable :sortDir="$sortField === 'kendaraan_id' ? $sortDir : null">ID Kendaraan</x-table.heading>
+            <x-table.heading wire:click="setSort('keluhan')" sortable :sortDir="$sortField === 'keluhan' ? $sortDir : null">Keluhan</x-table.heading>
             <x-table.heading>Status</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 

@@ -60,8 +60,8 @@
             </div>
             <x-table.wrapper>
                 <x-slot name="head">
-                    <x-table.heading wire:click="setSortTipe('id')">ID</x-table.heading>
-                    <x-table.heading wire:click="setSortTipe('tipe')">Tipe</x-table.heading>
+                    <x-table.heading wire:click="setSortTipe('id')" sortable :sortDir="$tipeSortField === 'id' ? $tipeSortDir : null">ID</x-table.heading>
+                    <x-table.heading wire:click="setSortTipe('tipe')" sortable :sortDir="$tipeSortField === 'tipe' ? $tipeSortDir : null">Tipe</x-table.heading>
                     <x-table.heading>Actions</x-table.heading>
         
                 </x-slot>
@@ -124,8 +124,8 @@
             </div>
             <x-table.wrapper>
                 <x-slot name="head">
-                    <x-table.heading wire:click="setSortMerk('id')">ID</x-table.heading>
-                    <x-table.heading wire:click="setSortMerk('merk')">Merk</x-table.heading>
+                    <x-table.heading wire:click="setSortMerk('id')" sortable :sortDir="$merkSortField === 'id' ? $merkSortDir : null">ID</x-table.heading>
+                    <x-table.heading wire:click="setSortMerk('merk')" sortable :sortDir="$merkSortField === 'merk' ? $merkSortDir : null">Merk</x-table.heading>
                     <x-table.heading>Actions</x-table.heading>
         
                 </x-slot>
