@@ -28,7 +28,12 @@ class Index extends Component
 
     public function destroy(WorkOrder $workOrder)
     {
-        $workOrder->delete();
+        if($workOrder->canBeDeleted()){
+            $workOrder->delete();
+        }else {
+            return redirect(route('work-orders.index'))
+                ->with('error', 'Tidak bisa di hapus.');
+        }
     }
 
     public function render()
