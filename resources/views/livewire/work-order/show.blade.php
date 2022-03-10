@@ -36,6 +36,23 @@
         @if ($workOrder->isServiceCancelled())
         <x-stamp label="BATAL" />
         @endif
+        <div class="mb-8 flex justify-between items-center">
+            <div class="text-3xl font-bold">Work Order</div>
+            @if ($workOrder->dicek)
+            <div class="flex justify-end items-center gap-4">
+                @if ($workOrder->isApprovalPending())
+                <div>
+                    <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju Service</x-button>
+                    <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal Service</x-button>
+                </div>
+                @else
+                    @if ($workOrder->mau_diservice)
+                    <div class="uppercase text-green-500 text-xl font-semibold">Disetujui</div>
+                    @endif
+                @endif
+            </div>
+            @endif
+        </div>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6">
                 <div class="grid grid-cols-12 mb-4 font-semibold">
@@ -88,30 +105,20 @@
                         <div class="col-span-3">Dicek</div>
                         <x-checkbox :checked="$workOrder->dicek" wire:click="markAsChecked" class="col-span-9"/>
                     </div>
+                    @if($workOrder->isServiceApproved())
                     <div class="grid-cols-12 grid gap-4">
                         <div class="col-span-3">Selesai</div>
                         <x-checkbox :checked="$workOrder->service_selesai" wire:click="markAsFinished" class="col-span-9"/>
                     </div>
+                    @endif
                 </div>
-                {{-- <div class="flex gap-4">
-                    <x-boolean-button
-                        class="px-2 rounded text-white font-semibold" trueLabel="Dicek" falseLabel="Dicek"
-                        trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
-                        :state="$workOrder->dicek" wire:click="markAsChecked"
-                    />
-                    <x-boolean-button
-                        class="px-2 rounded text-white font-semibold" trueLabel="Selesai" falseLabel="Selesai"
-                        trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
-                        :state="$workOrder->service_selesai" wire:click="markAsFinished"
-                    />
-                </div> --}}
             </div>
 
         </div>
         <hr class="my-4">
         @if (!$workOrder->dicek)
         <div>
-            Dicek dulu mas... Baru bisa
+            Harap dicek dahulu.
         </div>
         @else
         {{-- PENJUALAN SERVIS --}}

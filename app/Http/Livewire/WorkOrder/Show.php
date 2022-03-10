@@ -143,10 +143,15 @@ class Show extends Component
             }
             $this->workOrder->refresh();
         }
+        $this->isEditMode = false;
     }
 
     public function markAsFinished()
     {
+        if($this->workOrder->isApprovalPending()) {
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Mohon tunggu disetujui.');
+        }
         $this->workOrder->markAsFinished();
     }
 
