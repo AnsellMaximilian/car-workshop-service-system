@@ -56,6 +56,11 @@ class WorkOrder extends Model
         return $this->hasMany(PenggantianSukuCadang::class);
     }
 
+    public function faktur_service()
+    {
+        return $this->hasOne(FakturService::class);
+    }
+
     public function getTotalPenjualanServices()
     {
         return $this->penjualan_services->reduce(function($total, $penjualan){
@@ -95,5 +100,10 @@ class WorkOrder extends Model
         return (count($this->penggantian_suku_cadangs) <= 0) 
             && (count($this->penjualan_services) <= 0) 
             && ($this->isApprovalPending());
+    }
+
+    public function invoiced()
+    {
+        return $this->faktur_service !== null;
     }
 }

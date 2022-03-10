@@ -29,7 +29,7 @@ class Create extends Component
         $newFakturService->tanggal = now();
         $newFakturService->save();
 
-        return $this->redirect('/faktur-services');
+        return redirect(route('faktur-services.show', $newFakturService->id));
     }
 
     public function render()
@@ -40,8 +40,12 @@ class Create extends Component
             $selectedWorkOrder = new WorkOrder();
         }
 
+        $workOrders = WorkOrder::where('service_selesai', true)->get();
+
         return view('livewire.faktur-service.create', [
-            'workOrders' => WorkOrder::where('service_selesai', true)->get(),
+            'workOrders' => $workOrders->filter(function ($workOrder) {
+                return !$workOrder->invoiced();
+            }),
             'selectedWorkOrder' => $selectedWorkOrder
         ]);
     }
