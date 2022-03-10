@@ -47,6 +47,16 @@ class Show extends Component
         }
     }
 
+    public function toggleEditMode()
+    {
+        if(!$this->workOrder->isApprovalPending()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui') . ' Tidak bisa edit.');
+        }else{
+            $this->isEditMode = !$this->isEditMode;
+        }
+    }
+
     public function markAsChecked()
     {
         $this->workOrder->markAsChecked();

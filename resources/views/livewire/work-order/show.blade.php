@@ -15,9 +15,8 @@
         @if($workOrder->isServiceCancelled())<x-obscurer/>@endif
         <div class="flex items-end">
             <x-label class="">
-                <x-input type="checkbox" wire:model="isEditMode" class="hidden" />
                 <span class="block mb-1">Mode Edit</span>
-                <x-toggle :state="$isEditMode"/>
+                <x-toggle :state="$isEditMode" wire:click="toggleEditMode"/>
             </x-label>
             <div class="ml-auto flex items-end gap-4">
                 @if (!$isEditMode && $workOrder->dicek)
