@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\WorkOrder;
 
+use App\Models\FakturService;
 use App\Models\JenisService;
 use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
@@ -163,6 +164,25 @@ class Show extends Component
         }else {
             return redirect(route('work-orders.show', $this->workOrder->id))
                 ->with('error', 'Tidak bisa di hapus.');
+        }
+    }
+
+    public function makeInvoice()
+    {
+        if($this->workOrder->invoiced()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Faktur untuk work order ini sudah dibuat.');
+        }elseif(!$this->workOrder->canBeInvoiced()){
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Selesaikan dulu service.');
+        }else {
+            $fakturService = new FakturService();
+
+            $fakturService->tanggal = now();
+
+            $this->workOrder->faktur_service()->save($fakturService);
+            $this->workOrder->refresh();
+            return redirect(route('faktur-services.show', $this->workOrder->faktur_service->id));
         }
     }
 

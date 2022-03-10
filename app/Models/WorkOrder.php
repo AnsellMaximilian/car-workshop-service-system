@@ -102,6 +102,11 @@ class WorkOrder extends Model
             && ($this->isApprovalPending());
     }
 
+    public function canBeInvoiced()
+    {
+        return $this->service_selesai === 1;
+    }
+
     public function invoiced()
     {
         return $this->faktur_service !== null;

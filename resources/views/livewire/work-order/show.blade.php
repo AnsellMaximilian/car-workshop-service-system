@@ -19,14 +19,20 @@
                 <span class="block mb-1">Mode Edit</span>
                 <x-toggle :state="$isEditMode" wire:click="toggleEditMode"/>
             </x-label>
-            <div class="ml-auto flex items-end gap-4">
+            <div class="ml-auto flex gap-4">
                 @if (!$isEditMode && $workOrder->dicek)
-                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600 active:bg-gray-900" wire:click="deleteWorkOrder">
+                    
+                <x-button overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900" wire:click="deleteWorkOrder">
                     <x-icons.trash class="fill-white inline-block h-5"/>
                 </x-button>
-                <x-button onclick="window.print()">
+                <x-button onclick="window.print()" overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900">
                     <x-icons.print class="h-5 fill-white inline-block"/>
                 </x-button>
+                    @if ($workOrder->isServiceApproved())
+                    <x-button wire:click="makeInvoice">
+                        Buat Faktur Service
+                    </x-button> 
+                    @endif
                 @endif
             </div>
         </div>
