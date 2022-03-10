@@ -9,7 +9,7 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('id')">ID</x-table.heading>
+            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null" >ID</x-table.heading>
             <x-table.heading wire:click="setSort('nama')">Nama</x-table.heading>
             <x-table.heading wire:click="setSort('noTelp')">No. Telp</x-table.heading>
             <x-table.heading wire:click="setSort('email')">Email</x-table.heading>

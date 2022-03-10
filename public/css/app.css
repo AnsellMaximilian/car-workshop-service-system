@@ -814,6 +814,9 @@ select {
 .h-32 {
   height: 8rem;
 }
+.h-2 {
+  height: 0.5rem;
+}
 .max-h-full {
   max-height: 100%;
 }
@@ -998,6 +1001,9 @@ select {
 }
 .gap-4 {
   gap: 1rem;
+}
+.gap-1 {
+  gap: 0.25rem;
 }
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
