@@ -13,4 +13,9 @@ class FakturService extends Model
     {
         return $this->belongsTo(WorkOrder::class);
     }
+
+    public function isPaid()
+    {
+        return $this->dibayar === 1;
+    }
 }
