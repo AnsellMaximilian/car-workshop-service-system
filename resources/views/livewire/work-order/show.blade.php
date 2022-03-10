@@ -29,9 +29,15 @@
                     <x-icons.print class="h-5 fill-white inline-block"/>
                 </x-button>
                     @if ($workOrder->isServiceApproved())
-                    <x-button wire:click="makeInvoice">
-                        Buat Faktur Service
-                    </x-button> 
+                        @if ($workOrder->invoiced())
+                        <x-button >
+                            <a href="{{route('faktur-services.show', $workOrder->faktur_service->id)}}">Lihat Faktur Service</a>
+                        </x-button> 
+                        @else
+                        <x-button wire:click="makeInvoice">
+                            Buat Faktur Service
+                        </x-button> 
+                        @endif
                     @endif
                 @endif
             </div>
