@@ -26,9 +26,11 @@ class Index extends Component
         $this->sortField = $field;
     }
 
-    public function destroy(SukuCadang $pelanggan)
+    public function destroy(SukuCadang $sukuCadang)
     {
-        $pelanggan->delete();
+        $this->authorize('delete', $sukuCadang);
+
+        $sukuCadang->delete();
     }
 
     public function render()

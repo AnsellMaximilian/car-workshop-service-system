@@ -14,11 +14,15 @@ class PelangganController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Pelanggan::class);
+
         return view('pelanggans.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Pelanggan::class);
+
         $request->validate([
             'nama' => 'required|max:50',
             'noTelp' => 'required|max:15',
@@ -39,11 +43,15 @@ class PelangganController extends Controller
 
     public function edit(Pelanggan $pelanggan)
     {
+        $this->authorize('update', $pelanggan);
+
         return view('pelanggans.edit', ['pelanggan' => $pelanggan]);
     }
 
     public function update(Pelanggan $pelanggan, Request $request)
     {
+        $this->authorize('update', $pelanggan);
+
         $request->validate([
             'nama' => 'required|max:50',
             'noTelp' => 'required|max:15',

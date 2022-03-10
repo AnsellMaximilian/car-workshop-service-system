@@ -4,10 +4,13 @@ namespace App\Http\Livewire\MerkDanTipe;
 
 use App\Models\Merk;
 use App\Models\Tipe;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use AuthorizesRequests;
+
     // Search and sort
     public $tipeSortField;
     public $tipeSortDir = "asc";
@@ -88,6 +91,8 @@ class Index extends Component
 
     public function storeTipe()
     {
+        $this->authorize('create', Tipe::class);
+
         $this->validate([
             'tipe' => 'required|max:25',
             'merk_id' => 'required|exists:merks,id',
@@ -105,7 +110,11 @@ class Index extends Component
 
     public function editTipe($id)
     {
+        
         $tipeToEdit = Tipe::findOrFail($id);
+
+        $this->authorize('update', $tipeToEdit);
+
         $this->isTipeEditMode = true;
         $this->tipeToEditId = $id;
         $this->tipe = $tipeToEdit->tipe;
@@ -123,6 +132,10 @@ class Index extends Component
         ]);
 
         $tipeToEdit = Tipe::findOrFail($this->tipeToEditId);
+
+        $this->authorize('update', $tipeToEdit);
+
+
         $tipeToEdit->tipe = $this->tipe;
         $tipeToEdit->merk_id = $this->merk_id;
 
@@ -133,6 +146,9 @@ class Index extends Component
 
     public function storeMerk()
     {
+        $this->authorize('create', Merk::class);
+
+
         $this->validate([
             'merk' => 'required|max:25',
         ]);
@@ -149,6 +165,9 @@ class Index extends Component
     public function editMerk($id)
     {
         $merkToEdit = Merk::findOrFail($id);
+
+        $this->authorize('update', $merkToEdit);
+
         $this->isMerkEditMode = true;
         $this->merkToEditId = $id;
         $this->merk = $merkToEdit->merk;
@@ -164,6 +183,9 @@ class Index extends Component
         ]);
 
         $merkToEdit = Merk::findOrFail($this->merkToEditId);
+
+        $this->authorize('update', $merkToEdit);
+
         $merkToEdit->merk = $this->merk;
 
         $merkToEdit->save();
@@ -173,11 +195,15 @@ class Index extends Component
 
     public function destroyTipe(Tipe $tipe)
     {
+        $this->authorize('delete', $tipe);
+
         $tipe->delete();
     }
 
     public function destroyMerk(Merk $merk)
     {
+        $this->authorize('delete', $merk);
+
         $merk->delete();
     }
 

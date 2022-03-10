@@ -28,6 +28,9 @@ class Index extends Component
 
     public function destroy(FakturService $fakturService)
     {
+        $this->authorize('delete', $fakturService);
+
+
         $fakturService->delete();
     }
 

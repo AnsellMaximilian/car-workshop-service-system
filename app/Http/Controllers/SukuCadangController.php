@@ -24,6 +24,8 @@ class SukuCadangController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', SukuCadang::class);
+        
         $request->validate([
             'nama' => 'required|max:25',
             'stok_awal' => 'numeric|min:0',
@@ -43,11 +45,15 @@ class SukuCadangController extends Controller
 
     public function edit(SukuCadang $sukuCadang)
     {
+        $this->authorize('update', $sukuCadang);
+
         return view('suku-cadangs.edit', ['sukuCadang' => $sukuCadang]);
     }
 
     public function update(SukuCadang $sukuCadang, Request $request)
     {
+        $this->authorize('update', $sukuCadang);
+
         $request->validate([
             'nama' => 'required|max:25',
             'harga' => 'required|numeric|min:0',

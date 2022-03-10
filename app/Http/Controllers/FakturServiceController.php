@@ -19,6 +19,7 @@ class FakturServiceController extends Controller
 
     public function create()
     {
+        $this->authorize('create', FakturService::class);
         return view('faktur-services.create');
     }
 

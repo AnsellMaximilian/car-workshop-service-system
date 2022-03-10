@@ -3,12 +3,14 @@
 namespace App\Http\Livewire\Kendaraan;
 
 use App\Models\Kendaraan;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     // Search and sort
     public $query = "";
@@ -28,7 +30,7 @@ class Index extends Component
 
     public function destroy(Kendaraan $kendaraan)
     {
-        // Storage::disk('public')->delete('');
+        $this->authorize('delete', $kendaraan);
         $kendaraan->delete();
     }
 

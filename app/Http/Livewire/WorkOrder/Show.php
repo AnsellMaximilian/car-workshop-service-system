@@ -8,10 +8,13 @@ use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
 use App\Models\SukuCadang;
 use App\Models\WorkOrder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Show extends Component
 {
+    use AuthorizesRequests;
+
     public $workOrder;
 
     // Adding service sale
@@ -69,6 +72,8 @@ class Show extends Component
 
     public function addJenisService()
     {
+        $this->authorize('update', $this->workOrder);
+        
         $this->validate([
             'jenisServiceAmount' => 'required|numeric|min:0',
             'selectedJenisServiceId' => 'required|exists:jenis_services,id',
@@ -91,6 +96,8 @@ class Show extends Component
     
     public function deletePenjualanService($id)
     {
+        $this->authorize('update', $this->workOrder);
+
         $this->failIfApprovalNotPending();
         $penjualanService = PenjualanService::find($id);
         $penjualanService->delete();
@@ -99,6 +106,8 @@ class Show extends Component
 
     public function addSukuCadang()
     {
+        $this->authorize('update', $this->workOrder);
+
         $this->validate([
             'sukuCadangAmount' => 'required|numeric|min:0',
             'selectedSukuCadangId' => 'required|exists:suku_cadangs,id',
@@ -125,6 +134,8 @@ class Show extends Component
 
     public function deletePenggantianSukuCadang($id)
     {
+        $this->authorize('update', $this->workOrder);
+
         $this->failIfApprovalNotPending();
         $penggantianSukuCadang = PenggantianSukuCadang::find($id);
         $penggantianSukuCadang->delete();
@@ -133,6 +144,8 @@ class Show extends Component
 
     public function markApproveStatus($isApproved)
     {
+        $this->authorize('update', $this->workOrder);
+
         if(count($this->workOrder->penjualan_services) === 0 && count($this->workOrder->penggantian_suku_cadangs) === 0){
             return redirect(route('work-orders.show', $this->workOrder->id))
                 ->with('error', 'Work order kosong. Hapus saja.');
@@ -149,6 +162,8 @@ class Show extends Component
 
     public function markAsFinished()
     {
+        $this->authorize('update', $this->workOrder);
+
         if($this->workOrder->isApprovalPending()) {
             return redirect(route('work-orders.show', $this->workOrder->id))
                 ->with('error', 'Mohon tunggu disetujui.');
@@ -158,6 +173,8 @@ class Show extends Component
 
     public function deleteWorkOrder()
     {
+        $this->authorize('delete', $this->workOrder);
+
         if($this->workOrder->canBeDeleted()){
             $this->workOrder->delete();
             return redirect(route('work-orders.index'));
@@ -169,6 +186,8 @@ class Show extends Component
 
     public function makeInvoice()
     {
+        $this->authorize('update', $this->workOrder);
+
         if($this->workOrder->invoiced()){
             return redirect(route('work-orders.show', $this->workOrder->id))
                 ->with('error', 'Faktur untuk work order ini sudah dibuat.');

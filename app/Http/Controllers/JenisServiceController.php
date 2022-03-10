@@ -19,11 +19,15 @@ class JenisServiceController extends Controller
 
     public function create()
     {
+        $this->authorize('create', JenisService::class);
+
         return view('jenis-services.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', JenisService::class);
+
         $request->validate([
             'nama' => 'required|max:25',
             'deskripsi' => 'max:255',
@@ -43,11 +47,15 @@ class JenisServiceController extends Controller
 
     public function edit(JenisService $jenisService)
     {
+        $this->authorize('update', $jenisService);
+
         return view('jenis-services.edit', ['jenisService' => $jenisService]);
     }
 
     public function update(JenisService $jenisService, Request $request)
     {
+        $this->authorize('update', $jenisService);
+
         $request->validate([
             'nama' => 'required|max:25',
             'deskripsi' => 'max:255',

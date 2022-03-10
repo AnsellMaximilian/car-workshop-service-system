@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\WorkOrder;
 
 use App\Models\WorkOrder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
+
+    use AuthorizesRequests;
 
     // Search and sort
     public $query = "";
@@ -28,6 +31,8 @@ class Index extends Component
 
     public function destroy(WorkOrder $workOrder)
     {
+        $this->authorize('delete', $workOrder);
+
         if($workOrder->canBeDeleted()){
             $workOrder->delete();
         }else {

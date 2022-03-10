@@ -5,11 +5,13 @@ namespace App\Http\Livewire\SukuCadang;
 use App\Models\PemasukkanSukuCadang;
 use App\Models\PengeluaranSukuCadang;
 use App\Models\SukuCadang;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Show extends Component
 {
+    use AuthorizesRequests;
+
     public $sukuCadang;
     public $jumlah_pemasukkan = 0;
     public $jumlah_pengeluaran = 0;
@@ -21,6 +23,8 @@ class Show extends Component
 
     public function addToStock()
     {
+        $this->authorize('control_stock', $this->sukuCadang);
+
         $this->validate([
             'jumlah_pemasukkan' => 'required|numeric|min:0'
         ]);
@@ -35,6 +39,8 @@ class Show extends Component
 
     public function removeFromStock()
     {
+        $this->authorize('control_stock', $this->sukuCadang);
+
         $this->validate([
             'jumlah_pengeluaran' => 'required|numeric|min:0'
         ]);

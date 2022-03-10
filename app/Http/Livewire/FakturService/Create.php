@@ -20,6 +20,9 @@ class Create extends Component
     
     public function saveFakturService()
     {
+        $this->authorize('create', FakturService::class);
+
+
         $this->validate([
             'selectedWorkOrderId' => 'required|exists:work_orders,id',
         ]);

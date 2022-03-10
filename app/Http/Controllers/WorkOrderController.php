@@ -19,11 +19,15 @@ class WorkOrderController extends Controller
 
     public function create()
     {
+        $this->authorize('create', WorkOrder::class);
+        
         return view('work-orders.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', WorkOrder::class);
+
         $request->validate([
             'kendaraan_id' => 'required|exists:kendaraans,id',
             'keluhan' => 'max:255',
@@ -43,11 +47,15 @@ class WorkOrderController extends Controller
 
     public function edit(WorkOrder $workOrder)
     {
+        $this->authorize('update', $workOrder);
+
         return view('work-orders.edit', ['workOrder' => $workOrder]);
     }
 
     public function update(WorkOrder $workOrder, Request $request)
     {
+        $this->authorize('update', $workOrder);
+
         $request->validate([
             'nama' => 'required|max:25',
             'harga' => 'required|numeric|min:0',

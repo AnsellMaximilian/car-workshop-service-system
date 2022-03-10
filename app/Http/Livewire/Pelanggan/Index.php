@@ -3,12 +3,14 @@
 namespace App\Http\Livewire\Pelanggan;
 
 use App\Models\Pelanggan;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     // Search and sort
     public $query = "";
@@ -29,6 +31,7 @@ class Index extends Component
     public function destroy(Pelanggan $pelanggan)
     {
         // Storage::disk('public')->delete('');
+        $this->authorize('delete', $pelanggan);
         $pelanggan->delete();
     }
 
