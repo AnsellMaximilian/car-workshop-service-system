@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Peran;
 
 use App\Models\Peran;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use AuthorizesRequests;
+
     public $query = "";
     public $sortField;
     public $sortDir = "asc";
@@ -29,7 +32,10 @@ class Index extends Component
 
     public function edit($code)
     {
+        
         $peran = Peran::find($code);
+        
+        $this->authorize('update', $peran);
 
         $this->peranToEditCode = $code;
 
@@ -46,6 +52,8 @@ class Index extends Component
         ]);
 
         $peran = Peran::find($this->peranToEditCode);
+
+        $this->authorize('update', $peran);
 
         $peran->nama_peran = $this->nama_peran;
         $peran->save();
