@@ -21,7 +21,7 @@
             </x-label>
             <div class="ml-auto flex items-end gap-4">
                 @if (!$isEditMode && $workOrder->dicek)
-                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600 active:bg-gray-900">
+                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600 active:bg-gray-900" wire:click="deleteWorkOrder">
                     <x-icons.trash class="fill-white inline-block h-5"/>
                 </x-button>
                 <x-button onclick="window.print()">

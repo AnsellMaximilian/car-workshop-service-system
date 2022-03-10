@@ -155,6 +155,17 @@ class Show extends Component
         $this->workOrder->markAsFinished();
     }
 
+    public function deleteWorkOrder()
+    {
+        if($this->workOrder->canBeDeleted()){
+            $this->workOrder->delete();
+            return redirect(route('work-orders.index'));
+        }else {
+            return redirect(route('work-orders.show', $this->workOrder->id))
+                ->with('error', 'Tidak bisa di hapus.');
+        }
+    }
+
     public function render()
     {
         // dd($this->sukuCadang->getTotalPemasukkan());

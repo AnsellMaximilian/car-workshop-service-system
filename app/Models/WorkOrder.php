@@ -89,4 +89,11 @@ class WorkOrder extends Model
     {
         return !$this->isServiceApproved() && !$this->isServiceCancelled();
     }
+
+    public function canBeDeleted()
+    {
+        return (count($this->penggantian_suku_cadangs) <= 0) 
+            && (count($this->penjualan_services) <= 0) 
+            && ($this->isApprovalPending());
+    }
 }
