@@ -188,7 +188,7 @@
                     <div class="col-span-2">Harga</div>
                     <div class="col-span-2">Jumlah</div>
                     <div class="col-span-3">Subtotal</div>
-                    @if(!$isEditMode)<div class="col-span-2">Aksi</div>@endif
+                    @if($isEditMode)<div class="col-span-2">Aksi</div>@endif
                 </div>
                 @foreach ($workOrder->penggantian_suku_cadangs as $penggantianSukuCadang)
                     <div class="border-b border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
