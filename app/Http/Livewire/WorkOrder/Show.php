@@ -47,14 +47,18 @@ class Show extends Component
         }
     }
 
-    public function toggleEditMode()
+    public function failIfApprovalNotPending($extraMessage = "")
     {
         if(!$this->workOrder->isApprovalPending()){
             return redirect(route('work-orders.show', $this->workOrder->id))
-                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui') . ' Tidak bisa edit.');
-        }else{
-            $this->isEditMode = !$this->isEditMode;
+                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan. ' : 'disetujui. ') . $extraMessage);
         }
+    }
+
+    public function toggleEditMode()
+    {
+        $this->failIfApprovalNotPending("Tidak bisa edit.");    
+        $this->isEditMode = !$this->isEditMode;
     }
 
     public function markAsChecked()
@@ -69,35 +73,27 @@ class Show extends Component
             'selectedJenisServiceId' => 'required|exists:jenis_services,id',
         ]);
 
-        if(!$this->workOrder->isApprovalPending()){
-            return redirect(route('work-orders.show', $this->workOrder->id))
-            ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
-        }else {
-            $selectedJenisService = JenisService::find($this->selectedJenisServiceId);
-        
-            $newPenjualanService = new PenjualanService;
+        $this->failIfApprovalNotPending();    
+        $selectedJenisService = JenisService::find($this->selectedJenisServiceId);
     
-            $newPenjualanService->jumlah = $this->jenisServiceAmount;
-            $newPenjualanService->jenis_service_id = $this->selectedJenisServiceId;
-            $newPenjualanService->harga = $selectedJenisService->harga;
-            
-            $this->workOrder->penjualan_services()->save($newPenjualanService);
-            $this->workOrder->refresh();
-        }
+        $newPenjualanService = new PenjualanService;
+
+        $newPenjualanService->jumlah = $this->jenisServiceAmount;
+        $newPenjualanService->jenis_service_id = $this->selectedJenisServiceId;
+        $newPenjualanService->harga = $selectedJenisService->harga;
+        
+        $this->workOrder->penjualan_services()->save($newPenjualanService);
+        $this->workOrder->refresh();
         
         $this->reset(['jenisServiceAmount']);
     }
     
     public function deletePenjualanService($id)
     {
-        if(!$this->workOrder->isApprovalPending()){
-            return redirect(route('work-orders.show', $this->workOrder->id))
-                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
-        }else {
-            $penjualanService = PenjualanService::find($id);
-            $penjualanService->delete();
-            $this->workOrder->refresh();
-        }
+        $this->failIfApprovalNotPending();
+        $penjualanService = PenjualanService::find($id);
+        $penjualanService->delete();
+        $this->workOrder->refresh();
     }
 
     public function addSukuCadang()
@@ -111,10 +107,8 @@ class Show extends Component
         if($selectedSukuCadang->current_stock < $this->sukuCadangAmount){
             return redirect(route('work-orders.show', $this->workOrder->id))
                 ->with('error', 'Stok '.$selectedSukuCadang->nama.' tidak cukup. Stok: '.$selectedSukuCadang->current_stock);
-        }elseif(!$this->workOrder->isApprovalPending()){
-            return redirect(route('work-orders.show', $this->workOrder->id))
-            ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
         }else {
+            $this->failIfApprovalNotPending();
             $newPenggantianSukuCadang = new PenggantianSukuCadang;
 
             $newPenggantianSukuCadang->jumlah = $this->sukuCadangAmount;
@@ -130,14 +124,10 @@ class Show extends Component
 
     public function deletePenggantianSukuCadang($id)
     {
-        if(!$this->workOrder->isApprovalPending()){
-            return redirect(route('work-orders.show', $this->workOrder->id))
-                ->with('error', 'Service sudah ' . ($this->workOrder->isServiceCancelled() ? 'dibatalkan' : 'disetujui'));
-        }else {
-            $penggantianSukuCadang = PenggantianSukuCadang::find($id);
-            $penggantianSukuCadang->delete();
-            $this->workOrder->refresh();
-        }
+        $this->failIfApprovalNotPending();
+        $penggantianSukuCadang = PenggantianSukuCadang::find($id);
+        $penggantianSukuCadang->delete();
+        $this->workOrder->refresh();
     }
 
     public function markApproveStatus($isApproved)

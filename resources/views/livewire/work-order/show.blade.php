@@ -11,6 +11,7 @@
             </x-slot>
         </x-icon-link>
     </div>
+    @if ($workOrder->dicek)
     <x-card class="mb-4 relative">
         @if($workOrder->isServiceCancelled())<x-obscurer/>@endif
         <div class="flex items-end">
@@ -29,54 +30,70 @@
                 @endif
             </div>
         </div>
-        @if ($workOrder->dicek && $workOrder->isApprovalPending())
-        <hr class="my-4">
-        <div class="flex justify-end items-center gap-4">
-            {{-- <div class="font-semibold uppercase">
-                Mau Diservice?
-            </div> --}}
-            <div>
-                <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju Service</x-button>
-                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal Service</x-button>
-            </div>
-        </div>
-        {{-- <hr class="my-4"> --}}
-        @endif
     </x-card>
+    @endif
     <x-card class="mb-4 relative print-out">
         @if ($workOrder->isServiceCancelled())
         <x-stamp label="BATAL" />
         @endif
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-6 flex items-start">
-                <div class="font-bold uppercase mr-4 text-sm">
-                    Tanggal
+            <div class="col-span-6">
+                <div class="grid grid-cols-12 mb-4 font-semibold">
+                    <div class="font-bold uppercase col-span-4">
+                        Tanggal
+                    </div>
+                    <div class="col-span-8">
+                        : {{ $workOrder->tanggal }}
+                    </div>
                 </div>
-                <div>
-                    {{ $workOrder->tanggal }}
+                <div class="grid grid-cols-12 mb-4 font-semibold">
+                    <div class="font-bold uppercase col-span-4">
+                        Kendaraan
+                    </div>
+                    <div class="col-span-8">
+                        : {{ $workOrder->kendaraan->getFullName() }}
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 mb-4 font-semibold">
+                    <div class="font-bold uppercase col-span-4">
+                        No. Plat
+                    </div>
+                    <div class="col-span-8">
+                        : {{ $workOrder->kendaraan->no_plat }}
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 mb-4 font-semibold">
+                    <div class="font-bold uppercase col-span-4">
+                        Pelanggan
+                    </div>
+                    <div class="col-span-8">
+                        : {{ $workOrder->kendaraan->pelanggan->nama }}
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 mb-4 font-semibold">
+                    <div class="font-bold uppercase col-span-4">
+                        Keluhan
+                    </div>
+                    <div class="col-span-8">
+                        : {{ $workOrder->keluhan }}
+                    </div>
                 </div>
             </div>
-            <div class="col-span-6 flex items-start">
-                <div class="font-bold uppercase mr-4 text-sm">
-                    Kendaraan
-                </div>
-                <div>
-                    {{ $workOrder->kendaraan->no_plat }}
-                </div>
-            </div>
-            <div class="col-span-6 flex items-start">
-                <div class="font-bold uppercase mr-4 text-sm">
-                    Pelanggan
-                </div>
-                <div>
-                    {{ $workOrder->kendaraan->pelanggan->nama }}
-                </div>
-            </div>
-            <div class="col-span-6 flex items-start">
-                <div class="font-bold uppercase mr-4 text-sm">
+            <div class="col-span-6">
+                <div class="font-bold uppercase mb-4">
                     Status
                 </div>
-                <div class="flex gap-4">
+                <div>
+                    <div class="grid-cols-12 grid gap-4 mb-4">
+                        <div class="col-span-3">Dicek</div>
+                        <x-checkbox :checked="$workOrder->dicek" wire:click="markAsChecked" class="col-span-9"/>
+                    </div>
+                    <div class="grid-cols-12 grid gap-4">
+                        <div class="col-span-3">Selesai</div>
+                        <x-checkbox :checked="$workOrder->service_selesai" wire:click="markAsFinished" class="col-span-9"/>
+                    </div>
+                </div>
+                {{-- <div class="flex gap-4">
                     <x-boolean-button
                         class="px-2 rounded text-white font-semibold" trueLabel="Dicek" falseLabel="Dicek"
                         trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
@@ -87,7 +104,7 @@
                         trueClass="bg-green-500 hover:bg-green-600" falseClass="bg-gray-300 hover:bg-gray-400" 
                         :state="$workOrder->service_selesai" wire:click="markAsFinished"
                     />
-                </div>
+                </div> --}}
             </div>
 
         </div>
@@ -265,6 +282,20 @@
         @endif
 
     </x-card>
+    @if ($workOrder->dicek && $workOrder->isApprovalPending())
+    <x-card>
+        <div class="flex justify-end items-center gap-4">
+            {{-- <div class="font-semibold uppercase">
+                Mau Diservice?
+            </div> --}}
+            <div>
+                <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju Service</x-button>
+                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal Service</x-button>
+            </div>
+        </div>
+        {{-- <hr class="my-4"> --}}
+    </x-card>
+    @endif
 
 </div>
 

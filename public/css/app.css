@@ -659,6 +659,9 @@ select {
 .col-span-10 {
   grid-column: span 10 / span 10;
 }
+.col-span-8 {
+  grid-column: span 8 / span 8;
+}
 .col-start-4 {
   grid-column-start: 4;
 }
@@ -981,6 +984,9 @@ select {
 .justify-between {
   justify-content: space-between;
 }
+.justify-items-start {
+  justify-items: start;
+}
 .gap-2 {
   gap: 0.5rem;
 }
@@ -1054,6 +1060,9 @@ select {
 .border-8 {
   border-width: 8px;
 }
+.border-4 {
+  border-width: 4px;
+}
 .border-b-2 {
   border-bottom-width: 2px;
 }
@@ -1110,6 +1119,10 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
+.border-gray-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity));
+}
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1162,6 +1175,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
+.bg-green-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
+}
 .fill-current {
   fill: currentColor;
 }
@@ -1170,6 +1187,12 @@ select {
 }
 .fill-white {
   fill: #fff;
+}
+.fill-gray-800 {
+  fill: #1f2937;
+}
+.fill-green-500 {
+  fill: #22c55e;
 }
 .object-cover {
   -o-object-fit: cover;
@@ -1492,6 +1515,10 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+.hover\:border-gray-900:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(17 24 39 / var(--tw-border-opacity));
+}
 .hover\:bg-red-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -1516,8 +1543,29 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
+.hover\:bg-green-900:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 83 45 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-900:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
 .hover\:fill-gray-300:hover {
   fill: #d1d5db;
+}
+.hover\:fill-gray-900:hover {
+  fill: #111827;
+}
+.hover\:fill-red-300:hover {
+  fill: #fca5a5;
+}
+.hover\:fill-green-600:hover {
+  fill: #16a34a;
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
