@@ -11,7 +11,14 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <x-card class="mb-4 relative">
+    <x-card class="flex mb-4">
+        <div class="ml-auto">
+            <x-button onclick="window.print()" overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900">
+                <x-icons.print class="h-5 fill-white inline-block"/>
+            </x-button>
+        </div>
+    </x-card>
+    <x-card class="mb-4 relative print-out">
         <div class="mb-4 flex justify-between">
             <div class="">
                 <div class="text-2xl font-semibold mb-4">
