@@ -21,14 +21,14 @@ class SukuCadangSeeder extends Seeder
         ]);
 
         DB::table('suku_cadangs')->insert([
-            'nama' => 'Flushing',
-            'harga' => 200000,
+            'nama' => 'Pipa Axeon',
+            'harga' => 220000,
             'stok_awal' => 15
         ]);
 
         DB::table('suku_cadangs')->insert([
-            'nama' => 'Ganti Oli',
-            'harga' => 100000,
+            'nama' => 'Stinger',
+            'harga' => 250000,
             'stok_awal' =>15
         ]);
     }
