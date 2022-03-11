@@ -68,4 +68,9 @@ class ServiceController extends Controller
 
         return redirect(route('services.index'));
     }
+
+    public function invoice(Service $service)
+    {
+        return view('services.faktur', ['service' => $service]);
+    }
 }

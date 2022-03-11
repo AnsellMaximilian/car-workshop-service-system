@@ -31,8 +31,7 @@
                     @if ($service->isServiceApproved())
                         @if ($service->invoiced())
                         <x-button >
-                            {{-- <a href="{{route('faktur-services.show', $service->faktur_service->id)}}">Lihat Faktur Service</a> --}}
-                            <a>Lihat Faktur Service</a>
+                            <a href="{{route('services.invoice', $service->id)}}">Lihat Faktur Service</a>
                         </x-button> 
                         @else
                         <x-button wire:click="makeInvoice">
