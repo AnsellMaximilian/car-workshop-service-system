@@ -70,8 +70,12 @@ class Service extends Model
         }, 0);
     }
 
-    public function getGrandTotal()
+    public function getGrandTotal($asCurrencyString = false)
     {
+        if($asCurrencyString) {
+            return 'sex';
+        }
+
         return $this->getTotalPenjualanServices() + $this->getTotalPenggantianSukuCadangs();
     }
 
@@ -110,5 +114,15 @@ class Service extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function hasAnyPenjualanServices()
+    {
+        return count($this->penjualan_services) > 0;
+    }
+
+    public function hasAnyPenggantianSukuCadangs()
+    {
+        return count($this->penggantian_suku_cadangs) > 0;
     }
 }

@@ -61,6 +61,7 @@
             </div>
             <hr class="my-4">
             {{-- PENJUALAN SERVIS --}}
+            @if ($service->hasAnyPenjualanServices())
             <div class="">
                 <h3 class="font-semibold text-lg uppercase mb-4">Penjualan Servis</h3>
                 <div class="mb-4 border-l border-r border-primary" >
@@ -86,7 +87,9 @@
                 </div>
             </div>
             <hr class="my-4">
+            @endif
             {{-- SUKU CADANG --}}
+            @if ($service->hasAnyPenggantianSukuCadangs())
             <div class="">
                 <h3 class="font-semibold text-lg uppercase mb-4">Penggantian Suku Cadang</h3>
                 <div class="mb-4 border-l border-r border-primary" >
@@ -112,6 +115,7 @@
                 </div>
             </div>
             <hr class="my-4">
+            @endif
     
             <div class="grid grid-cols-12 py-2 gap-4">
                 <div class="col-span-12 border-t-8 border-primary"></div>
