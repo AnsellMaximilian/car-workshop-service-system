@@ -70,12 +70,8 @@ class Service extends Model
         }, 0);
     }
 
-    public function getGrandTotal($asCurrencyString = false)
+    public function getGrandTotal()
     {
-        if($asCurrencyString) {
-            return 'sex';
-        }
-
         return $this->getTotalPenjualanServices() + $this->getTotalPenggantianSukuCadangs();
     }
 
