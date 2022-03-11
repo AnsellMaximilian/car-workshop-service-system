@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,10 @@ class ServiceController extends Controller
     public function create()
     {
         $this->authorize('create', Service::class);
+
+        if(count(Kendaraan::all()) <= 0 ){
+            return redirect(route('kendaraans.index'))->with('error', 'Daftar kendaraan terlebih dahulu.');
+        }
         
         return view('services.create');
     }
