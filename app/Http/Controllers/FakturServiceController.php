@@ -25,21 +25,7 @@ class FakturServiceController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'kendaraan_id' => 'required|exists:kendaraans,id',
-        //     'keluhan' => 'max:255',
-        // ]);
-
-        // $workOrder = new WorkOrder;
-
-        // $workOrder->kendaraan_id = $request->kendaraan_id;
-        // $workOrder->keluhan = $request->keluhan;
-        // $workOrder->tanggal = now();
-        // $workOrder->user_id = request()->user()->id;
-
-        // $workOrder->save();
-
-        // return redirect(route('faktur-services.index'));
+        
     }
 
 }
