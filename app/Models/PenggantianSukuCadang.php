@@ -23,4 +23,9 @@ class PenggantianSukuCadang extends Model
     {
         return $this->belongsTo(WorkOrder::class);
     }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

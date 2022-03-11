@@ -28,7 +28,7 @@ class SukuCadang extends Model
     {
 
         return $this->penggantian_suku_cadangs->reduce(function($total, $penggantian){
-            return $total + (!$penggantian->work_order->isServiceCancelled() ? $penggantian->jumlah : 0);
+            return $total + (!$penggantian->service->isServiceCancelled() ? $penggantian->jumlah : 0);
         }, 0);
     }
 

@@ -7,6 +7,10 @@
         visibility: hidden;
     }
 
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+
     .print-out,
     .print-out * {
         visibility: visible;
