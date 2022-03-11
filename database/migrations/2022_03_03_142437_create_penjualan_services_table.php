@@ -15,7 +15,7 @@ class CreatePenjualanServicesTable extends Migration
     {
         Schema::create('penjualan_services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('work_order_id')->constrained();
+            // $table->foreignId('work_order_id')->constrained();
             $table->foreignId('jenis_service_id')->constrained();
             $table->integer('jumlah');
             $table->integer('harga');

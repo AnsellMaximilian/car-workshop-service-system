@@ -3,8 +3,16 @@
 @import "tailwindcss/utilities";
 
 @media print {
+    :root {
+        font-size: 12px;
+    }
+
     body * {
         visibility: hidden;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact;
     }
 
     .print-out,

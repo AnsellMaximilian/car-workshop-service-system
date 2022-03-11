@@ -8,6 +8,7 @@ use App\Models\Kendaraan;
 use App\Models\Merk;
 use App\Models\Pelanggan;
 use App\Models\Peran;
+use App\Models\Service;
 use App\Models\SukuCadang;
 use App\Models\Tipe;
 use App\Models\User;
@@ -18,6 +19,7 @@ use App\Policies\KendaraanPolicy;
 use App\Policies\MerkPolicy;
 use App\Policies\PelangganPolicy;
 use App\Policies\PeranPolicy;
+use App\Policies\ServicePolicy;
 use App\Policies\SukuCadangPolicy;
 use App\Policies\TipePolicy;
 use App\Policies\UserPolicy;
@@ -43,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         JenisService::class => JenisServicePolicy::class,
         SukuCadang::class => SukuCadangPolicy::class,
         WorkOrder::class => WorkOrderPolicy::class,
+        Service::class => ServicePolicy::class,
         FakturService::class => FakturServicePolicy::class,
     ];
 
