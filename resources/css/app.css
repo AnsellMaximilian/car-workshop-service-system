@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 
 @media print {
+    :root {
+        font-size: 12px;
+    }
+
     body * {
         visibility: hidden;
     }
