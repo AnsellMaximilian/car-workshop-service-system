@@ -68,11 +68,17 @@
                                 :active="request()->routeIs('jenis-services.*')"
                             >Jenis Service</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        {{-- <li>
                             <x-sidebar-nav-link 
                                 :href="route('work-orders.index')" 
                                 :active="request()->routeIs('work-orders.*')"
                             >Work Order</x-sidebar-nav-link>
+                        </li> --}}
+                        <li>
+                            <x-sidebar-nav-link 
+                                :href="route('services.index')" 
+                                :active="request()->routeIs('services.*')"
+                            >Service</x-sidebar-nav-link>
                         </li>
                         <li>
                             <x-sidebar-nav-link 

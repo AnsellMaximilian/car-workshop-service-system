@@ -6,10 +6,12 @@ use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeranController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SukuCadangController;
 use App\Http\Controllers\WorkOrderController;
 use App\Http\Livewire\FakturService\Show as FakturServiceShow;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
+use App\Http\Livewire\Service\Show as ServiceShow;
 use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
 use App\Http\Livewire\WorkOrder\Show as WorkOrderShow;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +81,15 @@ Route::middleware('auth')->group(function () {
         Route::get('work-orders/{id}', WorkOrderShow::class)->name('show');
         Route::get('work-orders/{work_order}/edit', [WorkOrderController::class, 'edit'])->name('edit');
         Route::patch('work-orders/{work_order}', [WorkOrderController::class, 'update'])->name('update');
+    });
+
+    Route::name('services.')->group(function(){
+        Route::get('services', [ServiceController::class, 'index'])->name('index');
+        Route::get('services/create', [ServiceController::class, 'create'])->name('create');
+        Route::post('services', [ServiceController::class, 'store'])->name('store');
+        Route::get('services/{id}', ServiceShow::class)->name('show');
+        Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('edit');
+        Route::patch('services/{service}', [ServiceController::class, 'update'])->name('update');
     });
 
     Route::name('faktur-services.')->group(function(){

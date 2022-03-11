@@ -15,7 +15,7 @@ class CreatePenggantianSukuCadangsTable extends Migration
     {
         Schema::create('penggantian_suku_cadangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('work_order_id')->constrained();
+            // $table->foreignId('service_id')->constrained();
             $table->foreignId('suku_cadang_id')->constrained();
             $table->integer('jumlah');
             $table->integer('harga');
