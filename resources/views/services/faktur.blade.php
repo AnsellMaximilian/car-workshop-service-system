@@ -20,29 +20,39 @@
     </x-card>
     <x-card class="mb-4">
         <div class="print-out relative">
-            <div class="mb-4 flex justify-between">
-                <div class="">
-                    <div class="text-2xl font-semibold mb-4">
-                        Tangerang, {{ \Carbon\Carbon::parse($service->tanggal_faktur)->format('d-m-Y') }}
+            <div class="mb-4">
+                <div class="flex items-start mb-8 border-b-4 border-primary pb-4">
+                    <div>
+                        <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="mb-4 w-64">
                     </div>
-                    <div class="mb-4 grid grid-cols-12">
-                        <div class="col-span-6">Kendaraan</div>
-                        <div class="font-semibold col-span-6">: {{ $service->kendaraan->getFullName() }}</div>
-                    </div>
-                    <div class="mb-4 grid grid-cols-12">
-                        <div class="col-span-6">No. Plat</div>
-                        <div class="font-semibold col-span-6">: {{ $service->kendaraan->no_plat }}</div>
-                    </div>
-                    <div class="mb-4 grid grid-cols-12">
-                        <div class="col-span-6">Pemilik</div>
-                        <div class="font-semibold col-span-6">: {{ $service->kendaraan->pelanggan->nama }}</div>
+                    <div class="text-center grow">
+                        <h1 class="font-bold text-2xl">SOGO JAYA AC</h1>
+                        <div>Office: Jl. Teuku Umar, No. 18 Cimone, Tangerang</div>
+                        <div class="text-sm font-semibold flex justify-center gap-4">
+                            <div>Telp: 021-55790472</div>
+                            <div>HP: 0877 8807 36666 / 08738959 9265</div>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="ml-auto mb-4 w-72">
-                    <div class="font-semibold">
-                        Office: Jl. Teuku Umar, No. 18
-                        Cimone, Tangerang
+                <div class="grid grid-cols-12">
+                    <div class="text-2xl font-semibold mb-4 col-span-12">
+                        Tangerang, {{ \Carbon\Carbon::parse($service->tanggal_faktur)->format('d-m-Y') }}
+                    </div>
+                    <div class="mb-4 grid grid-cols-12 col-span-6">
+                        <div class="col-span-4">Kendaraan</div>
+                        <div class="font-semibold col-span-8">: {{ $service->kendaraan->getFullName() }}</div>
+                    </div>
+                    <div class="mb-4 grid grid-cols-12 col-span-6">
+                        <div class="col-span-4">Pemilik</div>
+                        <div class="font-semibold col-span-8">: {{ $service->kendaraan->pelanggan->nama }}</div>
+                    </div>
+                    <div class="mb-4 grid grid-cols-12 col-span-6">
+                        <div class="col-span-4">No. Plat</div>
+                        <div class="font-semibold col-span-8">: {{ $service->kendaraan->no_plat }}</div>
+                    </div>
+                    <div class="mb-4 grid grid-cols-12 col-span-6">
+                        <div class="col-span-4">Kasir</div>
+                        <div class="font-semibold col-span-8">: {{ $service->user->name }}</div>
                     </div>
                 </div>
             </div>

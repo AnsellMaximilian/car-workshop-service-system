@@ -106,4 +106,9 @@ class Service extends Model
     {
         return $this->tanggal_faktur !== null;
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -975,6 +975,9 @@ select {
 .flex-col {
   flex-direction: column;
 }
+.items-start {
+  align-items: flex-start;
+}
 .items-end {
   align-items: flex-end;
 }
@@ -1095,6 +1098,9 @@ select {
 }
 .border-l {
   border-left-width: 1px;
+}
+.border-b-4 {
+  border-bottom-width: 4px;
 }
 .border-gray-300 {
   --tw-border-opacity: 1;
@@ -1281,6 +1287,9 @@ select {
 }
 .pl-4 {
   padding-left: 1rem;
+}
+.pb-4 {
+  padding-bottom: 1rem;
 }
 .text-left {
   text-align: left;
