@@ -5,13 +5,25 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
-        </div>
+    <x-card class="mb-8 bg-primary text-white">
+        Selamat datang, {{Auth::user()->name}}!
+    </x-card>
+
+    <div class="flex flex-wrap gap-4">
+        <x-dashboard-module label="Belum Dicek" :value="$uncheckedAmount">
+            <x-slot name="icon">
+                <x-icons.magnifying-glass class="h-6"/>
+            </x-slot>
+        </x-dashboard-module>
+        <x-dashboard-module label="Belum Selesai" :value="$unfinishedAmount">
+            <x-slot name="icon">
+                <x-icons.wrench class="h-6"/>
+            </x-slot>
+        </x-dashboard-module>
+        <x-dashboard-module label="Pending" :value="$approvalPendingAmount">
+            <x-slot name="icon">
+                <x-icons.checkmarked-clipboard class="h-6"/>
+            </x-slot>
+        </x-dashboard-module>
     </div>
 </x-app-layout>

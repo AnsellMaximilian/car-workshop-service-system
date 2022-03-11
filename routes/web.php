@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakturServiceController;
 use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
@@ -31,13 +32,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
     Route::get('perans', [PeranController::class, 'index'])->name('perans');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::name('pelanggans.')->group(function(){
         Route::get('pelanggans', [PelangganController::class, 'index'])->name('index');

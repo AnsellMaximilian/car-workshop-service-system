@@ -21,7 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('keluhan')->nullable();
             $table->boolean('dicek')->default(false);
             $table->boolean('mau_diservice')->nullable();
-            $table->boolean('service_selesai')->nullable();
+            $table->boolean('service_selesai')->default(false);
             $table->timestamps();
         });
     }
