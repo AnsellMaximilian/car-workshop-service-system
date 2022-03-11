@@ -42,7 +42,7 @@ class ServiceController extends Controller
 
         $service->kendaraan_id = $request->kendaraan_id;
         $service->keluhan = $request->keluhan;
-        $service->tanggal_pendaftaran = now();
+        $service->tanggal = now();
         $service->user_id = request()->user()->id;
 
         $service->save();
@@ -76,6 +76,10 @@ class ServiceController extends Controller
 
     public function invoice(Service $service)
     {
-        return view('services.faktur', ['service' => $service]);
+        if($service->service_selesai){
+            return view('services.faktur', ['service' => $service]);
+        }else{
+            return back()->with('error', 'Selesaikan service dahulu.');
+        }
     }
 }

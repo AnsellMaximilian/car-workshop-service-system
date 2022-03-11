@@ -17,8 +17,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->foreignId('kendaraan_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->date('tanggal_pendaftaran');
-            $table->date('tanggal_faktur')->nullable();
+            $table->date('tanggal');
             $table->string('keluhan')->nullable();
             $table->boolean('dicek')->default(false);
             $table->boolean('mau_diservice')->nullable();

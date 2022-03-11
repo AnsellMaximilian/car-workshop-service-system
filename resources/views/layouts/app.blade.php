@@ -80,12 +80,12 @@
                                 :active="request()->routeIs('services.*')"
                             >Service</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        {{-- <li>
                             <x-sidebar-nav-link 
                                 :href="route('faktur-services.index')" 
                                 :active="request()->routeIs('faktur-services.*')"
                             >Faktur Service</x-sidebar-nav-link>
-                        </li>
+                        </li> --}}
                     </ul>
                     <hr>
                     <div class="mt-4 cursor-pointer">

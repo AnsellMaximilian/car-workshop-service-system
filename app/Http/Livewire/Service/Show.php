@@ -184,22 +184,6 @@ class Show extends Component
         }
     }
 
-    public function makeInvoice()
-    {
-        $this->authorize('update', $this->service);
-
-        if($this->service->invoiced()){
-            return redirect(route('services.show', $this->service->id))
-                ->with('error', 'Faktur sudah order ini sudah dibuat.');
-        }elseif(!$this->service->canBeInvoiced()){
-            return redirect(route('services.show', $this->service->id))
-                ->with('error', 'Selesaikan dulu service.');
-        }else {
-            $this->service->tanggal_faktur = now();
-            $this->service->save();
-        }
-    }
-
     public function render()
     {
         // dd($this->sukuCadang->getTotalPemasukkan());

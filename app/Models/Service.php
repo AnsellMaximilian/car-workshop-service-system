@@ -106,11 +106,6 @@ class Service extends Model
         return $this->service_selesai === 1;
     }
 
-    public function invoiced()
-    {
-        return $this->tanggal_faktur !== null;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -36,7 +36,7 @@
                 </div>
                 <div class="grid grid-cols-12">
                     <div class="text-2xl font-semibold mb-4 col-span-12">
-                        Tangerang, {{ \Carbon\Carbon::parse($service->tanggal_faktur)->format('d-m-Y') }}
+                        Tangerang, {{ now()->format('d-m-Y') }}
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">Kendaraan</div>

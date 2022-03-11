@@ -21,23 +21,16 @@
             </x-label>
             <div class="ml-auto flex gap-4">
                 @if (!$isEditMode && $service->dicek)
+                    @if ($service->canBeDeleted())
+                    <x-button overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900" wire:click="deleteService">
+                        <x-icons.trash class="fill-white inline-block h-5"/>
+                    </x-button>
+                    @endif
                     
-                <x-button overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900" wire:click="deleteService">
-                    <x-icons.trash class="fill-white inline-block h-5"/>
-                </x-button>
-                <x-button onclick="window.print()" overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900">
-                    <x-icons.print class="h-5 fill-white inline-block"/>
-                </x-button>
                     @if ($service->isServiceApproved())
-                        @if ($service->invoiced())
-                        <x-button >
-                            <a href="{{route('services.invoice', $service->id)}}">Lihat Faktur Service</a>
-                        </x-button> 
-                        @else
-                        <x-button wire:click="makeInvoice">
-                            Buat Faktur Service
-                        </x-button> 
-                        @endif
+                    <x-button >
+                        <a href="{{route('services.invoice', $service->id)}}">Faktur Service</a>
+                    </x-button> 
                     @endif
                 @endif
             </div>
@@ -72,7 +65,7 @@
                         Pendaftaran
                     </div>
                     <div class="col-span-8">
-                        : {{ $service->tanggal_pendaftaran }}
+                        : {{ $service->tanggal }}
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mb-4 font-semibold">

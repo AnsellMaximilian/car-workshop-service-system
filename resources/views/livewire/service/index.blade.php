@@ -9,7 +9,7 @@
     <x-table.wrapper>
         <x-slot name="head">
             <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('tanggal_pendaftaran')" sortable :sortDir="$sortField === 'tanggal_pendaftaran' ? $sortDir : null">Tanggal Daftar</x-table.heading>
+            <x-table.heading wire:click="setSort('tanggal')" sortable :sortDir="$sortField === 'tanggal' ? $sortDir : null">Tanggal Daftar</x-table.heading>
             <x-table.heading wire:click="setSort('kendaraan_id')" sortable :sortDir="$sortField === 'kendaraan_id' ? $sortDir : null">ID Kendaraan</x-table.heading>
             <x-table.heading wire:click="setSort('keluhan')" sortable :sortDir="$sortField === 'keluhan' ? $sortDir : null">Keluhan</x-table.heading>
             <x-table.heading>Status</x-table.heading>
@@ -20,7 +20,7 @@
             @foreach ($services as $service)
             <x-table.row>
                 <x-table.cell>{{ $service->id }}</x-table.cell>
-                <x-table.cell>{{ $service->tanggal_pendaftaran }}</x-table.cell>
+                <x-table.cell>{{ $service->tanggal }}</x-table.cell>
                 <x-table.cell>{{ $service->kendaraan_id }}</x-table.cell>
                 <x-table.cell>{{ $service->keluhan }}</x-table.cell>
                 <x-table.cell>
