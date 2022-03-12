@@ -44,8 +44,8 @@
             <div class="flex justify-end items-center gap-4">
                 @if ($service->isApprovalPending())
                 <div>
-                    <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju Service</x-button>
-                    <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Batal Service</x-button>
+                    <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju</x-button>
+                    <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Tolak</x-button>
                 </div>
                 @else
                     @if ($service->mau_diservice)
