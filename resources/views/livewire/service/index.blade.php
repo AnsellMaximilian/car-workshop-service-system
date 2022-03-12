@@ -30,11 +30,6 @@
                         @if ($service->service_selesai)
                         <x-badge label="Selesai" class="bg-green-400 text-white" />
                         @else
-                            @if ($service->dicek)
-                            <x-badge label="Dicek" class="bg-green-400 text-white" />
-                            @else
-                            <x-badge label="Dicek" class="bg-gray-400 text-white" />
-                            @endif
                             <x-badge label="Selesai" class="bg-gray-400 text-white" />
                         @endif
                     @endif

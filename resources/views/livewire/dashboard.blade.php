@@ -8,11 +8,6 @@
     </div>
 
     <div class="flex flex-wrap gap-4">
-        <x-dashboard-module label="Belum Dicek" :value="$uncheckedAmount" class="bg-white" >
-            <x-slot name="icon">
-                <x-icons.magnifying-glass class="h-6"/>
-            </x-slot>
-        </x-dashboard-module>
         <x-dashboard-module label="Belum Selesai" :value="$unfinishedAmount" class="bg-white" >
             <x-slot name="icon">
                 <x-icons.wrench class="h-6"/>

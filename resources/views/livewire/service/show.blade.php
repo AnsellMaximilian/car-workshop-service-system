@@ -11,7 +11,6 @@
             </x-slot>
         </x-icon-link>
     </div>
-    @if ($service->dicek)
     <x-card class="mb-4 relative">
         @if($service->isServiceCancelled())<x-obscurer/>@endif
         <div class="flex items-end">
@@ -20,7 +19,7 @@
                 <x-toggle :state="$isEditMode" wire:click="toggleEditMode"/>
             </x-label>
             <div class="ml-auto flex gap-4">
-                @if (!$isEditMode && $service->dicek)
+                @if (!$isEditMode)
                     @if ($service->canBeDeleted())
                     <x-button overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900" wire:click="deleteService">
                         <x-icons.trash class="fill-white inline-block h-5"/>
@@ -36,14 +35,12 @@
             </div>
         </div>
     </x-card>
-    @endif
     <x-card class="mb-4 relative print-out">
         @if ($service->isServiceCancelled())
         <x-stamp label="BATAL" />
         @endif
         <div class="mb-8 flex justify-between items-center">
             <div class="text-3xl font-bold">Service</div>
-            @if ($service->dicek)
             <div class="flex justify-end items-center gap-4">
                 @if ($service->isApprovalPending())
                 <div>
@@ -56,7 +53,6 @@
                     @endif
                 @endif
             </div>
-            @endif
         </div>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6">
@@ -106,10 +102,6 @@
                     Status
                 </div>
                 <div>
-                    <div class="grid-cols-12 grid gap-4 mb-4">
-                        <div class="col-span-3">Dicek</div>
-                        <x-checkbox :checked="$service->dicek" wire:click="markAsChecked" class="col-span-9"/>
-                    </div>
                     @if($service->isServiceApproved())
                     <div class="grid-cols-12 grid gap-4">
                         <div class="col-span-3">Selesai</div>
@@ -121,11 +113,6 @@
 
         </div>
         <hr class="my-4">
-        @if (!$service->dicek)
-        <div>
-            Harap dicek dahulu.
-        </div>
-        @else
         {{-- PENJUALAN SERVIS --}}
         <div class="">
             <h3 class="font-semibold text-lg uppercase mb-4">Penjualan Servis</h3>
@@ -291,7 +278,6 @@
             <div class="col-span-4 col-start-4 uppercase font-bold text-xl">Grandtotal</div>
             <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 text-xl">{{ $service->getGrandTotal()}}</div>
         </div>
-        @endif
 
     </x-card>
 

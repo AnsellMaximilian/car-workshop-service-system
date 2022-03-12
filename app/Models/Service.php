@@ -9,28 +9,16 @@ class Service extends Model
 {
     use HasFactory;
 
-    public function markAsChecked()
-    {
-        if(!$this->dicek){
-            $this->dicek = true;
-            $this->save();
-        }
-    }
-
     public function markAsApproved()
     {
-        if($this->dicek){
-            $this->mau_diservice = true;
-            $this->save();
-        }
+        $this->mau_diservice = true;
+        $this->save();
     }
 
     public function markAsCancelled()
     {
-        if($this->dicek){
-            $this->mau_diservice = false;
-            $this->save();
-        }
+        $this->mau_diservice = false;
+        $this->save();
     }
 
     public function markAsFinished()

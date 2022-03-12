@@ -11,7 +11,6 @@ class Dashboard extends Component
 
     public function render()
     {
-        $uncheckedAmount = count(Service::where('dicek', false)->get());
         $unfinishedAmount = count(Service::where('service_selesai', false)->get());
         $approvalPendingAmount = count(Service::where('mau_diservice', null)->get());
 
@@ -20,7 +19,6 @@ class Dashboard extends Component
         }, 0);
 
         return view('livewire.dashboard', [
-            'uncheckedAmount' => $uncheckedAmount,
             'unfinishedAmount' => $unfinishedAmount,
             'approvalPendingAmount' => $approvalPendingAmount,
             'totalSales' => $totalSales
