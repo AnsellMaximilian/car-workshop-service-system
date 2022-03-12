@@ -78,10 +78,24 @@ class Service extends Model
         return !$this->isServiceApproved() && !$this->isServiceCancelled();
     }
 
+    public function isPenggantianSukuCadangEmpty()
+    {
+        return (count($this->penggantian_suku_cadangs) <= 0);
+    }
+
+    public function isPenjualanServiceEmpty()
+    {
+        return (count($this->penjualan_services) <= 0);
+    }
+
+    public function isEmpty()
+    {
+        return $this->isPenggantianSukuCadangEmpty() && $this->isPenjualanServiceEmpty();
+    }
+
     public function canBeDeleted()
     {
-        return (count($this->penggantian_suku_cadangs) <= 0) 
-            && (count($this->penjualan_services) <= 0) 
+        return $this->isEmpty() 
             && ($this->isApprovalPending());
     }
 
