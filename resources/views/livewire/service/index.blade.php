@@ -25,7 +25,7 @@
                 <x-table.cell>{{ $service->keluhan }}</x-table.cell>
                 <x-table.cell>
                     @if ($service->isServiceCancelled())
-                        <x-badge label="Batal" class="bg-red-600 text-white" />
+                        <x-badge label="Ditolak" class="bg-red-600 text-white" />
                     @else
                         @if ($service->service_selesai)
                         <x-badge label="Selesai" class="bg-green-400 text-white" />
