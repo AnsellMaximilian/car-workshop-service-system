@@ -34,14 +34,16 @@ class ServiceController extends Controller
         $this->authorize('create', Service::class);
 
         $request->validate([
-            'kendaraan_id' => 'required|exists:kendaraans,id',
+            'no_plat' => 'required',
             'keluhan' => 'max:255',
+            'pelanggan_id' => 'required|exists:pelanggans,id'
         ]);
 
         $service = new Service;
 
-        $service->kendaraan_id = $request->kendaraan_id;
+        $service->no_plat = $request->no_plat;
         $service->keluhan = $request->keluhan;
+        $service->pelanggan_id = $request->pelanggan_id;
         $service->tanggal = now();
         $service->user_id = request()->user()->id;
 

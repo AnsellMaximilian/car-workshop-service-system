@@ -21,7 +21,7 @@
             <x-table.row>
                 <x-table.cell>{{ $service->id }}</x-table.cell>
                 <x-table.cell>{{ $service->tanggal }}</x-table.cell>
-                <x-table.cell>{{ $service->kendaraan_id }}</x-table.cell>
+                <x-table.cell>{{ $service->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $service->keluhan }}</x-table.cell>
                 <x-table.cell>
                     @if ($service->isServiceCancelled())

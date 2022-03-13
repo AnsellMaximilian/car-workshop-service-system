@@ -18,26 +18,25 @@
             </div>
 
             <div class="col-span-6">
-                <x-label for="kendaraan_id" value="Kendaraan" />
+                <x-label for="pelanggan_id" value="Pelanggan" />
                 <select 
-                    wire:model="selectedKendaraanId"
-                    name="kendaraan_id" 
-                    id="kendaraan_id" 
+                    name="pelanggan_id" 
+                    id="pelanggan_id" 
                     class="w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 >
-                    @foreach ($kendaraans as $kendaraan)
+                    @foreach ($pelanggans as $pelanggan)
                         <option 
-                            value="{{ $kendaraan->id }}" 
-                            {{ old('kendaraan_id') === $kendaraan->id  ? 'selected' : '' }}
-                        >{{ $kendaraan->no_plat }}</option>
+                            value="{{ $pelanggan->id }}" 
+                            {{ old('pelanggan_id') === $pelanggan->id  ? 'selected' : '' }}
+                        >{{ $pelanggan->nama }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="col-span-6">
-                <x-label for="pelanggan" value="Pelanggan" />
+                <x-label for="no_plat" value="No. Plat" />
 
-                <x-input id="pelanggan" disabled class="block mt-1 w-full" type="text" :value="$selectedKendaraan->pelanggan->nama" />
+                <x-input id="no_plat" name="no_plat" class="block mt-1 w-full" type="text" :value="old('no_plat')" />
             </div>
 
             <div class="col-span-12">

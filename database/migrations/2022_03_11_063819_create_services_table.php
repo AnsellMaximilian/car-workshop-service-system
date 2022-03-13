@@ -15,8 +15,9 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kendaraan_id')->constrained();
+            $table->string('no_plat');
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('pelanggan_id')->constrained();
             $table->date('tanggal');
             $table->string('keluhan')->nullable();
             $table->boolean('mau_diservice')->nullable();

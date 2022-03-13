@@ -66,18 +66,10 @@
                 </div>
                 <div class="grid grid-cols-12 mb-4 font-semibold">
                     <div class="font-bold uppercase col-span-4">
-                        Kendaraan
-                    </div>
-                    <div class="col-span-8">
-                        : {{ $service->kendaraan->getFullName() }}
-                    </div>
-                </div>
-                <div class="grid grid-cols-12 mb-4 font-semibold">
-                    <div class="font-bold uppercase col-span-4">
                         No. Plat
                     </div>
                     <div class="col-span-8">
-                        : {{ $service->kendaraan->no_plat }}
+                        : {{ $service->no_plat }}
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mb-4 font-semibold">
@@ -85,7 +77,7 @@
                         Pelanggan
                     </div>
                     <div class="col-span-8">
-                        : {{ $service->kendaraan->pelanggan->nama }}
+                        : {{ $service->pelanggan->nama }}
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mb-4 font-semibold">

@@ -29,9 +29,9 @@ class Service extends Model
         }
     }
 
-    public function kendaraan()
+    public function pelanggan()
     {
-        return $this->belongsTo(Kendaraan::class);
+        return $this->belongsTo(Pelanggan::class);
     }
 
     public function penjualan_services()

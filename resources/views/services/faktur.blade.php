@@ -39,16 +39,12 @@
                         Tangerang, {{ now()->format('d-m-Y') }}
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
-                        <div class="col-span-4">Kendaraan</div>
-                        <div class="font-semibold col-span-8">: {{ $service->kendaraan->getFullName() }}</div>
-                    </div>
-                    <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">Pemilik</div>
-                        <div class="font-semibold col-span-8">: {{ $service->kendaraan->pelanggan->nama }}</div>
+                        <div class="font-semibold col-span-8">: {{ $service->pelanggan->nama }}</div>
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">No. Plat</div>
-                        <div class="font-semibold col-span-8">: {{ $service->kendaraan->no_plat }}</div>
+                        <div class="font-semibold col-span-8">: {{ $service->no_plat }}</div>
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">Kasir</div>

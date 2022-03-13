@@ -44,7 +44,7 @@
                                 :active="request()->routeIs('pelanggans.*')"
                             >Pelanggan</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        {{-- <li>
                             <x-sidebar-nav-link 
                                 :href="route('kendaraans.index')" 
                                 :active="request()->routeIs('kendaraans.*')"
@@ -55,7 +55,7 @@
                                 :href="route('merks-dan-tipes')" 
                                 :active="request()->routeIs('merks-dan-tipes')"
                             >Merk dan Tipe</x-sidebar-nav-link>
-                        </li>
+                        </li> --}}
                         <li>
                             <x-sidebar-nav-link 
                                 :href="route('suku-cadangs.index')" 
