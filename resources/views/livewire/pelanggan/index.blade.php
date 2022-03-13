@@ -14,6 +14,7 @@
             <x-table.heading wire:click="setSort('noTelp')" sortable :sortDir="$sortField === 'noTelp' ? $sortDir : null">No. Telp</x-table.heading>
             <x-table.heading wire:click="setSort('email')" sortable :sortDir="$sortField === 'email' ? $sortDir : null">Email</x-table.heading>
             <x-table.heading wire:click="setSort('alamat')" sortable :sortDir="$sortField === 'alamat' ? $sortDir : null">Alamat</x-table.heading>
+            <x-table.heading>Piutang</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
         </x-slot>
@@ -25,6 +26,7 @@
                 <x-table.cell>{{ $pelanggan->noTelp }}</x-table.cell>
                 <x-table.cell>{{ $pelanggan->email }}</x-table.cell>
                 <x-table.cell>{{ $pelanggan->alamat }}</x-table.cell>
+                <x-table.cell>{{ $pelanggan->getTotalAR() }}</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('pelanggans.edit', $pelanggan->id) }}"    
