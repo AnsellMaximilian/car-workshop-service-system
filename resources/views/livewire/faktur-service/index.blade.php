@@ -21,8 +21,8 @@
             <x-table.row>
                 <x-table.cell>{{ $fakturService->id }}</x-table.cell>
                 <x-table.cell>{{ $fakturService->tanggal }}</x-table.cell>
-                <x-table.cell>Johnny Guitar</x-table.cell>
-                <x-table.cell>400000</x-table.cell>
+                <x-table.cell>{{ $fakturService->service->pelanggan->nama }}</x-table.cell>
+                <x-table.cell>{{ $fakturService->getGrandTotal()}}</x-table.cell>
                 {{-- <x-table.cell>
                     @if ($fakturService->isPaid())
                         <x-badge label="Sudah" class="bg-green-400 text-white" />

@@ -86,6 +86,12 @@
                                 :active="request()->routeIs('faktur-services.*')"
                             >Faktur Service</x-sidebar-nav-link>
                         </li>
+                        <li>
+                            <x-sidebar-nav-link 
+                                :href="route('pembayarans.index')" 
+                                :active="request()->routeIs('pembayarans.*')"
+                            >Pembayaran</x-sidebar-nav-link>
+                        </li>
                     </ul>
                     <hr>
                     <div class="mt-4 cursor-pointer">

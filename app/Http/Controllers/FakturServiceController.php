@@ -23,7 +23,7 @@ class FakturServiceController extends Controller
         
         $this->authorize('create', FakturService::class);
 
-        $servicesReadyToBeInvoiced = Service::where('service_selesai', true)->get()->filter(function ($service) {
+        $servicesReadyToBeInvoiced = Service::all()->filter(function ($service) {
             return !$service->invoiced();
         });
 

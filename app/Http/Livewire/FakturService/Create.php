@@ -22,7 +22,10 @@ class Create extends Component
         //     $this->selectedWorkOrderId = $firstWorkOrder->id;
         // }
 
-        $firstService = Service::first();
+        $firstService = Service::all()->filter(function($service){
+            return !$service->invoiced();
+        })->first();
+
         if($firstService){
             $this->selectedServiceId = $firstService->id;
         }
@@ -61,7 +64,7 @@ class Create extends Component
             $selectedService = new Service();
         }
 
-        $services = Service::where('service_selesai', true)->get();
+        $services = Service::all();
 
         return view('livewire.faktur-service.create', [
             'services' => $services->filter(function ($service) {

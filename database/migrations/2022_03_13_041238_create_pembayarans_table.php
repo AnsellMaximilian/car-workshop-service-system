@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFakturServicesTable extends Migration
+class CreatePembayaransTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateFakturServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('faktur_services', function (Blueprint $table) {
+        Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('faktur_service_id')->constrained();
             $table->date('tanggal');
-            // $table->foreignId('work_order_id')->constrained();
-            // $table->foreignId('service_id')->constrained();
-            // $table->boolean('dibayar')->default(false);
+            $table->integer('jumlah');
+            $table->integer('kembali')->default(0);
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateFakturServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faktur_services');
+        Schema::dropIfExists('pembayarans');
     }
 }

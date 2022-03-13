@@ -6,6 +6,7 @@ use App\Http\Controllers\FakturServiceController;
 use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SukuCadangController;
@@ -102,6 +103,14 @@ Route::middleware('auth')->group(function () {
         Route::get('faktur-services/{id}', FakturServiceShow::class)->name('show');
         // Route::get('faktur-services/{work_order}/edit', [FakturServiceController::class, 'edit'])->name('edit');
         // Route::patch('faktur-services/{work_order}', [FakturServiceController::class, 'update'])->name('update');
+    });
+
+    Route::name('pembayarans.')->group(function(){
+        Route::get('pembayarans', [PembayaranController::class, 'index'])->name('index');
+        Route::get('pembayarans/create', [PembayaranController::class, 'create'])->name('create');
+        Route::post('pembayarans', [PembayaranController::class, 'store'])->name('store');
+        Route::get('pembayarans/{service}/edit', [PembayaranController::class, 'edit'])->name('edit');
+        Route::patch('pembayarans/{service}', [PembayaranController::class, 'update'])->name('update');
     });
 });
 
