@@ -26,9 +26,13 @@
                     </x-button>
                     @endif
                     
-                    @if ($service->isServiceApproved())
+                    @if ($service->invoiced())
                     <x-button >
-                        <a href="{{route('services.invoice', $service->id)}}">Faktur Service</a>
+                        <a href="{{route('faktur-services.show', $service->faktur_service->id)}}">Faktur Service</a>
+                    </x-button> 
+                    @else
+                    <x-button >
+                        <a href="{{route('faktur-services.create')}}">Buat ()()(Faktur Service</a>
                     </x-button> 
                     @endif
                 @endif
@@ -55,54 +59,38 @@
             </div>
         </div>
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-6">
-                <div class="grid grid-cols-12 mb-4 font-semibold">
-                    <div class="font-bold uppercase col-span-4">
-                        Pendaftaran
-                    </div>
-                    <div class="col-span-8">
-                        : {{ $service->tanggal }}
-                    </div>
+            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
+                <div class="font-bold uppercase col-span-4">
+                    Pendaftaran
                 </div>
-                <div class="grid grid-cols-12 mb-4 font-semibold">
-                    <div class="font-bold uppercase col-span-4">
-                        No. Plat
-                    </div>
-                    <div class="col-span-8">
-                        : {{ $service->no_plat }}
-                    </div>
-                </div>
-                <div class="grid grid-cols-12 mb-4 font-semibold">
-                    <div class="font-bold uppercase col-span-4">
-                        Pelanggan
-                    </div>
-                    <div class="col-span-8">
-                        : {{ $service->pelanggan->nama }}
-                    </div>
-                </div>
-                <div class="grid grid-cols-12 mb-4 font-semibold">
-                    <div class="font-bold uppercase col-span-4">
-                        Keluhan
-                    </div>
-                    <div class="col-span-8">
-                        : {{ $service->keluhan }}
-                    </div>
+                <div class="col-span-8">
+                    : {{ $service->tanggal }}
                 </div>
             </div>
-            <div class="col-span-6">
-                <div class="font-bold uppercase mb-4">
-                    Status
+            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
+                <div class="font-bold uppercase col-span-4">
+                    No. Plat
                 </div>
-                <div>
-                    @if($service->isServiceApproved())
-                    <div class="grid-cols-12 grid gap-4">
-                        <div class="col-span-3">Selesai</div>
-                        <x-checkbox :checked="$service->service_selesai" wire:click="markAsFinished" class="col-span-9"/>
-                    </div>
-                    @endif
+                <div class="col-span-8">
+                    : {{ $service->no_plat }}
                 </div>
             </div>
-
+            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
+                <div class="font-bold uppercase col-span-4">
+                    Pelanggan
+                </div>
+                <div class="col-span-8">
+                    : {{ $service->pelanggan->nama }}
+                </div>
+            </div>
+            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
+                <div class="font-bold uppercase col-span-4">
+                    Keluhan
+                </div>
+                <div class="col-span-8">
+                    : {{ $service->keluhan }}
+                </div>
+            </div>
         </div>
         @unless ($service->isPenjualanServiceEmpty() && !$isEditMode)
         <hr class="my-4">

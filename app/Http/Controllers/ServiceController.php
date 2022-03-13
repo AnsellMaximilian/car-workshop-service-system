@@ -76,12 +76,12 @@ class ServiceController extends Controller
         return redirect(route('services.index'));
     }
 
-    public function invoice(Service $service)
-    {
-        if($service->service_selesai){
-            return view('services.faktur', ['service' => $service]);
-        }else{
-            return back()->with('error', 'Selesaikan service dahulu.');
-        }
-    }
+    // public function invoice(Service $service)
+    // {
+    //     if($service->canBeInvoiced()){
+    //         return view('services.faktur', ['service' => $service]);
+    //     }else{
+    //         return redirect(route('faktur-services.show', $service->faktur_service->id))->with('error', 'Faktur sudah dibuat.');
+    //     }
+    // }
 }

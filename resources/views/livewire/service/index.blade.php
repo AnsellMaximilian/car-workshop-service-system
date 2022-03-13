@@ -24,13 +24,17 @@
                 <x-table.cell>{{ $service->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $service->keluhan }}</x-table.cell>
                 <x-table.cell>
-                    @if ($service->isServiceCancelled())
-                        <x-badge label="Ditolak" class="bg-red-600 text-white" />
+                    @if ($service->isApprovalPending())
+                        <x-badge label="Menunggu" class="text-white bg-gray-500" />
                     @else
-                        @if ($service->service_selesai)
-                        <x-badge label="Selesai" class="bg-green-400 text-white" />
+                        @if ($service->isServiceCancelled())
+                        <x-badge label="Batal" class="text-white bg-red-600" />
                         @else
-                            <x-badge label="Selesai" class="bg-gray-400 text-white" />
+                            @if ($service->invoiced())
+                            <x-badge label="Selesai" class="bg-green-400 text-white" />
+                            @else
+                            <x-badge label="Siap Difaktur" class="bg-yellow-400 text-white" />
+                            @endif
                         @endif
                     @endif
                 </x-table.cell>

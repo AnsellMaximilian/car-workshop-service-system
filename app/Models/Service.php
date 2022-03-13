@@ -21,13 +21,13 @@ class Service extends Model
         $this->save();
     }
 
-    public function markAsFinished()
-    {
-        if($this->mau_diservice){
-            $this->service_selesai = true;
-            $this->save();
-        }
-    }
+    // public function markAsFinished()
+    // {
+    //     if($this->mau_diservice){
+    //         $this->service_selesai = true;
+    //         $this->save();
+    //     }
+    // }
 
     public function pelanggan()
     {
@@ -101,7 +101,7 @@ class Service extends Model
 
     public function canBeInvoiced()
     {
-        return $this->service_selesai === 1;
+        return !$this->invoiced();
     }
 
     public function user()
