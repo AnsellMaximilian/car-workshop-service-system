@@ -16,7 +16,8 @@ class CreateFakturServicesTable extends Migration
         Schema::create('faktur_services', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->foreignId('work_order_id')->constrained();
+            // $table->foreignId('work_order_id')->constrained();
+            // $table->foreignId('service_id')->constrained();
             $table->boolean('dibayar')->default(false);
             $table->timestamps();
         });

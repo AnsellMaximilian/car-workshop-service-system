@@ -3,18 +3,25 @@
 namespace App\Http\Livewire\FakturService;
 
 use App\Models\FakturService;
+use App\Models\Service;
 use App\Models\WorkOrder;
 use Livewire\Component;
 
 class Create extends Component
 {
     public $selectedWorkOrderId;
+    public $selectedServiceId;
 
     public function mount()
     {
-        $firstWorkOrder = WorkOrder::first();
-        if($firstWorkOrder){
-            $this->selectedWorkOrderId = $firstWorkOrder->id;
+        // $firstWorkOrder = WorkOrder::first();
+        // if($firstWorkOrder){
+        //     $this->selectedWorkOrderId = $firstWorkOrder->id;
+        // }
+
+        $firstService = Service::first();
+        if($firstService){
+            $this->selectedServiceId = $firstService->id;
         }
     }
     
@@ -24,11 +31,13 @@ class Create extends Component
 
 
         $this->validate([
-            'selectedWorkOrderId' => 'required|exists:work_orders,id',
+            // 'selectedWorkOrderId' => 'required|exists:work_orders,id',
+            'selectedServiceId' => 'required|exists:services,id',
         ]);
 
         $newFakturService = new FakturService();
-        $newFakturService->work_order_id = $this->selectedWorkOrderId;
+        $newFakturService->service_id = $this->selectedServiceId;
+        // $newFakturService->work_order_id = $this->selectedWorkOrderId;
         $newFakturService->tanggal = now();
         $newFakturService->save();
 
@@ -37,19 +46,26 @@ class Create extends Component
 
     public function render()
     {
-        if($this->selectedWorkOrderId){
-            $selectedWorkOrder = WorkOrder::find($this->selectedWorkOrderId);
+        // if($this->selectedWorkOrderId){
+        //     $selectedWorkOrder = WorkOrder::find($this->selectedWorkOrderId);
+        // }else {
+        //     $selectedWorkOrder = new WorkOrder();
+        // }
+
+        if($this->selectedServiceId){
+            $selectedService = Service::find($this->selectedServiceId);
         }else {
-            $selectedWorkOrder = new WorkOrder();
+            $selectedService = new Service();
         }
 
-        $workOrders = WorkOrder::where('service_selesai', true)->get();
+        $services = Service::where('service_selesai', true)->get();
 
         return view('livewire.faktur-service.create', [
-            'workOrders' => $workOrders->filter(function ($workOrder) {
-                return !$workOrder->invoiced();
+            'services' => $services->filter(function ($service) {
+                return !$service->invoiced();
             }),
-            'selectedWorkOrder' => $selectedWorkOrder
+            'selectedService' => $selectedService
+            // 'selectedWorkOrder' => $selectedWorkOrder
         ]);
     }
 }
