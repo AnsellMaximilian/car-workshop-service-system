@@ -3,12 +3,14 @@
 namespace App\Http\Livewire\FakturService;
 
 use App\Models\FakturService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     // Search and sort
     public $query = "";

@@ -5,10 +5,13 @@ namespace App\Http\Livewire\FakturService;
 use App\Models\FakturService;
 use App\Models\Service;
 use App\Models\WorkOrder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Create extends Component
 {
+    use AuthorizesRequests;
+
     public $selectedWorkOrderId;
     public $selectedServiceId;
 

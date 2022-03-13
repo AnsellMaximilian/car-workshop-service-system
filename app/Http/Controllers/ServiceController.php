@@ -22,9 +22,9 @@ class ServiceController extends Controller
     {
         $this->authorize('create', Service::class);
 
-        if(count(Kendaraan::all()) <= 0 ){
-            return redirect(route('kendaraans.index'))->with('error', 'Daftar kendaraan terlebih dahulu.');
-        }
+        // if(count(Kendaraan::all()) <= 0 ){
+        //     return redirect(route('kendaraans.index'))->with('error', 'Daftar kendaraan terlebih dahulu.');
+        // }
         
         return view('services.create');
     }

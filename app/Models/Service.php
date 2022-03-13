@@ -119,6 +119,11 @@ class Service extends Model
         return count($this->penggantian_suku_cadangs) > 0;
     }
 
+    public function faktur_service()
+    {
+        return $this->hasOne(FakturService::class);
+    }
+
     public function invoiced()
     {
         return $this->faktur_service !== null;
