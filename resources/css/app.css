@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.only-print {
+    display: none;
+}
+
 @media print {
     :root {
         font-size: 12px;
@@ -15,9 +19,17 @@
         -webkit-print-color-adjust: exact;
     }
 
+    .only-print {
+        display: block;
+    }
+
     .print-out,
     .print-out * {
         visibility: visible;
+    }
+
+    .print-out .print-out__hide {
+        display: none !important;
     }
 
     .print-out {

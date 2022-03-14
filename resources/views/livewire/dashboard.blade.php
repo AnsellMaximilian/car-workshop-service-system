@@ -19,9 +19,12 @@
             </x-slot>
         </x-dashboard-module>
     </div>
-    <div>
+    <div class="print-out">
         <h2 class="text-xl font-semibold mb-4">Laporan Penjualan Service</h2>
-        <div class="flex mb-4 items-end">
+        <div class="only-print mb-4">
+            {{ \Carbon\Carbon::parse($reportStartDate)->format('d-m-Y') }} sampai {{ \Carbon\Carbon::parse($reportEndDate)->format('d-m-Y') }}
+        </div>
+        <div class="flex mb-4 items-end print-out__hide">
             <div class="mr-4">
                 <x-label value="Mulai" for="reportStartDate" />
                 <x-input type="date" id="reportStartDate" class="mt-1 block" wire:model="reportStartDate"/>
@@ -31,7 +34,7 @@
                 <x-input type="date" id="reportEndDate" class="mt-1 block" wire:model="reportEndDate"/>
             </div>
             <div class="ml-auto">
-                <x-button>Print</x-button>
+                <x-button onclick="window.print()">Print</x-button>
             </div>
         </div>
         <x-table.wrapper>
@@ -49,7 +52,7 @@
                     <x-table.cell>{{ $service->id }}</x-table.cell>
                     <x-table.cell>{{ $service->tanggal }}</x-table.cell>
                     <x-table.cell>{{ $service->no_plat }}</x-table.cell>
-                    <x-table.cell>{{ $service->keluhan }}</x-table.cell>
+                    <x-table.cell>{{ $service->pelanggan->nama }}</x-table.cell>
                     <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
                 </x-table.row>
                 @endforeach

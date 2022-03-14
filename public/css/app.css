@@ -1527,6 +1527,9 @@ select {
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+.only-print {
+    display: none;
+}
 @media print {
     :root {
         font-size: 12px;
@@ -1540,9 +1543,17 @@ select {
         -webkit-print-color-adjust: exact;
     }
 
+    .only-print {
+        display: block;
+    }
+
     .print-out,
     .print-out * {
         visibility: visible;
+    }
+
+    .print-out .print-out__hide {
+        display: none !important;
     }
 
     .print-out {
