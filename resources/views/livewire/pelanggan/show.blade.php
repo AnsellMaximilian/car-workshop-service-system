@@ -11,8 +11,8 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <x-card class="mb-4">
-        <div class="font-bold text-2xl mb-8">
+    <x-card class="mb-8">
+        <div class="font-bold text-2xl mb-4">
             {{ $pelanggan->nama }}
         </div>
         <div class="grid grid-cols-12 gap-4">
@@ -55,14 +55,15 @@
     </x-card>
 
     <div>
-        <h2>Transaksi Service</h2>
+        <h2 class="text-2xl font-bold mb-4">Transaksi Service</h2>
         <x-table.wrapper>
             <x-slot name="head">
                 <x-table.heading >ID</x-table.heading>
                 <x-table.heading >Tanggal Daftar</x-table.heading>
                 <x-table.heading >No. Plat</x-table.heading>
                 <x-table.heading>Total</x-table.heading>
-                <x-table.heading >Total Piutang</x-table.heading>
+                <x-table.heading >Dibayar</x-table.heading>
+                <x-table.heading >Sisa</x-table.heading>
     
             </x-slot>
             <x-slot name="body">
@@ -72,15 +73,10 @@
                     <x-table.cell>{{ $service->tanggal }}</x-table.cell>
                     <x-table.cell>{{ $service->no_plat }}</x-table.cell>
                     <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
+                    <x-table.cell>{{ $service->invoiced() ? $service->faktur_service->getTotalPembayaran() : 'Faktur belum dibuat' }}</x-table.cell>
                     <x-table.cell>{{ $service->invoiced() ? $service->faktur_service->getAmountToBePaid() : 'Faktur belum dibuat' }}</x-table.cell>
                 </x-table.row>
                 @endforeach
-                {{-- <x-table.row class="font-bold uppercase">
-                    <x-table.cell colspan="4" class="text-right">Total</x-table.cell>
-                    <x-table.cell>{{ $reportServices->reduce(function($total, $service){
-                        return $total + $service->getGrandTotal();
-                    }, 0) }}</x-table.cell>
-                </x-table.row> --}}
             </x-slot>
     
         </x-table.wrapper>
