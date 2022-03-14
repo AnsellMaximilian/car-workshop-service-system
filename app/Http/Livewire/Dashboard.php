@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public $reportStartDate;
+    public $reportEndDate;
     
 
     public function render()
@@ -15,16 +17,20 @@ class Dashboard extends Component
         // $unfinishedAmount = count(Service::where('service_selesai', false)->get());
         $approvalPendingAmount = count(Service::where('mau_diservice', null)->get());
 
-        $totalSales = Service::all()->reduce(function($total, $service) {
-            return $total + ($service->isServiceApproved() ? $service->getGrandTotal() : 0);
+        $services = Service::where('mau_diservice', true)->get();
+        
+        $reportServices = $services->whereBetween('tanggal', [date($this->reportStartDate), date($this->reportEndDate)]);
+
+        $totalSales = $services->reduce(function($total, $service) {
+            return $total + $service->getGrandTotal();
         }, 0);
 
-        $totalSalesToday = Service::all()
+        $totalSalesToday = $services
             ->filter(function($service){
                 return (new Carbon($service->tanggal))->isToday();
             })
             ->reduce(function($total, $service) {
-                return $total + (!$service->isServiceCancelled() ? $service->getGrandTotal() : 0);
+                return $total + $service->getGrandTotal();
             }, 0);
 
         // dd($totalSalesToday);
@@ -33,7 +39,9 @@ class Dashboard extends Component
             // 'unfinishedAmount' => $unfinishedAmount,
             'approvalPendingAmount' => $approvalPendingAmount,
             'totalSales' => $totalSales,
-            'totalSalesToday' => $totalSalesToday
+            'totalSalesToday' => $totalSalesToday,
+            'services' => $services,
+            'reportServices' => $reportServices
         ]);
     }
 }
