@@ -13,6 +13,7 @@ use App\Http\Controllers\SukuCadangController;
 use App\Http\Controllers\WorkOrderController;
 use App\Http\Livewire\FakturService\Show as FakturServiceShow;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
+use App\Http\Livewire\Pelanggan\Show as PelangganShow;
 use App\Http\Livewire\Service\Show as ServiceShow;
 use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
 use App\Http\Livewire\WorkOrder\Show as WorkOrderShow;
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::get('pelanggans', [PelangganController::class, 'index'])->name('index');
         Route::get('pelanggans/create', [PelangganController::class, 'create'])->name('create');
         Route::post('pelanggans', [PelangganController::class, 'store'])->name('store');
+        Route::get('pelanggans/{id}', PelangganShow::class)->name('show');
         Route::get('pelanggans/{pelanggan}/edit', [PelangganController::class, 'edit'])->name('edit');
         Route::patch('pelanggans/{pelanggan}', [PelangganController::class, 'update'])->name('update');
     });
