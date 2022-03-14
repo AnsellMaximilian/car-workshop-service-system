@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Service;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -11,17 +12,28 @@ class Dashboard extends Component
 
     public function render()
     {
-        $unfinishedAmount = count(Service::where('service_selesai', false)->get());
+        // $unfinishedAmount = count(Service::where('service_selesai', false)->get());
         $approvalPendingAmount = count(Service::where('mau_diservice', null)->get());
 
         $totalSales = Service::all()->reduce(function($total, $service) {
-            return $total + (!$service->isServiceCancelled() ? $service->getGrandTotal() : 0);
+            return $total + ($service->isServiceApproved() ? $service->getGrandTotal() : 0);
         }, 0);
 
+        $totalSalesToday = Service::all()
+            ->filter(function($service){
+                return (new Carbon($service->tanggal))->isToday();
+            })
+            ->reduce(function($total, $service) {
+                return $total + (!$service->isServiceCancelled() ? $service->getGrandTotal() : 0);
+            }, 0);
+
+        // dd($totalSalesToday);
+
         return view('livewire.dashboard', [
-            'unfinishedAmount' => $unfinishedAmount,
+            // 'unfinishedAmount' => $unfinishedAmount,
             'approvalPendingAmount' => $approvalPendingAmount,
-            'totalSales' => $totalSales
+            'totalSales' => $totalSales,
+            'totalSalesToday' => $totalSalesToday
         ]);
     }
 }

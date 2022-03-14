@@ -644,14 +644,14 @@ select {
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
-.col-span-9 {
-  grid-column: span 9 / span 9;
-}
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
 .col-span-7 {
   grid-column: span 7 / span 7;
+}
+.col-span-9 {
+  grid-column: span 9 / span 9;
 }
 .col-span-5 {
   grid-column: span 5 / span 5;
@@ -972,9 +972,6 @@ select {
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
 .flex-col {
   flex-direction: column;
 }
@@ -1167,6 +1164,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(181 25 25 / var(--tw-bg-opacity));
 }
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -1175,9 +1176,9 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
-.bg-gray-400 {
+.bg-yellow-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity));
 }
 .bg-gray-100 {
   --tw-bg-opacity: 1;
@@ -1195,17 +1196,13 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-.bg-yellow-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 204 21 / var(--tw-bg-opacity));
-}
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 .fill-current {
   fill: currentColor;
