@@ -36,7 +36,7 @@ class Index extends Component
         if($service->canBeDeleted()){
             $service->delete();
         }else {
-            return redirect(route('servicess.index'))
+            return redirect(route('services.index'))
                 ->with('error', 'Tidak bisa di hapus.');
         }
     }

@@ -96,7 +96,10 @@
         </div>
     </x-card>
     @unless ($service->isEmpty() && !$isEditMode)
-    <x-card>
+    <x-card class="relative">
+        @if ($service->isServiceCancelled())
+        <x-stamp label="BATAL" />
+        @endif
         <div class="text-2xl font-bold mb-4">Detail Service</div>
         @unless ($service->isPenjualanServiceEmpty() && !$isEditMode)
         <hr class="my-4">
