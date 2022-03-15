@@ -77,7 +77,7 @@
                         <li>
                             <x-sidebar-nav-link 
                                 :href="route('services.index')" 
-                                :active="request()->routeIs('services.*')"
+                                :active="request()->routeIs('services.*') || request()->routeIs('faktur-services.*')"
                             >Service</x-sidebar-nav-link>
                         </li>
                         {{-- <li>
