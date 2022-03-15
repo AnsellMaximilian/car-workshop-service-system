@@ -9,10 +9,15 @@ class Pembayaran extends Model
 {
     use HasFactory;
 
-    public function faktur_service()
+    public function service()
     {
-        return $this->belongsTo(FakturService::class);
+        return $this->belongsTo(Service::class);
     }
+
+    // public function faktur_service()
+    // {
+    //     return $this->belongsTo(FakturService::class);
+    // }
 
     public function getTotal()
     {

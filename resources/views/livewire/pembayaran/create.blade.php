@@ -22,16 +22,16 @@
             </div>
 
             <div class="col-span-6">
-                <x-label for="selectedFakturServiceId" value="Faktur Service" />
+                <x-label for="selectedServiceId" value="Service" />
                 <select 
-                    id="selectedFakturServiceId" 
-                    wire:model="selectedFakturServiceId"
+                    id="selectedServiceId" 
+                    wire:model="selectedServiceId"
                     class="w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 >
                     @foreach ($fakturServices as $fakturService)
                         <option 
                             value="{{ $fakturService->id }}" 
-                            {{ old('selectedFakturServiceId') === $fakturService->id  ? 'selected' : '' }}
+                            {{ old('selectedServiceId') === $fakturService->id  ? 'selected' : '' }}
                         >{{ $fakturService->id }}</option>
                     @endforeach
                 </select>
@@ -39,17 +39,17 @@
 
             <div class="col-span-6">
                 <x-label for="pelanggan" value="Pelanggan" />
-                <x-input id="pelanggan" class="block mt-1 w-full" type="text" disabled :value="$selectedFakturService->service->pelanggan->nama" />
+                <x-input id="pelanggan" class="block mt-1 w-full" type="text" disabled :value="$selectedService->pelanggan->nama" />
             </div>
             
             <div class="col-span-6">
                 <x-label for="totalAwal" value="Total Awal" />
-                <x-input id="totalAwal" class="block mt-1 w-full" type="text" disabled :value="$selectedFakturService->getGrandTotal()" />
+                <x-input id="totalAwal" class="block mt-1 w-full" type="text" disabled :value="$selectedService->getGrandTotal()" />
             </div>
 
             <div class="col-span-6">
                 <x-label for="totalSisa" value="Total Sisa" />
-                <x-input id="totalSisa" class="block mt-1 w-full" type="text" disabled :value="$selectedFakturService->getAmountToBePaid()" />
+                <x-input id="totalSisa" class="block mt-1 w-full" type="text" disabled :value="$selectedService->getAmountToBePaid()" />
             </div>
 
             <div class="col-span-6">
@@ -59,7 +59,7 @@
 
             <div class="col-span-6">
                 <x-label for="kembali" value="Kembali" />
-                <x-input placeholder="Kembali" id="kembali" type="number" class="block mt-1 min-w-0 w-full" :value="(is_numeric($jumlah) ? $selectedFakturService->getChange($jumlah) : 0)"/>
+                <x-input placeholder="Kembali" id="kembali" type="number" class="block mt-1 min-w-0 w-full" disabled :value="(is_numeric($jumlah) ? $selectedService->getChange($jumlah) : 0)"/>
             </div>
 
             <div class="col-span-12">

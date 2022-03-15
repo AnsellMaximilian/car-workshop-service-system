@@ -15,7 +15,8 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('faktur_service_id')->constrained();
+            // $table->foreignId('faktur_service_id')->constrained();
+            $table->foreignId('service_id')->constrained();
             $table->date('tanggal');
             $table->integer('jumlah');
             $table->integer('kembali')->default(0);

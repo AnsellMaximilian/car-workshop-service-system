@@ -73,8 +73,8 @@
                     <x-table.cell>{{ $service->tanggal }}</x-table.cell>
                     <x-table.cell>{{ $service->no_plat }}</x-table.cell>
                     <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
-                    <x-table.cell>{{ $service->invoiced() ? $service->faktur_service->getTotalPembayaran() : 'Faktur belum dibuat' }}</x-table.cell>
-                    <x-table.cell>{{ $service->invoiced() ? $service->faktur_service->getAmountToBePaid() : 'Faktur belum dibuat' }}</x-table.cell>
+                    <x-table.cell>{{ $service->isServiceApproved() ? $service->getTotalPembayaran() : 'Batal' }}</x-table.cell>
+                    <x-table.cell>{{ $service->isServiceApproved() ? $service->getAmountToBePaid() : 'Batal' }}</x-table.cell>
                 </x-table.row>
                 @endforeach
             </x-slot>

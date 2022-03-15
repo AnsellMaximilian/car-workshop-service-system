@@ -9,10 +9,17 @@ class Pelanggan extends Model
 {
     use HasFactory;
 
+    // public function getTotalAR()
+    // {
+    //     return $this->services->reduce(function($total, $service){
+    //         return $total + $service->faktur_service->getAmountToBePaid();
+    //     }, 0);
+    // }
+
     public function getTotalAR()
     {
         return $this->services->reduce(function($total, $service){
-            return $total + $service->faktur_service->getAmountToBePaid();
+            return $total + $service->getAmountToBePaid();
         }, 0);
     }
 
