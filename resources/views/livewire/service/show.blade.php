@@ -14,10 +14,12 @@
     <x-card class="mb-4 relative">
         @if($service->isServiceCancelled())<x-obscurer/>@endif
         <div class="flex items-end">
+            @if (!$service->invoiced())
             <x-label class="">
                 <span class="block mb-1">Mode Edit</span>
                 <x-toggle :state="$isEditMode" wire:click="toggleEditMode"/>
             </x-label>
+            @endif
             <div class="ml-auto flex gap-4">
                 @if (!$isEditMode)
                     @if ($service->canBeDeleted())
