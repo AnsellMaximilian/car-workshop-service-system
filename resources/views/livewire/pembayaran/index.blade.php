@@ -21,7 +21,7 @@
             @foreach ($pembayarans as $pembayaran)
             <x-table.row>
                 <x-table.cell>{{ $pembayaran->id }}</x-table.cell>
-                <x-table.cell>{{ $pembayaran->faktur_service_id }}</x-table.cell>
+                <x-table.cell>{{ $pembayaran->service->id }}</x-table.cell>
                 <x-table.cell>{{ $pembayaran->jumlah }}</x-table.cell>
                 <x-table.cell>{{ $pembayaran->kembali }}</x-table.cell>
                 <x-table.cell>Tets</x-table.cell>
