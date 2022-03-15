@@ -32,7 +32,7 @@
                     </x-button> 
                     @else
                     <x-button >
-                        <a href="{{route('faktur-services.create')}}">Buat ()()(Faktur Service</a>
+                        <a href="{{route('faktur-services.create')}}">Buat Faktur Service</a>
                     </x-button> 
                     @endif
                 @endif
