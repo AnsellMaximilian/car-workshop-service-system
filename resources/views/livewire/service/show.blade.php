@@ -94,6 +94,10 @@
                 </div>
             </div>
         </div>
+    </x-card>
+    @unless ($service->isEmpty() && !$isEditMode)
+    <x-card>
+        <div class="text-2xl font-bold mb-4">Detail Service</div>
         @unless ($service->isPenjualanServiceEmpty() && !$isEditMode)
         <hr class="my-4">
         {{-- PENJUALAN SERVIS --}}
@@ -258,17 +262,13 @@
             </div>
         </div>
         @endunless
-
-        @unless ($service->isEmpty() && !$isEditMode)
         <hr class="my-4">
         <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
             <div class="{{ !$isEditMode ? 'col-span-10' : 'col-span-12' }} border-t-8 border-primary"></div>
             <div class="col-span-4 col-start-4 uppercase font-bold text-xl">Grandtotal</div>
             <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 text-xl">{{ $service->getGrandTotal()}}</div>
         </div>
-        @endunless
-
     </x-card>
-
+    @endunless
 </div>
 
