@@ -10,7 +10,7 @@
     <x-table.wrapper>
         <x-slot name="head">
             <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('faktur_service_id')" sortable :sortDir="$sortField === 'faktur_service_id' ? $sortDir : null">No. Faktur</x-table.heading>
+            <x-table.heading wire:click="setSort('service_id')" sortable :sortDir="$sortField === 'service_id' ? $sortDir : null">No. Service</x-table.heading>
             <x-table.heading wire:click="setSort('jumlah')" sortable :sortDir="$sortField === 'jumlah' ? $sortDir : null">Jumlah</x-table.heading>
             <x-table.heading wire:click="setSort('kembali')" sortable :sortDir="$sortField === 'kembali' ? $sortDir : null">Kembali</x-table.heading>
             <x-table.heading>Test</x-table.heading>
