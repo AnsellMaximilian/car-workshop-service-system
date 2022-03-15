@@ -12,6 +12,7 @@
             <x-table.heading wire:click="setSort('tanggal')" sortable :sortDir="$sortField === 'tanggal' ? $sortDir : null">Tanggal Daftar</x-table.heading>
             <x-table.heading wire:click="setSort('kendaraan_id')" sortable :sortDir="$sortField === 'kendaraan_id' ? $sortDir : null">ID Kendaraan</x-table.heading>
             <x-table.heading wire:click="setSort('keluhan')" sortable :sortDir="$sortField === 'keluhan' ? $sortDir : null">Keluhan</x-table.heading>
+            <x-table.heading>Total</x-table.heading>
             <x-table.heading>Status</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
@@ -23,6 +24,7 @@
                 <x-table.cell>{{ $service->tanggal }}</x-table.cell>
                 <x-table.cell>{{ $service->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $service->keluhan }}</x-table.cell>
+                <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
                 <x-table.cell>
                     @if ($service->isApprovalPending())
                         <x-badge label="Menunggu" class="text-white bg-gray-500" />
