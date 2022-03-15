@@ -106,34 +106,6 @@
         {{-- PENJUALAN SERVIS --}}
         <div class="">
             <h3 class="font-semibold text-lg uppercase mb-4">Penjualan Servis</h3>
-            
-            <div class="mb-4">
-                <div class="border-b-2 border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 font-semibold gap-4">
-                    <div class="col-span-3">Jenis Service</div>
-                    <div class="col-span-2">Harga</div>
-                    <div class="col-span-2">Jumlah</div>
-                    <div class="col-span-3">Subtotal</div>
-                    @if($isEditMode)<div class="col-span-2">Aksi</div>@endif
-                </div>
-                @foreach ($service->penjualan_services as $penjualanService)
-                    <div class="border-b border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                        <div class="col-span-3">{{$penjualanService->jenis_service->nama}}</div>
-                        <div class="col-span-2">{{$penjualanService->harga}}</div>
-                        <div class="col-span-2">{{$penjualanService->jumlah}}</div>
-                        <div class="col-span-3">{{$penjualanService->getTotal()}}</div>
-                        @if ($isEditMode)
-                        <div class="col-span-2">
-                            <button
-                                wire:click="deletePenjualanService({{$penjualanService->id}})" 
-                                class="uppercase text-red-600 hover:text-red-800 font-semibold text-sm">
-                                Delete
-                            </button>
-                        </div>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
             @if ($isEditMode)
@@ -177,37 +149,24 @@
                 </div>
             </form>
             @endif
-            <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                <div class="{{ !$isEditMode ? 'col-span-7' : 'col-span-9' }} col-start-4 border-t-4 border-primary"></div>
-                <div class="col-span-4 col-start-4 uppercase font-bold text-xl">TOTAL SERVICE</div>
-                <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 text-xl">{{ $service->getTotalPenjualanServices()}}</div>
-            </div>
-        </div>
-        @endunless
-
-        @unless ($service->isPenggantianSukuCadangEmpty() && !$isEditMode)
-        <hr class="my-4">
-        {{-- SUKU CADANG --}}
-        <div>
-            <h3 class="font-semibold text-lg uppercase mb-4">Penggantian Suku Cadang</h3>
-            <div class="mb-4">
-                <div class="border-b-2 border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 font-semibold gap-4">
-                    <div class="col-span-3">Suku Cadang</div>
-                    <div class="col-span-2">Harga</div>
-                    <div class="col-span-2">Jumlah</div>
-                    <div class="col-span-3">Subtotal</div>
-                    @if($isEditMode)<div class="col-span-2">Aksi</div>@endif
+            <div class="mb-4 border-l border-r border-primary">
+                <div class="bg-primary text-white grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 font-semibold gap-4">
+                    <div class="col-span-3 px-4">Jenis Service</div>
+                    <div class="col-span-2 px-4">Harga</div>
+                    <div class="col-span-2 px-4">Jumlah</div>
+                    <div class="col-span-3 px-4">Subtotal</div>
+                    @if($isEditMode)<div class="col-span-2 px-4">Aksi</div>@endif
                 </div>
-                @foreach ($service->penggantian_suku_cadangs as $penggantianSukuCadang)
+                @foreach ($service->penjualan_services as $penjualanService)
                     <div class="border-b border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                        <div class="col-span-3">{{$penggantianSukuCadang->suku_cadang->nama}}</div>
-                        <div class="col-span-2">{{$penggantianSukuCadang->harga}}</div>
-                        <div class="col-span-2">{{$penggantianSukuCadang->jumlah}}</div>
-                        <div class="col-span-3">{{$penggantianSukuCadang->getTotal()}}</div>
+                        <div class="col-span-3 px-4">{{$penjualanService->jenis_service->nama}}</div>
+                        <div class="col-span-2 px-4">{{$penjualanService->harga}}</div>
+                        <div class="col-span-2 px-4">{{$penjualanService->jumlah}}</div>
+                        <div class="col-span-3 px-4">{{$penjualanService->getTotal()}}</div>
                         @if ($isEditMode)
-                        <div class="col-span-2">
+                        <div class="col-span-2 px-4">
                             <button
-                                wire:click="deletePenggantianSukuCadang({{$penggantianSukuCadang->id}})" 
+                                wire:click="deletePenjualanService({{$penjualanService->id}})" 
                                 class="uppercase text-red-600 hover:text-red-800 font-semibold text-sm">
                                 Delete
                             </button>
@@ -217,8 +176,21 @@
                 @endforeach
             </div>
 
+            <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
+                {{-- <div class="{{ !$isEditMode ? 'col-span-7' : 'col-span-9' }} col-start-4 border-t-4 border-primary"></div> --}}
+                <div class="col-span-4 col-start-4 uppercase font-bold pl-4">TOTAL SERVICE</div>
+                <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 pl-4">{{ $service->getTotalPenjualanServices()}}</div>
+            </div>
+        </div>
+        @endunless
+
+        @unless ($service->isPenggantianSukuCadangEmpty() && !$isEditMode)
+        <hr class="my-4">
+        {{-- SUKU CADANG --}}
+        <div>
+            <h3 class="font-semibold text-lg uppercase mb-4">Penggantian Suku Cadang</h3>
             @if ($isEditMode)
-            <form class="grid grid-cols-12 gap-4" wire:submit.prevent="addSukuCadang">
+            <form class="grid grid-cols-12 gap-4 mb-4" wire:submit.prevent="addSukuCadang">
                 <div class="col-span-3">
                     <select
                         wire:model="selectedSukuCadangId"
@@ -258,10 +230,37 @@
                 </div>
             </form>  
             @endif
+            <div class="mb-4 border-l border-r border-primary">
+                <div class="bg-primary text-white grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 font-semibold gap-4">
+                    <div class="col-span-3 px-4">Suku Cadang</div>
+                    <div class="col-span-2 px-4">Harga</div>
+                    <div class="col-span-2 px-4">Jumlah</div>
+                    <div class="col-span-3 px-4">Subtotal</div>
+                    @if($isEditMode)<div class="col-span-2 px-4">Aksi</div>@endif
+                </div>
+                @foreach ($service->penggantian_suku_cadangs as $penggantianSukuCadang)
+                    <div class="border-b border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
+                        <div class="col-span-3 px-4">{{$penggantianSukuCadang->suku_cadang->nama}}</div>
+                        <div class="col-span-2 px-4">{{$penggantianSukuCadang->harga}}</div>
+                        <div class="col-span-2 px-4">{{$penggantianSukuCadang->jumlah}}</div>
+                        <div class="col-span-3 px-4">{{$penggantianSukuCadang->getTotal()}}</div>
+                        @if ($isEditMode)
+                        <div class="col-span-2 px-4">
+                            <button
+                                wire:click="deletePenggantianSukuCadang({{$penggantianSukuCadang->id}})" 
+                                class="uppercase text-red-600 hover:text-red-800 font-semibold text-sm">
+                                Delete
+                            </button>
+                        </div>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+
             <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                <div class="{{ !$isEditMode ? 'col-span-7' : 'col-span-9' }} col-start-4 border-t-4 border-primary"></div>
-                <div class="col-span-4 col-start-4 uppercase font-bold text-xl">TOTAL SUKU CADANG</div>
-                <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 text-xl">{{ $service->getTotalPenggantianSukuCadangs()}}</div>
+                {{-- <div class="{{ !$isEditMode ? 'col-span-7' : 'col-span-9' }} col-start-4 border-t-4 border-primary"></div> --}}
+                <div class="col-span-4 col-start-4 uppercase font-bold pl-4">TOTAL SUKU CADANG</div>
+                <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 pl-4">{{ $service->getTotalPenggantianSukuCadangs()}}</div>
             </div>
         </div>
         @endunless
