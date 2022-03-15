@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Pelanggan;
 use App\Models\Service;
+use App\Models\SukuCadang;
+use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -10,7 +13,6 @@ class Dashboard extends Component
 {
     public $reportStartDate;
     public $reportEndDate;
-    
 
     public function render()
     {
@@ -33,6 +35,10 @@ class Dashboard extends Component
                 return $total + $service->getGrandTotal();
             }, 0);
 
+        $totalSukuCadang = count(SukuCadang::all());
+        $totalPelanggan = count(Pelanggan::all());
+        $totalUser = count(User::all());
+
         // dd($totalSalesToday);
 
         return view('livewire.dashboard', [
@@ -41,7 +47,10 @@ class Dashboard extends Component
             'totalSales' => $totalSales,
             'totalSalesToday' => $totalSalesToday,
             'services' => $services,
-            'reportServices' => $reportServices
+            'reportServices' => $reportServices,
+            'totalSukuCadang' => $totalSukuCadang,
+            'totalPelanggan' => $totalPelanggan,
+            'totalUser' => $totalUser,
         ]);
     }
 }

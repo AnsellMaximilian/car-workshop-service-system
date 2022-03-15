@@ -4,15 +4,42 @@
             <x-slot name="icon">
                 <x-icons.checkmarked-clipboard class="h-6"/>
             </x-slot>
+            <x-slot name="actions">
+                <a href="/" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+            </x-slot>
         </x-dashboard-module>
+        <x-dashboard-module label="Suku Cadang" :value="$totalSukuCadang" class="bg-white" >
+            <x-slot name="icon">
+                <x-icons.checkmarked-clipboard class="h-6"/>
+            </x-slot>
+            <x-slot name="actions">
+                <a href="{{ route('suku-cadangs.index') }}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+            </x-slot>
+        </x-dashboard-module>
+        <x-dashboard-module label="Pelanggan" :value="$totalPelanggan" class="bg-white" >
+            <x-slot name="icon">
+                <x-icons.checkmarked-clipboard class="h-6"/>
+            </x-slot>
+            <x-slot name="actions">
+                <a href="{{ route('pelanggans.index') }}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+            </x-slot>
+        </x-dashboard-module>
+        {{-- <x-dashboard-module label="User" :value="$totalUser" class="bg-white" >
+            <x-slot name="icon">
+                <x-icons.checkmarked-clipboard class="h-6"/>
+            </x-slot>
+            <x-slot name="actions">
+                <a href="/" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+            </x-slot>
+        </x-dashboard-module> --}}
     </div>
 
     <div class="flex flex-wrap gap-4 mb-8">
-        <div class="bg-primary p-4 shadow-lg rounded-lg text-white h-48">
+        <div class="bg-primary p-4 shadow-lg rounded-lg text-white h-48 grow">
             <div class="text-3xl font-bold mb-4">{{$totalSales}}</div>
             <div class="text-xl font-semibold">Total Penjualan Service</div>
         </div>
-        <div class="bg-primary p-4 shadow-lg rounded-lg text-white h-48">
+        <div class="bg-primary p-4 shadow-lg rounded-lg text-white h-48 grow">
             <div class="text-3xl font-bold mb-4">{{$totalSalesToday}}</div>
             <div class="text-xl font-semibold">Total Penjualan Service Hari Ini</div>
         </div>
