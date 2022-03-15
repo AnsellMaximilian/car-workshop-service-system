@@ -20,8 +20,10 @@
         </x-dashboard-module>
     </div>
     <div class="print-out">
-        <h2 class="text-xl font-semibold mb-4">Laporan Penjualan Service</h2>
-        <div class="only-print mb-4">
+        <x-print-header class="only-print"/>
+        <h2 class="text-xl font-semibold mb-4 print-out__hide">Laporan Penjualan Service</h2>
+        <h2 class="text-3xl font-bold mb-4 only-print text-center">Laporan Penjualan Service</h2>
+        <div class="only-print mb-4 text-center">
             {{ \Carbon\Carbon::parse($reportStartDate)->format('d-m-Y') }} sampai {{ \Carbon\Carbon::parse($reportEndDate)->format('d-m-Y') }}
         </div>
         <div class="flex mb-4 items-end print-out__hide">

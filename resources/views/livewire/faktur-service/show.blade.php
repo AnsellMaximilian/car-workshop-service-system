@@ -21,19 +21,7 @@
     <x-card class="mb-4">
         <div class="print-out relative">
             <div class="mb-4">
-                <div class="flex items-start mb-8 border-b-4 border-primary pb-4">
-                    <div>
-                        <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="mb-4 w-64">
-                    </div>
-                    <div class="text-center grow">
-                        <h1 class="font-bold text-2xl">SOGO JAYA AC</h1>
-                        <div>Office: Jl. Teuku Umar, No. 18 Cimone, Tangerang</div>
-                        <div class="text-sm font-semibold flex justify-center gap-4">
-                            <div>Telp: 021-55790472</div>
-                            <div>HP: 0877 8807 36666 / 08738959 9265</div>
-                        </div>
-                    </div>
-                </div>
+                <x-print-header />
                 <div class="grid grid-cols-12">
                     <div class="text-2xl font-semibold mb-4 col-span-12">
                         Tangerang, {{ now()->format('d-m-Y') }}
