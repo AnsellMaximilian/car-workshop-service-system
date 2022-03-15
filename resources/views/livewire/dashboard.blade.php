@@ -8,16 +8,14 @@
     </div>
 
     <div class="flex flex-wrap gap-4 mb-8">
-        <x-dashboard-module label="Total Service" :value="$totalSales" class="bg-primary text-white">
-            <x-slot name="icon">
-                <x-icons.magnifying-glass class="h-6 fill-white"/>
-            </x-slot>
-        </x-dashboard-module>
-        <x-dashboard-module label="Total Service Hari Ini" :value="$totalSalesToday" class="bg-primary text-white">
-            <x-slot name="icon">
-                <x-icons.magnifying-glass class="h-6 fill-white"/>
-            </x-slot>
-        </x-dashboard-module>
+        <div class="bg-primary p-4 shadow-lg rounded-lg text-white h-48">
+            <div class="text-3xl font-bold mb-4">{{$totalSales}}</div>
+            <div class="text-xl font-semibold">Total Penjualan Service</div>
+        </div>
+        <div class="bg-primary p-4 shadow-lg rounded-lg text-white h-48">
+            <div class="text-3xl font-bold mb-4">{{$totalSalesToday}}</div>
+            <div class="text-xl font-semibold">Total Penjualan Service Hari Ini</div>
+        </div>
     </div>
     <div class="print-out">
         <x-print-header class="only-print"/>
