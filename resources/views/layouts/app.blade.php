@@ -20,77 +20,93 @@
             <aside class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2 flex flex-col">
                 <nav class="flex flex-col grow">
                     <ul class="flex flex-col grow">
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('dashboard')" 
                                 :active="request()->routeIs('dashboard')"
-                            >Dashboard</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.dashboard class="h-4"/></x-slot>
+                            Dashboard</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('users.index')" 
                                 :active="request()->routeIs('users.*')"
-                            >Users</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.user class="h-4"/></x-slot>
+                            Users</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('perans')" 
                                 :active="request()->routeIs('perans')"
-                            >Peran</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.nametag class="h-4"/></x-slot>
+                            Peran</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('pelanggans.index')" 
                                 :active="request()->routeIs('pelanggans.*')"
-                            >Pelanggan</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.customer class="h-4"/></x-slot>
+                            Pelanggan</x-sidebar-nav-link>
                         </li>
-                        {{-- <li>
+                        {{-- <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('kendaraans.index')" 
                                 :active="request()->routeIs('kendaraans.*')"
                             >Kendaraan</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('merks-dan-tipes')" 
                                 :active="request()->routeIs('merks-dan-tipes')"
                             >Merk dan Tipe</x-sidebar-nav-link>
                         </li> --}}
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('suku-cadangs.index')" 
                                 :active="request()->routeIs('suku-cadangs.*')"
-                            >Suku Cadang</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.fan class="h-4"/></x-slot>
+                            Suku Cadang</x-sidebar-nav-link>
                         </li>
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('jenis-services.index')" 
                                 :active="request()->routeIs('jenis-services.*')"
-                            >Jenis Service</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.wrench class="h-4"/></x-slot>
+                            Jenis Service</x-sidebar-nav-link>
                         </li>
-                        {{-- <li>
+                        {{-- <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('work-orders.index')" 
                                 :active="request()->routeIs('work-orders.*')"
                             >Work Order</x-sidebar-nav-link>
                         </li> --}}
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('services.index')" 
                                 :active="request()->routeIs('services.*') || request()->routeIs('faktur-services.*')"
-                            >Service</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>
+                            Service</x-sidebar-nav-link>
                         </li>
-                        {{-- <li>
+                        {{-- <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('faktur-services.index')" 
                                 :active="request()->routeIs('faktur-services.*')"
                             >Faktur Service</x-sidebar-nav-link>
                         </li> --}}
-                        <li>
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('pembayarans.index')" 
                                 :active="request()->routeIs('pembayarans.*')"
-                            >Pembayaran</x-sidebar-nav-link>
+                            >
+                            <x-slot name="icon"><x-icons.money class="h-4"/></x-slot>
+                            Pembayaran</x-sidebar-nav-link>
                         </li>
                     </ul>
                     <hr>

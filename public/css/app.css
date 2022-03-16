@@ -1222,6 +1222,15 @@ select {
 .fill-green-500 {
   fill: #22c55e;
 }
+.fill-gray-500 {
+  fill: #6b7280;
+}
+.fill-gray-400 {
+  fill: #9ca3af;
+}
+.fill-red-400 {
+  fill: #f87171;
+}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1606,6 +1615,9 @@ select {
 .hover\:fill-gray-300:hover {
   fill: #d1d5db;
 }
+.hover\:fill-white:hover {
+  fill: #fff;
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1733,6 +1745,9 @@ select {
 }
 .group:hover .group-hover\:fill-red-800 {
   fill: #991b1b;
+}
+.group:hover .group-hover\:fill-white {
+  fill: #fff;
 }
 @media (prefers-color-scheme: dark) {
 
