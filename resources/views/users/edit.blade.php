@@ -11,7 +11,7 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <x-card class="max-w-xl">
+    <x-card class="">
         <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -21,17 +21,17 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
             @csrf
             @method('PATCH')
             <!-- Name -->
-            <div>
+            <div class="col-span-6">
                 <x-label for="name" :value="__('Name')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? $user->name" required autofocus />
             </div>
 
-            <div class="mt-4">
+            <div class="col-span-6">
                 <x-label for="kode_peran" value="Peran" />
                 <select 
                     name="kode_peran" 
@@ -49,13 +49,13 @@
                 {{-- <x-input id="peran" class="block mt-1 w-full" type="tel" name="peran" :value="old('peran')" required /> --}}
             </div>
 
-            <div class="mt-4">
+            <div class="col-span-6">
                 <x-label for="noTelp" value="No. Telp" />
 
                 <x-input id="noTelp" class="block mt-1 w-full" type="tel" name="noTelp" :value="old('noTelp') ?? $user->noTelp" required />
             </div>
 
-            <div class="mt-4">
+            <div class="col-span-12">
                 <x-label for="alamat" value="Alamat" />
                 <textarea 
                     id="alamat" 
@@ -64,7 +64,7 @@
                 >{{ old('alamat') ?? $user->alamat }}</textarea>
             </div>
 
-            <div class="mt-4">
+            <div class="col-span-6">
                 <x-file-input 
                     name="photo" 
                     label="Photo" 
@@ -73,7 +73,7 @@
                  />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end col-span-12">
                 <x-button class="ml-4">
                     {{ __('Perbaharui') }}
                 </x-button>
