@@ -1,7 +1,18 @@
 <div class="space-y-2">
-    <div class="flex justify-between gap-2">
+    <div class="flex justify-start gap-2">
         <x-input wire:model="query" class="block md:w-1/3 w-16 grow md:grow-0" type="text" placeholder="Search"/>
-        <a href="{{ route('services.create') }} ">
+        
+        <div class="flex gap-2 items-center">
+            <x-label for="status" value="Status" />
+            <select id="status" 
+                wire:model="statusSort"
+                class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="all">Semua</option>
+                <option value="setuju">Setuju</option>
+                <option value="tolak">Tolak</option>
+            </select>
+        </div>
+        <a href="{{ route('services.create') }} " class="ml-auto">
             <x-button type="button">Daftar Service</x-button>
         </a>
         

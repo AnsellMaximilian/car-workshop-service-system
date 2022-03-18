@@ -17,6 +17,7 @@ class Index extends Component
     public $query = "";
     public $sortField;
     public $sortDir = "asc";
+    public $statusSort;
     
     public function setSort($field)
     {
@@ -27,6 +28,11 @@ class Index extends Component
         }
 
         $this->sortField = $field;
+    }
+
+    public function setStatusSort($value)
+    {
+        
     }
 
     public function destroy(Service $service)
@@ -43,10 +49,29 @@ class Index extends Component
 
     public function render()
     {
+        
+        switch ($this->statusSort) {
+            case 'tolak':
+                $statusSort = false;
+                break;
+            case 'setuju':
+                $statusSort = true;
+                break;
+            default:
+                $statusSort = null;
+                break;
+        }
 
-        $services = Service::search('id', $this->query)
+        if($statusSort === null){
+            $services = Service::search('id', $this->query)
             ->optionalSort($this->sortField, $this->sortDir)
             ->paginate(10);
+        }else {
+            $services = Service::search('id', $this->query)
+            ->where('mau_diservice', $statusSort)
+            ->optionalSort($this->sortField, $this->sortDir)
+            ->paginate(10);
+        }
 
         return view('livewire.service.index', [
             'services' => $services
