@@ -90,17 +90,20 @@
                         <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('services.index')" 
-                                :active="request()->routeIs('services.*') || request()->routeIs('faktur-services.*')"
+                                {{-- :active="request()->routeIs('services.*') || request()->routeIs('faktur-services.*')" --}}
+                                :active="request()->routeIs('services.*')"
                             >
                             <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>
                             Service</x-sidebar-nav-link>
                         </li>
-                        {{-- <li class="group">
+                        <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('faktur-services.index')" 
                                 :active="request()->routeIs('faktur-services.*')"
-                            >Faktur Service</x-sidebar-nav-link>
-                        </li> --}}
+                            >
+                            <x-slot name="icon"><x-icons.document class="h-4"/></x-slot>
+                            Faktur Service</x-sidebar-nav-link>
+                        </li>
                         <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('pembayarans.index')" 
