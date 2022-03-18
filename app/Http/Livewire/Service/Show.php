@@ -184,6 +184,18 @@ class Show extends Component
         }
     }
 
+    public function saveFakturService()
+    {
+        $this->authorize('create', FakturService::class);
+
+        $newFakturService = new FakturService();
+        $newFakturService->service_id = $this->service->id;
+        $newFakturService->tanggal = now();
+        $newFakturService->save();
+
+        return redirect(route('faktur-services.show', $newFakturService->id));
+    }
+
     public function render()
     {
         // dd($this->sukuCadang->getTotalPemasukkan());

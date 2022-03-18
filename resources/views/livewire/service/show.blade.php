@@ -34,8 +34,9 @@
                     </x-button> 
                     @else
                         @if ($service->canBeInvoiced())
-                        <x-button >
-                            <a href="{{route('faktur-services.create')}}">Buat Faktur Service</a>
+                        <x-button wire:click="saveFakturService">
+                            {{-- <a href="{{route('faktur-services.create')}}">Buat Faktur Service</a> --}}
+                            Buat Faktur Service
                         @endif
                     </x-button> 
                     @endif
