@@ -33,8 +33,10 @@
                         <a href="{{route('faktur-services.show', $service->faktur_service->id)}}">Faktur Service</a>
                     </x-button> 
                     @else
-                    <x-button >
-                        <a href="{{route('faktur-services.create')}}">Buat Faktur Service</a>
+                        @if ($service->canBeInvoiced())
+                        <x-button >
+                            <a href="{{route('faktur-services.create')}}">Buat Faktur Service</a>
+                        @endif
                     </x-button> 
                     @endif
                 @endif
