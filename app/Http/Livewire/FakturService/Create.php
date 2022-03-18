@@ -58,17 +58,17 @@ class Create extends Component
         //     $selectedWorkOrder = new WorkOrder();
         // }
 
+        $services = Service::all();
+
         if($this->selectedServiceId){
             $selectedService = Service::find($this->selectedServiceId);
         }else {
             $selectedService = new Service();
         }
 
-        $services = Service::all();
-
         return view('livewire.faktur-service.create', [
             'services' => $services->filter(function ($service) {
-                return !$service->invoiced();
+                return $service->canBeInvoiced();
             }),
             'selectedService' => $selectedService
             // 'selectedWorkOrder' => $selectedWorkOrder

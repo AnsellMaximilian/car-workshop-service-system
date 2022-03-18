@@ -14,7 +14,7 @@ class AddColumnToFakturServicesTable extends Migration
     public function up()
     {
         Schema::table('faktur_services', function (Blueprint $table) {
-            $table->foreignId('service_id');
+            $table->foreignId('service_id')->constrained();
         });
     }
 

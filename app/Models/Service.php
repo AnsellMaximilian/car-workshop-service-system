@@ -101,7 +101,7 @@ class Service extends Model
 
     public function canBeInvoiced()
     {
-        return !$this->invoiced();
+        return  $this->isServiceApproved() && !$this->invoiced();
     }
 
     public function user()
