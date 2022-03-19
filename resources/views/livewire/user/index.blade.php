@@ -29,6 +29,9 @@
                 <x-table.cell>{{ $user->alamat }}</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                        href="{{ route('users.show', $user->id) }}"    
+                    >Detail</a>
+                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('users.edit', $user->id) }}"    
                     >Edit</a>
                     <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"

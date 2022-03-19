@@ -41,7 +41,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
-    Route::delete('users/{user}', [RegisteredUserController::class, 'destroy'])->name('destroy');
+    Route::delete('users/{user}', [RegisteredUserController::class, 'destroy'])->name('users.destroy');
+    Route::get('users/{user}', [RegisteredUserController::class, 'show'])->name('users.show');
+
 
     Route::get('perans', [PeranController::class, 'index'])->name('perans');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

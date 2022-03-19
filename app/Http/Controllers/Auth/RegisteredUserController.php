@@ -112,6 +112,11 @@ class RegisteredUserController extends Controller
 
         $user->delete();
 
-        return redirect(route('user.index'));
+        return redirect(route('users.index'));
+    }
+
+    public function show(User $user)
+    {
+        return view('users.show', ['user' => $user]);
     }
 }
