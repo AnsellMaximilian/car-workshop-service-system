@@ -12,6 +12,18 @@
         </x-icon-link>
     </div>
     <x-card class="mb-8">
+        <div class="mb-4 flex gap-4 justify-end">
+            <a href="{{ route('pelanggans.edit', $pelanggan->id)}}">
+                <x-icons.edit class="h-6 hover:fill-gray-600"/>
+            </a>
+            <form action="{{ route('pelanggans.destroy', $pelanggan->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button>
+                    <x-icons.trash class="h-6 hover:fill-gray-600"/>
+                </button>
+            </form>
+        </div>
         <div class="font-bold text-2xl mb-4">
             {{ $pelanggan->nama }}
         </div>

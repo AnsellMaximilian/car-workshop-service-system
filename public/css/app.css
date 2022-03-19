@@ -1615,6 +1615,12 @@ select {
 .hover\:fill-gray-300:hover {
   fill: #d1d5db;
 }
+.hover\:fill-gray-800:hover {
+  fill: #1f2937;
+}
+.hover\:fill-gray-600:hover {
+  fill: #4b5563;
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));

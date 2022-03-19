@@ -41,6 +41,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
+    Route::delete('users/{user}', [RegisteredUserController::class, 'destroy'])->name('destroy');
+
     Route::get('perans', [PeranController::class, 'index'])->name('perans');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -51,6 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::get('pelanggans/{id}', PelangganShow::class)->name('show');
         Route::get('pelanggans/{pelanggan}/edit', [PelangganController::class, 'edit'])->name('edit');
         Route::patch('pelanggans/{pelanggan}', [PelangganController::class, 'update'])->name('update');
+        Route::delete('pelanggans/{pelanggan}', [PelangganController::class, 'destroy'])->name('destroy');
     });
 
     Route::get('merk-dan-tipe-kendaraan', MerkDanTipeIndex::class)->name('merks-dan-tipes');
@@ -70,6 +73,7 @@ Route::middleware('auth')->group(function () {
         Route::get('suku-cadangs/{id}', SukuCadangShow::class)->name('show');
         Route::get('suku-cadangs/{suku_cadang}/edit', [SukuCadangController::class, 'edit'])->name('edit');
         Route::patch('suku-cadangs/{suku_cadang}', [SukuCadangController::class, 'update'])->name('update');
+        Route::delete('suku-cadangs/{suku_cadang}', [SukuCadangController::class, 'destroy'])->name('destroy');
     });
 
     Route::name('jenis-services.')->group(function(){

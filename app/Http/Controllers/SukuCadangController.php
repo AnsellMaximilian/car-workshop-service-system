@@ -50,6 +50,15 @@ class SukuCadangController extends Controller
         return view('suku-cadangs.edit', ['sukuCadang' => $sukuCadang]);
     }
 
+    public function destroy(SukuCadang $sukuCadang)
+    {
+        $this->authorize('delete', $sukuCadang);
+
+        $sukuCadang->delete();
+
+        return redirect(route('suku-cadangs.index'));
+    }
+
     public function update(SukuCadang $sukuCadang, Request $request)
     {
         $this->authorize('update', $sukuCadang);

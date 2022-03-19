@@ -105,4 +105,13 @@ class RegisteredUserController extends Controller
 
         return redirect(route('users.index'));
     }
+
+    public function destroy(User $user)
+    {
+        $this->authorize('delete', $user);
+
+        $user->delete();
+
+        return redirect(route('user.index'));
+    }
 }

@@ -15,6 +15,18 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         {{-- <h1 class="font-semibold mb-4 text-2xl">Detail Suku Cadang</h1> --}}
+        <div class="mb-4 flex gap-4 justify-end">
+            <a href="{{ route('suku-cadangs.edit', $sukuCadang->id)}}">
+                <x-icons.edit class="h-6 hover:fill-gray-600"/>
+            </a>
+            <form action="{{ route('suku-cadangs.destroy', $sukuCadang->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button>
+                    <x-icons.trash class="h-6 hover:fill-gray-600"/>
+                </button>
+            </form>
+        </div>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6 flex">
                 <div class="font-bold uppercase mr-4">
