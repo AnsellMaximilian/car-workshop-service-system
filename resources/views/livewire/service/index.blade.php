@@ -8,6 +8,7 @@
                 wire:model="statusSort"
                 class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="all">Semua</option>
+                <option value="pending">Pending</option>
                 <option value="setuju">Setuju</option>
                 <option value="tolak">Tolak</option>
             </select>
@@ -38,7 +39,7 @@
                 <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
                 <x-table.cell>
                     @if ($service->isApprovalPending())
-                        <x-badge label="Menunggu" class="text-white bg-gray-500" />
+                        <x-badge label="Pending" class="text-white bg-gray-500" />
                     @else
                         @if ($service->isServiceCancelled())
                         <x-badge label="Batal" class="text-white bg-red-600" />

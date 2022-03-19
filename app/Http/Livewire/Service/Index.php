@@ -30,11 +30,6 @@ class Index extends Component
         $this->sortField = $field;
     }
 
-    public function setStatusSort($value)
-    {
-        
-    }
-
     public function destroy(Service $service)
     {
         $this->authorize('delete', $service);
@@ -57,12 +52,15 @@ class Index extends Component
             case 'setuju':
                 $statusSort = true;
                 break;
-            default:
+            case 'pending':
                 $statusSort = null;
+                break;
+            default:
+                $statusSort = 'all';
                 break;
         }
 
-        if($statusSort === null){
+        if($statusSort === 'all'){
             $services = Service::search('id', $this->query)
             ->optionalSort($this->sortField, $this->sortDir)
             ->paginate(10);
