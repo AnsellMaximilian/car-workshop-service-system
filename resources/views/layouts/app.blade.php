@@ -81,12 +81,6 @@
                             <x-slot name="icon"><x-icons.wrench class="h-4"/></x-slot>
                             Jenis Service</x-sidebar-nav-link>
                         </li>
-                        {{-- <li class="group">
-                            <x-sidebar-nav-link 
-                                :href="route('work-orders.index')" 
-                                :active="request()->routeIs('work-orders.*')"
-                            >Work Order</x-sidebar-nav-link>
-                        </li> --}}
                         <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('services.index')" 

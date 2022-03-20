@@ -86,15 +86,6 @@ Route::middleware('auth')->group(function () {
         Route::patch('jenis-services/{jenis_service}', [JenisServiceController::class, 'update'])->name('update');
     });
 
-    Route::name('work-orders.')->group(function(){
-        Route::get('work-orders', [WorkOrderController::class, 'index'])->name('index');
-        Route::get('work-orders/create', [WorkOrderController::class, 'create'])->name('create');
-        Route::post('work-orders', [WorkOrderController::class, 'store'])->name('store');
-        Route::get('work-orders/{id}', WorkOrderShow::class)->name('show');
-        Route::get('work-orders/{work_order}/edit', [WorkOrderController::class, 'edit'])->name('edit');
-        Route::patch('work-orders/{work_order}', [WorkOrderController::class, 'update'])->name('update');
-    });
-
     Route::name('services.')->group(function(){
         Route::get('services', [ServiceController::class, 'index'])->name('index');
         Route::get('services/create', [ServiceController::class, 'create'])->name('create');

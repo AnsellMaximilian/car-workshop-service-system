@@ -12,7 +12,6 @@ use App\Models\Service;
 use App\Models\SukuCadang;
 use App\Models\Tipe;
 use App\Models\User;
-use App\Models\WorkOrder;
 use App\Policies\FakturServicePolicy;
 use App\Policies\JenisServicePolicy;
 use App\Policies\KendaraanPolicy;
@@ -23,7 +22,6 @@ use App\Policies\ServicePolicy;
 use App\Policies\SukuCadangPolicy;
 use App\Policies\TipePolicy;
 use App\Policies\UserPolicy;
-use App\Policies\WorkOrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -44,7 +42,6 @@ class AuthServiceProvider extends ServiceProvider
         Tipe::class, TipePolicy::class,
         JenisService::class => JenisServicePolicy::class,
         SukuCadang::class => SukuCadangPolicy::class,
-        WorkOrder::class => WorkOrderPolicy::class,
         Service::class => ServicePolicy::class,
         FakturService::class => FakturServicePolicy::class,
     ];
