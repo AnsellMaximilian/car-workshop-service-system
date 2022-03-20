@@ -10,13 +10,11 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SukuCadangController;
-use App\Http\Controllers\WorkOrderController;
 use App\Http\Livewire\FakturService\Show as FakturServiceShow;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
 use App\Http\Livewire\Pelanggan\Show as PelangganShow;
 use App\Http\Livewire\Service\Show as ServiceShow;
 use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
-use App\Http\Livewire\WorkOrder\Show as WorkOrderShow;
 use Illuminate\Support\Facades\Route;
 
 /*

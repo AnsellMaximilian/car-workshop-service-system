@@ -4,7 +4,6 @@ namespace App\Http\Livewire\FakturService;
 
 use App\Models\FakturService;
 use App\Models\Service;
-use App\Models\WorkOrder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
@@ -12,16 +11,10 @@ class Create extends Component
 {
     use AuthorizesRequests;
 
-    public $selectedWorkOrderId;
     public $selectedServiceId;
 
     public function mount()
     {
-        // $firstWorkOrder = WorkOrder::first();
-        // if($firstWorkOrder){
-        //     $this->selectedWorkOrderId = $firstWorkOrder->id;
-        // }
-
         $firstService = Service::all()->filter(function($service){
             return !$service->invoiced();
         })->first();
@@ -35,15 +28,12 @@ class Create extends Component
     {
         $this->authorize('create', FakturService::class);
 
-
         $this->validate([
-            // 'selectedWorkOrderId' => 'required|exists:work_orders,id',
             'selectedServiceId' => 'required|exists:services,id',
         ]);
 
         $newFakturService = new FakturService();
         $newFakturService->service_id = $this->selectedServiceId;
-        // $newFakturService->work_order_id = $this->selectedWorkOrderId;
         $newFakturService->tanggal = now();
         $newFakturService->save();
 
@@ -52,11 +42,6 @@ class Create extends Component
 
     public function render()
     {
-        // if($this->selectedWorkOrderId){
-        //     $selectedWorkOrder = WorkOrder::find($this->selectedWorkOrderId);
-        // }else {
-        //     $selectedWorkOrder = new WorkOrder();
-        // }
 
         $services = Service::all();
 
@@ -71,7 +56,6 @@ class Create extends Component
                 return $service->canBeInvoiced();
             }),
             'selectedService' => $selectedService
-            // 'selectedWorkOrder' => $selectedWorkOrder
         ]);
     }
 }

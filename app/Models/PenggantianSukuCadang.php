@@ -19,11 +19,6 @@ class PenggantianSukuCadang extends Model
         return $this->belongsTo(SukuCadang::class);
     }
 
-    public function work_order()
-    {
-        return $this->belongsTo(WorkOrder::class);
-    }
-
     public function service()
     {
         return $this->belongsTo(Service::class);
