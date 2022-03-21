@@ -83,6 +83,14 @@
                         </li>
                         <li class="group">
                             <x-sidebar-nav-link 
+                                :href="route('pendaftaran-services.create')" 
+                                :active="request()->routeIs('pendaftaran-services.*')"
+                            >
+                            <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>
+                            Pendaftaran Service</x-sidebar-nav-link>
+                        </li>
+                        <li class="group">
+                            <x-sidebar-nav-link 
                                 :href="route('services.index')" 
                                 {{-- :active="request()->routeIs('services.*') || request()->routeIs('faktur-services.*')" --}}
                                 :active="request()->routeIs('services.*')"

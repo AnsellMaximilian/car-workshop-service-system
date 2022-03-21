@@ -7,6 +7,7 @@ use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PendaftaranServiceController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SukuCadangController;
@@ -32,10 +33,6 @@ Route::get('/', function () {
     // return view('welcome');
     return redirect(route('dashboard'));
 });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
@@ -84,12 +81,19 @@ Route::middleware('auth')->group(function () {
         Route::patch('jenis-services/{jenis_service}', [JenisServiceController::class, 'update'])->name('update');
     });
 
+    Route::name('pendaftaran-services.')->group(function(){
+        Route::get('pendaftaran-services', [PendaftaranServiceController::class, 'index'])->name('index');
+        Route::get('pendaftaran-services/create', [PendaftaranServiceController::class, 'create'])->name('create');
+        Route::post('pendaftaran-services', [PendaftaranServiceController::class, 'store'])->name('store');
+        Route::get('pendaftaran-services/{pendaftaran_service}/edit', [PendaftaranServiceController::class, 'edit'])->name('edit');
+        Route::patch('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'update'])->name('update');
+    });
+
     Route::name('services.')->group(function(){
         Route::get('services', [ServiceController::class, 'index'])->name('index');
         Route::get('services/create', [ServiceController::class, 'create'])->name('create');
         Route::post('services', [ServiceController::class, 'store'])->name('store');
         Route::get('services/{id}', ServiceShow::class)->name('show');
-        // Route::get('services/{service}/faktur', [ServiceController::class, 'invoice'])->name('invoice');
         Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('edit');
         Route::patch('services/{service}', [ServiceController::class, 'update'])->name('update');
     });
@@ -99,8 +103,6 @@ Route::middleware('auth')->group(function () {
         Route::get('faktur-services/create', [FakturServiceController::class, 'create'])->name('create');
         Route::post('faktur-services', [FakturServiceController::class, 'store'])->name('store');
         Route::get('faktur-services/{id}', FakturServiceShow::class)->name('show');
-        // Route::get('faktur-services/{work_order}/edit', [FakturServiceController::class, 'edit'])->name('edit');
-        // Route::patch('faktur-services/{work_order}', [FakturServiceController::class, 'update'])->name('update');
     });
 
     Route::name('pembayarans.')->group(function(){
