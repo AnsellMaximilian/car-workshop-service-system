@@ -43,15 +43,30 @@
                         class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     >{{ old('keluhan')}}</textarea>
                 </div>
-                <div class="flex items-center justify-end col-span-12">
-                    <x-button class="ml-4">
-                        {{ __('Buat') }}
-                    </x-button>
-                </div>
             </form>
         </x-card>
-        <x-card class="col-span-4">
-            Total: {{ $totalPerkiraanService}}
+        <x-card class="col-span-4 flex flex-col">
+            <div class="flex justify-between">
+                <div class="font-semibold">Service</div>
+                <div>{{ $totalPerkiraanService}}</div>
+            </div>
+            <div class="flex justify-between">
+                <div class="font-semibold">Suku Cadang</div>
+                <div>{{ $totalPerkiraanSukuCadang}}</div>
+            </div>
+
+            <div class="flex justify-between mt-4">
+                <div class="font-bold uppercase">Total Perkiraan</div>
+                <div>{{ $totalPerkiraanSukuCadang + $totalPerkiraanService}}</div>
+            </div>
+            <div class="flex items-center justify-end mt-auto">
+                <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
+                    {{ __('Batal') }}
+                </x-button>
+                <x-button class="ml-4">
+                    {{ __('Daftar') }}
+                </x-button>
+            </div>
         </x-card>
         <x-card class="col-span-12">
             <h2>Perkiraan Service</h2>
@@ -94,8 +109,8 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button class="" wire:click="addServicePrediction">
-                            {{ __('Tambah') }}
+                        <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addServicePrediction">
+                            {{ __('+') }}
                         </x-button>
                     </div>
                 </div>
@@ -138,7 +153,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button class="" wire:click="removeServicePrediction({{$key}})">
+                        <x-button overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeServicePrediction({{$key}})">
                             &times;
                         </x-button>
                     </div>
@@ -146,6 +161,99 @@
                 @endforeach
             </div>
         
+        </x-card>
+        <x-card class="col-span-12">
+            <h2>Perkiraan Pengantian</h2>
+            <div class="flex flex-col gap-4">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3">
+                        <select
+                            wire:model="selectedSukuCadangId.0"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            @foreach ($sukuCadangs as $sukuCadang)
+                                <option 
+                                    value="{{ $sukuCadang->id }}" 
+                                >{{ $sukuCadang->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <x-input 
+                            class="block min-w-0 w-full" 
+                            type="number" 
+                            placeholder="Harga" disabled 
+                            :value="$selectedSukuCadang[0]->harga" 
+                            required />
+                    </div>
+                    <div class="col-span-2">
+                        <x-input
+                            wire:model="sukuCadangAmount.0"
+                            class="block min-w-0 w-full" 
+                            type="number"
+                            min="0"
+                            placeholder="Jumlah" required />
+                    </div>
+                    <div class="col-span-3">
+                        <x-input 
+                            class="block min-w-0 w-full" 
+                            type="number" 
+                            placeholder="Subtotal" disabled 
+                            :value="$selectedSukuCadang[0]->harga * (is_numeric($sukuCadangAmount[0]) ? $sukuCadangAmount[0] : 0)" 
+                            required />
+                    </div>
+                    <div class="col-span-2 flex items-center justify-end">
+                        <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addSukuCadangPrediction">
+                            {{ __('+') }}
+                        </x-button>
+                    </div>
+                </div>
+                @foreach ($sukuCadangPredictions as $key => $index)
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-3">
+                        <select
+                            wire:model="selectedSukuCadangId.{{ $index }}"
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            @foreach ($sukuCadangs as $sukuCadang)
+                                <option 
+                                    value="{{ $sukuCadang->id }}" 
+                                >{{ $sukuCadang->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <x-input 
+                            class="block min-w-0 w-full" 
+                            type="number" 
+                            placeholder="Harga" disabled 
+                            :value="$selectedSukuCadang[$index]->harga" 
+                            required />
+                    </div>
+                    <div class="col-span-2">
+                        <x-input
+                            wire:model="sukuCadangAmount.{{ $index }}"
+                            class="block min-w-0 w-full" 
+                            type="number"
+                            min="0"
+                            placeholder="Jumlah" required />
+                    </div>
+                    <div class="col-span-3">
+                        <x-input 
+                            class="block min-w-0 w-full" 
+                            type="number" 
+                            placeholder="Subtotal" disabled 
+                            :value="$selectedSukuCadang[$index]->harga * (is_numeric($sukuCadangAmount[$index]) ? $sukuCadangAmount[$index] : 0)" 
+                            required />
+                    </div>
+                    <div class="col-span-2 flex items-center justify-end">
+                        <x-button overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeSukuCadangPrediction({{$key}})">
+                            &times;
+                        </x-button>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </x-card>
     </div>
     
