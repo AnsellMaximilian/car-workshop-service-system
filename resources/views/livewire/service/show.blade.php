@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ 'Service '.$service->id }}
@@ -35,7 +35,6 @@
                     @else
                         @if ($service->canBeInvoiced())
                         <x-button wire:click="saveFakturService">
-                            {{-- <a href="{{route('faktur-services.create')}}">Buat Faktur Service</a> --}}
                             Buat Faktur Service
                         @endif
                     </x-button> 
@@ -106,7 +105,6 @@
         <div class="text-2xl font-bold mb-4">Detail Service</div>
         @unless ($service->isPenjualanServiceEmpty() && !$isEditMode)
         <hr class="my-4">
-        {{-- PENJUALAN SERVIS --}}
         <div class="">
             <h3 class="font-semibold text-lg uppercase mb-4">Penjualan Servis</h3>
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -180,7 +178,6 @@
             </div>
 
             <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                {{-- <div class="{{ !$isEditMode ? 'col-span-7' : 'col-span-9' }} col-start-4 border-t-4 border-primary"></div> --}}
                 <div class="col-span-4 col-start-4 uppercase font-bold pl-4">TOTAL SERVICE</div>
                 <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 pl-4">{{ $service->getTotalPenjualanServices()}}</div>
             </div>
@@ -189,7 +186,6 @@
 
         @unless ($service->isPenggantianSukuCadangEmpty() && !$isEditMode)
         <hr class="my-4">
-        {{-- SUKU CADANG --}}
         <div>
             <h3 class="font-semibold text-lg uppercase mb-4">Penggantian Suku Cadang</h3>
             @if ($isEditMode)
@@ -261,7 +257,6 @@
             </div>
 
             <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                {{-- <div class="{{ !$isEditMode ? 'col-span-7' : 'col-span-9' }} col-start-4 border-t-4 border-primary"></div> --}}
                 <div class="col-span-4 col-start-4 uppercase font-bold pl-4">TOTAL SUKU CADANG</div>
                 <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 pl-4">{{ $service->getTotalPenggantianSukuCadangs()}}</div>
             </div>
@@ -276,4 +271,113 @@
     </x-card>
     @endunless
 </div>
+ --}}
+ <div>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Service ').$service->id }}
+        </h2>
+    </x-slot>
 
+    <div class="mb-4">
+        <x-icon-link href="{{ route('services.index') }}" label="Kembali">
+            <x-slot name="icon">
+                <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
+            </x-slot>
+        </x-icon-link>
+    </div>
+    
+    <div class="grid grid-cols-12 gap-4">
+        <x-card class="col-span-8">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12">
+                    <div class="font-semibold">Waktu Pendaftaran</div>
+                    <div>{{ \Carbon\Carbon::parse($service->pendaftaran_service->waktu_pendaftaran)->format('d/m/Y - H:i:s')}}</div>
+                </div>
+                <div class="col-span-12">
+                    <div class="font-semibold">Waktu Mulai</div>
+                    <div>{{ \Carbon\Carbon::parse($service->waktu_mulai)->format('d/m/Y - H:i:s')}}</div>
+                </div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Pelanggan</div>
+                    <div>{{$service->pendaftaran_service->pelanggan->nama}}</div>
+                </div>
+                <div class="col-span-6">
+                    <div class="font-semibold">No. Plat</div>
+                    <div>{{$service->pendaftaran_service->no_plat}}</div>
+                </div>
+                <div class="col-span-12">
+                    <div class="font-semibold">Keluhan</div>
+                    <div>{{$service->pendaftaran_service->keluhan}}</div>
+                </div>
+            </div>
+        </x-card>
+        <x-card class="col-span-4 flex flex-col">
+            <div class="flex justify-between">
+                <div class="font-semibold">Service</div>
+                <div>{{ $service->getTotalPenjualanServices()}}</div>
+            </div>
+            <div class="flex justify-between">
+                <div class="font-semibold">Suku Cadang</div>
+                <div>{{ $service->getTotalPenggantianSukuCadangs()}}</div>
+            </div>
+
+            <div class="flex justify-between mt-4">
+                <div class="font-bold uppercase">Total</div>
+                <div>{{$service->getGrandTotal()}}</div>
+            </div>
+            {{-- <div class="flex items-center justify-end mt-auto">
+                <a href="{{route('services.index')}}">
+                    <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
+                        {{ __('Hapus') }}
+                    </x-button>
+                </a>
+                <x-button class="ml-4">
+                    {{ __('Service') }}
+                </x-button>
+            </div> --}}
+        </x-card>
+        <x-card class="col-span-12">
+            <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
+            <x-table.wrapper>
+                <x-slot name="head">
+                    <x-table.heading class="bg-primary text-white">Jenis Service</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Harga</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Jumlah</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Subtotal</x-table.heading>
+                </x-slot>
+                <x-slot name="body">
+                    @foreach ($service->penjualan_services as $penjualanService)
+                    <x-table.row>
+                        <x-table.cell>{{ $penjualanService->jenis_service->nama }}</x-table.cell>
+                        <x-table.cell>{{ $penjualanService->harga }}</x-table.cell>
+                        <x-table.cell>{{ $penjualanService->jumlah }}</x-table.cell>
+                        <x-table.cell>{{ $penjualanService->getTotal() }}</x-table.cell>
+                    </x-table.row>
+                    @endforeach
+                </x-slot>
+            </x-table.wrapper>
+        </x-card>
+        <x-card class="col-span-12">
+            <h2 class="font-semibold mb-4 text-xl">Penggantian Suku Cadang</h2>
+            <x-table.wrapper>
+                <x-slot name="head">
+                    <x-table.heading class="bg-primary text-white">Suku Cadang</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Harga</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Jumlah</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Subtotal</x-table.heading>
+                </x-slot>
+                <x-slot name="body">
+                    @foreach ($service->penggantian_suku_cadangs as $penggantianSukuCadang)
+                    <x-table.row>
+                        <x-table.cell>{{ $penggantianSukuCadang->suku_cadang->nama }}</x-table.cell>
+                        <x-table.cell>{{ $penggantianSukuCadang->harga }}</x-table.cell>
+                        <x-table.cell>{{ $penggantianSukuCadang->jumlah }}</x-table.cell>
+                        <x-table.cell>{{ $penggantianSukuCadang->getTotal() }}</x-table.cell>
+                    </x-table.row>
+                    @endforeach
+                </x-slot>
+            </x-table.wrapper>
+        </x-card>
+    </div>
+</div>

@@ -212,7 +212,6 @@ class Show extends Component
         }
 
         return view('livewire.service.show', [
-            'sukuCadang' => $this->service,
             'jenisServices' => JenisService::all(),
             'sukuCadangs' => SukuCadang::all(),
             'selectedJenisService' => $selectedJenisService,

@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
         Route::get('services/create', [ServiceController::class, 'create'])->name('create');
         Route::post('services', [ServiceController::class, 'store'])->name('store');
         Route::get('services/{id}', ServiceShow::class)->name('show');
+        // Route::get('services/{service}', [ServiceController::class, 'show'])->name('show');
         Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('edit');
         Route::patch('services/{service}', [ServiceController::class, 'update'])->name('update');
     });
