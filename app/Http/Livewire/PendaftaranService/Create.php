@@ -101,6 +101,14 @@ class Create extends Component
 
         $pendaftaran->save();
 
+
+        // Add for index 0
+        $perkiraanPenjualanService = new PerkiraanPenjualanService();
+        $perkiraanPenjualanService->jenis_service_id = $this->selectedJenisServiceId[0];
+        $perkiraanPenjualanService->jumlah = $this->jenisServiceAmount[0];
+        $perkiraanPenjualanService->harga = $this->selectedJenisService[0]['harga'];
+        $pendaftaran->perkiraan_penjualan_services()->save($perkiraanPenjualanService);
+
         foreach ($this->servicePredictions as $key => $serviceIndex) {
             $perkiraanPenjualanService = new PerkiraanPenjualanService();
             $perkiraanPenjualanService->jenis_service_id = $this->selectedJenisServiceId[$serviceIndex];
@@ -108,6 +116,13 @@ class Create extends Component
             $perkiraanPenjualanService->harga = $this->selectedJenisService[$serviceIndex]['harga'];
             $pendaftaran->perkiraan_penjualan_services()->save($perkiraanPenjualanService);
         }
+
+        // Add for index 0
+        $perkiraanPenggantianSukuCadang = new PerkiraanSukuCadang();
+        $perkiraanPenggantianSukuCadang->suku_cadang_id = $this->selectedSukuCadangId[0];
+        $perkiraanPenggantianSukuCadang->jumlah = $this->sukuCadangAmount[0];
+        $perkiraanPenggantianSukuCadang->harga = $this->selectedSukuCadang[0]['harga'];
+        $pendaftaran->perkiraan_suku_cadangs()->save($perkiraanPenggantianSukuCadang);
 
         foreach ($this->sukuCadangPredictions as $key => $sukuCadangIndex) {
             $perkiraanPenggantianSukuCadang = new PerkiraanSukuCadang();

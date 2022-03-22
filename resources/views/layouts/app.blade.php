@@ -83,7 +83,7 @@
                         </li>
                         <li class="group">
                             <x-sidebar-nav-link 
-                                :href="route('pendaftaran-services.create')" 
+                                :href="route('pendaftaran-services.index')" 
                                 :active="request()->routeIs('pendaftaran-services.*')"
                             >
                             <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>

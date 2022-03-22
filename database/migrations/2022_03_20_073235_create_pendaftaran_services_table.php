@@ -15,7 +15,7 @@ class CreatePendaftaranServicesTable extends Migration
     {
         Schema::create('pendaftaran_services', function (Blueprint $table) {
             $table->id();
-            $table->string('keluhan');
+            $table->string('keluhan')->nullable();
             $table->string('no_plat');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('pelanggan_id')->constrained();
