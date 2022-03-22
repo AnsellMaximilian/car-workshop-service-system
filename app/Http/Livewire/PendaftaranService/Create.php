@@ -138,13 +138,13 @@ class Create extends Component
     public function render()
     {
         // $selectedJenisService = [];
-        $this->selectedJenisService[0] = JenisService::first();
+        $this->selectedJenisService[0] = JenisService::find($this->selectedJenisServiceId[0]);
         foreach ($this->servicePredictions as $key => $serviceIndex) {
             $this->selectedJenisService[$serviceIndex] = JenisService::find($this->selectedJenisServiceId[$serviceIndex]);
         }
 
         // $selectedSukuCadang = [];
-        $this->selectedSukuCadang[0] = SukuCadang::first();
+        $this->selectedSukuCadang[0] = SukuCadang::find($this->selectedSukuCadangId[0]);
         foreach ($this->sukuCadangPredictions as $key => $sukuCadangIndex) {
             $this->selectedSukuCadang[$sukuCadangIndex] = SukuCadang::find($this->selectedSukuCadangId[$sukuCadangIndex]);
         }

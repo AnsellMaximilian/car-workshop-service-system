@@ -42,6 +42,9 @@
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('services.show', $service->id) }}"    
                     >VIEW</a>
+                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                        href="{{ route('services.edit', $service->id) }}"    
+                    >Edit</a>
                     <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
                         wire:click="destroy({{ $service->id }})"
                     >Delete</button>
