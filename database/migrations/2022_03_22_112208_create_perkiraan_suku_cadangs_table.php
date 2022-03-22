@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerkiraanPenggantianSukuCadangsTable extends Migration
+class CreatePerkiraanSukuCadangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreatePerkiraanPenggantianSukuCadangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perkiraan_penggantian_suku_cadangs', function (Blueprint $table) {
+        Schema::create('perkiraan_suku_cadangs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('suku_cadang_id')->constrained();
+            $table->foreignId('pendaftaran_service_id')->constrained()->onDelete('cascade');
+            $table->integer('jumlah');
+            $table->integer('harga');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreatePerkiraanPenggantianSukuCadangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perkiraan_penggantian_suku_cadangs');
+        Schema::dropIfExists('perkiraan_suku_cadangs');
     }
 }

@@ -18,6 +18,7 @@ class CreatePerkiraanPenjualanServicesTable extends Migration
             $table->foreignId('jenis_service_id')->constrained();
             $table->foreignId('pendaftaran_service_id')->constrained()->onDelete('cascade');
             $table->integer('jumlah');
+            $table->integer('harga');
             $table->timestamps();
         });
     }
