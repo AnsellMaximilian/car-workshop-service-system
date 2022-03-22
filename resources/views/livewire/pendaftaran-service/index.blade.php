@@ -28,9 +28,9 @@
                 {{-- <x-table.cell>{{ $pendaftaranService->alamat }}</x-table.cell>
                 <x-table.cell>{{ $pendaftaranService->getTotalAR() }}</x-table.cell> --}}
                 <x-table.cell class="space-x-2 flex">
-                    {{-- <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('pendaftaran-services.show', $pendaftaranService->id) }}"    
-                    >View</a> --}}
+                    >View</a>
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('pendaftaran-services.edit', $pendaftaranService->id) }}"    
                     >Edit</a>

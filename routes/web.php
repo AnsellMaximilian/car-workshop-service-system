@@ -85,6 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::get('pendaftaran-services', [PendaftaranServiceController::class, 'index'])->name('index');
         Route::get('pendaftaran-services/create', [PendaftaranServiceController::class, 'create'])->name('create');
         Route::post('pendaftaran-services', [PendaftaranServiceController::class, 'store'])->name('store');
+        Route::get('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'show'])->name('show');
         Route::get('pendaftaran-services/{pendaftaran_service}/edit', [PendaftaranServiceController::class, 'edit'])->name('edit');
         Route::patch('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'update'])->name('update');
     });

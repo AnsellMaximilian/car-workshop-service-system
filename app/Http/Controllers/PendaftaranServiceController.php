@@ -64,4 +64,11 @@ class PendaftaranServiceController extends Controller
 
         // return redirect(route('pendaftaranServices.index'));
     }
+
+    public function show(PendaftaranService $pendaftaranService)
+    {
+        return view('pendaftaran-services.show', [
+            'pendaftaranService' => $pendaftaranService
+        ]);
+    }
 }
