@@ -86,7 +86,7 @@
                                 :href="route('pendaftaran-services.index')" 
                                 :active="request()->routeIs('pendaftaran-services.*')"
                             >
-                            <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>
+                            <x-slot name="icon"><x-icons.form class="h-4"/></x-slot>
                             Pendaftaran Service</x-sidebar-nav-link>
                         </li>
                         <li class="group">
