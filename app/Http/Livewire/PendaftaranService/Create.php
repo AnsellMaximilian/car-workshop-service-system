@@ -39,15 +39,15 @@ class Create extends Component
         $firstPelanggan = Pelanggan::first();
         $this->pelanggan_id = $firstPelanggan->id;
 
-        $firstJenisService = JenisService::first();
+        // $firstJenisService = JenisService::first();
         
-        $this->selectedJenisServiceId[0] = $firstJenisService->id;
-        $this->jenisServiceAmount[0] = 0;
+        // $this->selectedJenisServiceId[0] = $firstJenisService->id;
+        // $this->jenisServiceAmount[0] = 0;
 
-        $firstSukuCadang = SukuCadang::first();
+        // $firstSukuCadang = SukuCadang::first();
         
-        $this->selectedSukuCadangId[0] = $firstSukuCadang->id;
-        $this->sukuCadangAmount[0] = 0;
+        // $this->selectedSukuCadangId[0] = $firstSukuCadang->id;
+        // $this->sukuCadangAmount[0] = 0;
     }
 
     public function addServicePrediction()
@@ -103,11 +103,11 @@ class Create extends Component
 
 
         // Add for index 0
-        $perkiraanPenjualanService = new PerkiraanPenjualanService();
-        $perkiraanPenjualanService->jenis_service_id = $this->selectedJenisServiceId[0];
-        $perkiraanPenjualanService->jumlah = $this->jenisServiceAmount[0];
-        $perkiraanPenjualanService->harga = $this->selectedJenisService[0]['harga'];
-        $pendaftaran->perkiraan_penjualan_services()->save($perkiraanPenjualanService);
+        // $perkiraanPenjualanService = new PerkiraanPenjualanService();
+        // $perkiraanPenjualanService->jenis_service_id = $this->selectedJenisServiceId[0];
+        // $perkiraanPenjualanService->jumlah = $this->jenisServiceAmount[0];
+        // $perkiraanPenjualanService->harga = $this->selectedJenisService[0]['harga'];
+        // $pendaftaran->perkiraan_penjualan_services()->save($perkiraanPenjualanService);
 
         foreach ($this->servicePredictions as $key => $serviceIndex) {
             $perkiraanPenjualanService = new PerkiraanPenjualanService();
@@ -118,11 +118,11 @@ class Create extends Component
         }
 
         // Add for index 0
-        $perkiraanPenggantianSukuCadang = new PerkiraanSukuCadang();
-        $perkiraanPenggantianSukuCadang->suku_cadang_id = $this->selectedSukuCadangId[0];
-        $perkiraanPenggantianSukuCadang->jumlah = $this->sukuCadangAmount[0];
-        $perkiraanPenggantianSukuCadang->harga = $this->selectedSukuCadang[0]['harga'];
-        $pendaftaran->perkiraan_suku_cadangs()->save($perkiraanPenggantianSukuCadang);
+        // $perkiraanPenggantianSukuCadang = new PerkiraanSukuCadang();
+        // $perkiraanPenggantianSukuCadang->suku_cadang_id = $this->selectedSukuCadangId[0];
+        // $perkiraanPenggantianSukuCadang->jumlah = $this->sukuCadangAmount[0];
+        // $perkiraanPenggantianSukuCadang->harga = $this->selectedSukuCadang[0]['harga'];
+        // $pendaftaran->perkiraan_suku_cadangs()->save($perkiraanPenggantianSukuCadang);
 
         foreach ($this->sukuCadangPredictions as $key => $sukuCadangIndex) {
             $perkiraanPenggantianSukuCadang = new PerkiraanSukuCadang();
@@ -138,23 +138,25 @@ class Create extends Component
     public function render()
     {
         // $selectedJenisService = [];
-        $this->selectedJenisService[0] = JenisService::find($this->selectedJenisServiceId[0]);
+        // $this->selectedJenisService[0] = JenisService::find($this->selectedJenisServiceId[0]);
         foreach ($this->servicePredictions as $key => $serviceIndex) {
             $this->selectedJenisService[$serviceIndex] = JenisService::find($this->selectedJenisServiceId[$serviceIndex]);
         }
 
         // $selectedSukuCadang = [];
-        $this->selectedSukuCadang[0] = SukuCadang::find($this->selectedSukuCadangId[0]);
+        // $this->selectedSukuCadang[0] = SukuCadang::find($this->selectedSukuCadangId[0]);
         foreach ($this->sukuCadangPredictions as $key => $sukuCadangIndex) {
             $this->selectedSukuCadang[$sukuCadangIndex] = SukuCadang::find($this->selectedSukuCadangId[$sukuCadangIndex]);
         }
 
-        $totalPerkiraanService = ($this->selectedJenisService[0]->harga * $this->jenisServiceAmount[0]);
+        // $totalPerkiraanService = ($this->selectedJenisService[0]->harga * $this->jenisServiceAmount[0]);
+        $totalPerkiraanService = 0;
         foreach ($this->servicePredictions as $key => $index) {
             $totalPerkiraanService += ($this->selectedJenisService[$index]->harga * $this->jenisServiceAmount[$index]);
         }
 
-        $totalPerkiraanSukuCadang = ($this->selectedSukuCadang[0]->harga * $this->sukuCadangAmount[0]);
+        // $totalPerkiraanSukuCadang = ($this->selectedSukuCadang[0]->harga * $this->sukuCadangAmount[0]);
+        $totalPerkiraanSukuCadang = 0;
         foreach ($this->sukuCadangPredictions as $key => $index) {
             $totalPerkiraanSukuCadang += ($this->selectedSukuCadang[$index]->harga * $this->sukuCadangAmount[$index]);
         }
