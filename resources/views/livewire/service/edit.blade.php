@@ -47,7 +47,21 @@
                 <div class="font-bold uppercase">Total Service</div>
                 <div>{{$totalPenjualanServices + $totalPenggantianSukuCadangs}}</div>
             </div>
-            <div class="flex items-center justify-end mt-auto">
+
+            <div class="mt-4">
+                <x-label for="statusService" value="Status Service" />
+                <select 
+                    wire:model="statusService" 
+                    id="statusService" 
+                    class="rounded-md mt-1 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
+                    <option value="cek">Dicek</option>
+                    <option value="service">Diservice</option>
+                    <option value="selesai">Selesai</option>
+                </select>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
                 <a href="{{route('services.index')}}">
                     <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
                         {{ __('Batal') }}

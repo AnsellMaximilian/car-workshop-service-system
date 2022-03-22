@@ -98,7 +98,7 @@ class Service extends Model
 
     public function canBeInvoiced()
     {
-        return  $this->isServiceApproved() && !$this->invoiced();
+        return $this->status_service === 'selesai';
     }
 
     public function user()
@@ -148,6 +148,13 @@ class Service extends Model
         $change = $amountPaid - $this->getAmountToBePaid();
 
         return $change <= 0 ? 0 : $change;
+    }
+
+    public static function getAllInvoicable()
+    {
+        return Service::all()->filter(function($service){
+            return $service->canBeInvoiced() && !$service->invoiced();
+        });
     }
     
 }

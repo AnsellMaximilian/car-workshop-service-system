@@ -13,6 +13,8 @@ class Edit extends Component
 {
     public $service;
 
+    public $statusService;
+
     // Service    
     public $selectedJenisServiceId;
     public $selectedJenisService;
@@ -31,6 +33,8 @@ class Edit extends Component
 
     public function mount()
     {
+        $this->statusService = $this->service->status_service;
+
         foreach ($this->service->penjualan_services as $key => $penjualanService) {
             $this->serviceIndex++;
             $this->selectedJenisServiceId[$this->serviceIndex] = $penjualanService->jenis_service->id;
@@ -82,6 +86,12 @@ class Edit extends Component
 
     public function save()
     {
+        $this->validate([
+            'statusService' => 'in:cek,service,selesai',
+        ]);
+
+        $this->service->status_service = $this->statusService;
+        
         PenjualanService::where('service_id', $this->service->id)->delete();
         PenggantianSukuCadang::where('service_id', $this->service->id)->delete();
 

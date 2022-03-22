@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'Faktur Service '.$fakturService->id.' - '.$fakturService->service->pelanggan->nama)
+    @section('title', 'Faktur Service '.$fakturService->id.' - '.$fakturService->service->pendaftaran_service->pelanggan->nama)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Faktur Service') }}
@@ -25,19 +25,19 @@
                 <x-print-header />
                 <div class="grid grid-cols-12">
                     <div class="text-2xl font-semibold mb-4 col-span-12">
-                        Tangerang, {{ now()->format('d-m-Y') }}
+                        Tangerang, {{ \Carbon\Carbon::parse($fakturService->tanggal)->format('d-m-Y') }}
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">Pemilik</div>
-                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pelanggan->nama }}</div>
+                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->pelanggan->nama }}</div>
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">No. Plat</div>
-                        <div class="font-semibold col-span-8">: {{ $fakturService->service->no_plat }}</div>
+                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->no_plat }}</div>
                     </div>
                     <div class="mb-4 grid grid-cols-12 col-span-6">
                         <div class="col-span-4">Kasir</div>
-                        <div class="font-semibold col-span-8">: {{ $fakturService->service->user->name }}</div>
+                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->user->name }}</div>
                     </div>
                 </div>
             </div>

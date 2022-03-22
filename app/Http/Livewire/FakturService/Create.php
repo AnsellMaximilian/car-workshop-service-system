@@ -15,13 +15,9 @@ class Create extends Component
 
     public function mount()
     {
-        $firstService = Service::all()->filter(function($service){
-            return !$service->invoiced();
-        })->first();
+        $firstService = Service::getAllInvoicable()->first();
 
-        if($firstService){
-            $this->selectedServiceId = $firstService->id;
-        }
+        $this->selectedServiceId = $firstService->id;
     }
     
     public function saveFakturService()
@@ -43,13 +39,9 @@ class Create extends Component
     public function render()
     {
 
-        $services = Service::all();
+        $services = Service::getAllInvoicable();
 
-        if($this->selectedServiceId){
-            $selectedService = Service::find($this->selectedServiceId);
-        }else {
-            $selectedService = new Service();
-        }
+        $selectedService = Service::find($this->selectedServiceId);
 
         return view('livewire.faktur-service.create', [
             'services' => $services->filter(function ($service) {

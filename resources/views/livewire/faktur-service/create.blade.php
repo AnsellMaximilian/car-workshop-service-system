@@ -49,7 +49,7 @@
                         Kendaraan
                     </div>
                     <div class="col-span-6">
-                        {{ $selectedService->no_plat }}
+                        {{ $selectedService->pendaftaran_service->no_plat }}
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mb-4">
@@ -57,7 +57,7 @@
                         Pelanggan
                     </div>
                     <div class="col-span-6">
-                        {{ $selectedService->pelanggan->nama }}
+                        {{ $selectedService->pendaftaran_service->pelanggan->nama }}
                     </div>
                 </div>
             </div>
