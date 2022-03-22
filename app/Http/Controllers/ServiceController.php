@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
+use App\Models\PendaftaranService;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,9 @@ class ServiceController extends Controller
     {
         $this->authorize('create', Service::class);
 
-        // if(count(Kendaraan::all()) <= 0 ){
-        //     return redirect(route('kendaraans.index'))->with('error', 'Daftar kendaraan terlebih dahulu.');
-        // }
+        if(count(PendaftaranService::all()) <= 0 ){
+            return redirect(route('pendaftaran-services.index'))->with('error', 'Daftar service terlebih dahulu.');
+        }
         
         return view('services.create');
     }

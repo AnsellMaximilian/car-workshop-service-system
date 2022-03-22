@@ -4,31 +4,44 @@ namespace App\Http\Livewire\Service;
 
 use App\Models\Kendaraan;
 use App\Models\Pelanggan;
+use App\Models\PendaftaranService;
+use App\Models\Service;
 use Livewire\Component;
 
 class Create extends Component
 {
-    // public $tipes;
-    // public $selectedKendaraanId;
+    public $selectedPendaftaranServiceId;
 
-    // public function mount()
-    // {
-    //     $firstKendaraan = Kendaraan::first();
-    //     if($firstKendaraan){
-    //         $this->selectedKendaraanId = $firstKendaraan->id;
-    //     }
-    // }
+    public function mount()
+    {
+        $firstPendaftaranService = PendaftaranService::first();
+
+        $this->selectedPendaftaranServiceId = $firstPendaftaranService->id;
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'selectedPendaftaranServiceId' => 'required|exists:pendaftaran_services,id'
+        ]);
+
+        $service = new Service();
+
+        $service->pendaftaran_service_id = $this->selectedPendaftaranServiceId;
+        $service->waktu_mulai = now();
+
+        $service->save();
+
+        return redirect(route('services.index'));
+    }
 
     public function render()
     {
-        // if($this->selectedKendaraanId){
-        //    $selectedKendaraan = Kendaraan::find($this->selectedKendaraanId);
-        // }
+        $selectedPendaftaranService = PendaftaranService::find($this->selectedPendaftaranServiceId);
 
         return view('livewire.service.create', [
-            // 'kendaraans' => Kendaraan::all(),
-            // 'selectedKendaraan' => $selectedKendaraan
-            'pelanggans' => Pelanggan::all()
+            'pendaftaranServices' => PendaftaranService::all(),
+            'selectedPendaftaranService' => $selectedPendaftaranService
         ]);
     }
 }

@@ -14,17 +14,17 @@
             </select>
         </div>
         <a href="{{ route('services.create') }} " class="ml-auto">
-            <x-button type="button">Daftar Service</x-button>
+            <x-button type="button">Mulai Service</x-button>
         </a>
         
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('tanggal')" sortable :sortDir="$sortField === 'tanggal' ? $sortDir : null">Tanggal Daftar</x-table.heading>
-            <x-table.heading wire:click="setSort('no_plat')" sortable :sortDir="$sortField === 'no_plat' ? $sortDir : null">No. Plat</x-table.heading>
-            <x-table.heading wire:click="setSort('keluhan')" sortable :sortDir="$sortField === 'keluhan' ? $sortDir : null">Keluhan</x-table.heading>
-            <x-table.heading>Total</x-table.heading>
+            <x-table.heading>ID</x-table.heading>
+            <x-table.heading>Waktu Daftar</x-table.heading>
+            <x-table.heading>No. Plat</x-table.heading>
+            <x-table.heading>Pelanggan</x-table.heading>
+            <x-table.heading>Perkiraan</x-table.heading>
             <x-table.heading>Status</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
@@ -33,25 +33,11 @@
             @foreach ($services as $service)
             <x-table.row>
                 <x-table.cell>{{ $service->id }}</x-table.cell>
-                <x-table.cell>{{ $service->tanggal }}</x-table.cell>
-                <x-table.cell>{{ $service->no_plat }}</x-table.cell>
-                <x-table.cell>{{ $service->keluhan }}</x-table.cell>
-                <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
-                <x-table.cell>
-                    @if ($service->isApprovalPending())
-                        <x-badge label="Pending" class="text-white bg-gray-500" />
-                    @else
-                        @if ($service->isServiceCancelled())
-                        <x-badge label="Batal" class="text-white bg-red-600" />
-                        @else
-                            @if ($service->invoiced())
-                            <x-badge label="Selesai" class="bg-green-400 text-white" />
-                            @else
-                            <x-badge label="Siap Difaktur" class="bg-yellow-400 text-white" />
-                            @endif
-                        @endif
-                    @endif
-                </x-table.cell>
+                <x-table.cell>{{ $service->pendaftaran_service->waktu_pendaftaran }}</x-table.cell>
+                <x-table.cell>{{ $service->pendaftaran_service->no_plat }}</x-table.cell>
+                <x-table.cell>{{ $service->pendaftaran_service->pelanggan->nama }}</x-table.cell>
+                <x-table.cell>{{ $service->pendaftaran_service->getTotalPerkiraan() }}</x-table.cell>
+                <x-table.cell>{{ $service->status_service }}</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('services.show', $service->id) }}"    

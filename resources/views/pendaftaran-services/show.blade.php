@@ -41,7 +41,7 @@
             </div>
             <div class="flex justify-between">
                 <div class="font-semibold">Suku Cadang</div>
-                <div>{{ $pendaftaranService->getTotalPerkiraanSukuCadang()}}</div>
+                <div>{{ $pendaftaranService->getTotalPerkiraanSukuCadangs()}}</div>
             </div>
 
             <div class="flex justify-between mt-4">

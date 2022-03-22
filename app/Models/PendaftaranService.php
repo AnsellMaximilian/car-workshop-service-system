@@ -31,7 +31,7 @@ class PendaftaranService extends Model
         }, 0);
     }
 
-    public function getTotalPerkiraanSukuCadang()
+    public function getTotalPerkiraanSukuCadangs()
     {
         return $this->perkiraan_suku_cadangs->reduce(function($total, $penggantian){
             return $total + $penggantian->getTotal();
@@ -40,6 +40,6 @@ class PendaftaranService extends Model
 
     public function getTotalPerkiraan()
     {
-        return $this->getTotalPerkiraanPenjualanServices() + $this->getTotalPerkiraanSukuCadang();
+        return $this->getTotalPerkiraanPenjualanServices() + $this->getTotalPerkiraanSukuCadangs();
     }
 }

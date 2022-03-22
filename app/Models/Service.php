@@ -21,17 +21,14 @@ class Service extends Model
         $this->save();
     }
 
-    // public function markAsFinished()
-    // {
-    //     if($this->mau_diservice){
-    //         $this->service_selesai = true;
-    //         $this->save();
-    //     }
-    // }
-
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class);
+    }
+
+    public function pendaftaran_service()
+    {
+        return $this->belongsTo(PendaftaranService::class);
     }
 
     public function penjualan_services()
