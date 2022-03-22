@@ -59,51 +59,15 @@
             </div>
         </x-card>
         <x-card class="col-span-12">
-            <h2 class="font-semibold mb-4 text-xl">Perkiraan Service</h2>
-            <div class="flex flex-col gap-4">
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
-                        <select
-                            wire:model="selectedJenisServiceId.0"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        >
-                            @foreach ($jenisServices as $jenisService)
-                                <option 
-                                    value="{{ $jenisService->id }}" 
-                                >{{ $jenisService->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-span-2">
-                        <x-input 
-                            class="block min-w-0 w-full" 
-                            type="number" 
-                            placeholder="Harga" disabled 
-                            :value="$selectedJenisService[0]->harga" 
-                            required />
-                    </div>
-                    <div class="col-span-2">
-                        <x-input
-                            wire:model="jenisServiceAmount.0"
-                            class="block min-w-0 w-full" 
-                            type="number"
-                            min="0"
-                            placeholder="Jumlah" required />
-                    </div>
-                    <div class="col-span-3">
-                        <x-input 
-                            class="block min-w-0 w-full" 
-                            type="number" 
-                            placeholder="Subtotal" disabled 
-                            :value="$selectedJenisService[0]->harga * (is_numeric($jenisServiceAmount[0]) ? $jenisServiceAmount[0] : 0)" 
-                            required />
-                    </div>
-                    <div class="col-span-2 flex items-center justify-end">
-                        <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenjualanService">
-                            {{ __('+') }}
-                        </x-button>
-                    </div>
+            <div class="flex justify-between">
+                <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
+                <div>
+                    <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenjualanService">
+                        {{ __('+') }}
+                    </x-button>
                 </div>
+            </div>
+            <div class="flex flex-col gap-4">
                 @foreach ($penjualanServices as $key => $index)
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3">
@@ -152,51 +116,15 @@
             </div>
         </x-card>
         <x-card class="col-span-12">
-            <h2 class="font-semibold mb-4 text-xl">Perkiraan Penggantian</h2>
-            <div class="flex flex-col gap-4">
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
-                        <select
-                            wire:model="selectedSukuCadangId.0"
-                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        >
-                            @foreach ($sukuCadangs as $sukuCadang)
-                                <option 
-                                    value="{{ $sukuCadang->id }}" 
-                                >{{ $sukuCadang->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-span-2">
-                        <x-input 
-                            class="block min-w-0 w-full" 
-                            type="number" 
-                            placeholder="Harga" disabled 
-                            :value="$selectedSukuCadang[0]->harga" 
-                            required />
-                    </div>
-                    <div class="col-span-2">
-                        <x-input
-                            wire:model="sukuCadangAmount.0"
-                            class="block min-w-0 w-full" 
-                            type="number"
-                            min="0"
-                            placeholder="Jumlah" required />
-                    </div>
-                    <div class="col-span-3">
-                        <x-input 
-                            class="block min-w-0 w-full" 
-                            type="number" 
-                            placeholder="Subtotal" disabled 
-                            :value="$selectedSukuCadang[0]->harga * (is_numeric($sukuCadangAmount[0]) ? $sukuCadangAmount[0] : 0)" 
-                            required />
-                    </div>
-                    <div class="col-span-2 flex items-center justify-end">
-                        <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenggantianSukuCadang">
-                            {{ __('+') }}
-                        </x-button>
-                    </div>
+            <div class="flex justify-between">
+                <h2 class="font-semibold mb-4 text-xl">Penggantian Suku Cadang</h2>
+                <div>
+                    <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenggantianSukuCadang">
+                        {{ __('+') }}
+                    </x-button>
                 </div>
+            </div>
+            <div class="flex flex-col gap-4">
                 @foreach ($penggantianSukuCadangs as $key => $index)
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3">
