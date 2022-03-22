@@ -21,7 +21,7 @@
             <x-table.row>
                 <x-table.cell>{{ $fakturService->id }}</x-table.cell>
                 <x-table.cell>{{ $fakturService->tanggal }}</x-table.cell>
-                <x-table.cell>{{ $fakturService->service->pelanggan->nama }}</x-table.cell>
+                <x-table.cell>{{ $fakturService->service->pendaftaran_service->pelanggan->nama }}</x-table.cell>
                 <x-table.cell>{{ $fakturService->getGrandTotal()}}</x-table.cell>
                 {{-- <x-table.cell>
                     @if ($fakturService->isPaid())
