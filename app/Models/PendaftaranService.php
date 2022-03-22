@@ -9,6 +9,13 @@ class PendaftaranService extends Model
 {
     use HasFactory;
 
+    public static function getAllNotContinued()
+    {
+        return PendaftaranService::all()->filter(function($pendaftaranService){
+            return $pendaftaranService->service === null;
+        });
+    }
+
     public function perkiraan_suku_cadangs()
     {
         return $this->hasMany(PerkiraanSukuCadang::class);
@@ -22,6 +29,11 @@ class PendaftaranService extends Model
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class);
+    }
+
+    public function service()
+    {
+        return $this->hasOne(Service::class);
     }
 
     public function getTotalPerkiraanPenjualanServices()

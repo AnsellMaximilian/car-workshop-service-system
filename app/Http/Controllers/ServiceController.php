@@ -23,7 +23,7 @@ class ServiceController extends Controller
     {
         $this->authorize('create', Service::class);
 
-        if(count(PendaftaranService::all()) <= 0 ){
+        if(count(PendaftaranService::getAllNotContinued()) <= 0 ){
             return redirect(route('pendaftaran-services.index'))->with('error', 'Daftar service terlebih dahulu.');
         }
         

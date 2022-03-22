@@ -40,7 +40,7 @@ class Create extends Component
         $selectedPendaftaranService = PendaftaranService::find($this->selectedPendaftaranServiceId);
 
         return view('livewire.service.create', [
-            'pendaftaranServices' => PendaftaranService::all(),
+            'pendaftaranServices' => PendaftaranService::getAllNotContinued(),
             'selectedPendaftaranService' => $selectedPendaftaranService
         ]);
     }
