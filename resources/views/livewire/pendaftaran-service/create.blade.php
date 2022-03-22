@@ -71,7 +71,7 @@
             </div>
         </x-card>
         <x-card class="col-span-12">
-            <h2>Perkiraan Service</h2>
+            <h2 class="font-semibold mb-4 text-xl">Perkiraan Service</h2>
             <div class="flex flex-col gap-4">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3">
@@ -165,7 +165,7 @@
         
         </x-card>
         <x-card class="col-span-12">
-            <h2>Perkiraan Pengantian</h2>
+            <h2 class="font-semibold mb-4 text-xl">Perkiraan Pengantian</h2>
             <div class="flex flex-col gap-4">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3">
