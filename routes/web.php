@@ -98,6 +98,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('services/{service}', [ServiceController::class, 'show'])->name('show');
         Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('edit');
         Route::patch('services/{service}', [ServiceController::class, 'update'])->name('update');
+        Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('destroy');
     });
 
     Route::name('faktur-services.')->group(function(){

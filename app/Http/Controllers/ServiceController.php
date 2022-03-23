@@ -85,4 +85,13 @@ class ServiceController extends Controller
     //         return redirect(route('faktur-services.show', $service->faktur_service->id))->with('error', 'Faktur sudah dibuat.');
     //     }
     // }
+
+    public function destroy(Service $service)
+    {
+        $this->authorize('delete', $service);
+
+        $service->delete();
+
+        return redirect(route('services.index'));
+    }
 }

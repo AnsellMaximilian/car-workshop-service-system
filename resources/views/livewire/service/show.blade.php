@@ -290,25 +290,39 @@
     <div class="grid grid-cols-12 gap-4">
         <x-card class="col-span-8">
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12">
-                    <div class="font-semibold">Waktu Pendaftaran</div>
-                    <div>{{ \Carbon\Carbon::parse($service->pendaftaran_service->waktu_pendaftaran)->format('d/m/Y - H:i:s')}}</div>
-                </div>
-                <div class="col-span-12">
-                    <div class="font-semibold">Waktu Mulai</div>
-                    <div>{{ \Carbon\Carbon::parse($service->waktu_mulai)->format('d/m/Y - H:i:s')}}</div>
+                <div class="col-span-6">
+                    <div class="font-medium text-gray-700 text-sm">Pelanggan</div>
+                    <div class="font-bold">{{$service->pendaftaran_service->pelanggan->nama}}</div>
                 </div>
                 <div class="col-span-6">
-                    <div class="font-semibold">Pelanggan</div>
-                    <div>{{$service->pendaftaran_service->pelanggan->nama}}</div>
+                    <div class="font-medium text-gray-700 text-sm">No. Plat</div>
+                    <div class="font-bold">{{$service->pendaftaran_service->no_plat}}</div>
                 </div>
                 <div class="col-span-6">
-                    <div class="font-semibold">No. Plat</div>
-                    <div>{{$service->pendaftaran_service->no_plat}}</div>
+                    <div class="font-medium text-gray-700 text-sm">Waktu Pendaftaran</div>
+                    <div class="font-bold">{{ \Carbon\Carbon::parse($service->pendaftaran_service->waktu_pendaftaran)->format('d/m/Y - H:i:s')}}</div>
+                </div>
+                <div class="col-span-6">
+                    <div class="font-medium text-gray-700 text-sm">Waktu Mulai</div>
+                    <div class="font-bold">{{ \Carbon\Carbon::parse($service->waktu_mulai)->format('d/m/Y - H:i:s')}}</div>
                 </div>
                 <div class="col-span-12">
-                    <div class="font-semibold">Keluhan</div>
-                    <div>{{$service->pendaftaran_service->keluhan}}</div>
+                    <div class="font-medium text-gray-700 text-sm">Keluhan</div>
+                    <div class="">{{$service->pendaftaran_service->keluhan}}</div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div>
+                <div class="label-text">Status</div>
+                <div>
+                    <x-service-steps :status="$service->status_service" class="mb-4"/>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div>
+                <div class="label-text">Persetujuan</div>
+                <div>
+                    
                 </div>
             </div>
         </x-card>
@@ -326,16 +340,14 @@
                 <div class="font-bold uppercase">Total</div>
                 <div>{{$service->getGrandTotal()}}</div>
             </div>
-            {{-- <div class="flex items-center justify-end mt-auto">
-                <a href="{{route('services.index')}}">
-                    <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
-                        {{ __('Hapus') }}
-                    </x-button>
+            <div class="flex items-center justify-end mt-auto gap-4">
+                <a href="{{route('services.destroy', $service->id)}}">
+                    <x-icons.trash class="h-7 hover:fill-gray-700"/>
                 </a>
-                <x-button class="ml-4">
-                    {{ __('Service') }}
-                </x-button>
-            </div> --}}
+                <a href="{{route('services.edit', $service->id)}}">
+                    <x-icons.edit class="h-7 hover:fill-gray-700"/>
+                </a>
+            </div>
         </x-card>
         <x-card class="col-span-12">
             <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>

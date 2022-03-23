@@ -2,6 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer components {
+    .label-text {
+        @apply font-medium text-gray-700 text-sm;
+    }
+}
+
 .only-print {
     display: none;
 }
