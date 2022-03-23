@@ -1,277 +1,3 @@
-{{-- <div>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ 'Service '.$service->id }}
-        </h2>
-    </x-slot>
-    <div class="mb-4">
-        <x-icon-link href="{{ route('services.index') }}" label="Kembali">
-            <x-slot name="icon">
-                <x-icons.left-arrow class="h-3 fill-primary group-hover:fill-red-800"/>
-            </x-slot>
-        </x-icon-link>
-    </div>
-    <x-card class="mb-4 relative">
-        @if($service->isServiceCancelled())<x-obscurer/>@endif
-        <div class="flex items-end">
-            @if ($service->isApprovalPending())
-            <x-label class="">
-                <span class="block mb-1">Mode Edit</span>
-                <x-toggle :state="$isEditMode" wire:click="toggleEditMode"/>
-            </x-label>
-            @endif
-            <div class="ml-auto flex gap-4">
-                @if (!$isEditMode)
-                    @if ($service->canBeDeleted())
-                    <x-button overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900" wire:click="deleteService">
-                        <x-icons.trash class="fill-white inline-block h-5"/>
-                    </x-button>
-                    @endif
-                    
-                    @if ($service->invoiced())
-                    <x-button >
-                        <a href="{{route('faktur-services.show', $service->faktur_service->id)}}">Faktur Service</a>
-                    </x-button> 
-                    @else
-                        @if ($service->canBeInvoiced())
-                        <x-button wire:click="saveFakturService">
-                            Buat Faktur Service
-                        @endif
-                    </x-button> 
-                    @endif
-                @endif
-            </div>
-        </div>
-    </x-card>
-    <x-card class="mb-4 relative print-out">
-        @if ($service->isServiceCancelled())
-        <x-stamp label="BATAL" />
-        @endif
-        <div class="mb-8 flex justify-between items-center">
-            <div class="text-3xl font-bold">Service</div>
-            <div class="flex justify-end items-center gap-4">
-                @if ($service->isApprovalPending())
-                <div>
-                    <x-button overrideBgClasses="bg-green-500 hover:bg-green-600" wire:click="markApproveStatus(true)">Setuju</x-button>
-                    <x-button overrideBgClasses="bg-red-500 hover:bg-red-600" wire:click="markApproveStatus(false)">Tolak</x-button>
-                </div>
-                @else
-                    @if ($service->mau_diservice)
-                    <div class="uppercase text-green-500 text-xl font-semibold">Disetujui</div>
-                    @endif
-                @endif
-            </div>
-        </div>
-        <div class="grid grid-cols-12 gap-4">
-            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
-                <div class="font-bold uppercase col-span-4">
-                    Pendaftaran
-                </div>
-                <div class="col-span-8">
-                    : {{ $service->tanggal }}
-                </div>
-            </div>
-            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
-                <div class="font-bold uppercase col-span-4">
-                    No. Plat
-                </div>
-                <div class="col-span-8">
-                    : {{ $service->no_plat }}
-                </div>
-            </div>
-            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
-                <div class="font-bold uppercase col-span-4">
-                    Pelanggan
-                </div>
-                <div class="col-span-8">
-                    : {{ $service->pelanggan->nama }}
-                </div>
-            </div>
-            <div class="grid grid-cols-12 col-span-6 mb-4 font-semibold">
-                <div class="font-bold uppercase col-span-4">
-                    Keluhan
-                </div>
-                <div class="col-span-8">
-                    : {{ $service->keluhan }}
-                </div>
-            </div>
-        </div>
-    </x-card>
-    @unless ($service->isEmpty() && !$isEditMode)
-    <x-card class="relative">
-        @if ($service->isServiceCancelled())
-        <x-stamp label="BATAL" />
-        @endif
-        <div class="text-2xl font-bold mb-4">Detail Service</div>
-        @unless ($service->isPenjualanServiceEmpty() && !$isEditMode)
-        <hr class="my-4">
-        <div class="">
-            <h3 class="font-semibold text-lg uppercase mb-4">Penjualan Servis</h3>
-            <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-            @if ($isEditMode)
-            <form class="grid grid-cols-12 gap-4 mb-4" wire:submit.prevent="addJenisService">
-                <div class="col-span-3">
-                    <select
-                        wire:model="selectedJenisServiceId"
-                        class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    >
-                        @foreach ($jenisServices as $jenisService)
-                            <option 
-                                value="{{ $jenisService->id }}" 
-                            >{{ $jenisService->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-span-2">
-                    <x-input 
-                        class="block min-w-0 w-full" 
-                        type="number" 
-                        placeholder="Harga" disabled :value="$selectedJenisService->harga" required />
-                </div>
-                <div class="col-span-2">
-                    <x-input
-                        wire:model="jenisServiceAmount"
-                        class="block min-w-0 w-full" 
-                        type="number"
-                        min="0"
-                        placeholder="Jumlah" required />
-                </div>
-                <div class="col-span-3">
-                    <x-input 
-                        class="block min-w-0 w-full" 
-                        type="number" 
-                        placeholder="Subtotal" disabled :value="$selectedJenisService->harga * (is_numeric($jenisServiceAmount) ? $jenisServiceAmount : 0)" required />
-                </div>
-                <div class="col-span-2 flex items-center justify-end">
-                    <x-button class="">
-                        {{ __('Tambah') }}
-                    </x-button>
-                </div>
-            </form>
-            @endif
-            <div class="mb-4 border-l border-r border-primary">
-                <div class="bg-primary text-white grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 font-semibold gap-4">
-                    <div class="col-span-3 px-4">Jenis Service</div>
-                    <div class="col-span-2 px-4">Harga</div>
-                    <div class="col-span-2 px-4">Jumlah</div>
-                    <div class="col-span-3 px-4">Subtotal</div>
-                    @if($isEditMode)<div class="col-span-2 px-4">Aksi</div>@endif
-                </div>
-                @foreach ($service->penjualan_services as $penjualanService)
-                    <div class="border-b border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                        <div class="col-span-3 px-4">{{$penjualanService->jenis_service->nama}}</div>
-                        <div class="col-span-2 px-4">{{$penjualanService->harga}}</div>
-                        <div class="col-span-2 px-4">{{$penjualanService->jumlah}}</div>
-                        <div class="col-span-3 px-4">{{$penjualanService->getTotal()}}</div>
-                        @if ($isEditMode)
-                        <div class="col-span-2 px-4">
-                            <button
-                                wire:click="deletePenjualanService({{$penjualanService->id}})" 
-                                class="uppercase text-red-600 hover:text-red-800 font-semibold text-sm">
-                                Delete
-                            </button>
-                        </div>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                <div class="col-span-4 col-start-4 uppercase font-bold pl-4">TOTAL SERVICE</div>
-                <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 pl-4">{{ $service->getTotalPenjualanServices()}}</div>
-            </div>
-        </div>
-        @endunless
-
-        @unless ($service->isPenggantianSukuCadangEmpty() && !$isEditMode)
-        <hr class="my-4">
-        <div>
-            <h3 class="font-semibold text-lg uppercase mb-4">Penggantian Suku Cadang</h3>
-            @if ($isEditMode)
-            <form class="grid grid-cols-12 gap-4 mb-4" wire:submit.prevent="addSukuCadang">
-                <div class="col-span-3">
-                    <select
-                        wire:model="selectedSukuCadangId"
-                        class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    >
-                        @foreach ($sukuCadangs as $sukuCadang)
-                            <option 
-                                value="{{ $sukuCadang->id }}" 
-                            >{{ $sukuCadang->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-span-2">
-                    <x-input 
-                        class="block min-w-0 w-full" 
-                        type="number" 
-                        placeholder="Harga" disabled :value="$selectedSukuCadang->harga" required />
-                </div>
-                <div class="col-span-2">
-                    <x-input
-                        wire:model="sukuCadangAmount"
-                        class="block min-w-0 w-full" 
-                        type="number" 
-                        min="0"
-                        placeholder="Jumlah" required />
-                </div>
-                <div class="col-span-3">
-                    <x-input 
-                        class="block min-w-0 w-full" 
-                        type="number" 
-                        placeholder="Subtotal" disabled :value="$selectedSukuCadang->harga * (is_numeric($sukuCadangAmount) ? $sukuCadangAmount : 0)" required />
-                </div>
-                <div class="col-span-2 flex items-center justify-end">
-                    <x-button class="">
-                        {{ __('Tambah') }}
-                    </x-button>
-                </div>
-            </form>  
-            @endif
-            <div class="mb-4 border-l border-r border-primary">
-                <div class="bg-primary text-white grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 font-semibold gap-4">
-                    <div class="col-span-3 px-4">Suku Cadang</div>
-                    <div class="col-span-2 px-4">Harga</div>
-                    <div class="col-span-2 px-4">Jumlah</div>
-                    <div class="col-span-3 px-4">Subtotal</div>
-                    @if($isEditMode)<div class="col-span-2 px-4">Aksi</div>@endif
-                </div>
-                @foreach ($service->penggantian_suku_cadangs as $penggantianSukuCadang)
-                    <div class="border-b border-primary grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                        <div class="col-span-3 px-4">{{$penggantianSukuCadang->suku_cadang->nama}}</div>
-                        <div class="col-span-2 px-4">{{$penggantianSukuCadang->harga}}</div>
-                        <div class="col-span-2 px-4">{{$penggantianSukuCadang->jumlah}}</div>
-                        <div class="col-span-3 px-4">{{$penggantianSukuCadang->getTotal()}}</div>
-                        @if ($isEditMode)
-                        <div class="col-span-2 px-4">
-                            <button
-                                wire:click="deletePenggantianSukuCadang({{$penggantianSukuCadang->id}})" 
-                                class="uppercase text-red-600 hover:text-red-800 font-semibold text-sm">
-                                Delete
-                            </button>
-                        </div>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-                <div class="col-span-4 col-start-4 uppercase font-bold pl-4">TOTAL SUKU CADANG</div>
-                <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 pl-4">{{ $service->getTotalPenggantianSukuCadangs()}}</div>
-            </div>
-        </div>
-        @endunless
-        <hr class="my-4">
-        <div class="grid {{ !$isEditMode ? 'grid-cols-10' : 'grid-cols-12' }} py-2 gap-4">
-            <div class="{{ !$isEditMode ? 'col-span-10' : 'col-span-12' }} border-t-8 border-primary"></div>
-            <div class="col-span-4 col-start-4 uppercase font-bold text-xl pl-4">Grandtotal</div>
-            <div class="{{ !$isEditMode ? 'col-span-3' : 'col-span-5' }} col-start-8 text-xl pl-4">{{ $service->getGrandTotal()}}</div>
-        </div>
-    </x-card>
-    @endunless
-</div>
- --}}
  <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -290,6 +16,8 @@
     <div class="grid grid-cols-12 gap-4">
         <x-card class="col-span-8">
             <div class="grid grid-cols-12 gap-4">
+                <h2 class="font-semibold text-lg col-span-12">Info Service</h2>
+
                 <div class="col-span-6">
                     <div class="font-medium text-gray-700 text-sm">Pelanggan</div>
                     <div class="font-bold">{{$service->pendaftaran_service->pelanggan->nama}}</div>
@@ -300,11 +28,11 @@
                 </div>
                 <div class="col-span-6">
                     <div class="font-medium text-gray-700 text-sm">Waktu Pendaftaran</div>
-                    <div class="font-bold">{{ \Carbon\Carbon::parse($service->pendaftaran_service->waktu_pendaftaran)->format('d/m/Y - H:i:s')}}</div>
+                    <div class="font-bold">{{ \Carbon\Carbon::parse($service->pendaftaran_service->waktu_pendaftaran)->format('d M, Y - H:i:s')}}</div>
                 </div>
                 <div class="col-span-6">
                     <div class="font-medium text-gray-700 text-sm">Waktu Mulai</div>
-                    <div class="font-bold">{{ \Carbon\Carbon::parse($service->waktu_mulai)->format('d/m/Y - H:i:s')}}</div>
+                    <div class="font-bold">{{ \Carbon\Carbon::parse($service->waktu_mulai)->format('d M, Y - H:i:s')}}</div>
                 </div>
                 <div class="col-span-12">
                     <div class="font-medium text-gray-700 text-sm">Keluhan</div>
@@ -313,17 +41,72 @@
             </div>
             <hr class="my-4">
             <div>
-                <div class="label-text">Status</div>
+                <h2 class="font-semibold mb-4 text-lg">Status</h2>
                 <div>
                     <x-service-steps :status="$service->status_service" class="mb-4"/>
                 </div>
             </div>
             <hr class="my-4">
             <div>
-                <div class="label-text">Persetujuan</div>
+                <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                <h2 class="font-semibold mb-4 text-lg">Persetujuan</h2>
+                @if ($service->isApprovalPending())
                 <div>
-                    
+                    <div>
+                        <div class="label-text">Status Persetujuan</div>
+                        <div class="flex gap-4 mb-4 mt-1">
+                            <div class="flex items-center gap-2">
+                                <x-input 
+                                    wire:model="statusPersetujuan"
+                                    type="radio" id="setuju-service" name="persetujuanService" value="setuju"/>
+                                <x-label value="Setuju" for="setuju-service"/>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <x-input 
+                                    wire:model="statusPersetujuan"
+                                    type="radio" id="tolak-service" name="persetujuanService" value="tolak"/>
+                                <x-label value="Tolak" for="tolak-service"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="keterangan" value="Keterangan" />
+                        <textarea 
+                            id="keterangan" 
+                            wire:model="keteranganPersetujuan" 
+                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >{{old('keterangan')}}</textarea>
+                    </div>
+                    <div class="flex">
+                        <x-button class="ml-auto" wire:click="savePersetujuan">Catat Persetujuan</x-button>
+                    </div>
                 </div>
+                @else
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <div class="label-text">Waktu Persetujuan</div>
+                        <div class="">
+                            {{\Carbon\Carbon::parse($service->persetujuan_service->waktu_persetujuan)->format('d M, Y - H:i:s')}}
+                        </div>
+                    </div>
+                    <div class="mb-4 col-span-6">
+                        <div class="label-text">Status Persetujuan</div>
+                        <div class="font-bold uppercase">
+                            @if ($service->persetujuan_service->status_persetujuan === 'setuju')
+                                <x-icons.checkmark class="h-10 fill-green-500"/>
+                            @else
+                                <x-icons.cross class="h-10 fill-red-600"/>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-span-6">
+                        <div class="label-text">Keterangan Persetujuan</div>
+                        <div class="">
+                            {{$service->persetujuan_service->keterangan}}
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </x-card>
         <x-card class="col-span-4 flex flex-col">

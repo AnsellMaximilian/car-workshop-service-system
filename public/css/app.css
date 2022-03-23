@@ -1278,6 +1278,12 @@ select {
 .fill-green-500 {
   fill: #22c55e;
 }
+.fill-red-500 {
+  fill: #ef4444;
+}
+.fill-red-600 {
+  fill: #dc2626;
+}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;

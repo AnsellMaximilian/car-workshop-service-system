@@ -9,21 +9,19 @@ class Service extends Model
 {
     use HasFactory;
 
-    public function markAsApproved()
-    {
-        $this->mau_diservice = true;
-        $this->save();
-    }
-
-    public function markAsCancelled()
-    {
-        $this->mau_diservice = false;
-        $this->save();
-    }
-
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function faktur_service()
+    {
+        return $this->hasOne(FakturService::class);
     }
 
     public function pendaftaran_service()
@@ -39,6 +37,11 @@ class Service extends Model
     public function penggantian_suku_cadangs()
     {
         return $this->hasMany(PenggantianSukuCadang::class);
+    }
+
+    public function persetujuan_service()
+    {
+        return $this->hasOne(PersetujuanService::class);
     }
 
     public function getTotalPenjualanServices()
@@ -62,17 +65,21 @@ class Service extends Model
 
     public function isServiceApproved()
     {
-        return $this->mau_diservice === 1;
+        return $this->isApprovalPending() ? false : (
+            $this->persetujuan_service->status_persetujuan === 'setuju'
+        );
     }
 
     public function isServiceCancelled()
     {
-        return $this->mau_diservice === 0;
+        return $this->isApprovalPending() ? false : (
+            $this->persetujuan_service->status_persetujuan === 'tolak'
+        );
     }
 
     public function isApprovalPending()
     {
-        return !$this->isServiceApproved() && !$this->isServiceCancelled();
+        return $this->persetujuan_service === null;
     }
 
     public function isPenggantianSukuCadangEmpty()
@@ -101,11 +108,6 @@ class Service extends Model
         return $this->status_service === 'selesai';
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function hasAnyPenjualanServices()
     {
         return count($this->penjualan_services) > 0;
@@ -114,11 +116,6 @@ class Service extends Model
     public function hasAnyPenggantianSukuCadangs()
     {
         return count($this->penggantian_suku_cadangs) > 0;
-    }
-
-    public function faktur_service()
-    {
-        return $this->hasOne(FakturService::class);
     }
 
     public function invoiced()
