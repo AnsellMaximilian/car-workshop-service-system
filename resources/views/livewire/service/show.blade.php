@@ -134,7 +134,7 @@
         </x-card>
         <x-card class="col-span-12">
             <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
-            <x-table.wrapper>
+            <x-table.wrapper class="shadow-lg">
                 <x-slot name="head">
                     <x-table.heading class="bg-primary text-white">Jenis Service</x-table.heading>
                     <x-table.heading class="bg-primary text-white">Harga</x-table.heading>
@@ -155,7 +155,7 @@
         </x-card>
         <x-card class="col-span-12">
             <h2 class="font-semibold mb-4 text-xl">Penggantian Suku Cadang</h2>
-            <x-table.wrapper>
+            <x-table.wrapper class="shadow-lg">
                 <x-slot name="head">
                     <x-table.heading class="bg-primary text-white">Suku Cadang</x-table.heading>
                     <x-table.heading class="bg-primary text-white">Harga</x-table.heading>
