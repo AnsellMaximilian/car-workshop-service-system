@@ -29,6 +29,11 @@ class Service extends Model
         return $this->hasOne(FakturService::class);
     }
 
+    public function pelaksanaan_pemeriksaan()
+    {
+        return $this->hasMany(PelaksanaanPemeriksaan::class);
+    }
+
     public function pendaftaran_service()
     {
         return $this->belongsTo(PendaftaranService::class);

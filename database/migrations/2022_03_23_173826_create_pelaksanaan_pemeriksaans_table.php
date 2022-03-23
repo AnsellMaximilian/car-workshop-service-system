@@ -17,6 +17,7 @@ class CreatePelaksanaanPemeriksaansTable extends Migration
             $table->id();
             $table->foreignId('service_id')->constrained();
             $table->foreignId('pemeriksaan_standar_id')->constrained();
+            $table->unique(['service_id', 'pemeriksaan_standar_id'], 'pelaksanaan_unique');
             $table->timestamps();
         });
     }

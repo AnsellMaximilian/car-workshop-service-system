@@ -74,6 +74,14 @@
         </x-card>
         <x-card class="col-span-12">
             <h2 class="font-semibold mb-4 text-xl">Pemeriksaan Standar</h2>
+            <div class="grid grid-cols-12">
+                @foreach ($pemeriksaanStandars as $key => $pemeriksaanStandar)
+                    <div class="col-span-3 flex gap-4 items-center">
+                        <x-input type="checkbox" :id="$pemeriksaanStandar->id" wire:model="pemeriksaanStandarsChecked.{{ $pemeriksaanStandar->id }}"/>
+                        <x-label :value="$pemeriksaanStandar->nama" :for="$pemeriksaanStandar->id"/>
+                    </div>
+                @endforeach
+            </div>
 
         </x-card>
         <x-card class="col-span-12">

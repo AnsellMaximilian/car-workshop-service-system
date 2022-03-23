@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Service;
 
 use App\Models\JenisService;
+use App\Models\PelaksanaanPemeriksaan;
+use App\Models\PemeriksaanStandar;
 use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
 use App\Models\Service;
@@ -31,6 +33,9 @@ class Edit extends Component
     public $penggantianSukuCadangs = [ ];
     public $sukuCadangIndex = 0;
 
+    // Pemeriksaan
+    public $pemeriksaanStandarsChecked = [];
+
     public function mount()
     {
         $this->statusService = $this->service->status_service;
@@ -48,6 +53,11 @@ class Edit extends Component
             array_push($this->penggantianSukuCadangs, $this->sukuCadangIndex);
             $this->sukuCadangAmount[$this->sukuCadangIndex] = $penggantianSukuCadang->jumlah;
         }
+
+        foreach ($this->service->pelaksanaan_pemeriksaan as $key => $pelaksanaanPemeriksaan) {
+            $this->pemeriksaanStandarsChecked[$pelaksanaanPemeriksaan->pemeriksaan_standar_id] = true;
+        }
+
     }
 
     public function addPenjualanService()
@@ -94,6 +104,18 @@ class Edit extends Component
         
         PenjualanService::where('service_id', $this->service->id)->delete();
         PenggantianSukuCadang::where('service_id', $this->service->id)->delete();
+        // dd($this->pemeriksaanStandarsChecked);
+        foreach($this->pemeriksaanStandarsChecked as $key => $checked){
+            $currentPemeriksaan = $this->service->pelaksanaan_pemeriksaan()->where('pemeriksaan_standar_id', $key)->first();
+            if($checked && !$currentPemeriksaan){
+                $pemeriksaan = new PelaksanaanPemeriksaan();
+                $pemeriksaan->pemeriksaan_standar_id = $key;
+                
+                $this->service->pelaksanaan_pemeriksaan()->save($pemeriksaan);
+            }elseif(!$checked && $currentPemeriksaan) {
+                $currentPemeriksaan->delete();
+            }
+        }
 
         foreach ($this->penjualanServices as $key => $serviceIndex) {
             $penjualanService = new PenjualanService();
@@ -139,8 +161,9 @@ class Edit extends Component
         return view('livewire.service.edit', [
             'jenisServices' => JenisService::all(),
             'sukuCadangs' => SukuCadang::all(),
+            'pemeriksaanStandars' => PemeriksaanStandar::all(),
             'totalPenjualanServices' => $totalPenjualanServices,
-            'totalPenggantianSukuCadangs' => $totalPenggantianSukuCadangs
+            'totalPenggantianSukuCadangs' => $totalPenggantianSukuCadangs,
         ]);
     }
 }
