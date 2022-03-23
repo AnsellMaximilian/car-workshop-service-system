@@ -14,13 +14,15 @@ class CreatePembayaransTable extends Migration
     public function up()
     {
         Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id();
-            // $table->foreignId('faktur_service_id')->constrained();
+            // $table->id();
             $table->foreignId('service_id')->constrained();
             $table->date('tanggal');
-            $table->integer('jumlah');
-            $table->integer('kembali')->default(0);
-            $table->string('keterangan');
+            $table->enum('tipe_pembayaran', ['debit', 'cash']);
+            $table->string('bukti_pembayaran')->nullable();
+            // $table->integer('jumlah');
+            // $table->integer('kembali')->default(0);
+            $table->string('keterangan')->nullable();
+            $table->primary('service_id');
             $table->timestamps();
         });
     }

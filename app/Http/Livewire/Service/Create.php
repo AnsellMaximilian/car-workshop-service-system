@@ -14,7 +14,7 @@ class Create extends Component
 
     public function mount()
     {
-        $firstPendaftaranService = PendaftaranService::first();
+        $firstPendaftaranService = PendaftaranService::getAllNotContinued()->first();
 
         $this->selectedPendaftaranServiceId = $firstPendaftaranService->id;
     }

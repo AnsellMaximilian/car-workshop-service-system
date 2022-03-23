@@ -110,18 +110,95 @@
             </div>
         </x-card>
         <x-card class="col-span-4 flex flex-col">
-            <div class="flex justify-between">
-                <div class="font-semibold">Service</div>
-                <div>{{ $service->getTotalPenjualanServices()}}</div>
-            </div>
-            <div class="flex justify-between">
-                <div class="font-semibold">Suku Cadang</div>
-                <div>{{ $service->getTotalPenggantianSukuCadangs()}}</div>
-            </div>
+            <div>
+                <h2 class="font-semibold mb-4 text-xl">Total</h2>
+                <div class="flex justify-between">
+                    <div class="font-semibold">Service</div>
+                    <div>{{ $service->getTotalPenjualanServices()}}</div>
+                </div>
+                <div class="flex justify-between">
+                    <div class="font-semibold">Suku Cadang</div>
+                    <div>{{ $service->getTotalPenggantianSukuCadangs()}}</div>
+                </div>
 
-            <div class="flex justify-between mt-4">
-                <div class="font-bold uppercase">Total</div>
-                <div>{{$service->getGrandTotal()}}</div>
+                <div class="flex justify-between mt-4">
+                    <div class="font-bold uppercase">Total</div>
+                    <div>{{$service->getGrandTotal()}}</div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="mb-4">
+                <h2 class="font-semibold mb-4 text-xl">Pembayaran</h2>
+                @if ($service->isPaymentPending())
+                <div>
+                    <div class="mb-4">
+                        <x-label for="tanggalPembayaran" value="Tanggal Pembayaran" />
+                        <x-input
+                            type="date"
+                            wire:model="tanggalPembayaran"
+                            class="mt-1" 
+                            id="tanggalPembayaran" />
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="tipePembayaran" value="Tipe Pembayaran" />
+                        <select 
+                            wire:model="tipePembayaran" 
+                            id="tipePembayaran" 
+                            class="rounded-md mt-1 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >
+                            <option value="cash">Cash</option>
+                            <option value="debit">Debit</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="buktiPembayaran" value="Bukti Pembayaran" />
+                        <x-input
+                            type="file" 
+                            class="mt-1"
+                            wire:model="buktiPembayaran"
+                            id="buktiPembayaran" 
+                            accept=".jpg,.png,.jpeg"/>
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="keterangan" value="Keterangan" />
+                        <textarea 
+                            id="keterangan" 
+                            wire:model="keteranganPembayaran" 
+                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >{{old('keterangan')}}</textarea>
+                    </div>
+                    <div class="flex">
+                        <x-button class="ml-auto" wire:click="savePembayaran">Catat Pembayaran</x-button>
+                    </div>
+                </div>
+                @else
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <div class="label-text">Tanggal Pembayaran</div>
+                        <div class="">
+                            {{\Carbon\Carbon::parse($service->pembayaran->tanggal)->format('d M, Y')}}
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="label-text">Tipe Pembayaran</div>
+                        <div class="uppercase">
+                            {{ $service->pembayaran->tipe_pembayaran}}
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="label-text">Keterangan Pembayaran</div>
+                        <div class="">
+                            {{$service->pembayaran->keterangan}}
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="label-text">Bukti Pembayaran</div>
+                        <div class="">
+                            <img class="w-32 h-32 object-cover mt-1" src="{{asset('storage/'.$service->pembayaran->bukti_pembayaran)}}" alt="bukti pembayaran">
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="flex items-center justify-end mt-auto gap-4">
                 <a href="{{route('services.destroy', $service->id)}}">

@@ -18,6 +18,11 @@ class Service extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class);
+    }
 
     public function faktur_service()
     {
@@ -82,6 +87,11 @@ class Service extends Model
         return $this->persetujuan_service === null;
     }
 
+    public function isPaymentPending()
+    {
+        return $this->pembayaran === null;
+    }
+
     public function isPenggantianSukuCadangEmpty()
     {
         return (count($this->penggantian_suku_cadangs) <= 0);
@@ -123,29 +133,30 @@ class Service extends Model
         return $this->faktur_service !== null;
     }
 
-    public function pembayarans()
-    {
-        return $this->hasMany(Pembayaran::class);
-    }
+    // public function pembayarans()
+    // {
+    //     return $this->hasMany(Pembayaran::class);
+    // }
 
-    public function getTotalPembayaran()
-    {
-        return $this->pembayarans->reduce(function($total, $pembayaran){
-            return $total + $pembayaran->getTotal();
-        }, 0);
-    }
 
-    public function getAmountToBePaid()
-    {
-        return $this->getGrandTotal() - $this->getTotalPembayaran();
-    }
+    // public function getTotalPembayaran()
+    // {
+    //     return $this->pembayarans->reduce(function($total, $pembayaran){
+    //         return $total + $pembayaran->getTotal();
+    //     }, 0);
+    // }
 
-    public function getChange($amountPaid)
-    {
-        $change = $amountPaid - $this->getAmountToBePaid();
+    // public function getAmountToBePaid()
+    // {
+    //     return $this->getGrandTotal() - $this->getTotalPembayaran();
+    // }
 
-        return $change <= 0 ? 0 : $change;
-    }
+    // public function getChange($amountPaid)
+    // {
+    //     $change = $amountPaid - $this->getAmountToBePaid();
+
+    //     return $change <= 0 ? 0 : $change;
+    // }
 
     public static function getAllInvoicable()
     {

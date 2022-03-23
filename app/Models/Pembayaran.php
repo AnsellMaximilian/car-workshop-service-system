@@ -14,11 +14,6 @@ class Pembayaran extends Model
         return $this->belongsTo(Service::class);
     }
 
-    // public function faktur_service()
-    // {
-    //     return $this->belongsTo(FakturService::class);
-    // }
-
     public function getTotal()
     {
         return $this->jumlah - $this->kembali;
