@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             TipeSeeder::class,
             KendaraanSeeder::class,
             JenisServiceSeeder::class,
-            SukuCadangSeeder::class
+            SukuCadangSeeder::class,
+            PemeriksaanStandarSeeder::class
         ]);
     }
 }

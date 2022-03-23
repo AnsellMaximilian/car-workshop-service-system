@@ -7,6 +7,7 @@ use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemeriksaanStandarController;
 use App\Http\Controllers\PendaftaranServiceController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\ServiceController;
@@ -79,6 +80,14 @@ Route::middleware('auth')->group(function () {
         Route::post('jenis-services', [JenisServiceController::class, 'store'])->name('store');
         Route::get('jenis-services/{jenis_service}/edit', [JenisServiceController::class, 'edit'])->name('edit');
         Route::patch('jenis-services/{jenis_service}', [JenisServiceController::class, 'update'])->name('update');
+    });
+
+    Route::name('pemeriksaan-standars.')->group(function(){
+        Route::get('pemeriksaan-standars', [PemeriksaanStandarController::class, 'index'])->name('index');
+        Route::get('pemeriksaan-standars/create', [PemeriksaanStandarController::class, 'create'])->name('create');
+        Route::post('pemeriksaan-standars', [PemeriksaanStandarController::class, 'store'])->name('store');
+        Route::get('pemeriksaan-standars/{pemeriksaan_standar}/edit', [PemeriksaanStandarController::class, 'edit'])->name('edit');
+        Route::patch('pemeriksaan-standars/{pemeriksaan_standar}', [PemeriksaanStandarController::class, 'update'])->name('update');
     });
 
     Route::name('pendaftaran-services.')->group(function(){

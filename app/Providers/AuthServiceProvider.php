@@ -7,6 +7,7 @@ use App\Models\JenisService;
 use App\Models\Kendaraan;
 use App\Models\Merk;
 use App\Models\Pelanggan;
+use App\Models\PemeriksaanStandar;
 use App\Models\Peran;
 use App\Models\Service;
 use App\Models\SukuCadang;
@@ -17,6 +18,7 @@ use App\Policies\JenisServicePolicy;
 use App\Policies\KendaraanPolicy;
 use App\Policies\MerkPolicy;
 use App\Policies\PelangganPolicy;
+use App\Policies\PemeriksaanStandarPolicy;
 use App\Policies\PeranPolicy;
 use App\Policies\ServicePolicy;
 use App\Policies\SukuCadangPolicy;
@@ -44,6 +46,7 @@ class AuthServiceProvider extends ServiceProvider
         SukuCadang::class => SukuCadangPolicy::class,
         Service::class => ServicePolicy::class,
         FakturService::class => FakturServicePolicy::class,
+        PemeriksaanStandar::class => PemeriksaanStandarPolicy::class,
     ];
 
     /**

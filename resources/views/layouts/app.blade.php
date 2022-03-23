@@ -53,18 +53,6 @@
                             <x-slot name="icon"><x-icons.customer class="h-4"/></x-slot>
                             Pelanggan</x-sidebar-nav-link>
                         </li>
-                        {{-- <li class="group">
-                            <x-sidebar-nav-link 
-                                :href="route('kendaraans.index')" 
-                                :active="request()->routeIs('kendaraans.*')"
-                            >Kendaraan</x-sidebar-nav-link>
-                        </li>
-                        <li class="group">
-                            <x-sidebar-nav-link 
-                                :href="route('merks-dan-tipes')" 
-                                :active="request()->routeIs('merks-dan-tipes')"
-                            >Merk dan Tipe</x-sidebar-nav-link>
-                        </li> --}}
                         <li class="group">
                             <x-sidebar-nav-link 
                                 :href="route('suku-cadangs.index')" 
@@ -80,6 +68,14 @@
                             >
                             <x-slot name="icon"><x-icons.wrench class="h-4"/></x-slot>
                             Jenis Service</x-sidebar-nav-link>
+                        </li>
+                        <li class="group">
+                            <x-sidebar-nav-link 
+                                :href="route('pemeriksaan-standars.index')" 
+                                :active="request()->routeIs('pemeriksaan-standars.*')"
+                            >
+                            <x-slot name="icon"><x-icons.magnifying-glass class="h-4"/></x-slot>
+                            Pemeriksaan Standar</x-sidebar-nav-link>
                         </li>
                         <li class="group">
                             <x-sidebar-nav-link 

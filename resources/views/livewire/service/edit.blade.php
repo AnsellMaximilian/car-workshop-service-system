@@ -73,6 +73,10 @@
             </div>
         </x-card>
         <x-card class="col-span-12">
+            <h2 class="font-semibold mb-4 text-xl">Pemeriksaan Standar</h2>
+
+        </x-card>
+        <x-card class="col-span-12">
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
                 <div>
