@@ -167,7 +167,7 @@
                     class="bg-red-500 text-white font-semibold py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center"
                 >
                     <span>{{ session('error') }}</span>
-                    <x-icons.cross class="fill-white hover:fill-gray-300 cursor-pointer" x-on:click="open = false"/>
+                    <x-icons.cross class="h-3 fill-white hover:fill-gray-300 cursor-pointer" x-on:click="open = false"/>
                 </div>
                 <div class="py-6 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
                     {{ $slot }}
