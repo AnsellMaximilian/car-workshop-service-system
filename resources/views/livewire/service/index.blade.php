@@ -45,7 +45,7 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading>ID</x-table.heading>
+            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
             <x-table.heading wire:click="setSort('waktu_mulai')" sortable :sortDir="$sortField === 'waktu_mulai' ? $sortDir : null">Waktu Mulai</x-table.heading>
             <x-table.heading>No. Plat</x-table.heading>
             <x-table.heading>Pelanggan</x-table.heading>
