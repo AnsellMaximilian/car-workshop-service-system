@@ -1,18 +1,43 @@
 <div class="space-y-2">
-    <div class="flex justify-start gap-2">
-        <x-input wire:model="query" class="block md:w-1/3 w-16 grow md:grow-0" type="text" placeholder="Search"/>
-        
-        <div class="flex gap-2 items-center">
-            <x-label for="status" value="Status" />
+    <div class="flex gap-2">
+        <div class="flex gap-1 flex-col">
+            <x-label for="status" value="Status Service" />
             <select id="status" 
                 wire:model="statusSort"
                 class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <option value="all">Semua</option>
+                <option value="semua">Semua</option>
+                <option value="cek">Dicek</option>
+                <option value="service">Diservice</option>
+                <option value="selesai">Selesai</option>
+            </select>
+        </div>
+
+        <div class="flex gap-1 flex-col">
+            <x-label for="status" value="Persetujuan" />
+            <select id="status" 
+                wire:model="persetujuanSort"
+                class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="semua">Semua</option>
                 <option value="pending">Pending</option>
                 <option value="setuju">Setuju</option>
                 <option value="tolak">Tolak</option>
             </select>
         </div>
+
+        <div class="flex gap-1 flex-col">
+            <x-label for="status" value="Pembayaran" />
+            <select id="status" 
+                wire:model="pembayaranSort"
+                class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="semua">Semua</option>
+                <option value="sudah">Sudah</option>
+                <option value="belum">Belum</option>
+            </select>
+        </div>
+    </div>
+    <div class="flex justify-start gap-2">
+        <x-input wire:model="query" class="block md:w-1/3 w-16 grow md:grow-0" type="text" placeholder="Search"/>
+        
         <a href="{{ route('services.create') }} " class="ml-auto">
             <x-button type="button">Mulai Service</x-button>
         </a>

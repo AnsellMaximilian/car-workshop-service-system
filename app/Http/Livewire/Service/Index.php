@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Service;
 
 use App\Models\Service;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,7 +18,10 @@ class Index extends Component
     public $query = "";
     public $sortField;
     public $sortDir = "asc";
-    public $statusSort;
+
+    public $statusSort = 'semua';
+    public $pembayaranSort = 'semua';
+    public $persetujuanSort = 'semua';
     
     public function setSort($field)
     {
@@ -44,35 +48,35 @@ class Index extends Component
 
     public function render()
     {
-        
-        switch ($this->statusSort) {
-            case 'tolak':
-                $statusSort = false;
-                break;
-            case 'setuju':
-                $statusSort = true;
-                break;
-            case 'pending':
-                $statusSort = null;
-                break;
-            default:
-                $statusSort = 'all';
-                break;
+        $services = Service::search('id', $this->query)->optionalSort($this->sortField, $this->sortDir);
+
+        // Sort by status
+        if($this->statusSort !== 'semua'){
+            $services = $services->where('status_service', $this->statusSort);
         }
 
-        if($statusSort === 'all'){
-            $services = Service::search('id', $this->query)
-            ->optionalSort($this->sortField, $this->sortDir)
-            ->paginate(10);
-        }else {
-            $services = Service::search('id', $this->query)
-            ->where('mau_diservice', $statusSort)
-            ->optionalSort($this->sortField, $this->sortDir)
-            ->paginate(10);
+        // Sort by persetujuan
+        if($this->persetujuanSort !== 'semua'){
+            if($this->persetujuanSort === 'pending'){
+                $services = $services->doesntHave('persetujuan_service');
+            }else {
+                $services = $services->whereHas('persetujuan_service', function(Builder $q){
+                    $q->where('status_persetujuan', $this->persetujuanSort);
+                });
+            }
+        }
+        
+        // Sort by pembayaran
+        if($this->pembayaranSort !== 'semua'){
+            if($this->pembayaranSort === 'sudah'){
+                $services = $services->whereHas('pembayaran');
+            }else {
+                $services = $services->doesntHave('pembayaran');
+            }
         }
 
         return view('livewire.service.index', [
-            'services' => $services
+            'services' => $services->paginate(10)
         ]);
     }
 }
