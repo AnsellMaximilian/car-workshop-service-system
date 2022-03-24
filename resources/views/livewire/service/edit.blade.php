@@ -32,6 +32,21 @@
                     <div>{{$service->pendaftaran_service->keluhan}}</div>
                 </div>
             </div>
+            <hr class="my-2">
+            <div>
+                <h2 class="font-semibold mb-4 text-lg">Status</h2>
+                <div class="flex justify-between mb-4">
+                    <button wire:click="updateStatus({{-1}})" class="border border-gray-400 hover:bg-gray-100 rounded-md px-4 py-1">
+                        <x-icons.left-chevron class="h-5 fill-gray-600"/>
+                    </button>
+                    <button wire:click="updateStatus({{1}})" class="border border-gray-400 hover:bg-gray-100 rounded-md px-4 py-1">
+                        <x-icons.right-chevron class="h-5 fill-gray-600"/>
+                    </button>
+                </div>
+                <div>
+                    <x-service-steps :status="$statusService" class="mb-4"/>
+                </div>
+            </div>
         </x-card>
         <x-card class="col-span-4 flex flex-col">
             <div class="flex justify-between">
@@ -48,20 +63,7 @@
                 <div>{{$totalPenjualanServices + $totalPenggantianSukuCadangs}}</div>
             </div>
 
-            <div class="mt-4">
-                <x-label for="statusService" value="Status Service" />
-                <select 
-                    wire:model="statusService" 
-                    id="statusService" 
-                    class="rounded-md mt-1 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                >
-                    <option value="cek">Dicek</option>
-                    <option value="service">Diservice</option>
-                    <option value="selesai">Selesai</option>
-                </select>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-auto">
                 <a href="{{route('services.index')}}">
                     <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
                         {{ __('Batal') }}

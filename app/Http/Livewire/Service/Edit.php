@@ -94,6 +94,11 @@ class Edit extends Component
         unset($this->penggantianSukuCadangs[$index]);
     }
 
+    public function updateStatus($steps)
+    {
+        $this->statusService = Service::getNewStatus($this->statusService, $steps);
+    }
+
     public function save()
     {
         $this->validate([

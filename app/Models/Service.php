@@ -123,16 +123,6 @@ class Service extends Model
         return $this->status_service === 'selesai';
     }
 
-    public function hasAnyPenjualanServices()
-    {
-        return count($this->penjualan_services) > 0;
-    }
-
-    public function hasAnyPenggantianSukuCadangs()
-    {
-        return count($this->penggantian_suku_cadangs) > 0;
-    }
-
     public function invoiced()
     {
         return $this->faktur_service !== null;
@@ -168,6 +158,30 @@ class Service extends Model
         return Service::all()->filter(function($service){
             return $service->canBeInvoiced() && !$service->invoiced();
         });
+    }
+
+    public static function getStatusMap($reverse = false)
+    {
+        return !$reverse ? [
+            0 => 'cek',
+            1 => 'service',
+            2 => 'selesai',
+        ] : [
+            'cek' => 0,
+            'service' => 1,
+            'selesai' => 2,
+        ];
+    }
+
+    public static function getNewStatus($status, $steps)
+    {
+        $map = Service::getStatusMap();
+        $mapReverse = Service::getStatusMap(true);
+        $pos = $mapReverse[$status];
+        $newPos = (($pos + $steps) > max($mapReverse)) ? max($mapReverse) : 0;
+        $newPos = (($pos + $steps) < 0) ? 0 : ($pos +$steps);
+
+        return $map[$newPos];
     }
     
 }
