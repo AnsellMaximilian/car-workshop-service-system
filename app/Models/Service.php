@@ -29,7 +29,7 @@ class Service extends Model
         return $this->hasOne(FakturService::class);
     }
 
-    public function pelaksanaan_pemeriksaan()
+    public function pelaksanaan_pemeriksaans()
     {
         return $this->hasMany(PelaksanaanPemeriksaan::class);
     }

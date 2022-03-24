@@ -211,6 +211,24 @@
                 </a>
             </div>
         </x-card>
+
+        <x-card class="col-span-12">
+            <h2 class="font-semibold mb-4 text-xl">Pemeriksaan Standar</h2>
+            <div class="grid grid-cols-12">
+                @foreach ($pemeriksaanStandars as $key => $pemeriksaanStandar)
+                    <div class="col-span-3 flex gap-4 items-center">
+                        @if ($service->pelaksanaan_pemeriksaans()->where('pemeriksaan_standar_id', $pemeriksaanStandar->id)->first())
+                        <x-icons.checkbox-ticked class="h-5"/>
+                        @else
+                        <x-icons.checkbox-unticked class="h-5"/>
+                        @endif
+                        <x-label :value="$pemeriksaanStandar->nama" :for="$pemeriksaanStandar->id"/>
+                    </div>
+                @endforeach
+            </div>
+
+        </x-card>
+
         <x-card class="col-span-12">
             <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
             <x-table.wrapper class="shadow-lg">

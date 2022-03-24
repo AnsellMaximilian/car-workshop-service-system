@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Service;
 
 use App\Models\FakturService;
 use App\Models\Pembayaran;
+use App\Models\PemeriksaanStandar;
 use App\Models\PersetujuanService;
 use App\Models\Service;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -87,6 +88,7 @@ class Show extends Component
     public function render()
     {
         return view('livewire.service.show', [
+            'pemeriksaanStandars' => PemeriksaanStandar::all()
         ]);
     }
 }

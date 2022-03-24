@@ -54,7 +54,7 @@ class Edit extends Component
             $this->sukuCadangAmount[$this->sukuCadangIndex] = $penggantianSukuCadang->jumlah;
         }
 
-        foreach ($this->service->pelaksanaan_pemeriksaan as $key => $pelaksanaanPemeriksaan) {
+        foreach ($this->service->pelaksanaan_pemeriksaans as $key => $pelaksanaanPemeriksaan) {
             $this->pemeriksaanStandarsChecked[$pelaksanaanPemeriksaan->pemeriksaan_standar_id] = true;
         }
 
@@ -111,12 +111,12 @@ class Edit extends Component
         PenggantianSukuCadang::where('service_id', $this->service->id)->delete();
         // dd($this->pemeriksaanStandarsChecked);
         foreach($this->pemeriksaanStandarsChecked as $key => $checked){
-            $currentPemeriksaan = $this->service->pelaksanaan_pemeriksaan()->where('pemeriksaan_standar_id', $key)->first();
+            $currentPemeriksaan = $this->service->pelaksanaan_pemeriksaans()->where('pemeriksaan_standar_id', $key)->first();
             if($checked && !$currentPemeriksaan){
                 $pemeriksaan = new PelaksanaanPemeriksaan();
                 $pemeriksaan->pemeriksaan_standar_id = $key;
                 
-                $this->service->pelaksanaan_pemeriksaan()->save($pemeriksaan);
+                $this->service->pelaksanaan_pemeriksaans()->save($pemeriksaan);
             }elseif(!$checked && $currentPemeriksaan) {
                 $currentPemeriksaan->delete();
             }
