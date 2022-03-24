@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Pelanggan;
+use App\Models\PendaftaranService;
 use App\Models\Service;
 use App\Models\SukuCadang;
 use App\Models\User;
@@ -14,20 +15,27 @@ class Dashboard extends Component
     public $reportStartDate;
     public $reportEndDate;
 
+    public function mount()
+    {
+        $this->reportStartDate = today()->format('Y-m-d');
+        $this->reportEndDate = today()->format('Y-m-d');
+    }
+
     public function render()
     {
-        // $unfinishedAmount = count(Service::where('service_selesai', false)->get());
-        $approvalPendingAmount = count(Service::where('mau_diservice', null)->get());
+        $totalPendaftaranPending = count(PendaftaranService::getAllNotContinued());
+        $totalApprovalPending = count(Service::doesntHave('persetujuan_service')->get());
+        $totalPembayaranPending = count(Service::doesntHave('pembayaran')->get());
 
-        $services = Service::where('mau_diservice', true)->get();
+        $paidServices = Service::whereHas('pembayaran')->get();
         
-        $reportServices = $services->whereBetween('tanggal', [date($this->reportStartDate), date($this->reportEndDate)]);
+        $reportServices = $paidServices->whereBetween('waktu_mulai', [$this->reportStartDate, $this->reportEndDate]);
 
-        $totalSales = $services->reduce(function($total, $service) {
+        $totalSales = $paidServices->reduce(function($total, $service) {
             return $total + $service->getGrandTotal();
         }, 0);
 
-        $totalSalesToday = $services
+        $totalSalesToday = $paidServices
             ->filter(function($service){
                 return (new Carbon($service->tanggal))->isToday();
             })
@@ -35,22 +43,13 @@ class Dashboard extends Component
                 return $total + $service->getGrandTotal();
             }, 0);
 
-        $totalSukuCadang = count(SukuCadang::all());
-        $totalPelanggan = count(Pelanggan::all());
-        $totalUser = count(User::all());
-
-        // dd($totalSalesToday);
-
         return view('livewire.dashboard', [
-            // 'unfinishedAmount' => $unfinishedAmount,
-            'approvalPendingAmount' => $approvalPendingAmount,
+            'totalApprovalPending' => $totalApprovalPending,
             'totalSales' => $totalSales,
             'totalSalesToday' => $totalSalesToday,
-            'services' => $services,
             'reportServices' => $reportServices,
-            'totalSukuCadang' => $totalSukuCadang,
-            'totalPelanggan' => $totalPelanggan,
-            'totalUser' => $totalUser,
+            'totalPendaftaranPending' => $totalPendaftaranPending,
+            'totalPembayaranPending' => $totalPembayaranPending,
         ]);
     }
 }

@@ -1,37 +1,29 @@
 <div>
     <div class="flex flex-wrap gap-4 mb-8">
-        <x-dashboard-module label="Pending" :value="$approvalPendingAmount" class="bg-white" >
+        <x-dashboard-module label="Pendaftaran" :value="$totalPendaftaranPending" class="bg-white" >
             <x-slot name="icon">
                 <x-icons.checkmarked-clipboard class="h-6"/>
             </x-slot>
             <x-slot name="actions">
-                <a href="/" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+                <a href="{{route('pendaftaran-services.index')}}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
             </x-slot>
         </x-dashboard-module>
-        <x-dashboard-module label="Suku Cadang" :value="$totalSukuCadang" class="bg-white" >
+        <x-dashboard-module label="Approval" :value="$totalApprovalPending" class="bg-white" >
             <x-slot name="icon">
                 <x-icons.checkmarked-clipboard class="h-6"/>
             </x-slot>
             <x-slot name="actions">
-                <a href="{{ route('suku-cadangs.index') }}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+                <a href="{{ route('services.index') }}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
             </x-slot>
         </x-dashboard-module>
-        <x-dashboard-module label="Pelanggan" :value="$totalPelanggan" class="bg-white" >
+        <x-dashboard-module label="Pembayaran" :value="$totalPembayaranPending" class="bg-white" >
             <x-slot name="icon">
                 <x-icons.checkmarked-clipboard class="h-6"/>
             </x-slot>
             <x-slot name="actions">
-                <a href="{{ route('pelanggans.index') }}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
+                <a href="{{ route('services.index') }}" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
             </x-slot>
         </x-dashboard-module>
-        {{-- <x-dashboard-module label="User" :value="$totalUser" class="bg-white" >
-            <x-slot name="icon">
-                <x-icons.checkmarked-clipboard class="h-6"/>
-            </x-slot>
-            <x-slot name="actions">
-                <a href="/" class="text-primary font-semibold hover:text-red-600 hover:bg-gray-100 block px-4 py-2">Lihat</a>
-            </x-slot>
-        </x-dashboard-module> --}}
     </div>
 
     <div class="flex flex-wrap gap-4 mb-8">
@@ -67,7 +59,7 @@
         <x-table.wrapper>
             <x-slot name="head">
                 <x-table.heading >ID</x-table.heading>
-                <x-table.heading >Tanggal Daftar</x-table.heading>
+                <x-table.heading >Waktu Service</x-table.heading>
                 <x-table.heading >No. Plat</x-table.heading>
                 <x-table.heading >Pelanggan</x-table.heading>
                 <x-table.heading>Total</x-table.heading>
@@ -77,9 +69,9 @@
                 @foreach ($reportServices as $service)
                 <x-table.row>
                     <x-table.cell>{{ $service->id }}</x-table.cell>
-                    <x-table.cell>{{ $service->tanggal }}</x-table.cell>
-                    <x-table.cell>{{ $service->no_plat }}</x-table.cell>
-                    <x-table.cell>{{ $service->pelanggan->nama }}</x-table.cell>
+                    <x-table.cell>{{ $service->waktu_mulai }}</x-table.cell>
+                    <x-table.cell>{{ $service->pendaftaran_service->no_plat }}</x-table.cell>
+                    <x-table.cell>{{ $service->pendaftaran_service->pelanggan->nama }}</x-table.cell>
                     <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
                 </x-table.row>
                 @endforeach
