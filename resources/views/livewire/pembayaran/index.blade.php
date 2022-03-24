@@ -9,24 +9,32 @@
     </div>
     <x-table.wrapper>
         <x-slot name="head">
-            <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
+            <x-table.heading wire:click="setSort('service_id')" sortable :sortDir="$sortField === 'service_id' ? $sortDir : null">ID Service</x-table.heading>
             <x-table.heading wire:click="setSort('tanggal')" sortable :sortDir="$sortField === 'tanggal' ? $sortDir : null">Tanggal</x-table.heading>
-            <x-table.heading wire:click="setSort('service_id')" sortable :sortDir="$sortField === 'service_id' ? $sortDir : null">No. Service</x-table.heading>
-            <x-table.heading wire:click="setSort('jumlah')" sortable :sortDir="$sortField === 'jumlah' ? $sortDir : null">Jumlah</x-table.heading>
-            <x-table.heading wire:click="setSort('kembali')" sortable :sortDir="$sortField === 'kembali' ? $sortDir : null">Kembali</x-table.heading>
-            <x-table.heading>Test</x-table.heading>
+            <x-table.heading>Jumlah</x-table.heading>
+            <x-table.heading wire:click="setSort('tipe_pembayaran')" sortable :sortDir="$sortField === 'tipe_pembayaran' ? $sortDir : null">Tipe Pembayaran</x-table.heading>
+            <x-table.heading>Keterangan</x-table.heading>
+            <x-table.heading>Bukti</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
         </x-slot>
         <x-slot name="body">
             @foreach ($pembayarans as $pembayaran)
             <x-table.row>
-                <x-table.cell>{{ $pembayaran->id }}</x-table.cell>
+                <x-table.cell>{{ $pembayaran->service_id }}</x-table.cell>
                 <x-table.cell>{{ $pembayaran->tanggal }}</x-table.cell>
-                <x-table.cell>{{ $pembayaran->service->id }}</x-table.cell>
-                <x-table.cell>{{ $pembayaran->jumlah }}</x-table.cell>
-                <x-table.cell>{{ $pembayaran->kembali }}</x-table.cell>
-                <x-table.cell>Tets</x-table.cell>
+                <x-table.cell>{{ $pembayaran->service->getGrandTotal() }}</x-table.cell>
+                <x-table.cell class="uppercase text-xs font-bold">{{ $pembayaran->tipe_pembayaran }}</x-table.cell>
+                <x-table.cell>{{ $pembayaran->keterangan }}</x-table.cell>
+                <x-table.cell>
+                    @if ($pembayaran->bukti_pembayaran)
+                    <a href="{{asset('storage/'.$pembayaran->bukti_pembayaran)}}">
+                        <img src="{{asset('storage/'.$pembayaran->bukti_pembayaran)}}" alt="bukti pembayaran" class="h-16 w-16 object-cover border border-gray-400">
+                    </a>
+                    @else
+                    -
+                    @endif
+                </x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
                         wire:click="destroy({{ $pembayaran->service_id }})"
