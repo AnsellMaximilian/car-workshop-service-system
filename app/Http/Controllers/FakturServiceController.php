@@ -23,9 +23,7 @@ class FakturServiceController extends Controller
         
         $this->authorize('create', FakturService::class);
 
-        $servicesReadyToBeInvoiced = Service::all()->filter(function ($service) {
-            return $service->canBeInvoiced();
-        });
+        $servicesReadyToBeInvoiced = Service::getAllInvoicable();
 
         if(count($servicesReadyToBeInvoiced) <= 0 ){
             return redirect(route('services.index'))->with('error', 'Tidak ada service yang siap dibuat fakturnya.');
