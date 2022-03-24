@@ -29,7 +29,7 @@
                 <x-table.cell>Tets</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
-                        wire:click="destroy({{ $pembayaran->id }})"
+                        wire:click="destroy({{ $pembayaran->service_id }})"
                     >Delete</button>
                 </x-table.cell>
             </x-table.row>

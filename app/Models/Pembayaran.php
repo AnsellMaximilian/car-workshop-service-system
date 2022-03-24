@@ -9,6 +9,9 @@ class Pembayaran extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'service_id';
+    public $incrementing = false;
+
     public function service()
     {
         return $this->belongsTo(Service::class);

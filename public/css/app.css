@@ -1935,6 +1935,10 @@ select {
 }
 @media (min-width: 768px) {
 
+  .md\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
   .md\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;

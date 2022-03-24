@@ -191,7 +191,7 @@
                             {{$service->pembayaran->keterangan}}
                         </div>
                     </div>
-                    @if ($service->pembayaran->bukti_pembayarna)
+                    @if ($service->pembayaran->bukti_pembayaran)
                     <div class="col-span-12">
                         <div class="label-text">Bukti Pembayaran</div>
                         <div class="">

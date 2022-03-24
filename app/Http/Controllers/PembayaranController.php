@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FakturService;
 use App\Models\Pembayaran;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
@@ -17,8 +18,8 @@ class PembayaranController extends Controller
     {
         $this->authorize('create', Pelanggan::class);
 
-        if(count(FakturService::all()) <= 0){
-            return redirect(route('pembayarans.index'))->with('error', 'Tidak ada faktur yang bisa dibayar.');
+        if(count(Service::getAllPayable()) <= 0){
+            return redirect(route('pembayarans.index'))->with('error', 'Tidak ada service yang belum dibayar.');
         }
         return view('pembayarans.create');
     }

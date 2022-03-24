@@ -155,10 +155,14 @@ class Service extends Model
 
     public static function getAllInvoicable()
     {
-        return Service::all()->filter(function($service){
-            return $service->canBeInvoiced() && !$service->invoiced();
-        });
+        return Service::doesntHave('faktur_service')->get();
     }
+
+    public static function getAllPayable()
+    {
+        return Service::doesntHave('pembayaran')->get();
+    }
+
 
     public static function getStatusMap($reverse = false)
     {
