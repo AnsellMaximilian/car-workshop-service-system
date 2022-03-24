@@ -46,11 +46,13 @@
     <x-table.wrapper>
         <x-slot name="head">
             <x-table.heading>ID</x-table.heading>
-            <x-table.heading>Waktu Daftar</x-table.heading>
+            <x-table.heading wire:click="setSort('waktu_mulai')" sortable :sortDir="$sortField === 'waktu_mulai' ? $sortDir : null">Waktu Mulai</x-table.heading>
             <x-table.heading>No. Plat</x-table.heading>
             <x-table.heading>Pelanggan</x-table.heading>
-            <x-table.heading>Perkiraan</x-table.heading>
+            <x-table.heading>Total</x-table.heading>
             <x-table.heading>Status</x-table.heading>
+            <x-table.heading>Persetujuan</x-table.heading>
+            <x-table.heading>Pembayaran</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
         </x-slot>
@@ -58,11 +60,17 @@
             @foreach ($services as $service)
             <x-table.row>
                 <x-table.cell>{{ $service->id }}</x-table.cell>
-                <x-table.cell>{{ $service->pendaftaran_service->waktu_pendaftaran }}</x-table.cell>
+                <x-table.cell>{{ $service->waktu_mulai }}</x-table.cell>
                 <x-table.cell>{{ $service->pendaftaran_service->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $service->pendaftaran_service->pelanggan->nama }}</x-table.cell>
-                <x-table.cell>{{ $service->pendaftaran_service->getTotalPerkiraan() }}</x-table.cell>
-                <x-table.cell>{{ $service->status_service }}</x-table.cell>
+                <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
+                <x-table.cell class="uppercase font-bold text-xs">{{ $service->status_service }}</x-table.cell>
+                <x-table.cell class="uppercase font-bold text-xs">
+                    {{ $service->persetujuan_service ? $service->persetujuan_service->status_persetujuan : 'pending' }}
+                </x-table.cell>
+                <x-table.cell class="uppercase font-bold text-xs">
+                    {{ $service->pembayaran ? 'sudah' : 'belum' }}
+                </x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('services.show', $service->id) }}"    
