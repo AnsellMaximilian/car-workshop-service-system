@@ -163,13 +163,15 @@ class Service extends Model
     public static function getStatusMap($reverse = false)
     {
         return !$reverse ? [
-            0 => 'cek',
-            1 => 'service',
-            2 => 'selesai',
+            0 => 'mulai',
+            1 => 'cek',
+            2 => 'service',
+            3 => 'selesai',
         ] : [
-            'cek' => 0,
-            'service' => 1,
-            'selesai' => 2,
+            'mulai' => 0,
+            'cek' => 1,
+            'service' => 2,
+            'selesai' => 3,
         ];
     }
 

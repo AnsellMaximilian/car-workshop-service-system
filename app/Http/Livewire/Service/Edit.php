@@ -102,7 +102,7 @@ class Edit extends Component
     public function save()
     {
         $this->validate([
-            'statusService' => 'in:cek,service,selesai',
+            'statusService' => 'in:mulai,cek,service,selesai',
         ]);
 
         $this->service->status_service = $this->statusService;

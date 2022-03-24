@@ -6,6 +6,7 @@
                 wire:model="statusSort"
                 class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="semua">Semua</option>
+                <option value="mulai">Mulai</option>
                 <option value="cek">Dicek</option>
                 <option value="service">Diservice</option>
                 <option value="selesai">Selesai</option>

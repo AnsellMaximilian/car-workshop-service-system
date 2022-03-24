@@ -26,7 +26,7 @@ class CreateServicesTable extends Migration
             $table->id();
             // $table->foreignId('pendaftaran_service_id')->constrained();
             $table->dateTime('waktu_mulai');
-            $table->enum('status_service', ['cek', 'service', 'selesai'])->default('cek');
+            $table->enum('status_service', ['mulai', 'cek', 'service', 'selesai'])->default('mulai');
             $table->timestamps();
         });
     }

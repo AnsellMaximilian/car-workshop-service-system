@@ -4,6 +4,10 @@
     $trueClasses = 'bg-green-600';
     $falseClasses = 'bg-gray-700';
     switch ($status) {
+        case 'mulai':
+            $step = 0;
+            $lineWidth = '';
+            break;
         case 'cek':
             $step = 1;
             $lineWidth = '';
@@ -17,7 +21,8 @@
             $lineWidth = 'w-full';
             break;
         default:
-            $step = 1;
+            $step = 0;
+            $lineWidth = '';
             break;
     }
 @endphp
