@@ -1427,6 +1427,12 @@ select {
 .leading-7 {
   line-height: 1.75rem;
 }
+.leading-3 {
+  line-height: .75rem;
+}
+.leading-4 {
+  line-height: 1rem;
+}
 .tracking-widest {
   letter-spacing: 0.1em;
 }
