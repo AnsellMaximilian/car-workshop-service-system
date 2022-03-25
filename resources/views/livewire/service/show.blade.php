@@ -70,12 +70,12 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <x-label for="keterangan" value="Keterangan" />
+                        <x-label for="keteranganPersetujuan" value="Keterangan" />
                         <textarea 
-                            id="keterangan" 
+                            id="keteranganPersetujuan" 
                             wire:model="keteranganPersetujuan" 
                             class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        >{{old('keterangan')}}</textarea>
+                        ></textarea>
                     </div>
                     <div class="flex">
                         <x-button class="ml-auto" wire:click="savePersetujuan">Catat Persetujuan</x-button>
@@ -160,9 +160,9 @@
                             accept=".jpg,.png,.jpeg"/>
                     </div>
                     <div class="mb-4">
-                        <x-label for="keterangan" value="Keterangan" />
+                        <x-label for="keteranganPembayaran" value="Keterangan" />
                         <textarea 
-                            id="keterangan" 
+                            id="keteranganPembayaran" 
                             wire:model="keteranganPembayaran" 
                             class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >{{old('keterangan')}}</textarea>
