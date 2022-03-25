@@ -95,41 +95,6 @@
                 </div>
             </div>
 
-            @if (!$service->isPaymentPending())
-            <hr class="my-4">
-            <div class="mb-4">
-                <h2 class="font-semibold mb-4 text-xl">Pembayaran</h2>
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12">
-                        <div class="label-text">Tanggal Pembayaran</div>
-                        <div class="">
-                            {{\Carbon\Carbon::parse($service->pembayaran->tanggal)->format('d M, Y')}}
-                        </div>
-                    </div>
-                    <div class="col-span-12">
-                        <div class="label-text">Tipe Pembayaran</div>
-                        <div class="uppercase">
-                            {{ $service->pembayaran->tipe_pembayaran}}
-                        </div>
-                    </div>
-                    <div class="col-span-12">
-                        <div class="label-text">Keterangan Pembayaran</div>
-                        <div class="">
-                            {{$service->pembayaran->keterangan}}
-                        </div>
-                    </div>
-                    @if ($service->pembayaran->bukti_pembayaran)
-                    <div class="col-span-12">
-                        <div class="label-text">Bukti Pembayaran</div>
-                        <div class="">
-                            <img class="w-32 h-32 object-cover mt-1" src="{{asset('storage/'.$service->pembayaran->bukti_pembayaran)}}" alt="bukti pembayaran">
-                        </div>
-                    </div>
-                    @endif
-                </div>
-            </div>
-            @endif
-
             <div class="flex items-center justify-end mt-auto">
                 <a href="{{route('services.index')}}">
                     <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
