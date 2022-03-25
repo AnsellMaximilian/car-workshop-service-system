@@ -71,22 +71,25 @@
         <x-table.wrapper>
             <x-slot name="head">
                 <x-table.heading >ID</x-table.heading>
-                <x-table.heading >Tanggal Daftar</x-table.heading>
+                <x-table.heading >Daftar</x-table.heading>
+                <x-table.heading >Mulai</x-table.heading>
                 <x-table.heading >No. Plat</x-table.heading>
                 <x-table.heading>Total</x-table.heading>
-                <x-table.heading >Dibayar</x-table.heading>
-                <x-table.heading >Sisa</x-table.heading>
-    
+                <x-table.heading>Dibayar</x-table.heading>
             </x-slot>
             <x-slot name="body">
-                @foreach ($pelanggan->services as $service)
+                @foreach ($pelanggan->getServices() as $service)
                 <x-table.row>
                     <x-table.cell>{{ $service->id }}</x-table.cell>
-                    <x-table.cell>{{ $service->tanggal }}</x-table.cell>
-                    <x-table.cell>{{ $service->no_plat }}</x-table.cell>
+                    <x-table.cell>{{ $service->pendaftaran_service->waktu_pendaftaran }}</x-table.cell>
+                    <x-table.cell>{{ $service->waktu_mulai }}</x-table.cell>
+                    <x-table.cell>{{ $service->pendaftaran_service->no_plat }}</x-table.cell>
                     <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
-                    <x-table.cell>{{ $service->isServiceApproved() ? $service->getTotalPembayaran() : 'Batal' }}</x-table.cell>
-                    <x-table.cell>{{ $service->isServiceApproved() ? $service->getAmountToBePaid() : 'Batal' }}</x-table.cell>
+                    <x-table.cell>
+                        {{ $service->isServiceCancelled() ? 'Batal' : (
+                            $service->pembayaran ? 'Sudah' : 'Belum'
+                        ) }}
+                    </x-table.cell>
                 </x-table.row>
                 @endforeach
             </x-slot>

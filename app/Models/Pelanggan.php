@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,13 +19,26 @@ class Pelanggan extends Model
 
     public function getTotalAR()
     {
-        return $this->services->reduce(function($total, $service){
-            return $total + $service->getAmountToBePaid();
+        return $this->pendaftaran_services()
+        ->whereHas('service', function(Builder $q){
+            $q->whereHas('persetujuan_service', function(Builder $q2){
+                $q2->where('status_persetujuan', 'setuju');
+            });
+        })->get()
+        ->reduce(function($total, $pendaftaran){
+            return $total + $pendaftaran->service->getGrandTotal();
         }, 0);
     }
 
-    public function services()
+    public function pendaftaran_services()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(PendaftaranService::class);
+    }
+
+    public function getServices()
+    {
+        return $this->pendaftaran_services->map(function($pendaftaran){
+            return $pendaftaran->service;
+        });
     }
 }
