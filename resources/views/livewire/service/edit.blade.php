@@ -90,7 +90,7 @@
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
                 <div>
-                    <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenjualanService">
+                    <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenjualanService">
                         {{ __('+') }}
                     </x-button>
                 </div>
@@ -100,6 +100,7 @@
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3">
                         <select
+                            {{ !$service->isApprovalPending() ? 'disabled' : ''}}
                             wire:model="selectedJenisServiceId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
@@ -120,6 +121,7 @@
                     </div>
                     <div class="col-span-2">
                         <x-input
+                            :disabled="!$service->isApprovalPending()"
                             wire:model="jenisServiceAmount.{{ $index }}"
                             class="block min-w-0 w-full" 
                             type="number"
@@ -135,7 +137,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenjualanService({{$key}})">
+                        <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenjualanService({{$key}})">
                             &times;
                         </x-button>
                     </div>
@@ -147,7 +149,7 @@
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Penggantian Suku Cadang</h2>
                 <div>
-                    <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenggantianSukuCadang">
+                    <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenggantianSukuCadang">
                         {{ __('+') }}
                     </x-button>
                 </div>
@@ -157,6 +159,7 @@
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-3">
                         <select
+                            {{ !$service->isApprovalPending() ? 'disabled' : ''}}
                             wire:model="selectedSukuCadangId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
@@ -168,7 +171,7 @@
                         </select>
                     </div>
                     <div class="col-span-2">
-                        <x-input 
+                        <x-input
                             class="block min-w-0 w-full" 
                             type="number" 
                             placeholder="Harga" disabled 
@@ -177,6 +180,7 @@
                     </div>
                     <div class="col-span-2">
                         <x-input
+                            :disabled="!$service->isApprovalPending()"
                             wire:model="sukuCadangAmount.{{ $index }}"
                             class="block min-w-0 w-full" 
                             type="number"
@@ -184,7 +188,7 @@
                             placeholder="Jumlah" required />
                     </div>
                     <div class="col-span-3">
-                        <x-input 
+                        <x-input
                             class="block min-w-0 w-full" 
                             type="number" 
                             placeholder="Subtotal" disabled 
@@ -192,7 +196,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenggantianSukuCadang({{$key}})">
+                        <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenggantianSukuCadang({{$key}})">
                             &times;
                         </x-button>
                     </div>

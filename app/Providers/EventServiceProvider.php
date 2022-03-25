@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Models\PelaksanaanPemeriksaan;
+use App\Models\PenggantianSukuCadang;
+use App\Models\PenjualanService;
 use App\Models\Service;
 use App\Observers\PelaksanaanPemeriksaanObserver;
+use App\Observers\PenggantianSukuCadangObserver;
+use App\Observers\PenjualanServiveObserver;
 use App\Observers\ServiceObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -33,5 +37,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Service::observe(ServiceObserver::class);
         PelaksanaanPemeriksaan::observe(PelaksanaanPemeriksaanObserver::class);
+        PenggantianSukuCadang::observe(PenggantianSukuCadangObserver::class);
+        PenjualanService::observe(PenjualanServiveObserver::class);
     }
 }

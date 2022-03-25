@@ -107,9 +107,15 @@ class Edit extends Component
 
         $this->service->status_service = $this->statusService;
         
-        PenjualanService::where('service_id', $this->service->id)->delete();
-        PenggantianSukuCadang::where('service_id', $this->service->id)->delete();
-        // dd($this->pemeriksaanStandarsChecked);
+        // PenjualanService::where('service_id', $this->service->id)->delete();
+        foreach (PenjualanService::where('service_id', $this->service->id)->get() as $key => $penjualanService) {
+            $penjualanService->delete();
+        }
+        // PenggantianSukuCadang::where('service_id', $this->service->id)->delete();
+        foreach (PenggantianSukuCadang::where('service_id', $this->service->id)->get() as $key => $penggantianSukuCadang) {
+            $penggantianSukuCadang->delete();
+        }
+
         foreach($this->pemeriksaanStandarsChecked as $key => $checked){
             $currentPemeriksaan = $this->service->pelaksanaan_pemeriksaans()->where('pemeriksaan_standar_id', $key)->first();
             if($checked && !$currentPemeriksaan){

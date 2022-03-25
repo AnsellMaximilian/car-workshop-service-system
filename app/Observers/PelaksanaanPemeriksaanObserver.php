@@ -28,7 +28,13 @@ class PelaksanaanPemeriksaanObserver
     {
         $service = Service::find($pelaksanaanPemeriksaan->service_id);
 
-        return ! $service->persetujuan_service;
+        $serviceApproval = $service->persetujuan_service;
+
+        if($serviceApproval){
+            request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
+        }
+
+        return ! $serviceApproval;
     }
 
     /**
@@ -74,7 +80,13 @@ class PelaksanaanPemeriksaanObserver
     {
         $service = Service::find($pelaksanaanPemeriksaan->service_id);
 
-        return ! $service->persetujuan_service;
+        $serviceApproval = $service->persetujuan_service;
+
+        if($serviceApproval){
+            request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
+        }
+
+        return ! $serviceApproval;
     }
 
     /**
