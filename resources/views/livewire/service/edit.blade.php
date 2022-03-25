@@ -166,7 +166,7 @@
                             @foreach ($sukuCadangs[$index] as $sukuCadang)
                                 <option 
                                     value="{{ $sukuCadang->id }}" 
-                                >{{ $sukuCadang->nama }}</option>
+                                >{{ $sukuCadang->nama }} - Stok: {{ $sukuCadang->getCurrentStock()}}</option>
                             @endforeach
                         </select>
                     </div>
