@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActionsPageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakturServiceController;
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('users/{user}', [RegisteredUserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/{user}', [RegisteredUserController::class, 'show'])->name('users.show');
 
+    // Route::get('actions/{code}', [ActionsPageController::class, 'admn'])->name('actions.admn');
 
     Route::get('perans', [PeranController::class, 'index'])->name('perans');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
