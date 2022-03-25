@@ -41,6 +41,11 @@ class PendaftaranService extends Model
         return $this->hasOne(Service::class);
     }
 
+    public function isContinued()
+    {
+        return $this->service !== null;
+    }
+
     public function getTotalPerkiraanPenjualanServices()
     {
         return $this->perkiraan_penjualan_services->reduce(function($total, $penjualan){

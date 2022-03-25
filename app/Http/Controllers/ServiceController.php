@@ -35,22 +35,17 @@ class ServiceController extends Controller
         $this->authorize('create', Service::class);
 
         $request->validate([
-            'no_plat' => 'required',
-            'keluhan' => 'max:255',
-            'pelanggan_id' => 'required|exists:pelanggans,id'
+            'pendaftaran_service_id' => 'required|exists:pendaftaran_services,id'
         ]);
 
         $service = new Service;
 
-        $service->no_plat = $request->no_plat;
-        $service->keluhan = $request->keluhan;
-        $service->pelanggan_id = $request->pelanggan_id;
-        $service->tanggal = now();
-        $service->user_id = request()->user()->id;
+        $service->waktu_mulai = now();
+        $service->pendaftaran_service_id = $request->pendaftaran_service_id;
 
         $service->save();
 
-        return redirect(route('services.index'));
+        return redirect(route('services.show', $service->id));
     }
 
     public function edit(Service $service)
@@ -76,15 +71,6 @@ class ServiceController extends Controller
 
         return redirect(route('services.index'));
     }
-
-    // public function invoice(Service $service)
-    // {
-    //     if($service->canBeInvoiced()){
-    //         return view('services.faktur', ['service' => $service]);
-    //     }else{
-    //         return redirect(route('faktur-services.show', $service->faktur_service->id))->with('error', 'Faktur sudah dibuat.');
-    //     }
-    // }
 
     public function destroy(Service $service)
     {

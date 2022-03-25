@@ -54,9 +54,21 @@
                         {{ __('Hapus') }}
                     </x-button>
                 </a>
-                <x-button class="ml-4">
-                    {{ __('Service') }}
-                </x-button>
+                @if ($pendaftaranService->isContinued())
+                    <a href="{{route('services.show', $pendaftaranService->service->id)}}">
+                        <x-button class="ml-4" >
+                            {{ __('Service') }}
+                        </x-button>
+                    </a>
+                @else
+                <form action="{{route('services.store')}}" method="POST">
+                    @csrf
+                    <input type="hidden" value="{{$pendaftaranService->id}}" name="pendaftaran_service_id">
+                    <x-button class="ml-4" >
+                        {{ __('Service') }}
+                    </x-button>
+                </form>
+                @endif
             </div>
         </x-card>
         <x-card class="col-span-12">
