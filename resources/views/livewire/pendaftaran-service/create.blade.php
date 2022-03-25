@@ -74,7 +74,7 @@
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Perkiraan Service</h2>
                 <div>
-                    <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addServicePrediction">
+                    <x-button wire:loading.attr="disabled" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addServicePrediction">
                         {{ __('+') }}
                     </x-button>
                 </div>
@@ -87,7 +87,7 @@
                             wire:model="selectedJenisServiceId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
-                            @foreach ($jenisServices as $jenisService)
+                            @foreach ($jenisServices[$index] as $jenisService)
                                 <option 
                                     value="{{ $jenisService->id }}" 
                                 >{{ $jenisService->nama }}</option>
@@ -119,7 +119,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeServicePrediction({{$key}})">
+                        <x-button wire:loading.attr="disabled" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeServicePrediction({{$key}})">
                             &times;
                         </x-button>
                     </div>
@@ -132,7 +132,7 @@
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Perkiraan Pengantian</h2>
                 <div>
-                    <x-button overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addSukuCadangPrediction">
+                    <x-button wire:loading.attr="disabled" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addSukuCadangPrediction">
                         {{ __('+') }}
                     </x-button>
                 </div>
@@ -145,7 +145,7 @@
                             wire:model="selectedSukuCadangId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
-                            @foreach ($sukuCadangs as $sukuCadang)
+                            @foreach ($sukuCadangs[$index] as $sukuCadang)
                                 <option 
                                     value="{{ $sukuCadang->id }}" 
                                 >{{ $sukuCadang->nama }}</option>
@@ -177,7 +177,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeSukuCadangPrediction({{$key}})">
+                        <x-button wire:loading.attr="disabled" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeSukuCadangPrediction({{$key}})">
                             &times;
                         </x-button>
                     </div>

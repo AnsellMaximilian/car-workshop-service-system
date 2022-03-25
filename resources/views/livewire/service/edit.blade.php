@@ -90,7 +90,7 @@
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Jasa Service</h2>
                 <div>
-                    <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenjualanService">
+                    <x-button wire:loading.attr="disabled" :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenjualanService">
                         {{ __('+') }}
                     </x-button>
                 </div>
@@ -104,7 +104,7 @@
                             wire:model="selectedJenisServiceId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
-                            @foreach ($jenisServices as $jenisService)
+                            @foreach ($jenisServices[$index] as $jenisService)
                                 <option 
                                     value="{{ $jenisService->id }}" 
                                 >{{ $jenisService->nama }}</option>
@@ -137,7 +137,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenjualanService({{$key}})">
+                        <x-button wire:loading.attr="disabled" :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenjualanService({{$key}})">
                             &times;
                         </x-button>
                     </div>
@@ -149,7 +149,7 @@
             <div class="flex justify-between">
                 <h2 class="font-semibold mb-4 text-xl">Penggantian Suku Cadang</h2>
                 <div>
-                    <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenggantianSukuCadang">
+                    <x-button wire:loading.attr="disabled" :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-gray-700 hover:bg-gray-800" wire:click="addPenggantianSukuCadang">
                         {{ __('+') }}
                     </x-button>
                 </div>
@@ -163,7 +163,7 @@
                             wire:model="selectedSukuCadangId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         >
-                            @foreach ($sukuCadangs as $sukuCadang)
+                            @foreach ($sukuCadangs[$index] as $sukuCadang)
                                 <option 
                                     value="{{ $sukuCadang->id }}" 
                                 >{{ $sukuCadang->nama }}</option>
@@ -196,7 +196,7 @@
                             required />
                     </div>
                     <div class="col-span-2 flex items-center justify-end">
-                        <x-button :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenggantianSukuCadang({{$key}})">
+                        <x-button wire:loading.attr="disabled" :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenggantianSukuCadang({{$key}})">
                             &times;
                         </x-button>
                     </div>

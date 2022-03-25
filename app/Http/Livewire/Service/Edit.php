@@ -18,17 +18,19 @@ class Edit extends Component
     public $statusService;
 
     // Service    
-    public $selectedJenisServiceId;
+    public $selectedJenisServiceId = [];
     public $selectedJenisService;
     public $jenisServiceAmount;
+    public $jenisServices = [];
 
     public $penjualanServices = [ ];
     public $serviceIndex = 0;
 
     // Suku Cadang    
-    public $selectedSukuCadangId;
+    public $selectedSukuCadangId = [];
     public $selectedSukuCadang;
     public $sukuCadangAmount;
+    public $sukuCadangs = [];
 
     public $penggantianSukuCadangs = [ ];
     public $sukuCadangIndex = 0;
@@ -62,35 +64,41 @@ class Edit extends Component
 
     public function addPenjualanService()
     {
-        $this->serviceIndex++;
+        if(count(JenisService::whereNotIn('id', $this->selectedJenisServiceId)->get()) > 0){
+            $this->serviceIndex++;
 
-        $firstJenisService = JenisService::first();
-        
-        $this->selectedJenisServiceId[$this->serviceIndex] = $firstJenisService->id;
-
-        array_push($this->penjualanServices, $this->serviceIndex);
-        $this->jenisServiceAmount[$this->serviceIndex] = 0;
+            $this->jenisServices[$this->serviceIndex] = JenisService::whereNotIn('id', $this->selectedJenisServiceId)->get();
+            
+            $this->selectedJenisServiceId[$this->serviceIndex] = $this->jenisServices[$this->serviceIndex]->first()->id;
+    
+            array_push($this->penjualanServices, $this->serviceIndex);
+            $this->jenisServiceAmount[$this->serviceIndex] = 0;
+        }
     }
 
     public function removePenjualanService($index)
     {
+        unset($this->selectedJenisServiceId[$this->penjualanServices[$index]]);
         unset($this->penjualanServices[$index]);
     }
 
     public function addPenggantianSukuCadang()
     {
-        $this->sukuCadangIndex++;
+        if(count(SukuCadang::whereNotIn('id', $this->selectedSukuCadangId)->get()) > 0){
+            $this->sukuCadangIndex++;
 
-        $firstSukuCadang = SukuCadang::first();
-        
-        $this->selectedSukuCadangId[$this->sukuCadangIndex] = $firstSukuCadang->id;
-
-        array_push($this->penggantianSukuCadangs, $this->sukuCadangIndex);
-        $this->sukuCadangAmount[$this->sukuCadangIndex] = 0;
+            $this->sukuCadangs[$this->sukuCadangIndex] = SukuCadang::whereNotIn('id', $this->selectedSukuCadangId)->get();
+            
+            $this->selectedSukuCadangId[$this->sukuCadangIndex] = $this->sukuCadangs[$this->sukuCadangIndex]->first()->id;
+    
+            array_push($this->penggantianSukuCadangs, $this->sukuCadangIndex);
+            $this->sukuCadangAmount[$this->sukuCadangIndex] = 0;
+        }
     }
 
     public function removePenggantianSukuCadang($index)
     {
+        unset($this->selectedSukuCadangId[$this->penggantianSukuCadangs[$index]]);
         unset($this->penggantianSukuCadangs[$index]);
     }
 
@@ -169,9 +177,21 @@ class Edit extends Component
             $totalPenggantianSukuCadangs += ($this->selectedSukuCadang[$index]->harga * $this->sukuCadangAmount[$index]);
         }
 
+        foreach ($this->penjualanServices as $key => $index) {
+            $this->jenisServices[$index] = JenisService::whereNotIn('id', $this->selectedJenisServiceId)
+                ->orWhereIn('id', [$this->selectedJenisServiceId[$index]])->get();
+        }
+
+        foreach ($this->penggantianSukuCadangs as $key => $index) {
+            $this->sukuCadangs[$index] = SukuCadang::whereNotIn('id', $this->selectedSukuCadangId)
+                ->orWhereIn('id', [$this->selectedSukuCadangId[$index]])->get();
+        }
+
         return view('livewire.service.edit', [
-            'jenisServices' => JenisService::all(),
-            'sukuCadangs' => SukuCadang::all(),
+            // 'jenisServices' => JenisService::all(),
+            // 'jenisServices' => $jenisServices,
+            // 'sukuCadangs' => SukuCadang::all(),
+            // 'sukuCadangs' => $sukuCadangs,
             'pemeriksaanStandars' => PemeriksaanStandar::all(),
             'totalPenjualanServices' => $totalPenjualanServices,
             'totalPenggantianSukuCadangs' => $totalPenggantianSukuCadangs,
