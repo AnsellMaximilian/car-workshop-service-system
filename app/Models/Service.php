@@ -184,9 +184,14 @@ class Service extends Model
         $map = Service::getStatusMap();
         $mapReverse = Service::getStatusMap(true);
         $pos = $mapReverse[$status];
-        $newPos = (($pos + $steps) > max($mapReverse)) ? max($mapReverse) : 0;
-        $newPos = (($pos + $steps) < 0) ? 0 : ($pos +$steps);
+        $newPos = ($pos + $steps);
 
+        if ($newPos >  max($mapReverse)) {
+            $newPos = max($mapReverse);
+        } elseif($newPos < 0) {
+            $newPos = 0;
+        }
+        
         return $map[$newPos];
     }
     
