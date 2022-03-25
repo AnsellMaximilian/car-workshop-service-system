@@ -32,6 +32,8 @@ class Create extends Component
 
         $service->save();
 
+        // Saving pendaftaran
+
         return redirect(route('services.index'));
     }
 

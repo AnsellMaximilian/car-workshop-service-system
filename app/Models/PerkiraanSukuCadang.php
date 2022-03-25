@@ -18,4 +18,9 @@ class PerkiraanSukuCadang extends Model
     {
         return $this->belongsTo(SukuCadang::class);
     }
+
+    public function pendaftaran_service()
+    {
+        return $this->belongsTo(PendaftaranService::class);
+    }
 }
