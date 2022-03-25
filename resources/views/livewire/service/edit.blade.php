@@ -47,21 +47,88 @@
                     <x-service-steps :status="$statusService" class="mb-4"/>
                 </div>
             </div>
+            @if (!$service->isApprovalPending())
+            <hr class="my-4">
+            <div>
+                <h2 class="font-semibold mb-4 text-lg">Persetujuan</h2>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <div class="label-text">Waktu Persetujuan</div>
+                        <div class="">
+                            {{\Carbon\Carbon::parse($service->persetujuan_service->waktu_persetujuan)->format('d M, Y - H:i:s')}}
+                        </div>
+                    </div>
+                    <div class="mb-4 col-span-6">
+                        <div class="label-text">Status Persetujuan</div>
+                        <div class="font-bold uppercase">
+                            @if ($service->persetujuan_service->status_persetujuan === 'setuju')
+                                <x-icons.checkmark class="h-10 fill-green-500"/>
+                            @else
+                                <x-icons.cross class="h-10 fill-red-600"/>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-span-6">
+                        <div class="label-text">Keterangan Persetujuan</div>
+                        <div class="">
+                            {{$service->persetujuan_service->keterangan}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </x-card>
         <x-card class="col-span-4 flex flex-col">
-            <div class="flex justify-between">
-                <div class="font-semibold">Service</div>
-                <div>{{ $totalPenjualanServices}}</div>
-            </div>
-            <div class="flex justify-between">
-                <div class="font-semibold">Suku Cadang</div>
-                <div>{{ $totalPenggantianSukuCadangs}}</div>
+            <div>
+                <div class="flex justify-between">
+                    <div class="font-semibold">Service</div>
+                    <div>{{ $totalPenjualanServices}}</div>
+                </div>
+                <div class="flex justify-between">
+                    <div class="font-semibold">Suku Cadang</div>
+                    <div>{{ $totalPenggantianSukuCadangs}}</div>
+                </div>
+    
+                <div class="flex justify-between mt-4">
+                    <div class="font-bold uppercase">Total Service</div>
+                    <div>{{$totalPenjualanServices + $totalPenggantianSukuCadangs}}</div>
+                </div>
             </div>
 
-            <div class="flex justify-between mt-4">
-                <div class="font-bold uppercase">Total Service</div>
-                <div>{{$totalPenjualanServices + $totalPenggantianSukuCadangs}}</div>
+            @if (!$service->isPaymentPending())
+            <hr class="my-4">
+            <div class="mb-4">
+                <h2 class="font-semibold mb-4 text-xl">Pembayaran</h2>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <div class="label-text">Tanggal Pembayaran</div>
+                        <div class="">
+                            {{\Carbon\Carbon::parse($service->pembayaran->tanggal)->format('d M, Y')}}
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="label-text">Tipe Pembayaran</div>
+                        <div class="uppercase">
+                            {{ $service->pembayaran->tipe_pembayaran}}
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="label-text">Keterangan Pembayaran</div>
+                        <div class="">
+                            {{$service->pembayaran->keterangan}}
+                        </div>
+                    </div>
+                    @if ($service->pembayaran->bukti_pembayaran)
+                    <div class="col-span-12">
+                        <div class="label-text">Bukti Pembayaran</div>
+                        <div class="">
+                            <img class="w-32 h-32 object-cover mt-1" src="{{asset('storage/'.$service->pembayaran->bukti_pembayaran)}}" alt="bukti pembayaran">
+                        </div>
+                    </div>
+                    @endif
+                </div>
             </div>
+            @endif
 
             <div class="flex items-center justify-end mt-auto">
                 <a href="{{route('services.index')}}">
