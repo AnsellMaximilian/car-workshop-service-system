@@ -28,13 +28,13 @@ class PelaksanaanPemeriksaanObserver
     {
         $service = Service::find($pelaksanaanPemeriksaan->service_id);
 
-        $serviceApproval = $service->persetujuan_service;
+        $isChecking = $service->status_service === 'cek';
 
-        if($serviceApproval){
-            request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
+        if(!$isChecking){
+            request()->session()->flash('error', 'Pemeriksaan standar tidak dicatat. Ubah status service menjadi dicek dahulu.');
         }
 
-        return ! $serviceApproval;
+        return $isChecking;
     }
 
     /**
@@ -80,13 +80,13 @@ class PelaksanaanPemeriksaanObserver
     {
         $service = Service::find($pelaksanaanPemeriksaan->service_id);
 
-        $serviceApproval = $service->persetujuan_service;
+        $isChecking = $service->status_service === 'cek';
 
-        if($serviceApproval){
-            request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
+        if(!$isChecking){
+            request()->session()->flash('error', 'Ubah status service menjadi dicek.');
         }
 
-        return ! $serviceApproval;
+        return $isChecking;
     }
 
     /**

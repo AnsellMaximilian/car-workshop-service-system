@@ -31,7 +31,7 @@ class PenjualanServiveObserver
         $serviceApproval = $service->persetujuan_service;
 
         if($serviceApproval){
-            request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
+            // request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
         }
 
         return ! $serviceApproval;
@@ -72,7 +72,7 @@ class PenjualanServiveObserver
         $serviceApproval = $service->persetujuan_service;
 
         if($serviceApproval){
-            request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
+            // request()->session()->flash('error', 'Service sudah memiliki persetujuan.');
         }
 
         return ! $serviceApproval;

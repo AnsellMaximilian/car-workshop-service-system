@@ -123,6 +123,11 @@ class Service extends Model
         return $this->status_service === 'selesai';
     }
 
+    public function isServiceFinished()
+    {
+        return $this->status_service === 'selesai';
+    }
+
     public function invoiced()
     {
         return $this->faktur_service !== null;

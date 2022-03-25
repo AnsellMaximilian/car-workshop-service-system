@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Models\PelaksanaanPemeriksaan;
+use App\Models\Pembayaran;
 use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
 use App\Models\Service;
 use App\Observers\PelaksanaanPemeriksaanObserver;
+use App\Observers\PembayaranObserver;
 use App\Observers\PenggantianSukuCadangObserver;
 use App\Observers\PenjualanServiveObserver;
 use App\Observers\ServiceObserver;
@@ -39,5 +41,6 @@ class EventServiceProvider extends ServiceProvider
         PelaksanaanPemeriksaan::observe(PelaksanaanPemeriksaanObserver::class);
         PenggantianSukuCadang::observe(PenggantianSukuCadangObserver::class);
         PenjualanService::observe(PenjualanServiveObserver::class);
+        Pembayaran::observe(PembayaranObserver::class);
     }
 }
