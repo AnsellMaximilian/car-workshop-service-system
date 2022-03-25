@@ -113,6 +113,15 @@ class Edit extends Component
             'statusService' => 'in:mulai,cek,service,selesai',
         ]);
 
+        // Check stock
+        foreach ($this->penggantianSukuCadangs as $key => $sukuCadangIndex) {
+            $checkJumlah =  $this->sukuCadangAmount[$sukuCadangIndex];
+            $checkStock = SukuCadang::find($this->selectedSukuCadangId[$sukuCadangIndex])->getCurrentStock();
+            if($checkStock < $checkJumlah){
+                return redirect(route('services.edit', $this->service->id))->with('error', 'You a faggot');
+            }
+        }
+
         $this->service->status_service = $this->statusService;
         
         // PenjualanService::where('service_id', $this->service->id)->delete();
