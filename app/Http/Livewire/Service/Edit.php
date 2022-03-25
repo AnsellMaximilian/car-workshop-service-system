@@ -35,12 +35,20 @@ class Edit extends Component
     public $penggantianSukuCadangs = [ ];
     public $sukuCadangIndex = 0;
 
+    // Stok
+    public $stokSukuCadang = [];
+
     // Pemeriksaan
     public $pemeriksaanStandarsChecked = [];
 
     public function mount()
     {
         $this->statusService = $this->service->status_service;
+
+        // Stok first
+        foreach (SukuCadang::all() as $key => $sukuCadang) {
+            $this->stokSukuCadang[$sukuCadang->id] = $sukuCadang->getCurrentStock();
+        }
 
         foreach ($this->service->penjualan_services as $key => $penjualanService) {
             $this->serviceIndex++;
@@ -54,6 +62,9 @@ class Edit extends Component
             $this->selectedSukuCadangId[$this->sukuCadangIndex] = $penggantianSukuCadang->suku_cadang->id;
             array_push($this->penggantianSukuCadangs, $this->sukuCadangIndex);
             $this->sukuCadangAmount[$this->sukuCadangIndex] = $penggantianSukuCadang->jumlah;
+
+            // Stok
+            $this->stokSukuCadang[$penggantianSukuCadang->suku_cadang->id] += $penggantianSukuCadang->jumlah;
         }
 
         foreach ($this->service->pelaksanaan_pemeriksaans as $key => $pelaksanaanPemeriksaan) {
@@ -116,9 +127,10 @@ class Edit extends Component
         // Check stock
         foreach ($this->penggantianSukuCadangs as $key => $sukuCadangIndex) {
             $checkJumlah =  $this->sukuCadangAmount[$sukuCadangIndex];
-            $checkStock = SukuCadang::find($this->selectedSukuCadangId[$sukuCadangIndex])->getCurrentStock();
-            if($checkStock < $checkJumlah){
-                return redirect(route('services.edit', $this->service->id))->with('error', 'You a faggot');
+            // $checkSukuCadang = SukuCadang::find($this->selectedSukuCadangId[$sukuCadangIndex])->getCurrentStock();
+            if($this->stokSukuCadang[$this->selectedSukuCadangId[$sukuCadangIndex]] < $checkJumlah){
+                return redirect(route('services.edit', $this->service->id))
+                    ->with('error', 'Stok '.$this->selectedSukuCadang[$sukuCadangIndex]['nama'].' tidak cukup. Sisa '.$this->stokSukuCadang[$this->selectedSukuCadangId[$sukuCadangIndex]].'.');
             }
         }
 

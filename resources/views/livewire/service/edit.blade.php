@@ -198,7 +198,7 @@
                             @foreach ($sukuCadangs[$index] as $sukuCadang)
                                 <option 
                                     value="{{ $sukuCadang->id }}" 
-                                >{{ $sukuCadang->nama }} - Stok: {{ $sukuCadang->getCurrentStock() - $sukuCadangAmount[$index]}}</option>
+                                >{{ $sukuCadang->nama }} - Stok: {{ $stokSukuCadang[$sukuCadang->id] - $sukuCadangAmount[$index]}}</option>
                             @endforeach
                         </select>
                     </div>
