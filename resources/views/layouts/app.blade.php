@@ -154,8 +154,29 @@
     
                 <!-- Page Heading -->
                 <header class="bg-white shadow">
-                    <div class="py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                    <div class="py-6 px-4 sm:px-6 lg:px-8 flex">
+                        <div class="grow">
+                            {{ $header }}
+                        </div>
+                        <div>
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
+                                        <x-icons.bell class="h-5"/>
+                                    </button>
+                                </x-slot>
+            
+                                <x-slot name="content">
+                                    @forelse (Auth::user()->unreadNotifications as $notification)
+                                        notif
+                                    @empty
+                                    <x-dropdown-link >
+                                        Tidak ada notifikasi
+                                    </x-dropdown-link>
+                                    @endforelse
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
                     </div>
                 </header>
 
