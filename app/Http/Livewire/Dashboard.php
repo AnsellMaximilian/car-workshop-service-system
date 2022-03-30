@@ -37,7 +37,7 @@ class Dashboard extends Component
 
         $totalSalesToday = $paidServices
             ->filter(function($service){
-                return (new Carbon($service->tanggal))->isToday();
+                return (new Carbon($service->waktu_mulai))->isToday();
             })
             ->reduce(function($total, $service) {
                 return $total + $service->getGrandTotal();
