@@ -70,5 +70,47 @@
             </div>
             
         </x-card>
+        <x-card class="col-span-12">
+            <h2 class="font-semibold mb-4 text-xl">Perkiraan Service</h2>
+            <x-table.wrapper>
+                <x-slot name="head">
+                    <x-table.heading class="bg-primary text-white">Jenis Service</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Harga</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Jumlah</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Subtotal</x-table.heading>
+                </x-slot>
+                <x-slot name="body">
+                    @foreach ($selectedPendaftaranService->perkiraan_penjualan_services as $perkiraanPenjualanService)
+                    <x-table.row>
+                        <x-table.cell>{{ $perkiraanPenjualanService->jenis_service->nama }}</x-table.cell>
+                        <x-table.cell>{{ $perkiraanPenjualanService->harga }}</x-table.cell>
+                        <x-table.cell>{{ $perkiraanPenjualanService->jumlah }}</x-table.cell>
+                        <x-table.cell>{{ $perkiraanPenjualanService->getTotal() }}</x-table.cell>
+                    </x-table.row>
+                    @endforeach
+                </x-slot>
+            </x-table.wrapper>
+        </x-card>
+        <x-card class="col-span-12">
+            <h2 class="font-semibold mb-4 text-xl">Perkiraan Penggantian</h2>
+            <x-table.wrapper>
+                <x-slot name="head">
+                    <x-table.heading class="bg-primary text-white">Suku Cadang</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Harga</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Jumlah</x-table.heading>
+                    <x-table.heading class="bg-primary text-white">Subtotal</x-table.heading>
+                </x-slot>
+                <x-slot name="body">
+                    @foreach ($selectedPendaftaranService->perkiraan_suku_cadangs as $perkiraanSukuCadang)
+                    <x-table.row>
+                        <x-table.cell>{{ $perkiraanSukuCadang->suku_cadang->nama }}</x-table.cell>
+                        <x-table.cell>{{ $perkiraanSukuCadang->harga }}</x-table.cell>
+                        <x-table.cell>{{ $perkiraanSukuCadang->jumlah }}</x-table.cell>
+                        <x-table.cell>{{ $perkiraanSukuCadang->getTotal() }}</x-table.cell>
+                    </x-table.row>
+                    @endforeach
+                </x-slot>
+            </x-table.wrapper>
+        </x-card>
     </div>
 </div>
