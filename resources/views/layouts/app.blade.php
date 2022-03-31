@@ -159,16 +159,25 @@
                             {{ $header }}
                         </div>
                         <div>
-                            <x-dropdown align="right" width="48">
+                            @php
+                                $unreadNotifications = Auth::user()->unreadNotifications;
+                            @endphp
+                            <x-dropdown align="right" width="96">
                                 <x-slot name="trigger">
-                                    <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
+                                    <button class="relative flex items-center hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
                                         <x-icons.bell class="h-5"/>
+                                        <span class="absolute block w-3 h-3 top-0 -right-1 bg-primary rounded-full text-white text-[0.5rem]">
+                                            {{ count($unreadNotifications) }}
+                                        </span>
                                     </button>
                                 </x-slot>
             
                                 <x-slot name="content">
-                                    @forelse (Auth::user()->unreadNotifications as $notification)
-                                        notif
+                                    @forelse ($unreadNotifications as $notification)
+                                    {{-- {{dd(class_basename($notification->type))}} --}}
+                                    <x-dropdown-link href="{{ route('notifications.'.class_basename($notification->type), $notification) }}">
+                                        <x-notifications.switch :notification="$notification"/>
+                                    </x-dropdown-link>
                                     @empty
                                     <x-dropdown-link >
                                         Tidak ada notifikasi

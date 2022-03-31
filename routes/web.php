@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakturServiceController;
 use App\Http\Controllers\JenisServiceController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemeriksaanStandarController;
@@ -125,6 +126,10 @@ Route::middleware('auth')->group(function () {
         Route::post('pembayarans', [PembayaranController::class, 'store'])->name('store');
         Route::get('pembayarans/{service}/edit', [PembayaranController::class, 'edit'])->name('edit');
         Route::patch('pembayarans/{service}', [PembayaranController::class, 'update'])->name('update');
+    });
+
+    Route::name('notifications.')->group(function(){
+        Route::get('notifications/service-payment-due/{id}', [NotificationController::class, 'ServicePaymentDue'])->name('ServicePaymentDue');
     });
 });
 

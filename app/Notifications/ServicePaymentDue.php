@@ -71,7 +71,9 @@ class ServicePaymentDue extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'service' => $this->service
+            'service' => $this->service,
+            'no_plat' => $this->service->pendaftaran_service->no_plat,
+            'pelanggan' => $this->service->pendaftaran_service->pelanggan
         ];
     }
 }

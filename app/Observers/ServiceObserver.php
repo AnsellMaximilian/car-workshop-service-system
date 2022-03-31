@@ -4,6 +4,9 @@ namespace App\Observers;
 
 use App\Models\PemeriksaanStandar;
 use App\Models\Service;
+use App\Models\User;
+use App\Notifications\ServicePaymentDue;
+use Illuminate\Support\Facades\Notification;
 
 class ServiceObserver
 {
@@ -55,7 +58,11 @@ class ServiceObserver
      */
     public function updated(Service $service)
     {
-        //
+        // dd($service->status_service);
+        if($service->status_service === 'selesai'){
+            $users = User::where('kode_peran', 'ADMN')->get();
+            Notification::send($users, new ServicePaymentDue($service));
+        }
     }
 
     /**
