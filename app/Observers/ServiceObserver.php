@@ -85,7 +85,11 @@ class ServiceObserver
      */
     public function deleting(Service $service)
     {
-        return ! $service->persetujuan_service;
+        if(!$service->canBeDeleted()){
+            request()->session()->flash('error', 'Tidak bisa dihapus.');
+        }
+
+        return $service->canBeDeleted();
     }
 
     /**
