@@ -24,8 +24,8 @@
                     <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                         href="{{ route('pemeriksaan-standars.edit', $pemeriksaanStandar->id) }}"    
                     >Edit</a>
-                    <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
-                        wire:click="destroy({{ $pemeriksaanStandar->id }})"
+                    <button class="with-del-conf uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
+                        {{-- wire:click="destroy({{ $pemeriksaanStandar->id }})" --}}
                     >Delete</button>
                 </x-table.cell>
             </x-table.row>

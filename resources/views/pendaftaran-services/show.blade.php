@@ -18,7 +18,7 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
                     <div class="font-semibold">Waktu Pendaftaran</div>
-                    <div>{{ now()->format('d/m/Y - H:i:s')}}</div>
+                    <div>{{ \Carbon\Carbon::parse($pendaftaranService->waktu_pendaftaran)->format('d/m/Y - H:i:s')}}</div>
                 </div>
                 <div class="col-span-6">
                     <div class="font-semibold">Pelanggan</div>

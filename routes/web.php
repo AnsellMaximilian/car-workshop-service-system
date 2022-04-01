@@ -100,6 +100,7 @@ Route::middleware('auth')->group(function () {
         Route::get('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'show'])->name('show');
         Route::get('pendaftaran-services/{pendaftaran_service}/edit', [PendaftaranServiceController::class, 'edit'])->name('edit');
         Route::patch('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'update'])->name('update');
+        Route::delete('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'destroy'])->name('destroy');
     });
 
     Route::name('services.')->group(function(){

@@ -26,7 +26,7 @@ class PendaftaranServiceController extends Controller
     {
         $this->authorize('create', PendaftaranService::class);
 
-        return redirect(route('pendaftara-services.index'));
+        return redirect(route('pendaftarans-services.index'));
     }
 
     public function destroy(PendaftaranService $pendaftaranService)
@@ -35,14 +35,14 @@ class PendaftaranServiceController extends Controller
 
         $pendaftaranService->delete();
 
-        return redirect(route('pendaftara-services.index'));
+        return redirect(route('pendaftaran-services.index'));
     }
 
     public function edit(PendaftaranService $pendaftaranService)
     {
         $this->authorize('update', $pendaftaranService);
 
-        return view('pendaftaranServices.edit', ['pendaftaranService' => $pendaftaranService]);
+        return view('pendaftaran-services.edit', ['pendaftaranService' => $pendaftaranService]);
     }
 
     public function update(PendaftaranService $pendaftaranService, Request $request)

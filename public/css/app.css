@@ -633,12 +633,6 @@ select {
 .top-\[-100\%\] {
   top: -100%;
 }
-.right-8 {
-  right: 2rem;
-}
-.-right-4 {
-  right: -1rem;
-}
 .-right-1 {
   right: -0.25rem;
 }
@@ -789,6 +783,9 @@ select {
 .inline-block {
   display: inline-block;
 }
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
 }
@@ -908,6 +905,9 @@ select {
 .w-48 {
   width: 12rem;
 }
+.w-96 {
+  width: 24rem;
+}
 .w-4 {
   width: 1rem;
 }
@@ -919,9 +919,6 @@ select {
 }
 .w-3 {
   width: 0.75rem;
-}
-.w-96 {
-  width: 24rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1061,6 +1058,9 @@ select {
 }
 .gap-1 {
   gap: 0.25rem;
+}
+.gap-3 {
+  gap: 0.75rem;
 }
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -1294,9 +1294,6 @@ select {
 }
 .p-2 {
   padding: 0.5rem;
-}
-.p-1 {
-  padding: 0.25rem;
 }
 .px-4 {
   padding-left: 1rem;

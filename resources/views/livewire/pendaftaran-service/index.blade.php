@@ -14,9 +14,7 @@
             <x-table.heading wire:click="setSort('no_plat')" sortable :sortDir="$sortField === 'no_plat' ? $sortDir : null">No. Plat</x-table.heading>
             <x-table.heading wire:click="setSort('pelanggan_id')" sortable :sortDir="$sortField === 'pelanggan_id' ? $sortDir : null">ID Pelanggan</x-table.heading>
             <x-table.heading wire:click="setSort('keluhan')" sortable :sortDir="$sortField === 'keluhan' ? $sortDir : null">Keluhan</x-table.heading>
-            {{-- <x-table.heading wire:click="setSort('alamat')" sortable :sortDir="$sortField === 'alamat' ? $sortDir : null">Alamat</x-table.heading>
-            <x-table.heading>Piutang</x-table.heading> --}}
-            <x-table.heading>Actions</x-table.heading>
+            <x-table.heading>Aksi</x-table.heading>
 
         </x-slot>
         <x-slot name="body">
@@ -27,18 +25,28 @@
                 <x-table.cell>{{ $pendaftaranService->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $pendaftaranService->pelanggan_id }}</x-table.cell>
                 <x-table.cell>{{ $pendaftaranService->keluhan }}</x-table.cell>
-                {{-- <x-table.cell>{{ $pendaftaranService->alamat }}</x-table.cell>
-                <x-table.cell>{{ $pendaftaranService->getTotalAR() }}</x-table.cell> --}}
                 <x-table.cell class="space-x-2 flex">
-                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
-                        href="{{ route('pendaftaran-services.show', $pendaftaranService->id) }}"    
-                    >View</a>
-                    {{-- <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
-                        href="{{ route('pendaftaran-services.edit', $pendaftaranService->id) }}"    
-                    >Edit</a> --}}
-                    <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
-                        wire:click="destroy({{ $pendaftaranService->id }})"
-                    >Delete</button>
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
+                                <x-icons.more class="h-4"/>
+                            </button>
+                        </x-slot>
+    
+                        <x-slot name="content">
+                            <x-dropdown-link class="flex items-center gap-3"
+                                href="{{ route('pendaftaran-services.show', $pendaftaranService->id) }}"    
+                            ><x-icons.eye class="h-4"/> <span>Detil</span></x-dropdown-link>
+
+                            <form class="" action="{{route('pendaftaran-services.destroy', $pendaftaranService->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="with-del-conf w-full flex items-center gap-3 px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" type="submit"
+                                ><x-icons.trash class="h-4"/> <span>Hapus</span></button>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                    
                 </x-table.cell>
             </x-table.row>
             @endforeach
