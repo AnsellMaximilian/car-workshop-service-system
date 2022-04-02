@@ -70,4 +70,13 @@ class JenisServiceController extends Controller
 
         return redirect(route('jenis-services.index'));
     }
+
+    public function destroy(JenisService $jenisService)
+    {
+        $this->authorize('delete', $jenisService);
+
+        $jenisService->delete();
+
+        return redirect(route('jenis-services.index'));
+    }
 }

@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
         Route::post('jenis-services', [JenisServiceController::class, 'store'])->name('store');
         Route::get('jenis-services/{jenis_service}/edit', [JenisServiceController::class, 'edit'])->name('edit');
         Route::patch('jenis-services/{jenis_service}', [JenisServiceController::class, 'update'])->name('update');
+        Route::delete('jenis-services/{jenis_service}', [JenisServiceController::class, 'destroy'])->name('destroy');
     });
 
     Route::name('pemeriksaan-standars.')->group(function(){
@@ -91,6 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::post('pemeriksaan-standars', [PemeriksaanStandarController::class, 'store'])->name('store');
         Route::get('pemeriksaan-standars/{pemeriksaan_standar}/edit', [PemeriksaanStandarController::class, 'edit'])->name('edit');
         Route::patch('pemeriksaan-standars/{pemeriksaan_standar}', [PemeriksaanStandarController::class, 'update'])->name('update');
+        Route::delete('pemeriksaan-standars/{pemeriksaan_standar}', [PemeriksaanStandarController::class, 'destroy'])->name('destroy');
     });
 
     Route::name('pendaftaran-services.')->group(function(){
@@ -119,6 +121,7 @@ Route::middleware('auth')->group(function () {
         Route::get('faktur-services/create', [FakturServiceController::class, 'create'])->name('create');
         Route::post('faktur-services', [FakturServiceController::class, 'store'])->name('store');
         Route::get('faktur-services/{id}', FakturServiceShow::class)->name('show');
+        Route::delete('faktur-services/{faktur_service}', [FakturServiceController::class, 'destroy'])->name('destroy');
     });
 
     Route::name('pembayarans.')->group(function(){

@@ -37,4 +37,13 @@ class FakturServiceController extends Controller
         
     }
 
+    public function destroy(FakturService $fakturService)
+    {
+        $this->authorize('delete', $fakturService);
+
+        $fakturService->delete();
+
+        return redirect(route('faktur-services.index'));
+    }
+
 }

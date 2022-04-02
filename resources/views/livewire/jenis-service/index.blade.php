@@ -23,12 +23,25 @@
                 <x-table.cell>{{ $jenisService->deskripsi }}</x-table.cell>
                 <x-table.cell>{{ $jenisService->harga }}</x-table.cell>
                 <x-table.cell class="space-x-2 flex">
-                    <a class="uppercase text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
-                        href="{{ route('jenis-services.edit', $jenisService->id) }}"    
-                    >Edit</a>
-                    <button class="uppercase text-red-600 hover:text-red-800 font-semibold cursor-pointer"
-                        wire:click="destroy({{ $jenisService->id }})"
-                    >Delete</button>
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
+                                <x-icons.more class="h-4"/>
+                            </button>
+                        </x-slot>
+    
+                        <x-slot name="content">
+                            <x-dropdown-link class="flex items-center gap-3"
+                                href="{{ route('jenis-services.edit', $jenisService->id) }}"    
+                            ><x-icons.edit class="h-4"/> <span>Edit</span></x-dropdown-link>
+                            <form class="" action="{{route('jenis-services.destroy', $jenisService->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="with-del-conf w-full flex items-center gap-3 px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" type="submit"
+                                ><x-icons.trash class="h-4"/> <span>Hapus</span></button>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
                 </x-table.cell>
             </x-table.row>
             @endforeach

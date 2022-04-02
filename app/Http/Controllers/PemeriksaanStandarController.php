@@ -66,4 +66,13 @@ class PemeriksaanStandarController extends Controller
 
         return redirect(route('pemeriksaan-standars.index'));
     }
+
+    public function destroy(PemeriksaanStandar $pemeriksaanStandar)
+    {
+        $this->authorize('delete', $pemeriksaanStandar);
+
+        $pemeriksaanStandar->delete();
+
+        return redirect(route('pemeriksaan-standars.index'));
+    }
 }
