@@ -118,6 +118,11 @@ class Service extends Model
             && ($this->isApprovalPending());
     }
 
+    public function canBePaid()
+    {
+        return $this->isServiceApproved();
+    }
+
     public function canBeInvoiced()
     {
         return $this->status_service === 'selesai';

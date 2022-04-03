@@ -28,6 +28,7 @@ class Show extends Component
     public $tanggalPembayaran;
     public $buktiPembayaran;
     public $keteranganPembayaran;
+    public $isPaymentModalOpen = false;
 
     public function mount($id)
     {
@@ -56,6 +57,11 @@ class Show extends Component
         $this->isApprovalModalOpen = false;
     }
 
+    public function setPaymentModalState($isOpen)
+    {
+        $this->isPaymentModalOpen = $isOpen;
+    }
+
     public function savePembayaran()
     {
         $this->validate([
@@ -71,13 +77,13 @@ class Show extends Component
         $pembayaran->keterangan = $this->keteranganPembayaran;
 
         if($this->buktiPembayaran){
-            // $photoFile = $request->file('photo');
             $photoPath = $this->buktiPembayaran->store('payments', 'public');
             $pembayaran->bukti_pembayaran = $photoPath;
         }
 
         $this->service->pembayaran()->save($pembayaran);
         $this->service->refresh();
+        $this->isPaymentModalOpen = false;
     }
 
     public function saveFakturService()
