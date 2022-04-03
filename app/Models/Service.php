@@ -184,6 +184,11 @@ class Service extends Model
         ];
     }
 
+    public function getStatusIndex()
+    {
+        return Service::getStatusMap(true)[$this->status_service];
+    }
+
     public static function getNewStatus($status, $steps)
     {
         $map = Service::getStatusMap();

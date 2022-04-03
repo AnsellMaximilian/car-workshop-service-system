@@ -65,7 +65,7 @@
                 <x-table.cell>{{ $service->pendaftaran_service->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $service->pendaftaran_service->pelanggan->nama }}</x-table.cell>
                 <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
-                <x-table.cell class="uppercase font-bold text-xs">{{ $service->status_service }}</x-table.cell>
+                <x-table.cell class="uppercase font-bold text-xs"><x-stages :count="3" :stage="$service->getStatusIndex() - 1" /></x-table.cell>
                 <x-table.cell class="uppercase font-bold text-xs">
                     @if ($service->isApprovalPending())
                         <x-badge class="bg-gray-500 text-white" label="pending"/>
