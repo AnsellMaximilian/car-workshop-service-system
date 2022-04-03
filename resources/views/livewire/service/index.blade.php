@@ -51,7 +51,7 @@
             <x-table.heading>No. Plat</x-table.heading>
             <x-table.heading>Pelanggan</x-table.heading>
             <x-table.heading>Total</x-table.heading>
-            <x-table.heading>Status</x-table.heading>
+            <x-table.heading wire:click="setSort('status_service')" sortable :sortDir="$sortField === 'status_service' ? $sortDir : null">Status</x-table.heading>
             <x-table.heading>Persetujuan</x-table.heading>
             <x-table.heading>Pembayaran</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
