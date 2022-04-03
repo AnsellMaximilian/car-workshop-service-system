@@ -34,6 +34,14 @@ class PembayaranObserver
         //     request()->session()->flash('error', 'Service belum selesai. Tidak bisa mencatat pembayaran.');
 
         // }
+
+        $canBePaid = $pembayaran->service->isServiceApproved();
+
+        if(!$canBePaid){
+            request()->session()->flash('error', 'Belum bisa dibayar.');
+        }
+
+        return $canBePaid;
         
     }
 
