@@ -13,7 +13,7 @@
             <x-table.heading wire:click="setSort('tanggal')" sortable :sortDir="$sortField === 'tanggal' ? $sortDir : null">Tanggal</x-table.heading>
             <x-table.heading>Jumlah</x-table.heading>
             <x-table.heading wire:click="setSort('tipe_pembayaran')" sortable :sortDir="$sortField === 'tipe_pembayaran' ? $sortDir : null">Tipe Pembayaran</x-table.heading>
-            <x-table.heading>Keterangan</x-table.heading>
+            <x-table.heading wire:click="setSort('keterangan')" sortable :sortDir="$sortField === 'keterangan' ? $sortDir : null">Keterangan</x-table.heading>
             <x-table.heading>Bukti</x-table.heading>
             <x-table.heading>Actions</x-table.heading>
 
