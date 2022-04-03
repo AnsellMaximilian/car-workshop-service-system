@@ -67,10 +67,19 @@
                 <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
                 <x-table.cell class="uppercase font-bold text-xs">{{ $service->status_service }}</x-table.cell>
                 <x-table.cell class="uppercase font-bold text-xs">
-                    {{ $service->persetujuan_service ? $service->persetujuan_service->status_persetujuan : 'pending' }}
+                    @if ($service->isApprovalPending())
+                        <x-badge class="bg-gray-500 text-white" label="pending"/>
+                    @else
+                        <x-badge :label="$service->persetujuan_service->status_persetujuan" 
+                            class="text-white {{$service->persetujuan_service->status_persetujuan === 'setuju' ? 'bg-green-500' : 'bg-red-500'}}"/>
+                    @endif
                 </x-table.cell>
                 <x-table.cell class="uppercase font-bold text-xs">
-                    {{ $service->pembayaran ? 'sudah' : 'belum' }}
+                    @if ($service->isPaymentPending())
+                        <x-badge class="bg-gray-500 text-white" label="Belum"/>
+                    @else
+                        <x-badge label="sudah" class="text-white bg-green-500"/>
+                    @endif
                 </x-table.cell>
                 <x-table.cell class="space-x-2 flex">
                     <x-dropdown :align="$loop->iteration >= $loop->count - 1 ? 'top-left' : 'right'" width="48">
