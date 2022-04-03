@@ -21,6 +21,7 @@ class Show extends Component
     // Persetujuan
     public $statusPersetujuan;
     public $keteranganPersetujuan;
+    public $isApprovalModalOpen = false;
 
     // Pembayaran
     public $tipePembayaran = 'cash';
@@ -31,6 +32,11 @@ class Show extends Component
     public function mount($id)
     {
         $this->service = Service::find($id);
+    }
+
+    public function setApprovalModalState($isOpen)
+    {
+        $this->isApprovalModalOpen = $isOpen;
     }
 
     public function savePersetujuan()
@@ -47,6 +53,7 @@ class Show extends Component
 
         $this->service->persetujuan_service()->save($persetujuan);
         $this->service->refresh();
+        $this->isApprovalModalOpen = false;
     }
 
     public function savePembayaran()

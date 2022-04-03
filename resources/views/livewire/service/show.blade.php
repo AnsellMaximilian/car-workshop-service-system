@@ -16,7 +16,7 @@
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 bg-white shadow-md overflow-hidden sm:rounded-lg flex">
             <div class="p-2 grow">
-                @if($service->isApprovalPending())<x-button>Catat Persetujuan</x-button>@endif
+                @if($service->isApprovalPending())<x-button wire:click="setApprovalModalState(true)">Catat Persetujuan</x-button>@endif
                 @if($service->isPaymentPending())<x-button>Catat Pembayaran</x-button>@endif
             </div>
             <div class="border-l border-gray-300 flex">
@@ -62,36 +62,7 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <h2 class="font-semibold mb-4 text-lg">Persetujuan</h2>
                 @if ($service->isApprovalPending())
-                <div>
-                    <div>
-                        <div class="label-text">Status Persetujuan</div>
-                        <div class="flex gap-4 mb-4 mt-1">
-                            <div class="flex items-center gap-2">
-                                <x-input 
-                                    wire:model="statusPersetujuan"
-                                    type="radio" id="setuju-service" name="persetujuanService" value="setuju"/>
-                                <x-label value="Setuju" for="setuju-service"/>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <x-input 
-                                    wire:model="statusPersetujuan"
-                                    type="radio" id="tolak-service" name="persetujuanService" value="tolak"/>
-                                <x-label value="Tolak" for="tolak-service"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <x-label for="keteranganPersetujuan" value="Keterangan" />
-                        <textarea 
-                            id="keteranganPersetujuan" 
-                            wire:model="keteranganPersetujuan" 
-                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        ></textarea>
-                    </div>
-                    <div class="flex">
-                        <x-button class="ml-auto" wire:click="savePersetujuan">Catat Persetujuan</x-button>
-                    </div>
-                </div>
+                <div>Menunggu Persetujuan</div>
                 @else
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
@@ -283,4 +254,47 @@
             </x-table.wrapper>
         </x-card>
     </div>
+
+    {{-- MODAL PERSETUJUAN --}}
+    <x-modal :entangled="true" entangleKey="isApprovalModalOpen"
+        containerClasses=""
+    >
+        <x-slot name="trigger"></x-slot>
+        <div class="w-[32rem] max-w-full">
+            <h2 class="font-semibold p-4 border-b mb-2 border-gray-400 text-lg">Persetujuan</h2>
+            <div class="p-4 border-b border-gray-400">
+                <div>
+                    <div class="label-text">Status Persetujuan</div>
+                    <div class="flex gap-4 mb-4 mt-1">
+                        <div class="flex items-center gap-2">
+                            <x-input 
+                                wire:model="statusPersetujuan"
+                                type="radio" id="setuju-service" name="persetujuanService" value="setuju"/>
+                            <x-label value="Setuju" for="setuju-service"/>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <x-input 
+                                wire:model="statusPersetujuan"
+                                type="radio" id="tolak-service" name="persetujuanService" value="tolak"/>
+                            <x-label value="Tolak" for="tolak-service"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <x-label for="keteranganPersetujuan" value="Keterangan" />
+                    <textarea 
+                        id="keteranganPersetujuan" 
+                        wire:model="keteranganPersetujuan" 
+                        class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    ></textarea>
+                </div>
+                
+            </div>
+            <div class="flex p-4">
+                <x-button  wire:click="savePersetujuan">Catat Persetujuan</x-button>
+                <x-button wire:click="setApprovalModalState(false)" 
+                    overrideBgClasses="bg-transparent text-primary hover:text-red-800">Cancel</x-button>
+            </div>
+        </div>
+    </x-modal>
 </div>
