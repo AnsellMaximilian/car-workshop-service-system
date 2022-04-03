@@ -8,6 +8,9 @@ switch ($align) {
     case 'top':
         $alignmentClasses = 'origin-top translate-y-[-100%] top-[-100%]';
         break;
+    case 'top-left':
+        $alignmentClasses = 'origin-top translate-y-[-100%] top-[-100%] translate-x-[-100%]';
+        break;
     case 'right':
     default:
         $alignmentClasses = 'origin-top-right right-0';

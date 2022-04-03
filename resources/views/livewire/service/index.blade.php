@@ -73,7 +73,7 @@
                     {{ $service->pembayaran ? 'sudah' : 'belum' }}
                 </x-table.cell>
                 <x-table.cell class="space-x-2 flex">
-                    <x-dropdown align="right" width="48">
+                    <x-dropdown :align="$loop->iteration >= $loop->count - 1 ? 'top-left' : 'right'" width="48">
                         <x-slot name="trigger">
                             <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
                                 <x-icons.more class="h-4"/>
