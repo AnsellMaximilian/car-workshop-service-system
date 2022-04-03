@@ -200,15 +200,15 @@ class Service extends Model
         return $map[$newPos];
     }
 
-    // public function getGeneralStatus()
-    // {
-    //     if($this->isApprovalPending()){
-    //         return 'Menunggu Persetujuan';
-    //     }
-
-    //     if($this->isPaymentPending()){
-    //         return 'Menunggu Pembayaran';
-    //     }
-    // }
+    public function getCurrentStage()
+    {
+        if($this->isApprovalPending()){
+            return 'persetujuan';
+        }elseif($this->isPaymentPending()){
+            return 'pembayaran';
+        }else{
+            return 'lunas';
+        }
+    }
     
 }

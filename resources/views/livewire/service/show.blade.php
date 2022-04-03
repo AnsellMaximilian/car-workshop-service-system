@@ -14,6 +14,17 @@
     </div>
     
     <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 bg-white shadow-md overflow-hidden sm:rounded-lg flex">
+            <div class="p-2 grow">
+                @if($service->isApprovalPending())<x-button>Catat Persetujuan</x-button>@endif
+                @if($service->isPaymentPending())<x-button>Catat Pembayaran</x-button>@endif
+            </div>
+            <div class="border-l border-gray-300 flex">
+                <div class="flex items-center py-2 px-3 text-xs uppercase rounded-tr-full rounded-br-full {{ $service->getCurrentStage() === 'persetujuan' ? 'bg-gray-200 text-primary font-bold' : 'text-gray-400 font-semibold' }}">Persetujuan</div>
+                <div class="flex items-center py-2 px-3 text-xs uppercase rounded-tr-full rounded-br-full {{ $service->getCurrentStage() === 'pembayaran' ? 'bg-gray-200 text-primary font-bold' : 'text-gray-400 font-semibold' }}">Pembayaran</div>
+                <div class="flex items-center py-2 px-3 text-xs uppercase {{ $service->getCurrentStage() === 'lunas' ? 'bg-gray-200 text-primary font-bold' : 'text-gray-400 font-semibold' }}">Lunas</div>
+            </div>
+        </div>
         <x-card class="col-span-8">
             <div class="grid grid-cols-12 gap-4">
                 <h2 class="font-semibold text-lg col-span-12">Info Service</h2>
