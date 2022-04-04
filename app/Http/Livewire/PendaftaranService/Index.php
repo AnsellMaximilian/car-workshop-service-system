@@ -16,6 +16,9 @@ class Index extends Component
     public $query = "";
     public $sortField;
     public $sortDir = "asc";
+
+    // Continuation
+    public $contSort = "semua";
     
     public function setSort($field)
     {
@@ -37,10 +40,18 @@ class Index extends Component
     public function render()
     {
         $pendaftaranServices = PendaftaranService::search('no_plat', $this->query)
-            ->optionalSort($this->sortField, $this->sortDir)
-            ->paginate(10);
+            ->optionalSort($this->sortField, $this->sortDir);
+
+        if($this->contSort !== 'semua'){
+            if($this->contSort === 'lanjut'){
+                $pendaftaranServices = $pendaftaranServices->whereHas('service');
+            }else {
+                $pendaftaranServices = $pendaftaranServices->doesntHave('service');
+            }
+        }
+
         return view('livewire.pendaftaran-service.index', [
-            'pendaftaranServices' => $pendaftaranServices
+            'pendaftaranServices' => $pendaftaranServices->paginate(10)
         ]);
     }
 }

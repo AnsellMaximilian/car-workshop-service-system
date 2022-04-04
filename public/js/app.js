@@ -5548,6 +5548,26 @@ document.querySelectorAll(".with-del-conf").forEach(function (button) {
       }
     });
   });
+}); // Continue service
+
+document.querySelectorAll(".with-cont-conf").forEach(function (button) {
+  button.addEventListener("click", function (e) {
+    e.preventDefault();
+    var form = button.closest("form");
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+      title: "Warning!",
+      text: "Service akan dilanjutkan berdasarkan perkiraan. Bisa diedit nanti.",
+      icon: "warning",
+      confirmButtonText: "Lanjut",
+      showCancelButton: true,
+      cancelButtonText: "Batal",
+      confirmButtonColor: "#b51919"
+    }).then(function (res) {
+      if (res.isConfirmed) {
+        form.submit();
+      }
+    });
+  });
 });
 
 /***/ }),

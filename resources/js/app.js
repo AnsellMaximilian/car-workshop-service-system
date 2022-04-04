@@ -31,3 +31,25 @@ document.querySelectorAll(".with-del-conf").forEach((button) => {
         });
     });
 });
+
+// Continue service
+document.querySelectorAll(".with-cont-conf").forEach((button) => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
+        const form = button.closest("form");
+
+        Swal.fire({
+            title: "Warning!",
+            text: "Service akan dilanjutkan berdasarkan perkiraan. Bisa diedit nanti.",
+            icon: "warning",
+            confirmButtonText: "Lanjut",
+            showCancelButton: true,
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#b51919",
+        }).then((res) => {
+            if (res.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
