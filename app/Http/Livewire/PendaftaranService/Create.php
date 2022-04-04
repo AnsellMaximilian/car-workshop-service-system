@@ -117,7 +117,7 @@ class Create extends Component
             $pendaftaran->perkiraan_suku_cadangs()->save($perkiraanPenggantianSukuCadang);
         }
         
-        return redirect(route('pendaftaran-services.index'));
+        return redirect(route('pendaftaran-services.show', $pendaftaran->id));
     }
 
     public function render()

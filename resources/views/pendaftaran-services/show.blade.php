@@ -12,6 +12,26 @@
             </x-slot>
         </x-icon-link>
     </div>
+
+    <div class="bg-white shadow-md overflow-hidden sm:rounded-lg flex mb-4">
+        <div class="p-2 grow flex gap-2">
+            @if ($pendaftaranService->isContinued())
+                <a href="{{route('services.show', $pendaftaranService->service->id)}}">
+                    <x-secondary-button>
+                        {{ __('Service') }}
+                    </x-secondary-button>
+                </a>
+            @else
+            <form action="{{route('services.store')}}" method="POST">
+                @csrf
+                <input type="hidden" value="{{$pendaftaranService->id}}" name="pendaftaran_service_id">
+                <x-button>
+                    {{ __('Service') }}
+                </x-button>
+            </form>
+            @endif
+        </div>
+    </div>
     
     <div class="grid grid-cols-12 gap-4">
         <x-card class="col-span-8">
@@ -49,26 +69,13 @@
                 <div>{{$pendaftaranService->getTotalPerkiraan()}}</div>
             </div>
             <div class="flex items-center justify-end mt-auto">
-                <a href="{{route('pendaftaran-services.index')}}">
-                    <x-button class="ml-4" overrideBgClasses="bg-gray-700 hover:bg-gray-800">
-                        {{ __('Hapus') }}
-                    </x-button>
-                </a>
-                @if ($pendaftaranService->isContinued())
-                    <a href="{{route('services.show', $pendaftaranService->service->id)}}">
-                        <x-button class="ml-4" >
-                            {{ __('Service') }}
-                        </x-button>
-                    </a>
-                @else
-                <form action="{{route('services.store')}}" method="POST">
-                    @csrf
+                <form action="{{route('pendaftaran-services.destroy', $pendaftaranService->id)}}" method="POST">
+                    @csrf @method('DELETE')
                     <input type="hidden" value="{{$pendaftaranService->id}}" name="pendaftaran_service_id">
-                    <x-button class="ml-4" >
-                        {{ __('Service') }}
-                    </x-button>
+                    <button class="with-del-conf">
+                        <x-icons.trash class="h-7 hover:fill-gray-700"/>
+                    </button>
                 </form>
-                @endif
             </div>
         </x-card>
         <x-card class="col-span-12">
