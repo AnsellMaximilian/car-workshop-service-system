@@ -15,9 +15,23 @@
     
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 bg-white shadow-md overflow-hidden sm:rounded-lg flex">
-            <div class="p-2 grow">
+            <div class="p-2 grow flex gap-2">
                 @if($service->isApprovalPending())<x-button wire:click="setApprovalModalState(true)">Catat Persetujuan</x-button>@endif
                 @if($service->canBePaid() && $service->isPaymentPending())<x-button wire:click="setPaymentModalState(true)">Catat Pembayaran</x-button>@endif
+                @if($service->canBeInvoiced())
+                <form action="{{route('faktur-services.store')}}" method="POST">
+                    @csrf
+                    <input type="hidden" value="{{$service->id}}" name="service_id">
+                    <x-button>Faktur</x-button>
+                </form>
+                @endif
+                @if($service->invoiced())
+                <a href="{{route('faktur-services.show', $service->faktur_service->id)}}">
+                    <x-secondary-button>
+                        Faktur
+                    </x-secondary-button>
+                </a>
+                @endif
             </div>
             <div class="border-l border-gray-300 flex">
                 <div class="flex items-center py-2 px-3 text-xs uppercase rounded-tr-full rounded-br-full {{ $service->getCurrentStage() === 'persetujuan' ? 'bg-gray-200 text-primary font-bold' : 'text-gray-400 font-semibold' }}">Persetujuan</div>

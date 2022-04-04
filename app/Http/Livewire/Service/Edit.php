@@ -175,7 +175,7 @@ class Edit extends Component
 
         $this->service->save();
         
-        return redirect(route('services.index'));
+        return redirect(route('services.show', $this->service->id));
     }
 
     public function render()

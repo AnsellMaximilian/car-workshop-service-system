@@ -12,13 +12,19 @@
             </x-slot>
         </x-icon-link>
     </div>
-    <x-card class="flex mb-4">
-        <div class="ml-auto">
-            <x-button onclick="window.print()" overrideBgClasses="bg-gray-800 hover:bg-gray-900 active:bg-gray-900">
-                <x-icons.print class="h-5 fill-white inline-block"/>
+    <div class="bg-white shadow-md overflow-hidden sm:rounded-lg flex mb-4">
+        <div class="p-2 grow flex gap-2">
+            <x-button onclick="window.print()">
+                Print
             </x-button>
+            @if($fakturService->service->canBePaid() && $fakturService->service->isPaymentPending())<x-button wire:click="setPaymentModalState(true)">Catat Pembayaran</x-button>@endif
+            <a href="{{route('services.show', $fakturService->service->id)}}">
+                <x-secondary-button>
+                    Service
+                </x-secondary-button>
+            </a>
         </div>
-    </x-card>
+    </div>
     <x-card class="mb-4">
         <div class="print-out relative">
             <div class="mb-4">
@@ -110,6 +116,59 @@
         </div>
 
     </x-card>
+
+    {{-- MODAL PEMBAYARAN --}}
+    <x-modal :entangled="true" entangleKey="isPaymentModalOpen"
+        containerClasses=""
+    >
+        <x-slot name="trigger"></x-slot>
+        <div class="w-[32rem] max-w-full">
+            <h2 class="font-semibold p-4 border-b mb-2 border-gray-400 text-lg">Pembayaran</h2>
+            <div class="p-4 border-b border-gray-400">
+                <div class="mb-4">
+                    <x-label for="tanggalPembayaran" value="Tanggal Pembayaran" />
+                    <x-input
+                        type="date"
+                        wire:model="tanggalPembayaran"
+                        class="mt-1" 
+                        id="tanggalPembayaran" />
+                </div>
+                <div class="mb-4">
+                    <x-label for="tipePembayaran" value="Tipe Pembayaran" />
+                    <select 
+                        wire:model="tipePembayaran" 
+                        id="tipePembayaran" 
+                        class="rounded-md mt-1 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    >
+                        <option value="cash">Cash</option>
+                        <option value="debit">Debit</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <x-label for="buktiPembayaran" value="Bukti Pembayaran" />
+                    <x-input
+                        type="file" 
+                        class="mt-1"
+                        wire:model="buktiPembayaran"
+                        id="buktiPembayaran" 
+                        accept=".jpg,.png,.jpeg"/>
+                </div>
+                <div class="mb-4">
+                    <x-label for="keteranganPembayaran" value="Keterangan" />
+                    <textarea 
+                        id="keteranganPembayaran" 
+                        wire:model="keteranganPembayaran" 
+                        class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="flex p-4">
+                <x-button  wire:click="savePembayaran">Catat Persetujuan</x-button>
+                <x-button wire:click="setPaymentModalState(false)" 
+                    overrideBgClasses="bg-transparent text-primary hover:text-red-800">Cancel</x-button>
+            </div>
+        </div>
+    </x-modal>
 
 </div>
 

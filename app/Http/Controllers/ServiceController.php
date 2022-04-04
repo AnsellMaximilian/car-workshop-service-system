@@ -88,7 +88,7 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return redirect(route('services.index'));
+        return redirect(route('services.show', $service->id));
     }
 
     public function destroy(Service $service)

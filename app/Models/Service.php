@@ -120,12 +120,13 @@ class Service extends Model
 
     public function canBePaid()
     {
-        return $this->isServiceApproved();
+        return $this->isServiceApproved() && $this->faktur_service !== null;
     }
 
     public function canBeInvoiced()
     {
-        return $this->status_service === 'selesai';
+        return $this->status_service === 'selesai' 
+            && $this->isServiceApproved() && $this->faktur_service === null;
     }
 
     public function isServiceFinished()

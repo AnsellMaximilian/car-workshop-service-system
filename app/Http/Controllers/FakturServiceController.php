@@ -34,6 +34,20 @@ class FakturServiceController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', FakturService::class);
+
+        $request->validate([
+            'service_id' => 'required|exists:services,id'
+        ]);
+
+        $fakturService = new FakturService();
+
+        $fakturService->tanggal = now();
+        $fakturService->service_id = $request->service_id;
+
+        $fakturService->save();
+
+        return redirect(route('faktur-services.show', $fakturService->id));
         
     }
 

@@ -26,15 +26,15 @@ class PelaksanaanPemeriksaanObserver
      */
     public function creating(PelaksanaanPemeriksaan $pelaksanaanPemeriksaan)
     {
-        $service = Service::find($pelaksanaanPemeriksaan->service_id);
+        // $service = Service::find($pelaksanaanPemeriksaan->service_id);
 
-        $isChecking = $service->status_service === 'cek';
+        // $isChecking = $service->status_service === 'cek';
 
-        if(!$isChecking){
-            request()->session()->flash('error', 'Pemeriksaan standar tidak dicatat. Ubah status service menjadi dicek dahulu.');
-        }
+        // if(!$isChecking){
+        //     request()->session()->flash('error', 'Pemeriksaan standar tidak dicatat. Ubah status service menjadi dicek dahulu.');
+        // }
 
-        return $isChecking;
+        // return $isChecking;
     }
 
     /**
@@ -78,15 +78,15 @@ class PelaksanaanPemeriksaanObserver
      */
     public function deleting(PelaksanaanPemeriksaan $pelaksanaanPemeriksaan)
     {
-        $service = Service::find($pelaksanaanPemeriksaan->service_id);
+        // $service = Service::find($pelaksanaanPemeriksaan->service_id);
 
-        $isChecking = $service->status_service === 'cek';
+        // $isChecking = $service->status_service === 'cek';
 
-        if(!$isChecking){
-            request()->session()->flash('error', 'Ubah status service menjadi dicek.');
-        }
+        // if(!$isChecking){
+        //     request()->session()->flash('error', 'Ubah status service menjadi dicek.');
+        // }
 
-        return $isChecking;
+        // return $isChecking;
     }
 
     /**
