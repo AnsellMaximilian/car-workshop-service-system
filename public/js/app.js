@@ -5568,7 +5568,19 @@ document.querySelectorAll(".with-cont-conf").forEach(function (button) {
       }
     });
   });
-});
+}); // sidebar interaction
+
+var sidebarToggler = document.getElementById("sidebar-toggler");
+
+if (sidebarToggler) {
+  sidebarToggler.addEventListener("click", function (e) {
+    console.log("fag");
+    var sidebar = document.getElementById("main-sidebar");
+    var mainContent = document.getElementById("main-content");
+    sidebar.classList.toggle("sidebar--closed");
+    mainContent.classList.toggle("main-content--full");
+  });
+}
 
 /***/ }),
 

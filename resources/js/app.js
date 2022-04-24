@@ -53,3 +53,16 @@ document.querySelectorAll(".with-cont-conf").forEach((button) => {
         });
     });
 });
+
+// sidebar interaction
+const sidebarToggler = document.getElementById("sidebar-toggler");
+if (sidebarToggler) {
+    sidebarToggler.addEventListener("click", (e) => {
+        console.log("fag");
+
+        const sidebar = document.getElementById("main-sidebar");
+        const mainContent = document.getElementById("main-content");
+        sidebar.classList.toggle("sidebar--closed");
+        mainContent.classList.toggle("main-content--full");
+    });
+}
