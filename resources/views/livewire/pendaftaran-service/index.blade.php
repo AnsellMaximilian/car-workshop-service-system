@@ -22,7 +22,7 @@
     <x-table.wrapper>
         <x-slot name="head">
             <x-table.heading wire:click="setSort('id')" sortable :sortDir="$sortField === 'id' ? $sortDir : null">ID</x-table.heading>
-            <x-table.heading wire:click="setSort('waktu_pendaftaran')" sortable :sortDir="$sortField === 'waktu_pendaftaran' ? $sortDir : null">Waktu Daftar</x-table.heading>
+            <x-table.heading wire:click="setSort('waktu_booking')" sortable :sortDir="$sortField === 'waktu_booking' ? $sortDir : null">Waktu Booking</x-table.heading>
             <x-table.heading wire:click="setSort('no_plat')" sortable :sortDir="$sortField === 'no_plat' ? $sortDir : null">No. Plat</x-table.heading>
             <x-table.heading>Pelanggan</x-table.heading>
             <x-table.heading wire:click="setSort('keluhan')" sortable :sortDir="$sortField === 'keluhan' ? $sortDir : null">Keluhan</x-table.heading>
@@ -34,7 +34,7 @@
             @foreach ($pendaftaranServices as $pendaftaranService)
             <x-table.row wire:key="{{$pendaftaranService->id}}">
                 <x-table.cell>{{ $pendaftaranService->id }}</x-table.cell>
-                <x-table.cell>{{ $pendaftaranService->waktu_pendaftaran }}</x-table.cell>
+                <x-table.cell>{{ $pendaftaranService->waktu_booking }}</x-table.cell>
                 <x-table.cell>{{ $pendaftaranService->no_plat }}</x-table.cell>
                 <x-table.cell>{{ $pendaftaranService->pelanggan->nama }}</x-table.cell>
                 <x-table.cell>{{ $pendaftaranService->keluhan }}</x-table.cell>

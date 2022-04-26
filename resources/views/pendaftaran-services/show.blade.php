@@ -36,9 +36,13 @@
     <div class="grid grid-cols-12 gap-4">
         <x-card class="col-span-8">
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12">
+                <div class="col-span-6">
                     <div class="font-semibold">Waktu Pendaftaran</div>
-                    <div>{{ \Carbon\Carbon::parse($pendaftaranService->waktu_pendaftaran)->format('d/m/Y - H:i:s')}}</div>
+                    <div>{{ \Carbon\Carbon::parse($pendaftaranService->waktu_pendaftaran)->format('d/m/Y - H:i')}}</div>
+                </div>
+                <div class="col-span-6">
+                    <div class="font-semibold">Waktu Booking</div>
+                    <div>{{ \Carbon\Carbon::parse($pendaftaranService->waktu_booking)->format('d/m/Y - H:i')}}</div>
                 </div>
                 <div class="col-span-6">
                     <div class="font-semibold">Pelanggan</div>

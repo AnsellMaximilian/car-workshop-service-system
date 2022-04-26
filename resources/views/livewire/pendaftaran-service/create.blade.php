@@ -12,9 +12,13 @@
         <x-card class="col-span-8">
             <form method="POST" action="{{ route('pendaftaran-services.store') }}" class="grid grid-cols-12 gap-4">
                 @csrf
-                <div class="col-span-12">
+                <div class="col-span-6">
                     <span class="block font-medium text-sm text-gray-700">Waktu Pendaftaran</span>
                     <span class="block mt-1">{{ now()->format('d/m/Y - H:i:s')}}</span>
+                </div>
+                <div class="col-span-6">
+                    <x-label for="waktu-booking" value="Waktu Booking" />
+                    <x-input id="waktu-booking" class="block mt-1 w-full" type="datetime-local" :value="old('waktu_booking')" wire:model="waktu_booking"/>
                 </div>
                 <div class="col-span-6">
                     <x-label for="pelanggan_id" value="Pelanggan" />

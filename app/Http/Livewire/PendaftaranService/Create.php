@@ -17,6 +17,7 @@ class Create extends Component
     public $no_plat;
     public $pelanggan_id;
     public $keluhan;
+    public $waktu_booking;
     
     // Service    
     public $selectedJenisServiceId = [];
@@ -89,13 +90,15 @@ class Create extends Component
         $this->validate([
             'keluhan' => 'max:255',
             'no_plat' => 'required',
-            'pelanggan_id' => 'required|exists:pelanggans,id'
+            'pelanggan_id' => 'required|exists:pelanggans,id',
+            'waktu_booking' => 'required|date'
         ]);
 
         $pendaftaran = new PendaftaranService();
         $pendaftaran->waktu_pendaftaran = now();
         $pendaftaran->no_plat = $this->no_plat;
         $pendaftaran->pelanggan_id = $this->pelanggan_id;
+        $pendaftaran->waktu_booking = $this->waktu_booking;
         $pendaftaran->keluhan = $this->keluhan;
         $pendaftaran->user_id = Auth::user()->id;
 
