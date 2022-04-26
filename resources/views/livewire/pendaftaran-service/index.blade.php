@@ -11,6 +11,11 @@
                 <option value="belum">Belum</option>
             </select>
         </div>
+        <div class="flex gap-1 flex-col">
+            <x-label for="waktu-booking" value="Tanggal Booking" />
+            <x-input id="waktu-booking" class="block mt-1 w-full" type="date" wire:model="waktuBookingSort"/>
+            
+        </div>
     </div>
     <div class="flex justify-between gap-2">
         <x-input wire:model="query" class="block md:w-1/3 w-16 grow md:grow-0" type="text" placeholder="Search"/>

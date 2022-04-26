@@ -19,6 +19,7 @@ class Index extends Component
 
     // Continuation
     public $contSort = "semua";
+    public $waktuBookingSort;
     
     public function setSort($field)
     {

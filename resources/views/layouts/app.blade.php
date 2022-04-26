@@ -103,14 +103,14 @@
                                 <x-slot name="icon"><x-icons.document class="h-4"/></x-slot>
                                 Faktur Service</x-sidebar-nav-link>
                             </li>
-                            <li class="group">
+                            {{-- <li class="group">
                                 <x-sidebar-nav-link 
                                     :href="route('pembayarans.index')" 
                                     :active="request()->routeIs('pembayarans.*')"
                                 >
                                 <x-slot name="icon"><x-icons.money class="h-4"/></x-slot>
                                 Pembayaran</x-sidebar-nav-link>
-                            </li>
+                            </li> --}}
                         </ul>
                         <hr>
                         <div class="mt-4 cursor-pointer">
