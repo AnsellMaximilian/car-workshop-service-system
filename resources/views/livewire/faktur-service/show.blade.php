@@ -113,6 +113,9 @@
                 <div class="col-span-4 col-start-5 uppercase font-bold text-xl pl-4">Grandtotal</div>
                 <div class="col-span-4 col-start-9 text-xl pl-4">{{ $fakturService->service->getGrandTotal()}}</div>
             </div>
+            <div>
+                Transfer
+            </div>
         </div>
 
     </x-card>

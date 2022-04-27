@@ -95,7 +95,7 @@
                                     {{-- :active="request()->routeIs('services.*') || request()->routeIs('faktur-services.*')" --}}
                                     :active="request()->routeIs('services.*')"
                                 >
-                                <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>
+                                <x-slot name="icon"><x-icons.car class="h-4"/></x-slot>
                                 Service</x-sidebar-nav-link>
                             </li>
                             <li class="group">
@@ -114,6 +114,14 @@
                                 <x-slot name="icon"><x-icons.money class="h-4"/></x-slot>
                                 Pembayaran</x-sidebar-nav-link>
                             </li> --}}
+                            <li class="group">
+                                <x-sidebar-nav-link 
+                                    :href="route('configurations.index')" 
+                                    :active="request()->routeIs('configurations.*')"
+                                >
+                                <x-slot name="icon"><x-icons.gear class="h-4"/></x-slot>
+                                Konfigurasi</x-sidebar-nav-link>
+                            </li>
                         </ul>
                         <hr>
                         <div class="mt-4 cursor-pointer">

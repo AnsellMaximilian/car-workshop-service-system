@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActionsPageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CompanyConfigurationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakturServiceController;
 use App\Http\Controllers\JenisServiceController;
@@ -130,6 +131,11 @@ Route::middleware('auth')->group(function () {
         Route::post('pembayarans', [PembayaranController::class, 'store'])->name('store');
         Route::get('pembayarans/{service}/edit', [PembayaranController::class, 'edit'])->name('edit');
         Route::patch('pembayarans/{service}', [PembayaranController::class, 'update'])->name('update');
+    });
+
+    Route::name('configurations.')->group(function(){
+        Route::get('configurations', [CompanyConfigurationController::class, 'index'])->name('index');
+        Route::patch('configurations/{company_configuration}', [CompanyConfigurationController::class, 'update'])->name('update');
     });
 
     Route::name('notifications.')->group(function(){
