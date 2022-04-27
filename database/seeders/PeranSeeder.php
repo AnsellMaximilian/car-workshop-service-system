@@ -26,5 +26,9 @@ class PeranSeeder extends Seeder
             'kode_peran' => 'KGDG',
             'nama_peran' => 'Kepala Gudang'
         ]);
+        DB::table('perans')->insert([
+            'kode_peran' => 'VIEW',
+            'nama_peran' => 'Pengamat'
+        ]);
     }
 }
