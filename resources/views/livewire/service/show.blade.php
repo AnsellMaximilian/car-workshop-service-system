@@ -79,10 +79,16 @@
                 <div>Menunggu Persetujuan</div>
                 @else
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12">
+                    <div class="col-span-6">
                         <div class="label-text">Waktu Persetujuan</div>
                         <div class="">
                             {{\Carbon\Carbon::parse($service->persetujuan_service->waktu_persetujuan)->format('d M, Y - H:i:s')}}
+                        </div>
+                    </div>
+                    <div class="col-span-6">
+                        <div class="label-text">Dicatat Oleh</div>
+                        <div class="">
+                            {{$service->persetujuan_service->user->name}}
                         </div>
                     </div>
                     <div class="mb-4 col-span-6">
@@ -159,6 +165,12 @@
                         </div>
                     </div>
                     @endif
+                    <div class="col-span-12">
+                        <div class="label-text">Dicatat Oleh</div>
+                        <div class="">
+                            {{$service->pembayaran->user->name}}
+                        </div>
+                    </div>
                 </div>
                 @endif
             </div>

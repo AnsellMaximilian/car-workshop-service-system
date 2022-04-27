@@ -52,6 +52,7 @@ class Create extends Component
         $pembayaran->tipe_pembayaran = $this->tipePembayaran;
         // $pembayaran->kembali = Service::find($this->selectedServiceId)->getChange($this->jumlah);
         $pembayaran->keterangan = $this->keterangan;
+        $pembayaran->user_id = auth()->user()->id;
 
         if($this->buktiPembayaran){
             $photoPath = $this->buktiPembayaran->store('payments', 'public');

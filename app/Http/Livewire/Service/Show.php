@@ -51,6 +51,8 @@ class Show extends Component
         $persetujuan->keterangan = $this->keteranganPersetujuan;
         $persetujuan->status_persetujuan = $this->statusPersetujuan;
         $persetujuan->waktu_persetujuan = now();
+        $persetujuan->user_id = auth()->user()->id;
+
 
         $this->service->persetujuan_service()->save($persetujuan);
         $this->service->refresh();
@@ -75,6 +77,7 @@ class Show extends Component
         $pembayaran->tanggal = $this->tanggalPembayaran;
         $pembayaran->tipe_pembayaran = $this->tipePembayaran;
         $pembayaran->keterangan = $this->keteranganPembayaran;
+        $pembayaran->user_id = auth()->user()->id;
 
         if($this->buktiPembayaran){
             $photoPath = $this->buktiPembayaran->store('payments', 'public');

@@ -21,4 +21,9 @@ class Pembayaran extends Model
     {
         return $this->jumlah - $this->kembali;
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

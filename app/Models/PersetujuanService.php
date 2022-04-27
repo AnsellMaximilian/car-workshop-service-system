@@ -11,4 +11,9 @@ class PersetujuanService extends Model
 
     protected $primaryKey = 'service_id';
     public $incrementing = false;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
