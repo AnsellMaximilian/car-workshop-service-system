@@ -51,6 +51,10 @@ class Index extends Component
             }
         }
 
+        if($this->waktuBookingSort){
+            $pendaftaranServices->whereDate('waktu_booking', $this->waktuBookingSort);
+        }
+
         return view('livewire.pendaftaran-service.index', [
             'pendaftaranServices' => $pendaftaranServices->paginate(10)
         ]);
