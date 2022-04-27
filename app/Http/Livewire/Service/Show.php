@@ -42,6 +42,9 @@ class Show extends Component
 
     public function savePersetujuan()
     {
+        $this->authorize('create', PersetujuanService::class);
+        
+
         $this->validate([
             'statusPersetujuan' => 'in:setuju,tolak',
             'keteranganPersetujuan' => 'max:255'
@@ -66,6 +69,9 @@ class Show extends Component
 
     public function savePembayaran()
     {
+        $this->authorize('create', Pembayaran::class);
+
+
         $this->validate([
             'tanggalPembayaran' => 'required|date',
             'tipePembayaran' => 'required|in:cash,debit',

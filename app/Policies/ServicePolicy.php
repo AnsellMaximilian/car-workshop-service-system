@@ -52,7 +52,7 @@ class ServicePolicy
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Service $service)
+    public function update(User $user)
     {
         return $user->peran->kode_peran === "KBKL" || $user->peran->kode_peran === "ADMN";
         //

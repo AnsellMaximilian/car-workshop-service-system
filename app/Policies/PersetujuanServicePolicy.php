@@ -41,7 +41,8 @@ class PersetujuanServicePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->peran->kode_peran === "KBKL" || $user->peran->kode_peran === "ADMN";
+
     }
 
     /**

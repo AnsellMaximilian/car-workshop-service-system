@@ -19,8 +19,6 @@ class JenisServiceController extends Controller
 
     public function create()
     {
-        $this->authorize('create', JenisService::class);
-
         return view('jenis-services.create');
     }
 

@@ -8,10 +8,13 @@ use App\Models\PendaftaranService;
 use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
 use App\Models\Service;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Create extends Component
 {
+    use AuthorizesRequests;
+
     public $selectedPendaftaranServiceId;
 
     public function mount()
@@ -23,6 +26,8 @@ class Create extends Component
 
     public function save()
     {
+        $this->authorize('create', Service::class);
+
         $this->validate([
             'selectedPendaftaranServiceId' => 'required|exists:pendaftaran_services,id'
         ]);

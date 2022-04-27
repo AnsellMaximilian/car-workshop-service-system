@@ -8,11 +8,15 @@ use App\Models\PendaftaranService;
 use App\Models\PerkiraanPenjualanService;
 use App\Models\PerkiraanSukuCadang;
 use App\Models\SukuCadang;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Create extends Component
 {
+
+    use AuthorizesRequests;
+
     // Basic
     public $no_plat;
     public $pelanggan_id;
@@ -87,6 +91,8 @@ class Create extends Component
 
     public function save()
     {
+        $this->authorize('create', PendaftaranService::class);
+
         $this->validate([
             'keluhan' => 'max:255',
             'no_plat' => 'required',

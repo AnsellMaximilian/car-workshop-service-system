@@ -15,8 +15,6 @@ class PendaftaranServiceController extends Controller
 
     public function create()
     {
-        $this->authorize('create', PendaftaranService::class);
-
         return view('pendaftaran-services.create', [
             'pelanggans' => Pelanggan::all()
         ]);

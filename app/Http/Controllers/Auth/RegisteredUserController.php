@@ -21,8 +21,6 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', User::class);
-
         $perans = Peran::all();
         return view('users.create', ['perans' => $perans]);
     }

@@ -14,8 +14,6 @@ class PelangganController extends Controller
 
     public function create()
     {
-        $this->authorize('create', Pelanggan::class);
-
         return view('pelanggans.create');
     }
 

@@ -19,8 +19,6 @@ class PemeriksaanStandarController extends Controller
 
     public function create()
     {
-        $this->authorize('create', PemeriksaanStandar::class);
-
         return view('pemeriksaan-standars.create');
     }
 

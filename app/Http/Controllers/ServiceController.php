@@ -23,8 +23,6 @@ class ServiceController extends Controller
 
     public function create()
     {
-        $this->authorize('create', Service::class);
-
         if(count(PendaftaranService::getAllNotContinued()) <= 0 ){
             return redirect(route('pendaftaran-services.index'))->with('error', 'Daftar service terlebih dahulu.');
         }
@@ -69,7 +67,6 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        $this->authorize('update', $service);
 
         return view('services.edit', ['service' => $service]);
     }

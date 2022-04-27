@@ -9,10 +9,13 @@ use App\Models\PenggantianSukuCadang;
 use App\Models\PenjualanService;
 use App\Models\Service;
 use App\Models\SukuCadang;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Edit extends Component
 {
+
+    use AuthorizesRequests;
     public $service;
 
     public $statusService;
@@ -120,6 +123,8 @@ class Edit extends Component
 
     public function save()
     {
+        $this->authorize('update', Service::class);
+        
         $this->validate([
             'statusService' => 'in:mulai,cek,service,selesai',
         ]);
