@@ -144,15 +144,17 @@
                         <option value="debit">Debit</option>
                     </select>
                 </div>
-                <div class="mb-4">
-                    <x-label for="buktiPembayaran" value="Bukti Pembayaran" />
-                    <x-input
-                        type="file" 
-                        class="mt-1"
-                        wire:model="buktiPembayaran"
-                        id="buktiPembayaran" 
-                        accept=".jpg,.png,.jpeg"/>
-                </div>
+               @if ($tipePembayaran === 'debit')
+               <div class="mb-4">
+                <x-label for="buktiPembayaran" value="Bukti Pembayaran" />
+                <x-input
+                    type="file" 
+                    class="mt-1"
+                    wire:model="buktiPembayaran"
+                    id="buktiPembayaran" 
+                    accept=".jpg,.png,.jpeg"/>
+            </div>
+               @endif
                 <div class="mb-4">
                     <x-label for="keteranganPembayaran" value="Keterangan" />
                     <textarea 

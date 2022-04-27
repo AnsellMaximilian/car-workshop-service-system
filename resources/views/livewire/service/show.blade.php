@@ -315,6 +315,7 @@
                         <option value="debit">Debit</option>
                     </select>
                 </div>
+                @if ($tipePembayaran === 'debit')
                 <div class="mb-4">
                     <x-label for="buktiPembayaran" value="Bukti Pembayaran" />
                     <x-input
@@ -324,6 +325,7 @@
                         id="buktiPembayaran" 
                         accept=".jpg,.png,.jpeg"/>
                 </div>
+                @endif
                 <div class="mb-4">
                     <x-label for="keteranganPembayaran" value="Keterangan" />
                     <textarea 
