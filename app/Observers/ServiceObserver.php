@@ -61,7 +61,7 @@ class ServiceObserver
     {
         // dd($service->status_service);
         if($service->status_service === 'selesai'){
-            $users = User::where('kode_peran', 'ADMN')->get();
+            $users = User::where('kode_peran', 'ADMN')->orWhere('kode_peran', 'KBKL')->get();
             Notification::send($users, new ServicePaymentDue($service));
         }
     }
