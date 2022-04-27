@@ -43,6 +43,7 @@ class Show extends Component
         $pembayaran->tanggal = $this->tanggalPembayaran;
         $pembayaran->tipe_pembayaran = $this->tipePembayaran;
         $pembayaran->keterangan = $this->keteranganPembayaran;
+        $pembayaran->user_id = auth()->user()->id;
 
         if($this->buktiPembayaran){
             $photoPath = $this->buktiPembayaran->store('payments', 'public');

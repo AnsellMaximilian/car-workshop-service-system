@@ -135,7 +135,7 @@
                     @if ($service->canBePaid())
                     <div>Menunggu Pembayaran</div>
                     @else
-                    <div>Memerlukan Persetujuan</div>
+                    <div>Memerlukan Persetujuan / Faktur</div>
                     @endif
                 @else
                 <div class="grid grid-cols-12 gap-4">
