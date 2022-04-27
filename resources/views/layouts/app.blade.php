@@ -154,7 +154,7 @@
             </aside>
     
             <!-- Page Content -->
-            <main class="grow ml-52" id="main-content">
+            <main class="grow ml-52 overflow-x-hidden" id="main-content">
                 {{-- @include('layouts.navigation') --}}
     
                 <!-- Page Heading -->
