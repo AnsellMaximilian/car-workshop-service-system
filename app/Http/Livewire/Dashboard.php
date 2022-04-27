@@ -8,6 +8,7 @@ use App\Models\Service;
 use App\Models\SukuCadang;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -25,7 +26,10 @@ class Dashboard extends Component
     {
         $totalPendaftaranPending = count(PendaftaranService::getAllNotContinued());
         $totalApprovalPending = count(Service::doesntHave('persetujuan_service')->get());
-        $totalPembayaranPending = count(Service::doesntHave('pembayaran')->get());
+        $totalPembayaranPending = count(Service::doesntHave('pembayaran')
+            ->whereHas('persetujuan_service', function(Builder $q){
+                $q->where('status_persetujuan', 'setuju');
+        })->get());
 
         $paidServices = Service::whereHas('pembayaran')->get();
         
