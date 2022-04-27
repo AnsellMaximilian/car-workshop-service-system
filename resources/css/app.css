@@ -6,14 +6,6 @@
     .label-text {
         @apply font-medium text-gray-700 text-sm;
     }
-
-    .sidebar--closed {
-        @apply -translate-x-52;
-    }
-
-    .main-content--full {
-        @apply -ml-52;
-    }
 }
 
 .only-print {

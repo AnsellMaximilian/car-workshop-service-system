@@ -18,7 +18,7 @@
     </head>
     <body class="font-sans antialiased min-h-screen bg-gray-100">
         <div class="flex">
-            <aside class="w-52">
+            <aside class="">
                 <div class="bg-gray-800 fixed top-0 left-0 w-52 min-h-screen p-2 flex flex-col transition-all duration-100" id="main-sidebar">
                     <a href="/dashboard" class="mb-4 bg-white py-4 px-2 rounded-lg block">
                         <img src="{{asset('images/sogojayalogo.png')}}"/>
@@ -154,7 +154,7 @@
             </aside>
     
             <!-- Page Content -->
-            <main class="grow overflow-x-hidden" id="main-content">
+            <main class="grow ml-52" id="main-content">
                 {{-- @include('layouts.navigation') --}}
     
                 <!-- Page Heading -->

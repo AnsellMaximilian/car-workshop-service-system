@@ -62,7 +62,7 @@ if (sidebarToggler) {
 
         const sidebar = document.getElementById("main-sidebar");
         const mainContent = document.getElementById("main-content");
-        sidebar.classList.toggle("sidebar--closed");
-        mainContent.classList.toggle("main-content--full");
+        sidebar.classList.toggle("-translate-x-52");
+        mainContent.classList.toggle("ml-52");
     });
 }

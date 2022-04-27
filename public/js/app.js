@@ -5577,8 +5577,8 @@ if (sidebarToggler) {
     console.log("fag");
     var sidebar = document.getElementById("main-sidebar");
     var mainContent = document.getElementById("main-content");
-    sidebar.classList.toggle("sidebar--closed");
-    mainContent.classList.toggle("main-content--full");
+    sidebar.classList.toggle("-translate-x-52");
+    mainContent.classList.toggle("ml-52");
   });
 }
 
