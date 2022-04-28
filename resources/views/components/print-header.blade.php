@@ -1,4 +1,20 @@
+@props(['config' => null])
 <div {{ $attributes->merge(['class' => 'mb-8 border-b-4 border-primary pb-4'])}}>
+    @if ($config !== null)
+    <div class="flex items-start ">
+        <div>
+            <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="mb-4 w-64">
+        </div>
+        <div class="text-center grow">
+            <h1 class="font-bold text-2xl">SOGO JAYA AC</h1>
+            <div>{{$config->alamat}}</div>
+            <div class="text-sm font-semibold flex justify-center gap-4">
+                <div>Telp: {{$config->no_telp}}</div>
+                <div>HP: {{$config->hp_1}} / {{$config->hp_2}}</div>
+            </div>
+        </div>
+    </div>
+    @else
     <div class="flex items-start ">
         <div>
             <img src="{{asset('images/sogojayalogo.png')}}" alt="logo" class="mb-4 w-64">
@@ -12,4 +28,5 @@
             </div>
         </div>
     </div>
+    @endif
 </div>

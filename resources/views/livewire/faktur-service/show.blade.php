@@ -28,22 +28,40 @@
     <x-card class="mb-4">
         <div class="print-out relative">
             <div class="mb-4">
-                <x-print-header />
+                <x-print-header :config="$config"/>
                 <div class="grid grid-cols-12">
                     <div class="text-2xl font-semibold mb-4 col-span-12">
                         Tangerang, {{ \Carbon\Carbon::parse($fakturService->tanggal)->format('d-m-Y') }}
                     </div>
-                    <div class="mb-4 grid grid-cols-12 col-span-6">
-                        <div class="col-span-4">Pemilik</div>
-                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->pelanggan->nama }}</div>
+                    <div class="col-span-6">
+                        <div class="mb-4">
+                            <div class="font-bold text-lg">Invoice Kepada</div>
+                        </div>
+                        <div class="mb-4 grid grid-cols-12">
+                            <div class="col-span-4">Pemilik</div>
+                            <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->pelanggan->nama }}</div>
+                        </div>
+                        <div class="mb-4 grid grid-cols-12">
+                            <div class="col-span-4">No. Plat</div>
+                            <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->no_plat }}</div>
+                        </div>
+                        <div class="mb-4 grid grid-cols-12">
+                            <div class="col-span-4">Kasir</div>
+                            <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->user->name }}</div>
+                        </div>
                     </div>
-                    <div class="mb-4 grid grid-cols-12 col-span-6">
-                        <div class="col-span-4">No. Plat</div>
-                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->no_plat }}</div>
-                    </div>
-                    <div class="mb-4 grid grid-cols-12 col-span-6">
-                        <div class="col-span-4">Kasir</div>
-                        <div class="font-semibold col-span-8">: {{ $fakturService->service->pendaftaran_service->user->name }}</div>
+                    <div class="col-span-6 text-right border-l-2 border-primary">
+                        <div class="mb-4">
+                            <div class="font-bold text-lg">Transfer atau Cash</div>
+                        </div>
+                        <div class="mb-4 grid grid-cols-12">
+                            <div class="col-span-2 col-start-5 text-left">BCA:</div>
+                            <div class="font-semibold col-span-6">{{ $config->rekening_bca }}</div>
+                        </div>
+                        <div class="mb-4 grid grid-cols-12">
+                            <div class="col-span-2 col-start-5 text-left">BNI:</div>
+                            <div class="font-semibold col-span-6">{{ $config->rekening_bni }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,9 +130,6 @@
                 <div class="col-span-12 border-t-8 border-primary"></div>
                 <div class="col-span-4 col-start-5 uppercase font-bold text-xl pl-4">Grandtotal</div>
                 <div class="col-span-4 col-start-9 text-xl pl-4">{{ $fakturService->service->getGrandTotal()}}</div>
-            </div>
-            <div>
-                Transfer
             </div>
         </div>
 

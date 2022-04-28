@@ -687,6 +687,9 @@ select {
 .col-start-9 {
   grid-column-start: 9;
 }
+.col-start-3 {
+  grid-column-start: 3;
+}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -1175,6 +1178,12 @@ select {
 }
 .border-t {
   border-top-width: 1px;
+}
+.border-t-2 {
+  border-top-width: 2px;
+}
+.border-l-2 {
+  border-left-width: 2px;
 }
 .border-gray-300 {
   --tw-border-opacity: 1;

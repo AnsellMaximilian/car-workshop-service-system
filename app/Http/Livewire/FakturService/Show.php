@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\FakturService;
 
+use App\Models\CompanyConfiguration;
 use App\Models\FakturService;
 use App\Models\Pembayaran;
 use Livewire\Component;
@@ -59,6 +60,7 @@ class Show extends Component
     {
         return view('livewire.faktur-service.show', [
             'fakturService' => $this->faktuService,
+            'config' => CompanyConfiguration::first()
         ]);
     }
 }
