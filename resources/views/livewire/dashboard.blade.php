@@ -36,6 +36,13 @@
             <div class="text-xl font-semibold">Total Penjualan Service Hari Ini</div>
         </div>
     </div>
+
+    <div class="max-w-md mb-4">
+        <h3 class="text-xl font-semibold mb-2">Penjualan Tahun {{now()->year}}</h3>
+        <canvas id="chartPenjualan" width="400" height="400"></canvas>
+    </div>
+
+
     <div class="print-out">
         <x-print-header class="only-print"/>
         <h2 class="text-xl font-semibold mb-4 print-out__hide">Laporan Penjualan Service</h2>
@@ -86,3 +93,28 @@
         </x-table.wrapper>
     </div>
 </div>
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const ctx = document.getElementById('chartPenjualan').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                datasets: [{
+                    label: 'Total Penjualan',
+                    data: JSON.parse('{!! json_encode($chartData) !!}'),
+                    backgroundColor: '#b51919'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+@endpush

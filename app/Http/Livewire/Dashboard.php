@@ -34,6 +34,16 @@ class Dashboard extends Component
         $paidServices = Service::whereHas('pembayaran')->get();
         
         $reportServices = $paidServices->whereBetween('waktu_mulai', [$this->reportStartDate, $this->reportEndDate]);
+        
+        // CHART
+        $yearSales = Service::whereHas('pembayaran')->whereYear('waktu_mulai', now()->year)->get();
+        for ($month=0; $month < 12; $month++) {
+            $chartData[] = $yearSales->filter(function($service) use ($month) {
+                return $month === Carbon::parse($service->waktu_mulai)->month;
+            })->reduce(function($total, $service) {
+                return $total + $service->getGrandTotal();
+            }, 0);
+        }
 
         $totalSales = $paidServices->reduce(function($total, $service) {
             return $total + $service->getGrandTotal();
@@ -54,6 +64,7 @@ class Dashboard extends Component
             'reportServices' => $reportServices,
             'totalPendaftaranPending' => $totalPendaftaranPending,
             'totalPembayaranPending' => $totalPembayaranPending,
+            'chartData' => $chartData,
         ]);
     }
 }
