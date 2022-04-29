@@ -83,6 +83,14 @@
                             </li>
                             <li class="group">
                                 <x-sidebar-nav-link 
+                                    :href="route('bookings.index')" 
+                                    :active="request()->routeIs('bookings.*')"
+                                >
+                                <x-slot name="icon"><x-icons.exclamation-mark class="h-4"/></x-slot>
+                                Request Pendaftaran</x-sidebar-nav-link>
+                            </li>
+                            <li class="group">
+                                <x-sidebar-nav-link 
                                     :href="route('pendaftaran-services.index')" 
                                     :active="request()->routeIs('pendaftaran-services.*')"
                                 >

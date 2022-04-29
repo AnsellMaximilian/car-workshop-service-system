@@ -41,6 +41,11 @@ class PendaftaranService extends Model
         return $this->hasOne(Service::class);
     }
 
+    public function booking_request()
+    {
+        return $this->belongsTo(BookingRequest::class);
+    }
+
     public function isContinued()
     {
         return $this->service !== null;

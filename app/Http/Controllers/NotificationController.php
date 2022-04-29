@@ -16,4 +16,14 @@ class NotificationController extends Controller
 
         return redirect(route('services.show', $notification->data['service']['id']));
     }
+
+    public function BookingRequested($id)
+    {
+
+        $notification = auth()->user()->notifications->where('id', $id)->first();
+
+        $notification->markAsRead();
+
+        return redirect(route('bookings.show', $notification->data['booking']['id']));
+    }
 }

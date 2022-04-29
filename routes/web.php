@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActionsPageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BookingRequestController;
 use App\Http\Controllers\CompanyConfigurationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakturServiceController;
@@ -20,6 +21,7 @@ use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
 use App\Http\Livewire\Pelanggan\Show as PelangganShow;
 use App\Http\Livewire\Service\Show as ServiceShow;
 use App\Http\Livewire\SukuCadang\Show as SukuCadangShow;
+use App\Http\Livewire\BookingRequest\Show as BookingShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,10 @@ Route::get('/', function () {
     // return view('welcome');
     return redirect(route('dashboard'));
 });
+
+Route::get('/booking', [BookingRequestController::class, 'create'])->name('booking');
+Route::post('/booking', [BookingRequestController::class, 'store'])->name('booking.store');
+Route::get('/booking/thanks', [BookingRequestController::class, 'thanks'])->name('booking.thanks');
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
@@ -106,6 +112,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('pendaftaran-services/{pendaftaran_service}', [PendaftaranServiceController::class, 'destroy'])->name('destroy');
     });
 
+    Route::name('bookings.')->group(function(){
+        Route::get('bookings', [BookingRequestController::class, 'index'])->name('index');
+        Route::get('bookings/{id}', BookingShow::class)->name('show');
+        Route::delete('bookings/{booking}', [BookingRequestController::class, 'destroy'])->name('destroy');
+    });
+
     Route::name('services.')->group(function(){
         Route::get('services', [ServiceController::class, 'index'])->name('index');
         Route::get('services/create', [ServiceController::class, 'create'])->name('create');
@@ -140,6 +152,7 @@ Route::middleware('auth')->group(function () {
 
     Route::name('notifications.')->group(function(){
         Route::get('notifications/service-payment-due/{id}', [NotificationController::class, 'ServicePaymentDue'])->name('ServicePaymentDue');
+        Route::get('notifications/booking-requested/{id}', [NotificationController::class, 'BookingRequested'])->name('BookingRequested');
     });
 });
 

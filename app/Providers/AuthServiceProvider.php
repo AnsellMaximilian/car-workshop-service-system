@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\BookingRequest;
 use App\Models\FakturService;
 use App\Models\JenisService;
 use App\Models\Kendaraan;
@@ -13,6 +14,7 @@ use App\Models\Service;
 use App\Models\SukuCadang;
 use App\Models\Tipe;
 use App\Models\User;
+use App\Policies\BookingRequestPolicy;
 use App\Policies\FakturServicePolicy;
 use App\Policies\JenisServicePolicy;
 use App\Policies\KendaraanPolicy;
@@ -47,6 +49,7 @@ class AuthServiceProvider extends ServiceProvider
         Service::class => ServicePolicy::class,
         FakturService::class => FakturServicePolicy::class,
         PemeriksaanStandar::class => PemeriksaanStandarPolicy::class,
+        BookingRequest::class => BookingRequestPolicy::class,
     ];
 
     /**

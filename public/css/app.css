@@ -687,9 +687,6 @@ select {
 .col-start-9 {
   grid-column-start: 9;
 }
-.col-start-3 {
-  grid-column-start: 3;
-}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -858,9 +855,6 @@ select {
 .max-h-full {
   max-height: 100%;
 }
-.max-h-52 {
-  max-height: 13rem;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -893,6 +887,9 @@ select {
   width: -moz-max-content;
   width: max-content;
 }
+.w-52 {
+  width: 13rem;
+}
 .w-64 {
   width: 16rem;
 }
@@ -901,6 +898,9 @@ select {
 }
 .w-2 {
   width: 0.5rem;
+}
+.w-\[50rem\] {
+  width: 50rem;
 }
 .w-8 {
   width: 2rem;
@@ -920,9 +920,6 @@ select {
 .w-screen {
   width: 100vw;
 }
-.w-52 {
-  width: 13rem;
-}
 .w-3 {
   width: 0.75rem;
 }
@@ -935,23 +932,20 @@ select {
 .max-w-full {
   max-width: 100%;
 }
+.max-w-3xl {
+  max-width: 48rem;
+}
 .max-w-6xl {
   max-width: 72rem;
+}
+.max-w-md {
+  max-width: 28rem;
 }
 .max-w-xl {
   max-width: 36rem;
 }
 .max-w-7xl {
   max-width: 80rem;
-}
-.max-w-lg {
-  max-width: 32rem;
-}
-.max-w-2xl {
-  max-width: 42rem;
-}
-.max-w-md {
-  max-width: 28rem;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -1085,6 +1079,9 @@ select {
 .gap-1 {
   gap: 0.25rem;
 }
+.gap-8 {
+  gap: 2rem;
+}
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1190,9 +1187,6 @@ select {
 }
 .border-t {
   border-top-width: 1px;
-}
-.border-t-2 {
-  border-top-width: 2px;
 }
 .border-l-2 {
   border-left-width: 2px;
@@ -1314,6 +1308,14 @@ select {
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 .fill-primary {
   fill: #b51919;
@@ -2006,6 +2008,14 @@ select {
     grid-column: span 6 / span 6;
   }
 
+  .md\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
   .md\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
@@ -2029,6 +2039,10 @@ select {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:border-t-0 {
@@ -2059,9 +2073,17 @@ select {
     grid-column: span 4 / span 4;
   }
 
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
   .lg\:-mx-8 {
     margin-left: -2rem;
     margin-right: -2rem;
+  }
+
+  .lg\:mb-0 {
+    margin-bottom: 0px;
   }
 
   .lg\:p-8 {
