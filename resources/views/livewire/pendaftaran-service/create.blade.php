@@ -7,6 +7,9 @@
         </x-icon-link>
     </div>
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    @if (session()->has('error'))
+        <div class="px-4 py-2 rounded-md bg-red-200 text-red-700 my-2">{{session()->get('error')}}</div>
+    @endif
     
     <div class="grid grid-cols-12 gap-4">
         <x-card class="col-span-8">

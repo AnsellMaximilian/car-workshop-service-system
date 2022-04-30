@@ -100,6 +100,16 @@ class Create extends Component
             'waktu_booking' => 'required|date'
         ]);
 
+        // Check stock
+        foreach ($this->sukuCadangPredictions as $key => $sukuCadangIndex) {
+            $checkJumlah =  $this->sukuCadangAmount[$sukuCadangIndex];
+            $stock = SukuCadang::find($this->selectedSukuCadangId[$sukuCadangIndex])->getCurrentStock();
+            if($stock< $checkJumlah){
+                return session()
+                    ->flash('error', 'Stok '.$this->selectedSukuCadang[$sukuCadangIndex]['nama'].' tidak cukup. Sisa '.$stock.'.');
+            }
+        }
+
         $pendaftaran = new PendaftaranService();
         $pendaftaran->waktu_pendaftaran = now();
         $pendaftaran->no_plat = $this->no_plat;
