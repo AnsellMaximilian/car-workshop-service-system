@@ -56,7 +56,7 @@ class Create extends Component
             $service->penggantian_suku_cadangs()->save($penggantian);
         }
 
-        return redirect(route('services.index'));
+        return redirect(route('services.show', $service->id));
     }
 
     public function render()
