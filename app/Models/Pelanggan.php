@@ -23,8 +23,9 @@ class Pelanggan extends Model
         ->whereHas('service', function(Builder $q){
             $q->whereHas('persetujuan_service', function(Builder $q2){
                 $q2->where('status_persetujuan', 'setuju');
-            });
-        })->get()
+            })->doesntHave('pembayaran');
+        })
+        ->get()
         ->reduce(function($total, $pendaftaran){
             return $total + $pendaftaran->service->getGrandTotal();
         }, 0);
@@ -37,8 +38,12 @@ class Pelanggan extends Model
 
     public function getServices()
     {
-        return $this->pendaftaran_services->map(function($pendaftaran){
-            return $pendaftaran->service;
-        });
+        return $this->pendaftaran_services
+            ->filter(function($pendaftaran){
+                return $pendaftaran->service;
+            })
+            ->map(function($pendaftaran){
+                return $pendaftaran->service;
+            });
     }
 }

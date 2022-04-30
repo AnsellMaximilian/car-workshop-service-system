@@ -72,23 +72,40 @@
             <x-slot name="head">
                 <x-table.heading >ID</x-table.heading>
                 <x-table.heading >Daftar</x-table.heading>
-                <x-table.heading >Mulai</x-table.heading>
                 <x-table.heading >No. Plat</x-table.heading>
                 <x-table.heading>Total</x-table.heading>
-                <x-table.heading>Dibayar</x-table.heading>
+                <x-table.heading >Status Service</x-table.heading>
+                <x-table.heading >Aksi</x-table.heading>
             </x-slot>
             <x-slot name="body">
-                @foreach ($pelanggan->getServices() as $service)
+                @foreach ($pelanggan->pendaftaran_services as $pendaftaran)
                 <x-table.row>
-                    <x-table.cell>{{ $service->id }}</x-table.cell>
-                    <x-table.cell>{{ $service->pendaftaran_service->waktu_pendaftaran }}</x-table.cell>
-                    <x-table.cell>{{ $service->waktu_mulai }}</x-table.cell>
-                    <x-table.cell>{{ $service->pendaftaran_service->no_plat }}</x-table.cell>
-                    <x-table.cell>{{ $service->getGrandTotal() }}</x-table.cell>
+                    <x-table.cell>{{ $pendaftaran->id }}</x-table.cell>
+                    <x-table.cell>{{ $pendaftaran->waktu_pendaftaran }}</x-table.cell>
+                    <x-table.cell>{{ $pendaftaran->no_plat }}</x-table.cell>
+                    <x-table.cell>{{ $pendaftaran->service ? $pendaftaran->service->getGrandTotal() : '-' }}</x-table.cell>
                     <x-table.cell>
-                        {{ $service->isServiceCancelled() ? 'Batal' : (
-                            $service->pembayaran ? 'Sudah' : 'Belum'
-                        ) }}
+                        @if ($pendaftaran->getStatus() === 'selesai')
+                        <x-badge label="selesai" 
+                            class="text-white bg-green-500 uppercase"/>
+                        @else
+                        <x-badge class="{{$pendaftaran->getStatus() === 'belum' ? 'bg-gray-500' : 'bg-yellow-400'}} text-white uppercase" :label="$pendaftaran->getStatus()"/>
+                        @endif
+                    </x-table.cell>
+                    <x-table.cell class="space-x-2 flex">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="flex items-center text-white hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
+                                    <x-icons.more class="h-4"/>
+                                </button>
+                            </x-slot>
+        
+                            <x-slot name="content">
+                                <x-dropdown-link class="flex items-center gap-3"
+                                    href="{{ $pendaftaran->service ? route('services.show', $pendaftaran->service->id) : route('pendaftaran-services.show', $pendaftaran->id) }}"    
+                                ><x-icons.eye class="h-4"/> <span>Detil {{$pendaftaran->service ? 'Service' : 'Pendaftaran'}}</span></x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
                     </x-table.cell>
                 </x-table.row>
                 @endforeach

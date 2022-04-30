@@ -69,4 +69,20 @@ class PendaftaranService extends Model
     {
         return $this->getTotalPerkiraanPenjualanServices() + $this->getTotalPerkiraanSukuCadangs();
     }
+
+    public function getStatus()
+    {
+        $service = $this->service;
+        if($service){
+            if($service->isApprovalPending()){
+                return 'persetujuan';
+            } elseif($service->isPaymentPending()){
+                return 'pembayaran';
+            }else {
+                return 'selesai';
+            }
+        } else {
+            return 'belum';
+        }
+    }
 }
