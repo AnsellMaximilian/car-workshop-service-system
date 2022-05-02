@@ -338,7 +338,7 @@
                 </div>
             </div>
             <div class="flex p-4">
-                <x-button  wire:click="savePembayaran">Catat Persetujuan</x-button>
+                <x-button  wire:click="savePembayaran">Catat Pembayaran</x-button>
                 <x-button wire:click="setPaymentModalState(false)" 
                     overrideBgClasses="bg-transparent text-primary hover:text-red-800">Cancel</x-button>
             </div>

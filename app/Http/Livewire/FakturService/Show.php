@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\FakturService;
 
+use App\Mail\ServiceFinished;
 use App\Models\CompanyConfiguration;
 use App\Models\FakturService;
 use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -54,6 +56,9 @@ class Show extends Component
         $this->fakturService->service->pembayaran()->save($pembayaran);
         $this->fakturService->service->refresh();
         $this->isPaymentModalOpen = false;
+
+        Mail::to($this->service->pendaftaran_service->pelanggan->email)->send(new ServiceFinished($this->faktuService->service));
+
     }
 
     public function render()

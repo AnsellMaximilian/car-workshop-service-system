@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Service;
 
+use App\Mail\ServiceFinished;
 use App\Models\FakturService;
 use App\Models\Pembayaran;
 use App\Models\PemeriksaanStandar;
 use App\Models\PersetujuanService;
 use App\Models\Service;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -77,6 +79,8 @@ class Show extends Component
 
     public function savePembayaran()
     {
+        // dd($this->service->pendaftaran_service->pelanggan->email);
+
         $this->authorize('create', Pembayaran::class);
 
 
@@ -101,6 +105,8 @@ class Show extends Component
         $this->service->pembayaran()->save($pembayaran);
         $this->service->refresh();
         $this->isPaymentModalOpen = false;
+
+        Mail::to($this->service->pendaftaran_service->pelanggan->email)->send(new ServiceFinished($this->service));
     }
 
     public function saveFakturService()
