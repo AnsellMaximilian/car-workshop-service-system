@@ -67,6 +67,14 @@ class Show extends Component
         $this->isPaymentModalOpen = $isOpen;
     }
 
+    public function finish()
+    {
+        $this->service->status_service = 'selesai';
+
+        $this->service->save();
+        $this->service->refresh();
+    }
+
     public function savePembayaran()
     {
         $this->authorize('create', Pembayaran::class);

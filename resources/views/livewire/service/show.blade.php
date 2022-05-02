@@ -18,6 +18,7 @@
             <div class="p-2 grow flex gap-2">
                 @if($service->isApprovalPending())<x-button wire:click="setApprovalModalState(true)">Catat Persetujuan</x-button>@endif
                 @if($service->canBePaid() && $service->isPaymentPending())<x-button wire:click="setPaymentModalState(true)">Catat Pembayaran</x-button>@endif
+                @if($service->isServiceApproved() && !$service->canBeInvoiced() && !$service->invoiced())<x-button wire:click="finish">Selesai</x-button>@endif
                 @if($service->canBeInvoiced())
                 <form action="{{route('faktur-services.store')}}" method="POST">
                     @csrf
@@ -25,6 +26,7 @@
                     <x-button>Faktur</x-button>
                 </form>
                 @endif
+
                 @if($service->invoiced())
                 <a href="{{route('faktur-services.show', $service->faktur_service->id)}}">
                     <x-secondary-button>
