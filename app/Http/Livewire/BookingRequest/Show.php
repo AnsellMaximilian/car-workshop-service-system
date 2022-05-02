@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\BookingRequest;
 
+use App\Mail\BookingAccepted;
 use App\Models\BookingRequest;
 use App\Models\Pelanggan;
 use App\Models\PendaftaranService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Show extends Component
@@ -62,6 +64,8 @@ class Show extends Component
         $pendaftaran->booking_request_id = $this->booking->id;
 
         $pendaftaran->save();
+
+        Mail::to($this->booking->email)->send(new BookingAccepted($pendaftaran));
 
         return redirect(route('pendaftaran-services.index'));
     }

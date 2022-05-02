@@ -16,6 +16,7 @@ use App\Http\Controllers\PendaftaranServiceController;
 use App\Http\Controllers\PeranController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SukuCadangController;
+use App\Http\Controllers\WelcomeMailController;
 use App\Http\Livewire\FakturService\Show as FakturServiceShow;
 use App\Http\Livewire\MerkDanTipe\Index as MerkDanTipeIndex;
 use App\Http\Livewire\Pelanggan\Show as PelangganShow;
@@ -43,6 +44,7 @@ Route::get('/', function () {
 Route::get('/booking', [BookingRequestController::class, 'create'])->name('booking');
 Route::post('/booking', [BookingRequestController::class, 'store'])->name('booking.store');
 Route::get('/booking/thanks', [BookingRequestController::class, 'thanks'])->name('booking.thanks');
+Route::get('/sendmail', [WelcomeMailController::class, 'send'])->name('sendmail.welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
