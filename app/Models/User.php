@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function getPhotoPath()
     {
-        return Str::startsWith($this->photo, 'avatars') ? 'storage/'.$this->photo : $this->photo;
+        return Str::startsWith($this->photo, 'avatars') ? 'uploads/'.$this->photo : $this->photo;
     }
 
     public function peran()

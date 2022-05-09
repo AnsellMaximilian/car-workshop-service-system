@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
 
         if($request->hasFile('photo')){
             $photoFile = $request->file('photo');
-            $photoPath = $photoFile->store('avatars', 'public');
+            $photoPath = $photoFile->store('avatars', 'public_uploads');
             $user->photo = $photoPath;
         }
 

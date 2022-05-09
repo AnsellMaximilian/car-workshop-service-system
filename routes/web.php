@@ -45,6 +45,8 @@ Route::get('/booking', [BookingRequestController::class, 'create'])->name('booki
 Route::post('/booking', [BookingRequestController::class, 'store'])->name('booking.store');
 Route::get('/booking/thanks', [BookingRequestController::class, 'thanks'])->name('booking.thanks');
 Route::get('/sendmail', [WelcomeMailController::class, 'send'])->name('sendmail.welcome');
+Route::get('/sendmail/upload', [WelcomeMailController::class, 'upload'])->name('sendmail.upload');
+Route::post('/sendmail/upload', [WelcomeMailController::class, 'uploadStore'])->name('sendmail.uploadStore');
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index');
