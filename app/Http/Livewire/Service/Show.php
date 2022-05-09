@@ -98,7 +98,7 @@ class Show extends Component
         $pembayaran->user_id = auth()->user()->id;
 
         if($this->buktiPembayaran){
-            $photoPath = $this->buktiPembayaran->store('payments', 'public');
+            $photoPath = $this->buktiPembayaran->store('payments', 'public_uploads');
             $pembayaran->bukti_pembayaran = $photoPath;
         }
 

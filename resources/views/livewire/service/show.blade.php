@@ -163,7 +163,7 @@
                     <div class="col-span-12">
                         <div class="label-text">Bukti Pembayaran</div>
                         <div class="">
-                            <img class="w-32 h-32 object-cover mt-1" src="{{asset('storage/'.$service->pembayaran->bukti_pembayaran)}}" alt="bukti pembayaran">
+                            <img class="w-32 h-32 object-cover mt-1" src="{{asset('uploads/'.$service->pembayaran->bukti_pembayaran)}}" alt="bukti pembayaran">
                         </div>
                     </div>
                     @endif
