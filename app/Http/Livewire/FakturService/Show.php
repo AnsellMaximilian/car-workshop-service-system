@@ -14,7 +14,7 @@ class Show extends Component
 {
     use WithFileUploads;
 
-    public $faktuService;
+    public $fakturService;
 
     // Pembayaran
     public $tipePembayaran = 'cash';
@@ -35,6 +35,8 @@ class Show extends Component
 
     public function savePembayaran()
     {
+
+        // dd($this->fakturService->service->pendaftaran_service->pelanggan->email);
         $this->validate([
             'tanggalPembayaran' => 'required|date',
             'tipePembayaran' => 'required|in:cash,debit',
@@ -57,14 +59,13 @@ class Show extends Component
         $this->fakturService->service->refresh();
         $this->isPaymentModalOpen = false;
 
-        Mail::to($this->service->pendaftaran_service->pelanggan->email)->send(new ServiceFinished($this->faktuService->service));
+        Mail::to($this->fakturService->service->pendaftaran_service->pelanggan->email)->send(new ServiceFinished($this->fakturService->service));
 
     }
 
     public function render()
     {
         return view('livewire.faktur-service.show', [
-            'fakturService' => $this->faktuService,
             'config' => CompanyConfiguration::first()
         ]);
     }
