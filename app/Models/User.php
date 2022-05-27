@@ -58,4 +58,19 @@ class User extends Authenticatable
         return $this->belongsTo(Peran::class, 'kode_peran', 'kode_peran');
     }
 
+    public function pendaftaran_services()
+    {
+        return $this->hasMany(PendaftaranService::class);
+    }
+
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class);
+    }
+
+    public function persetujuan_services()
+    {
+        return $this->hasMany(PersetujuanService::class);
+    }
+
 }

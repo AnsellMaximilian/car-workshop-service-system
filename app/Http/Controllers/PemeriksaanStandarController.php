@@ -69,6 +69,10 @@ class PemeriksaanStandarController extends Controller
     {
         $this->authorize('delete', $pemeriksaanStandar);
 
+        if(count($pemeriksaanStandar->pelaksanaan_pemeriksaans) > 0){
+            return redirect(route('pemeriksaan-standars.index'))->with('error', 'Tidak bisa dihapus.');
+        }
+
         $pemeriksaanStandar->delete();
 
         return redirect(route('pemeriksaan-standars.index'));

@@ -31,6 +31,10 @@ class PendaftaranServiceController extends Controller
     {
         $this->authorize('delete', $pendaftaranService);
 
+        if($pendaftaranService->service){
+            return redirect(route('pendaftaran-services.index'))->with('error', 'Tidak bisa diahpus - service sudah dimulai.');
+        }
+
         $pendaftaranService->delete();
 
         return redirect(route('pendaftaran-services.index'));

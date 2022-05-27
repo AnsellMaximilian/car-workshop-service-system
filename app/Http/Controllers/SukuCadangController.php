@@ -54,6 +54,15 @@ class SukuCadangController extends Controller
     {
         $this->authorize('delete', $sukuCadang);
 
+        if(
+            count($sukuCadang->penggantian_suku_cadangs) > 0 ||
+            count($sukuCadang->pengeluaran_suku_cadangs) > 0 ||
+            count($sukuCadang->pemasukkan_suku_cadangs) > 0 ||
+            count($sukuCadang->perkiraan_suku_cadangs) > 0 
+        ) {
+            return redirect(route('suku-cadangs.index'))->with('error', 'Tidak bisa dihapus.');
+        }
+
         $sukuCadang->delete();
 
         return redirect(route('suku-cadangs.index'));

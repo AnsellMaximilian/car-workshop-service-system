@@ -43,8 +43,11 @@ class PelangganController extends Controller
     {
         $this->authorize('delete', $pelanggan);
 
+        if(count($pelanggan->pendaftaran_services) > 0){
+            return redirect(route('pelanggans.index'))->with('error', 'Tidak bisa dihapus.');
+        }
+        
         $pelanggan->delete();
-
         return redirect(route('pelanggans.index'));
     }
 

@@ -108,7 +108,15 @@ class RegisteredUserController extends Controller
     {
         $this->authorize('delete', $user);
 
-        $user->delete();
+        if(
+            count($user->pendaftaran_services) > 0 ||
+            count($user->pembayarans) > 0 ||
+            count($user->persetujuan_services) > 0
+        ){
+            return redirect(route('users.index'))->with('error', 'Tidak bisa hapus.');
+ 
+        }
+            $user->delete();
 
         return redirect(route('users.index'));
     }

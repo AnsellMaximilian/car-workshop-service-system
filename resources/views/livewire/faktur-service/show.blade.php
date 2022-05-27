@@ -83,16 +83,16 @@
                     @foreach ($fakturService->service->penjualan_services as $penjualanService)
                         <div class="border-b border-primary grid grid-cols-12 py-2 gap-4">
                             <div class="col-span-4 px-4">{{$penjualanService->jenis_service->nama}}</div>
-                            <div class="col-span-2 px-4">{{$penjualanService->harga}}</div>
+                            <div class="col-span-2 px-4">{{"Rp".number_format($penjualanService->harga)}}</div>
                             <div class="col-span-2 px-4">{{$penjualanService->jumlah}}</div>
-                            <div class="col-span-4 px-4">{{$penjualanService->getTotal()}}</div>
+                            <div class="col-span-4 px-4">{{"Rp".number_format($penjualanService->getTotal())}}</div>
                         </div>
                     @endforeach
                 </div>
     
                 <div class="grid grid-cols-12 py-2 gap-4">
                     <div class="col-span-4 col-start-5 uppercase font-bold pl-4">TOTAL SERVICE</div>
-                    <div class="col-span-4 col-start-9 pl-4">{{ $fakturService->service->getTotalPenjualanServices()}}</div>
+                    <div class="col-span-4 col-start-9 pl-4">{{ "Rp".number_format($fakturService->service->getTotalPenjualanServices())}}</div>
                 </div>
             </div>
             <hr class="my-4">
@@ -111,16 +111,16 @@
                     @foreach ($fakturService->service->penggantian_suku_cadangs as $penggantianSukuCadang)
                         <div class="border-b border-primary grid grid-cols-12 py-2 gap-4">
                             <div class="col-span-4 px-4">{{$penggantianSukuCadang->suku_cadang->nama}}</div>
-                            <div class="col-span-2 px-4">{{$penggantianSukuCadang->harga}}</div>
+                            <div class="col-span-2 px-4">{{"Rp".number_format($penggantianSukuCadang->harga)}}</div>
                             <div class="col-span-2 px-4">{{$penggantianSukuCadang->jumlah}}</div>
-                            <div class="col-span-4 px-4">{{$penggantianSukuCadang->getTotal()}}</div>
+                            <div class="col-span-4 px-4">{{"Rp".number_format($penggantianSukuCadang->getTotal())}}</div>
                         </div>
                     @endforeach
                 </div>
     
                 <div class="grid grid-cols-12 py-2 gap-4">
                     <div class="col-span-4 col-start-5 uppercase font-bold pl-4">TOTAL PENGGANTIAN</div>
-                    <div class="col-span-4 col-start-9 pl-4">{{ $fakturService->service->getTotalPenggantianSukuCadangs()}}</div>
+                    <div class="col-span-4 col-start-9 pl-4">{{ "Rp".number_format($fakturService->service->getTotalPenggantianSukuCadangs())}}</div>
                 </div>
             </div>
             <hr class="my-4">
@@ -129,7 +129,7 @@
             <div class="grid grid-cols-12 py-2 gap-4">
                 <div class="col-span-12 border-t-8 border-primary"></div>
                 <div class="col-span-4 col-start-5 uppercase font-bold text-xl pl-4">Grandtotal</div>
-                <div class="col-span-4 col-start-9 text-xl pl-4">{{ $fakturService->service->getGrandTotal()}}</div>
+                <div class="col-span-4 col-start-9 text-xl pl-4">{{ "Rp".number_format($fakturService->service->getGrandTotal()) }}</div>
             </div>
         </div>
 

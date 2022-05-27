@@ -73,6 +73,15 @@ class JenisServiceController extends Controller
     {
         $this->authorize('delete', $jenisService);
 
+        if(
+            count($jenisService->penjualan_services) > 0 ||
+            count($jenisService->perkiraan_penjualan_services) > 0 
+
+        ) {
+            return redirect(route('jenis-services.index'))->with('error', 'Tidak bisa dihapus. Jasa servis ini pernah dijual.');
+
+        }
+
         $jenisService->delete();
 
         return redirect(route('jenis-services.index'));

@@ -59,6 +59,11 @@ class BookingRequestController extends Controller
 
     public function destroy(BookingRequest $booking)
     {
+        if($booking->pendaftaran_service) {
+            return redirect(route('bookings.index'))->with('error', 'Tidak bisa dihapus - Sudah didaftarkan.');
+
+        }
+
         $booking->delete();
         return redirect(route('bookings.index'));
     }
