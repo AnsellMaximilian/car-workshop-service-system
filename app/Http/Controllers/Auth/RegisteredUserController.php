@@ -14,25 +14,13 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
+
     public function create()
     {
         $perans = Peran::all();
         return view('users.create', ['perans' => $perans]);
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function store(Request $request)
     {
         $this->authorize('create', User::class);
@@ -63,8 +51,6 @@ class RegisteredUserController extends Controller
         $user->save();
 
         event(new Registered($user));
-
-        // Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
@@ -116,7 +102,7 @@ class RegisteredUserController extends Controller
             return redirect(route('users.index'))->with('error', 'Tidak bisa hapus.');
  
         }
-            $user->delete();
+        $user->delete();
 
         return redirect(route('users.index'));
     }

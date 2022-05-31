@@ -136,7 +136,7 @@
             <div class="flex flex-col gap-4">
                 @foreach ($penjualanServices as $key => $index)
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <select
                             {{ !$service->isApprovalPending() ? 'disabled' : ''}}
                             wire:model="selectedJenisServiceId.{{ $index }}"
@@ -174,7 +174,7 @@
                             :value="$selectedJenisService[$index]->harga * (is_numeric($jenisServiceAmount[$index]) ? $jenisServiceAmount[$index] : 0)" 
                             required />
                     </div>
-                    <div class="col-span-2 flex items-center justify-end">
+                    <div class="col-span-1 flex items-center justify-end">
                         <x-button wire:loading.attr="disabled" :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenjualanService({{$key}})">
                             &times;
                         </x-button>
@@ -195,7 +195,7 @@
             <div class="flex flex-col gap-4">
                 @foreach ($penggantianSukuCadangs as $key => $index)
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <select
                             {{ !$service->isApprovalPending() ? 'disabled' : ''}}
                             wire:model="selectedSukuCadangId.{{ $index }}"
@@ -233,7 +233,7 @@
                             :value="$selectedSukuCadang[$index]->harga * (is_numeric($sukuCadangAmount[$index]) ? $sukuCadangAmount[$index] : 0)" 
                             required />
                     </div>
-                    <div class="col-span-2 flex items-center justify-end">
+                    <div class="col-span-1 flex items-center justify-end">
                         <x-button wire:loading.attr="disabled" :disabled="!$service->isApprovalPending()" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removePenggantianSukuCadang({{$key}})">
                             &times;
                         </x-button>

@@ -89,7 +89,7 @@
             <div class="flex flex-col gap-4">
                 @foreach ($servicePredictions as $key => $index)
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <select
                             wire:model="selectedJenisServiceId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -125,7 +125,7 @@
                             :value="$selectedJenisService[$index]->harga * (is_numeric($jenisServiceAmount[$index]) ? $jenisServiceAmount[$index] : 0)" 
                             required />
                     </div>
-                    <div class="col-span-2 flex items-center justify-end">
+                    <div class="col-span-1 flex items-center justify-end">
                         <x-button wire:loading.attr="disabled" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeServicePrediction({{$key}})">
                             &times;
                         </x-button>
@@ -147,7 +147,7 @@
             <div class="flex flex-col gap-4">
                 @foreach ($sukuCadangPredictions as $key => $index)
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <select
                             wire:model="selectedSukuCadangId.{{ $index }}"
                             class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -183,7 +183,7 @@
                             :value="$selectedSukuCadang[$index]->harga * (is_numeric($sukuCadangAmount[$index]) ? $sukuCadangAmount[$index] : 0)" 
                             required />
                     </div>
-                    <div class="col-span-2 flex items-center justify-end">
+                    <div class="col-span-1 flex items-center justify-end">
                         <x-button wire:loading.attr="disabled" overrideBgClasses="bg-red-600 hover:bg-red-500" wire:click="removeSukuCadangPrediction({{$key}})">
                             &times;
                         </x-button>
