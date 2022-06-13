@@ -675,6 +675,9 @@ select {
 .col-span-10 {
   grid-column: span 10 / span 10;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
 .col-start-4 {
   grid-column-start: 4;
 }

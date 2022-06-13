@@ -63,15 +63,33 @@
             </div>
         </div>
         <hr class="my-4">
-        <div class="grid grid-cols-12 gap-4">
-            <h3 class="uppercase font-bold col-span-12">Kontrol Stok</h3>
-            <div class="col-span-12 lg:col-span-4 flex gap-4">
-                <x-input placeholder="Pemasukkan" type="number" class="block min-w-0" wire:model="jumlah_pemasukkan"/>
-                <x-button overrideBgClasses="bg-green-500 hover:bg-green-600 active:bg-gray-900" wire:click="addToStock">Terima</x-button>
-            </div>
-            <div class="col-span-12 lg:col-span-4 flex gap-4">
-                <x-input placeholder="Pengeluaran" type="number" class="block min-w-0" wire:model="jumlah_pengeluaran"/>
-                <x-button overrideBgClasses="bg-red-500 hover:bg-red-600 active:bg-gray-900" wire:click="removeFromStock">Keluar</x-button>
+        <div>
+            <h3 class="uppercase font-bold mb-2">Kontrol Stok</h3>
+            <div class="flex gap-2">
+                <div class="flex gap-4 flex-1">
+                    <div class="flex-1">
+                        <x-input placeholder="Pemasukkan" type="number" class="block w-full" wire:model="jumlah_pemasukkan"/>
+                        <textarea
+                            id="keterangan-pemasukkan"
+                            name="keterangan-pemasukkan"
+                            placeholder="Keterangan"
+                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >{{old('keterangan-pemasukkan')}}</textarea>
+                    </div>
+                    <x-button overrideBgClasses="bg-green-500 hover:bg-green-600 active:bg-gray-900" wire:click="addToStock">Terima</x-button>
+                </div>
+                <div class="flex gap-4 flex-1">
+                    <div class="flex-1">
+                        <x-input placeholder="Pengeluaran" type="number" class="block w-full" wire:model="jumlah_pengeluaran"/>
+                        <textarea
+                            id="keterangan-pengeluaran"
+                            name="keterangan-pengeluaran"
+                            placeholder="Keterangan"
+                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        >{{old('keterangan-pengeluaran')}}</textarea>
+                    </div>
+                    <x-button overrideBgClasses="bg-red-500 hover:bg-red-600 active:bg-gray-900" wire:click="removeFromStock">Keluar</x-button>
+                </div>
             </div>
         </div>
     </x-card>
