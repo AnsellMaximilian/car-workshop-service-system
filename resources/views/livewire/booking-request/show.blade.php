@@ -67,6 +67,29 @@
                 </div>
             </div>
             @if(!$booking->pendaftaran_service)
+                <hr class="my-4">
+                @if ($registeredPelanggan)
+                <div>
+                    <h2 class="font-semibold text-lg col-span-12 mb-4">Pelanggan Sudah Terdaftar</h2>
+                    @if (session()->has('error'))
+                        <div class="px-4 py-2 rounded-md bg-red-200 text-red-700 mb-2">{{session()->get('error')}}</div>
+                    @endif
+                    <div>Pelanggan #{{$registeredPelanggan->id}} - <a href="{{route('pelanggans.show', $registeredPelanggan->id)}}" class="underline text-primary">{{$registeredPelanggan->nama}}</a></div>
+                    
+                </div>
+                @else
+                <div>
+                    <h2 class="font-semibold col-span-12 mb-4">Pelanggan Belum Terdaftar</h2>
+                    {{-- <h3>P</h3> --}}
+                </div>
+                @endif
+                <div class="flex items-center justify-end col-span-12 mt-4">
+                    <x-button class="ml-4" wire:click="savePendaftaran">
+                        {{ __('Buat Pendaftaran') }}
+                    </x-button>
+                </div>
+            @endif
+            {{-- @if(!$booking->pendaftaran_service)
             <hr class="my-4">
             <div>
                 <h2 class="font-semibold text-lg col-span-12 mb-4">Info Pelanggan</h2>
@@ -131,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            @endif
+            @endif --}}
         </x-card>
     </div>
 </div>
