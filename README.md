@@ -1,64 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Car Workshop Sales System for Bengkel Sogo Jaya AC
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Background
 
-## About Laravel
+The purpose of this document is to provide a technical overview of the sales system used to computerize the sales process of a car workshop named Bengkel Sogo Jaya AC. This system is designed to automate the registration of service requests, track spare part inventory, generate invoices, and store customer data. The system is built using Laravel, Livewire, and Tailwind, with MySQL as the database.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Current Working System
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+During the analysis phase, it was discovered that this was the current employed to process sales, as displayed as an activity diagram:
+![image](https://user-images.githubusercontent.com/56351143/231940380-5f9a8ba5-0b53-4135-a5a3-638dd95f029b.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Sugested New System
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+To overcome the weaknesses of the currently employed system, it is suggested that the workshop use a new system. Here is the proposed activity diagram:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![image](https://user-images.githubusercontent.com/56351143/231940564-17b38075-8d11-4553-9ace-272103069df6.png)
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Requirements and Functionalities
 
-### Premium Partners
+Based on the suggested system, here are the requirements:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Use Cases
 
-## Contributing
+![image](https://user-images.githubusercontent.com/56351143/231940742-d0f40b9b-0336-42fb-a8fd-bece0f0d7545.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Requirements
 
-## Code of Conduct
+Here are a simplified list of the system's requirements:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Registration System:
+The system allows customers to register for a service at a specified date. Once a customer has registered, the system will notify the admins if there are users who registered.
 
-## Security Vulnerabilities
+- Service Registration:
+The system enables the creation, storage, and updating of service registrations. This functionality allows the admins to track service requests and manage them efficiently.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Service Data:
+The system provides a way to create, store, and update service data. This functionality enables the admins to track the types of services provided, their cost, and other relevant information.
 
-## License
+- Spare Parts Inventory:
+The system allows the creation, storage, and updating of spare parts. This functionality enables the admins to keep track of spare part inventory stock.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Service Types:
+The system provides a way to create, store, and update service types. This functionality enables the admins to track the types of services provided and their costs.
+
+- Customer Data:
+The system enables the creation, storage, and updating of customer data. This functionality enables the admins to keep track of customer information, such as their name, contact information, and service history.
+
+- Invoice Generation:
+The system generates invoices for services rendered. This functionality enables the admins to bill customers for services rendered and provides a record of financial transactions.
+
+
+## Architecture
+
+The sales system is a web application built using the Laravel framework, with Livewire and Tailwind as the front-end frameworks. The system uses MySQL as the database, providing a robust and scalable solution for storing and retrieving data.
+
+![Architecture](https://user-images.githubusercontent.com/56351143/231941594-18f0285a-735b-4329-95d6-2b40e74c9fdd.png)
+
+
+## Data Model
+
+The data model for the sales system consists of tables for service registrations, service data, spare parts inventory, service types, customer data, and invoices. These tables store the necessary data to facilitate the sales process, track inventory, and generate invoices.
+
+![image](https://user-images.githubusercontent.com/56351143/231940866-5129eb58-a75b-42b2-9469-85aaadfd2da8.png)
+
+
+
+## Design
+
+The design of the sales system is based on the Tailwind CSS framework, providing a clean and modern interface. The user interface enables the admins to manage service requests, track spare part inventory, manage customer data, and generate invoices efficiently.
+
+## Implementation
+
+### Login Page
+
+![image](https://user-images.githubusercontent.com/56351143/231941648-7ce28008-13a2-447e-b760-3e8cb0acd94b.png)
+
+
+### Main page
+
+![image](https://user-images.githubusercontent.com/56351143/231941681-539b0ad2-ae15-4d12-a0ce-a1efe911580b.png)
+
+
+### Service Pages
+
+![image](https://user-images.githubusercontent.com/56351143/231941782-8acd716c-0eb4-478b-859f-498466990484.png)
+
+
